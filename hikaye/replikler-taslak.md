@@ -123,11 +123,11 @@ D: Sabah dörtte demo çalıştı. Jüri önünde çalışmadı. Jürideki CTO "
 T: Ben hackathona yemek için gelmiştim abi. Kırk sekiz saatte on bir pizza. Bizim takım birinci oldu; yemekte.
 A: Jürideki CTO, Deniz'in numarasını telefonuna kaydetti: "Deniz, hackathon, çalışmayan demo". Rehberinde dört yüz kişi daha vardı.
 
-**Kariyer günü (ortak)** — panel: Yıldızlar Holding roll-up "Junior Yazılım Geliştirici · En az 5 yıl deneyim"; önünde Asuman fotoğraf çektiriyor.
+**Kariyer günü (ortak)** — panel: Yıldızlar Holding roll-up "Junior Yazılım Geliştirici · Esnek mesai (akşam dokuza kadar esnek)"; önünde Asuman fotoğraf çektiriyor.
 O: Bir stant "kendinden bahset" dedi. GitHub linkimi söyledim. Harf harf. Sonra "biz sizi ararız" dediler. Numaramı sormadılar.
 B: Ben bugün otuz kişiyle tanıştım. Sırrı basit: ikinci kez gidiyorum. İkinci kez gidince insanlar seni hatırladıklarını sanıyor.
 T: Dokuz kalem, üç termos, bir stres topu. Kariyer günü benim için verimli geçti abi. Mezun olunca kalem almayacağım.
-S: Standımızda junior alıyoruz! En az beş yıl deneyim. Bence çok makul; ben de beş yıldır şirkette stajyerim. Yaz tatillerinde.
+S: Standımızda junior alıyoruz! Çok samimi bir ortamımız var; herkes birbirini çocukluğundan tanıyor. Bayramlarda bile görüşüyoruz.
 D: Dört yılda bitirirsem bir yıl eksik kalıyor. Demek ki bu ilan bize değil. Okulu uzatan arkadaşlar, sonunda sizin devriniz geldi.
 
 A: LinkedIn. Türkiye'nin en kalabalık motivasyon konuşması. Herkes konuşuyor, kimse dinlemiyor, herkes beğeniyor.
@@ -166,7 +166,7 @@ T: Abi o fotoğrafı ben çektim. Profesyonelim, caps arşivim dört gigabayt. I
 ---
 
 ## PERDE 3 · MEZUNİYET VE İŞ ARAMA
-Kart altı: "Aranan: Junior. Deneyim: en az 5 yıl."
+Kart altı: "Aranan: Junior. Maaş: Rekabetçi."
 Tören pankartı: "Tören sponsoru: YILDIZLAR HOLDING".
 
 A: Mezuniyet. Kepler havaya atıldı. Üçü geri gelmedi; Çukurova rüzgârı kep sever.

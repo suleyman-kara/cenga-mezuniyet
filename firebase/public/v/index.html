@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0a0e1a">
+<title>Salon Oylaması</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#0a0e1a;color:#f4f6ff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{background:radial-gradient(120% 80% at 50% -10%,#2a1b5e 0%,#0a0e1a 60%);min-height:100dvh}
+#app{min-height:100dvh;display:flex;flex-direction:column;padding:max(14px,env(safe-area-inset-top)) 16px max(18px,env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
+#conn{display:none;background:#ff3d71;color:#fff;font-weight:700;text-align:center;padding:8px 10px;border-radius:12px;margin-bottom:10px;font-size:15px}
+#app[data-conn=off] #conn{display:block}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;opacity:.9;font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:800}
+.tag{background:#ffffff18;padding:5px 10px;border-radius:99px}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:10px 0}
+h1{font-size:clamp(22px,6.4vw,30px);line-height:1.2;margin:0;text-align:center;font-weight:900}
+.center{text-align:center}.big{font-size:56px;margin:0}.sub{opacity:.75;font-size:17px;line-height:1.4}
+.ringwrap{position:relative;width:96px;height:96px;margin:0 auto}
+.ringwrap svg{transform:rotate(-90deg)}
+.ringwrap .n{position:absolute;inset:0;display:grid;place-items:center;font-size:34px;font-weight:900;font-variant-numeric:tabular-nums}
+.ringwrap.hot .n{color:#ff5c7a}
+#ring{transition:stroke-dashoffset .25s linear}
+.opts{display:flex;flex-direction:column;gap:12px}
+button.opt{appearance:none;border:3px solid transparent;border-radius:20px;min-height:76px;padding:14px 18px;font:inherit;font-size:22px;font-weight:800;color:#fff;text-align:left;display:flex;align-items:center;gap:14px;cursor:pointer;background:#1b2140;touch-action:manipulation;transition:transform .08s,background .15s,border-color .15s}
+button.opt .k{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#ffffff1f;font-size:20px}
+button.opt:nth-child(1) .k{background:#7c4dff}button.opt:nth-child(2) .k{background:#00c2ff;color:#04202b}button.opt:nth-child(3) .k{background:#ffb300;color:#2b1c00}button.opt:nth-child(4) .k{background:#ff4d8d}
+button.opt:active:not(:disabled){transform:scale(.98)}
+button.opt[aria-pressed=true]{background:#17c964;border-color:#fff;color:#04210f;box-shadow:0 0 0 4px #17c96450}
+button.opt[aria-pressed=true] .k{background:#fff;color:#04210f}
+button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:disabled{opacity:.9}
+.status{min-height:28px;text-align:center;font-weight:800;font-size:18px}.status.ok{color:#5dff9e}.status.bad{color:#ff7a93}
+.win{background:linear-gradient(135deg,#7c4dff,#00c2ff);border-radius:24px;padding:22px 18px;text-align:center;font-size:28px;font-weight:900;line-height:1.2}
+.win small{display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
+.bar{background:#1b2140;border-radius:14px;overflow:hidden;position:relative;height:48px}
+.bar i{position:absolute;inset:0 auto 0 0;background:#ffffff30}.bar.w i{background:#17c96499}
+.bar span{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center;padding:0 14px;font-weight:800;font-size:18px}
+.bar.mine span b::after{content:" ✓ senin oyun";font-weight:600;font-size:13px;opacity:.85}
+#app>:is(main) .view{display:none}
+#app[data-state=loading] .v-loading,#app[data-state=waiting] .v-waiting,#app[data-state=vote] .v-vote,#app[data-state=result] .v-result,#app[data-state=error] .v-error,#app[data-state=ended] .v-ended{display:flex;flex-direction:column;gap:16px}
+.pulse{animation:p 1.6s ease-in-out infinite}@keyframes p{50%{transform:scale(1.12);opacity:.7}}
+</style>
+</head>
+<body>
+<div id="app" data-state="loading" data-conn="on">
+  <div id="conn" role="status">Bağlantı koptu, yeniden deneniyor…</div>
+  <header><span>Salon Oylaması</span><span class="tag" id="polltag" hidden>Anket · sonucu değiştirmez</span></header>
+  <main>
+    <section class="view v-loading center"><p class="big pulse">⏳</p><p class="sub">Bağlanıyor…</p></section>
+    <section class="view v-waiting center"><p class="big pulse">📱</p><h1>Sıradaki karar anında burada</h1><p class="sub">Bu sayfayı açık tut. Oylama başlayınca ekran kendiliğinden değişir.</p></section>
+    <section class="view v-vote">
+      <h1 id="q"></h1>
+      <div class="ringwrap" id="ringwrap"><svg width="96" height="96" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#ffffff22" stroke-width="9"/><circle id="ring" cx="50" cy="50" r="44" fill="none" stroke="#00e5ff" stroke-width="9" stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="0"/></svg><div class="n" id="cnt">30</div></div>
+      <div class="opts" id="opts"></div>
+      <div class="status" id="status" aria-live="polite"></div>
+    </section>
+    <section class="view v-result"><div class="win"><small id="rtag">Salon karar verdi</small><span id="rwin"></span></div><div id="rbars" style="display:flex;flex-direction:column;gap:10px"></div><p class="sub center">Sıradaki karar için sayfayı açık tut.</p></section>
+    <section class="view v-error center"><p class="big">⚠️</p><h1 id="errmsg">Bir sorun oluştu</h1><p class="sub">Ekrandaki QR kodu yeniden okutmayı dene.</p></section>
+    <section class="view v-ended center"><p class="big">🎉</p><h1>Teşekkürler!</h1><p class="sub">Oturum sona erdi.</p></section>
+  </main>
+</div>
+<script src="../firebase-config.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SDK = '12.19.0'; // firebase-config.js'in yaninda, CDN surumu
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), sid = new URLSearchParams(location.search).get('s');
+  var S = { sess: null, uid: null, fb: null, myVote: null, myKey: null, saved: false, failed: false, offset: 0, first: true, lastKey: null, timer: null };
+
+  function setState(s) { app.dataset.state = s; }
+  function fail(msg) { $('errmsg').textContent = msg; setState('error'); }
+  function ms(t) { return t && typeof t.toMillis === 'function' ? t.toMillis() : null; }
+  function percents(c) { // vote-core.js ile ayni mantik
+    var t = c.reduce(function (a, b) { return a + b; }, 0), p = c.map(function (x) { return t ? Math.round(x / t * 100) : 0; });
+    if (t) { var m = c.indexOf(Math.max.apply(null, c)); p[m] += 100 - p.reduce(function (a, b) { return a + b; }, 0); } return p;
+  }
+  function remaining() { var c = ms(S.sess && S.sess.closesAt); return c === null ? 0 : Math.max(0, c - (Date.now() + S.offset)); }
+
+  async function wakeLock() {
+    try { if (navigator.wakeLock && navigator.wakeLock.request) { await navigator.wakeLock.request('screen'); } } catch (e) { /* sessiz */ }
+  }
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') wakeLock(); });
+  window.addEventListener('offline', function () { app.dataset.conn = 'off'; });
+  window.addEventListener('online', function () { app.dataset.conn = 'on'; });
+
+  async function getFb() {
+    if (window.__FB__) return window.__FB__;
+    var cfg = window.FIREBASE_CONFIG; if (!cfg) throw new Error('config');
+    var u = function (m) { return 'https://www.gstatic.com/firebasejs/' + SDK + '/firebase-' + m + '.js'; };
+    var mods = await Promise.all([import(u('app')), import(u('auth')), import(u('firestore'))]);
+    var app_ = mods[0].initializeApp(cfg), auth = mods[1].getAuth(app_), F = mods[2];
+    await new Promise(function (res) { var off = mods[1].onAuthStateChanged(auth, function () { off(); res(); }); }); // kalici uid: kayitli oturumu bekle
+    if (!auth.currentUser) await mods[1].signInAnonymously(auth);
+    return { db: F.getFirestore(app_), fs: F, uid: auth.currentUser.uid };
+  }
+
+  function renderVote() {
+    var s = S.sess, left = remaining(), open = left > 0;
+    $('q').textContent = s.q || '';
+    $('polltag').hidden = !s.poll;
+    var box = $('opts');
+    if (S.lastKey !== s.decKey || box.children.length !== s.options.length) {
+      box.textContent = '';
+      s.options.forEach(function (o, i) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.dataset.opt = i;
+        var k = document.createElement('span'); k.className = 'k'; k.textContent = i + 1;
+        var t = document.createElement('span'); t.textContent = o; b.append(k, t);
+        b.addEventListener('click', function () { choose(i); }); box.appendChild(b);
+      });
+    }
+    [].forEach.call(box.children, function (b, i) { b.setAttribute('aria-pressed', S.myVote === i ? 'true' : 'false'); b.disabled = !open; });
+    var secs = Math.ceil(left / 1000), dur = Math.max(1, (ms(s.closesAt) - (ms(s.openedAt) || ms(s.closesAt) - 30000)) / 1000);
+    $('cnt').textContent = secs; $('ringwrap').classList.toggle('hot', secs <= 5 && open);
+    $('ring').style.strokeDashoffset = 276.5 * Math.min(1, Math.max(0, 1 - left / 1000 / dur));
+    var st = $('status');
+    if (S.failed) { st.textContent = 'Oy gönderilemedi, tekrar dokun'; st.className = 'status bad'; }
+    else if (!open) { st.textContent = S.myVote !== null ? 'Süre doldu · oyun sayıldı ✓' : 'Süre doldu, sonuç bekleniyor…'; st.className = 'status'; }
+    else if (S.saved && S.myVote !== null) { st.textContent = 'Oyun kaydedildi ✓ (değiştirebilirsin)'; st.className = 'status ok'; }
+    else { st.textContent = 'Birine dokun, oyun verilsin'; st.className = 'status'; }
+  }
+  function renderResult() {
+    var s = S.sess, c = s.counts || (s.options || []).map(function () { return 0; }), p = percents(c), w = s.winner;
+    $('rtag').textContent = s.poll ? 'Salon böyle düşünüyor' : 'Salon karar verdi';
+    $('rwin').textContent = (s.options && s.options[w]) || '';
+    var box = $('rbars'); box.textContent = '';
+    (s.options || []).forEach(function (o, i) {
+      var d = document.createElement('div'); d.className = 'bar' + (i === w ? ' w' : '') + (S.myVote === i ? ' mine' : '');
+      var f = document.createElement('i'); f.style.width = p[i] + '%';
+      var sp = document.createElement('span'), a = document.createElement('b'), b = document.createElement('em');
+      a.textContent = o; b.textContent = '%' + p[i]; b.style.fontStyle = 'normal'; sp.append(a, b); d.append(f, sp); box.appendChild(d);
+    });
+  }
+  async function loadMyVote(key) {
+    S.myVote = null; S.saved = false; S.failed = false; S.myKey = key;
+    try {
+      var fs = S.fb.fs, snap = await fs.getDoc(fs.doc(S.fb.db, 'sessions', sid, 'votes', key + '__' + S.uid));
+      if (S.myKey === key && snap.exists() && Number.isInteger(snap.data().o)) { S.myVote = snap.data().o; S.saved = true; }
+    } catch (e) { /* oy yoksa okuma reddedilebilir; sorun degil */ }
+    render();
+  }
+  async function choose(i) {
+    var s = S.sess; if (!s || s.phase !== 'vote' || remaining() <= 0) return;
+    var prev = S.myVote, fs = S.fb.fs; S.myVote = i; S.saved = false; S.failed = false; render();
+    try {
+      await fs.setDoc(fs.doc(S.fb.db, 'sessions', sid, 'votes', s.decKey + '__' + S.uid), { o: i, at: fs.serverTimestamp() });
+      if (S.myVote === i) { S.saved = true; S.failed = false; }
+    } catch (e) { S.failed = true; S.myVote = prev; S.saved = prev !== null; }
+    render();
+  }
+  function render() {
+    var s = S.sess; if (!s) return;
+    if (s.phase === 'vote' && s.decKey) { setState('vote'); renderVote(); if (!S.timer) S.timer = setInterval(function () { if (S.sess && S.sess.phase === 'vote') renderVote(); }, 200); }
+    else { clearInterval(S.timer); S.timer = null; $('polltag').hidden = !(s.poll && s.phase === 'result');
+      if (s.phase === 'result' && s.counts) { setState('result'); renderResult(); } else if (s.phase === 'ended') setState('ended'); else setState('waiting'); }
+  }
+  function onSession(snap) {
+    app.dataset.conn = navigator.onLine === false ? 'off' : 'on';
+    if (!snap.exists()) return fail('Bu oturum bulunamadı');
+    var s = snap.data(), keyChanged = s.decKey !== S.lastKey;
+    if (keyChanged && !S.first && s.phase === 'vote' && ms(s.openedAt) !== null) { // canli acilis: sunucu saatine gore yerel fark
+      var o = ms(s.openedAt) - Date.now(); if (Math.abs(o) < 120000) S.offset = o;
+    }
+    S.sess = s; S.first = false;
+    if (keyChanged) { S.lastKey = s.decKey; if (s.phase === 'vote') loadMyVote(s.decKey); else { S.myVote = null; S.saved = false; S.failed = false; } }
+    render();
+  }
+
+  (async function init() {
+    if (!sid) return fail('Oturum bulunamadı. QR kodu yeniden okut.');
+    wakeLock();
+    try { S.fb = await getFb(); } catch (e) { return fail('Bağlantı kurulamadı'); }
+    S.uid = S.fb.uid;
+    var fs = S.fb.fs;
+    fs.onSnapshot(fs.doc(S.fb.db, 'sessions', sid), onSession, function () { app.dataset.conn = 'off'; if (!S.sess) fail('Bağlantı hatası'); });
+  })();
+})();
+</script>
+</body>
+</html>

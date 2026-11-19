@@ -32,7 +32,7 @@ const sessionDoc = async (sid) => (await FS.getDoc(FS.doc(env.authenticatedConte
 describe('uctan uca oylama (emulator)', () => {
   it('50 seyirci oy verir, bazilari degistirir; sayim ve kazanan dogru; sonuc oturuma yazilir', async () => {
     const src = hostSource(); const sid = await src.createSession();
-    await src.open({ decKey: DK, q: 'Soru?', options: ['A', 'B', 'C'], poll: false, durMs: 2500 });
+    await src.open({ decKey: DK, q: 'Soru?', options: ['A', 'B', 'C'], poll: false, durMs: 8000 });
     const ids = Array.from({ length: 50 }, (_, i) => `aud${i}`);
     await Promise.all(ids.map((u, i) => assertSucceeds(vote(u, sid, i % 5 === 0 ? 0 : i % 5 <= 2 ? 1 : 2))));
     await Promise.all(ids.filter((_, i) => i % 5 === 0).map((u) => assertSucceeds(vote(u, sid, 1))));

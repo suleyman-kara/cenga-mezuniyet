@@ -8,13 +8,13 @@ else src = fs.readFileSync(path.join(__dirname, 'build.js'), 'utf8');
 const G = new Function(src + ';return {build,A,VOICE,hid,decVid,endVid,sonSec:typeof sonSec!=="undefined"?sonSec:null};')();
 
 // ---- sözleşme listeleri (oyun/sahne-sozlesmesi.md) ----
-const BG = 'yokus koridor cayocagi holding startup oda soylesi kahve lab kariyer hackathon mezuniyet mulakat kafe bayram ofis bank'.split(' ');
+const BG = 'yokus koridor cayocagi holding startup oda soylesi kahve lab kariyer hackathon mezuniyet mulakat kafe bayram ofis bank dolmus'.split(' ');
 const V = ['', 'gece', 'aksam', 'pizza', 'asistan', 'lobi'];
 const POZ = 'look wave point shrug facepalm think cheer clap shock sad worry panic phone laptop type present smug calm heart bow brow sip write wag weigh alarm sit tired selfie'.split(' ');
 const IFADE = 'happy sad shock skeptic smug stern worried tired'.split(' ');
 const KAR = 'deniz ozan buse tolga asuman'.split(' ');
-const PANEL = 'hava github repo yaka klasor linkedin lbildirim lgonderi akis ilan mail mailkutu jira jirakart leetcode fotokopi kartvizit insta defter afis tablo arama dosya fis whatsapp davet takvim caps dm kayit etkinlik cv3 balonlar durum kod mulakat kolay epilog pencere'.split(' ');
-const FX = /^(shake|confetti|flash|sweat|kep|plus0|ding|click|whoosh|thud|zoom|big:.+|bubble:.+|stamp:.+|p:.+)$/;
+const PANEL = 'hava github repo yaka klasor linkedin lbildirim lgonderi akis ilan mail mailkutu jira jirakart leetcode fotokopi kartvizit insta defter afis tablo arama dosya fis whatsapp davet takvim caps reels dm kayit etkinlik cv3 balonlar durum kod mulakat kolay epilog pencere'.split(' ');
+const FX = /^(shake|confetti|flash|sweat|kep|plus0|ding|click|whoosh|thud|zoom|korna|big:.+|bubble:.+|stamp:.+|p:.+)$/;
 const MUZIK = 'lofi synth toren gergin melankoli bayram s1 s2 s3 s4 s5 epilog none'.split(' ');
 const HUDP = ['deniz', 'ozan', 'buse', 'tolga', 'asuman', 0];
 const sorun = new Set(); const hata = m => sorun.add(m);

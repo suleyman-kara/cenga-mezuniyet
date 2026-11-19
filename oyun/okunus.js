@@ -26,5 +26,8 @@ module.exports = [
   ['Hackathon', 'Hekatın'],
   ['hackathon', 'hekatın'],
   ['startup', 'startap'],
-  ['caps', 'keps'],
+  ['hülülülü', 'hü lü lü lü'],
+  ['lülülü', 'lü lü lü'],
+  ['Reels', 'Rils'],
+  ['TikTok', 'Tiktok'],
 ];

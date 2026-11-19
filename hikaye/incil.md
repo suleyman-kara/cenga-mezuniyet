@@ -1,3 +1,5 @@
+> NOT: Caps ve yokuş bölümleri 2. turda değişti (bkz. lululu-oneri.md, elestirmen-notlari.md "Tur 2"); güncel metin hikaye/build.js.
+
 # MEZUNİYET.EXE YANIT VERMİYOR — Hikâye İncili ve Perde Planı
 
 CENGA sosyal etkinliği · 20 Kasım 2026 Cuma · ~50 kişilik salon · telefonla oylama · hedef süre ~20 dk

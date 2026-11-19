@@ -51,3 +51,37 @@ Doğrulayıcı: `node hikaye/dogrula.js` → SORUN YOK, son dağılımı incille
 - **"Beş yıl deneyimli junior"** esprisi hâlâ dört yerde görünüyor: Asuman stant, Perde 3 kartı, S2 caps, Asuman final. Final callback'i güçlü, ama tekrar sınırda.
 - **"Kurdan yanayım" (S3):** ekonomi göndermesi, taraf tutmuyor; yine de salonda farklı okunabilir.
 - **Süre:** ortalama +0,4 dk arttı (19,5 dk). Gerekirse ilk kısaltılacak yerler: madde 10 ve 15.
+
+---
+
+# Tur 2 — caps → böcek videoları, yokuş → Balcalı dolmuşu (19 Kasım, kullanıcı isteği)
+
+Kural: sayaç/son mantığı, karar kimlikleri, yol yapısı aynı. Değişenler: metin, panel içerikleri, bg (`yokus`→`dolmus`), fx (`korna`), bir yeni panel (`reels`, K5-C'ye eklendi; S2'de `caps`'in yerine). Kullanıcı düzeltmesi: seslendirmede "hamamböceği" yok, halk dilindeki "böcek" kullanılıyor; açıklayıcı ek yok. Değişen replikler eskisinden uzun değil (bir tanesi +1 karakter).
+Doğrulayıcı: `node hikaye/dogrula.js` → SORUN YOK, son dağılımı AYNI, taslak ↔ kod 0 fark. Replik sayısı 133, ses ~19,1 → ~19,0 dk.
+
+## Değişen 13 replik (eski → yeni)
+1. T, P1: "…caps klasörüm dört gigabayt…" → "Abi CV klasörüm iki megabayt, böcek videolarım dört gigabayt. Hayatta öncelikler var abi." (89, bilerek kısa)
+2. D, P1: "Benim de caps klasörüm var, ama adı…" → "Benim de böcek klasörüm var, adı "Staj Belgeleri"…"
+3. A, P1 açılış: "…yokuşu çıkarken staj yeri arıyor. Yokuş da onu arıyor." → "Çukurova, haziran. Üçüncü sınıf Deniz, dolmuşta ayakta staj yeri arıyor. Kapasite on dört kişi. Şoföre göre bu bir öneri." (+korna)
+4. D, SerinYol: "…Balcalı yokuşunu iki derece serin çıkıyorsunuz." → "…Durağa kadar serin. Dolmuşta işe yaramıyor."
+5. T, LinkedIn: "…caps atıyorum… caps atınca beğeniyorlar." → "…böcek atıyorum… CV atınca beğenmiyorlar; böcek atınca beğeniyorlar."
+6. T, K4-C: "…caps arşivim dört gigabayt…" → "…Profesyonelim, böcek düğünü çekiyorum…"
+7. T, K5-C: "…caps sayfamın takipçisi yüz bini geçti…" → "…Sonra böcek düğünü yayınıma hediye yağdı, bıraktım…" (canlı yayın paneli eklendi: "Halayı izleyiciler yönetiyor"; oyunla paralel, açıklanmıyor)
+8. T, K6-C: "Şirkette caps sayfasının başındayım…" → "Şirketin böcek hesabı bende…"
+9. D, S2: "Fotoğrafım bir caps sayfasında paylaşılmış…" → "Yüzüm bir böcekte. Elimde dürüm, lülülü. Altında üç bin yorum var…"
+10. T, S2: "Abi o caps'i ben yaptım…" → "Abi videoyu ben yaptım. Böcek "Memleket neresi kardeşim?" diyor, sen dürümü uzatıyorsun. Bir dürüm yeter." · Kurucunun DM'i "Hemşehrim!" diye başlıyor; bağlantı söylenmiyor.
+11. A, S2: "…caps'i paylaşan…" → "…böceği paylaşan…"
+12. A, S2 kapanış: "…caps unutuldu…" → "…böcek unutuldu…" (bg dolmuş + korna; metne ek yapılmadı)
+13. T, S5: "…caps sayfasının altyazılarını düzeltiyor…" → "…böceklerin dudak senkronunu düzeltiyor…"
+
+Sessiz: M0 "Yokuş aynı yokuş." → "Dolmuş aynı dolmuş. Hâlâ yolcu alıyor."; K3 seçenek "önde Balcalı dolmuşu"; M4 WhatsApp Tolga; M5 epilog "Böcek düğünü bir gün bile gecikmedi."; klasör "böcek videoları · 4,1 GB". Mekânı dolmuşa dönen, metni aynı kalan beat'ler: "Eylül sonu", "Mezuniyetin 4. ayı".
+
+## Diğer dosyalar
+- okunus.js: `caps→keps` silindi; `hülülülü`, `lülülü`, `Reels→Rils`, `TikTok→Tiktok` eklendi.
+- sahne-sozlesmesi.md: DEĞİŞİKLİK 2 (dolmus, korna, reels, HUD etiketi).
+- dogrula.js: BG'ye `dolmus`, PANEL'e `reels`, FX'e `korna` eklendi.
+
+## Riskler
+- `oyun/index.html`'deki HİKÂYE bölümü güncellenmedi. build.js oraya kopyalanmalı; `dolmus`/`korna`/`reels` motor tarafından çizilene kadar eksik görünür.
+- `incil.md` hâlâ caps/yokuş anlatıyor (bağlam dosyası).
+- 13 replik yeniden seslendirilmeli; ses kimlikleri değişti.

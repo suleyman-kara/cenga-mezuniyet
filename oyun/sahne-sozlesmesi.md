@@ -203,3 +203,21 @@ URL: `?test=1` öz sınama, `?vitrin=1` bütün mekân/panel/poz vitrini, `?yol=
 - Montaj karesinde `alt` verilirse `mulakat` paneli kendi soru şeridini çizmez (çift yazı olmasın).
 - Paneller ekran dışına taşarsa ya da HUD'un altına girerse motor onları otomatik içeri kaydırır.
 - `jirakart` paneli ayrıca 2. perde açılış kartında kullanılır.
+
+## DEĞİŞİKLİK 2 (19 Kasım · caps → böcek videoları, yokuş → Balcalı dolmuşu)
+
+**Yeni mekân `dolmus`** — Balcalı dolmuşunun içi, tıklım tıklım: ayakta tutunan öğrenciler, ter, camda/tavanda termometre "hissedilen 47", önde şoför ve dikiz aynası, kapıdan durmadan biniş. Varyant: `aksam` (camdan turuncu akşam ışığı). Kullanım: M0 3. sınıf karesi, P1 açılış, "Eylül sonu", "Mezuniyetin 4. ayı", S2 kapanışı ("Adana · 6 ay sonra"). Karakterler ayakta, mevcut pozlarla (`tired`, `look`, `sip`, `worry`); yeni poz yok. `yokus` mekânı sözleşmede kalır ama artık kullanılmıyor. Bilgi: motorun `yeni(c)` içindeki başlangıç değeri `K.bg='yokus'` olarak duruyor; ilk beat bg'yi kendisi verdiği için etkisi yok.
+
+**Yeni efekt `korna`** — dolmuş kornası (iki kısa bir uzun) + kısa kamera sarsıntısı. Beat `fx`'i ya da cue olarak: `[.97,'fx','korna']`. Kullanım: M0 dolmuş karesi (fx), P1 açılış (cue, son kelimede), S2 kapanışı (cue, son kelimede).
+
+**Yeni panel `reels`** (eski `caps` tipinin yerine; `caps` artık kullanılmıyor) — dikey kısa video / canlı yayın ekranı:
+
+| type | alanlar | eylemler |
+|---|---|---|
+| `reels` | `hesap` ('@tolga.lululu'), `baslik` (videonun üst yazısı), `alt` (alt yazı), `ses` ('♫ lülülü (orijinal ses)'), `begeni`, `yorum` (metin), `canli` (0\|1: 1 ise kırmızı CANLI rozeti + izleyici akışı), `hediye` (canlıda köşede uçan hediye sayacı; boş = yok). Görsel: insansı böcek karakteri (yapay zekâ videosu havası); S2'de böceğin yüzü Deniz'in dürümlü fotoğrafı, elinde dürüm. | — |
+
+Kullanım:
+- K5-C, Tolga: `{type:'reels',id:'dugun',hesap:'@tolga.lululu',baslik:'BÖCEK DÜĞÜNÜ',alt:'Halayı izleyiciler yönetiyor',ses:'♫ hülülülü (davul-zurna remix)',begeni:'12 bin',yorum:'9.870',canli:1,hediye:'gül × 3.400'}` (böcekler halay çeker).
+- S2, iki beat (aynı id, yerinde kalır): `{type:'reels',id:'reels',hesap:'@tolga.lululu',baslik:'POV: İK maaş beklentinizi sordu',alt:"Adana'dan başvuran aday · elinde dürüm",ses:'♫ lülülü (orijinal ses)',begeni:'48 bin',yorum:'3.112',canli:0,hediye:''}`.
+
+**Diğer metin/panel yazıları:** Tolga klasörü 2. satır `['böcek videoları','4,1 GB']`. §10 HUD Tolga etiketi "Caps: 4 GB" → "Böcek: 4,1 GB". M4 WhatsApp Tolga satırı: "abi şirket böcek hesabı açtı, başına beni geçirdiler. lülülü". M5 Tolga epilog: "Şirket maaşları üç ay geciktirdi. Böcek düğünü bir gün bile gecikmedi."

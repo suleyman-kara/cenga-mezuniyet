@@ -25,20 +25,20 @@ Kişiler: ANLATICI (A), DENİZ (D), OZAN (O), BUSE (B), TOLGA (T), ASUMAN (S).
 Windows donma penceresi: **"Mezuniyet.exe yanıt vermiyor."** [Bekle] [Programı kapat] → imleç "Bekle".
 
 ## M0 · Açılış montajı (15 sn, sessiz)
-`Hello, World!` (1. sınıf, mutlu Deniz) → `Segmentation fault (core dumped)` (2. sınıf, yüzde kahve) → Balcalı yokuşu, "41°C · hissedilen 47" (3. sınıf).
+`Hello, World!` (1. sınıf, mutlu Deniz) → `Segmentation fault (core dumped)` (2. sınıf, yüzde kahve) → Balcalı dolmuşu, tıklım tıklım, "41°C · hissedilen 47", korna; alt yazı "Dolmuş aynı dolmuş. Hâlâ yolcu alıyor." (3. sınıf).
 
 ---
 
 ## PERDE 1 · 3. SINIF · STAJ
 Kart altı: "Staj zorunludur. Ücret: —"
 
-A: Çukurova, haziran. Bilgisayar mühendisliği üçüncü sınıf öğrencisi Deniz, yokuşu çıkarken staj yeri arıyor. Yokuş da onu arıyor.
+A: Çukurova, haziran. Üçüncü sınıf Deniz, dolmuşta ayakta staj yeri arıyor. Kapasite on dört kişi. Şoföre göre bu bir öneri.
 D: Staj zorunlu: kırk iş günü, defter, imza, kaşe. Bir de birinin beni kabul etmesi lazım. O kısım yönetmelikte yazmıyor.
 O: Ben staja başvurmadım. Önce şu algoritmayı O(n log n)'e indireceğim. İyi iş kendini gösterir, değil mi?
 B: Deniz! Bu Selin Hanım, İK'dan. Bu kantinci Hüseyin Abi, oğlu yazılımcı. Hepsiyle staj fuarında tanıştım. Sen neredeydin?
 D: Fuar mı vardı? Ben o gün staj defterimin kapağını kaplıyordum. Şeffaf naylonla. Çok güzel oldu, gerçekten.
-T: Abi benim CV klasörüm iki megabayt, caps klasörüm dört gigabayt. Hayatta öncelikler var abi.
-D: Benim de caps klasörüm var, ama adı "Staj Belgeleri". Annem açmasın diye. Annem açmıyor; staj belgesi de yok.
+T: Abi CV klasörüm iki megabayt, böcek videolarım dört gigabayt. Hayatta öncelikler var abi.
+D: Benim de böcek klasörüm var, adı "Staj Belgeleri". Annem açmasın diye. Annem açmıyor; staj belgesi de yok.
 A: Bu sırada Asuman da staj yerini bulmuştu. Daha doğrusu, staj yeri yirmi iki yıldır onu bekliyordu.
 S: İlk günüm! Kimse beni tanımıyordu. Sadece güvenlik "hoş geldiniz Asuman Hanım" dedi. Bir de genel müdür. Bir de herkes.
 A: Deniz'in ise önünde üç kapı var. Hangisini çalacağına bu akşam salon karar verecek.
@@ -97,14 +97,14 @@ Kart altı (Jira kartı): "BITIRME-1 · Mezun ol · Öncelik: Yüksek · Atanan:
 Açılış paneli (sessiz): "Buse, Kuzey Yazılım'da gönüllü etkinlik asistanı olarak başladı. (Ücretsiz)"
 
 A: Dördüncü sınıf. Herkes bitirme projesine bir isim buldu, bazıları logo da yaptı. Projeyi bulmak sonraya kaldı.
-D: Benimki SerinYol: kampüste gölgeden gölgeye en kısa rotayı buluyor. Balcalı yokuşunu iki derece serin çıkıyorsunuz.
+D: Benimki SerinYol: kampüste gölgeden gölgeye en kısa rotayı buluyor. Durağa kadar serin. Dolmuşta işe yaramıyor.
 O: Ben bir derleyici yazdım, kendi dilim için. Dilin adı yok, dokümantasyonu yok, kullanıcısı yok. Ama çok hızlı.
 T: Ben raporu yazdım abi. Proje henüz yok ama rapor çok güzel; içindekiler tablosu otomatik, kaynakça da hazır.
 S: Projemi şirketteki herkese sundum, hepsi ayakta alkışladı! Sonra öğrendim, toplantı odasında sandalye yokmuş. Yine de çok duygusaldı.
 A: SerinYol hazır. Şu an varlığından haberi olan üç kişi var: Deniz, danışman hocası ve pek emin olmayan bir asistan.
 
 ### K3 · SerinYol dünyaya nasıl çıkıyor?
-- **Demo videoyla paylaş** — Doksan saniyelik video. Arkada epik müzik, önde Balcalı yokuşu. (G+2, Y+1)
+- **Demo videoyla paylaş** — Doksan saniyelik video. Arkada epik müzik, önde Balcalı dolmuşu. (G+2, Y+1)
 - **Sessizce GitHub'a koy** — README dosyası: "TODO: README yaz." (Y+2)
 - **Hackathon'a götür** — 48 saat, sınırsız enerji içeceği, sıfır uyku. (G+1, Ç+1, Y+1)
 
@@ -142,7 +142,7 @@ A: LinkedIn. Türkiye'nin en kalabalık motivasyon konuşması. Herkes konuşuyo
 7. "Asuman Yıldız: Bitirme projemi Yıldızlar Holding yönetim kuruluna sundum. Kendi yolumu kendim çizdim." · 1.200 beğeni
 8. Flaş: "Ozan K. · —", gri avatar, 0 bağlantı → kayıp gider
 
-T: Abi ben LinkedIn'e caps atıyorum. En çok İK'cılar beğeniyor. CV atınca beğenmiyorlar ama; caps atınca beğeniyorlar.
+T: Abi ben LinkedIn'e böcek atıyorum. En çok İK'cılar beğeniyor. CV atınca beğenmiyorlar; böcek atınca beğeniyorlar.
 D: Herkes yeşil çerçeveyle dolaşıyor. Benim profilimde hâlâ lise mezuniyet fotoğrafım var. Cüppeli. Bıyıklı.
 B: İnsanlar seninle tanışmadan önce profiline bakıyor. Profilin boşsa tanışmıyorlar. Ben öyle değilim tabii, ben herkesle tanışırım.
 
@@ -161,7 +161,7 @@ O: Doğru karar. Ben de öyle yaptım, iki yıldır bekliyorum. Ama doğru karar
 
 **K4-C** — dürümlü fotoğraf; "Profil görüntülenmesi: 3 → 31 (ikisi kebapçı)"
 D: Fotoğrafı yükledim. Annem aradı: "Oğlum, İK bunu görünce aç olduğunu düşünür." Açtım zaten, o yüzden dürüm.
-T: Abi o fotoğrafı ben çektim. Profesyonelim, caps arşivim dört gigabayt. Işık doğal, ter doğal, dürüm acılı.
+T: Abi o fotoğrafı ben çektim. Profesyonelim, böcek düğünü çekiyorum. Işık doğal, ter doğal, dürüm acılı.
 
 ---
 
@@ -221,10 +221,10 @@ D: Bir buluşmaya gittim. Konuşmak, kod yazmaktan zormuş. Üçüncü çayda bi
 B: Gördün mü? CV'yi bir insana atınca okunuyormuş. Okunmak işe alınmak demek değil ama. Benimkini üç kez okudular; üçünde de okuyan bir yazılımdı.
 A: Buluşmada otuz iki kişi vardı. Otuz biri ona iş teklif etmedi. Bu, şimdiye kadarki en iyi oranıydı.
 
-**K5-C (yüksek lisans kaydı; askerlik şubesi zarfı)**
+**K5-C (yüksek lisans kaydı; askerlik şubesi zarfı; Tolga'nın yanında canlı yayın paneli "BÖCEK DÜĞÜNÜ · Halayı izleyiciler yönetiyor · gül × 3.400")**
 D: Yüksek lisansa kaydoldum. Annem komşulara "master yapıyor" diyor. Ben kendime "zaman yapıyorum" diyorum.
 A: Askerlik şubesi de kaydı not aldı. Acele etmiyor; yüksek lisans biter, doktora biter, şube yine oradadır.
-T: Yüksek lisans mı abi? Ben de düşündüm. Sonra caps sayfamın takipçisi yüz bini geçti, bıraktım. Akademi kaybetti.
+T: Yüksek lisans mı abi? Ben de düşündüm. Sonra böcek düğünü yayınıma hediye yağdı, bıraktım. Akademi kaybetti.
 
 ---
 
@@ -238,7 +238,7 @@ D: Yazıcıya baktım. Kâğıt sıkışmış. Çıkardım, çalıştı. Sofrada
 S: Bizim bayram da çok kalabalık geçti! Babam bütün çalışanlara ikramiye dağıttı. Ben de aldım; ben de çalışıyorum sonuçta.
 
 ## M4 · Mezunlar grubu (24 sn, sessiz) — "CENG '27 Mezunları · 64 üye"
-Almanya mavi kart · askerlik · yüksek lisans "zaman kazanıyorum" · remote dolar, stand-up gece 2 · "Leetcode grubu kuran?" (4 "ben") · Tolga caps sayfası · Buse "CV'si olan bana atsın" · "Ozan: 1.204" · "Deniz: yazıyor…" → durur.
+Almanya mavi kart · askerlik · yüksek lisans "zaman kazanıyorum" · remote dolar, stand-up gece 2 · "Leetcode grubu kuran?" (4 "ben") · Tolga "şirket böcek hesabı açtı, başına beni geçirdiler. lülülü" · Buse "CV'si olan bana atsın" · "Ozan: 1.204" · "Deniz: yazıyor…" → durur.
 
 D: Herkes bir yere gitmiş. Ben de bir şey yazacaktım. "İyiyim" yazdım, sildim. "Bakıyorum" yazdım, onu da sildim.
 O: Bin iki yüz dört başvuru. Bugün bir tanesi döndü: "Pozisyon iç kaynaklardan karşılanmıştır." İç kaynak kim, merak ediyorum.
@@ -262,7 +262,7 @@ A: Yedinci yazının altında altmış bir beğeni vardı. Elli dokuzunu tanım�
 
 **K6-C** — fiş "3 filtre kahve · 210 ₺"
 D: Üç kişiye kahve ısmarladım, iki yüz on lira tuttu. Biri beni bir ekibe önerdi. İş değil, mülakat sözü. Bu piyasada yetmiş liraya alınabilecek en iyi şey.
-T: Kahveyi bana da ısmarlasaydın abi. Şirkette caps sayfasının başındayım, İK her gün uğruyor. Ben de bir tanıdığım.
+T: Kahveyi bana da ısmarlasaydın abi. Şirketin böcek hesabı bende, İK her gün uğruyor. Ben de bir tanıdığım.
 B: Kahve mi ısmarladın? Sonunda! Ben bunu dört yıldır yapıyorum. Artık işim de var. Maaşım kahveye yetmiyor, o ayrı.
 
 A: Deniz'in hikâyesi bitmek üzere. Sonu açmadan önce salona tek bir soru.
@@ -286,13 +286,13 @@ A: Maaşın yarısı kiraya, dörtte biri yola gitti. Deniz ayın yirmisine kada
 B: Kuzey'e hoş geldin! Selin Hanım'a adını ben söyledim, kimseye söyleme. Bir gün ben de senden bir şey isteyeceğim; onu da kimseye söyleme.
 **Son kartı · REFERANS KAPISI** — Çevre kapıyı aralar; içeri girmek ve içeride tutunmak yine senin işin. Görünür ol, tanış, ne yaptığını anlat. Garanti değil; ama bu ülkede onsuz kapı neredeyse hiç aralanmıyor.
 
-### S2 · VİRAL KAZA (DÜRÜM ve G ≥ 3) — oda → telefon → İstanbul'dan görüntülü arama
-Panel: caps "İK: 5 yıl deneyimli junior arıyoruz / Adana'dan başvuran aday:" · 48 bin beğeni; DM "Kurucu · Lezzet Teknoloji: Hemşehrim! Yorumdaki linke baktım, kod fena değil. Pazartesi bir gel, konuşalım."
-D: Fotoğrafım bir caps sayfasında paylaşılmış. Altında üç bin yorum var. Hiçbiri kodumla ilgili değil.
-T: Abi o caps'i ben yaptım. Bir sayfaya attım, gerisi bende değil. Komisyon da istemiyorum. Bir dürüm yeter.
-A: Deniz utancından yorumlara kodunun linkini bıraktı. Üç bin yorumda kimse tıklamadı. Biri hariç: caps'i paylaşan yemek şirketinin Adanalı kurucusu.
+### S2 · VİRAL KAZA (DÜRÜM ve G ≥ 3) — oda → telefon → İstanbul'dan görüntülü arama → dolmuş
+Panel: reels "@tolga.lululu · POV: İK maaş beklentinizi sordu / Adana'dan başvuran aday · elinde dürüm · ♫ lülülü (orijinal ses)" · 48 bin beğeni · 3.112 yorum; DM "Kurucu · Lezzet Teknoloji: Hemşehrim! Yorumdaki linke baktım, kod fena değil. Pazartesi bir gel, konuşalım."
+D: Yüzüm bir böcekte. Elimde dürüm, lülülü. Altında üç bin yorum var. Hiçbiri kodumla ilgili değil.
+T: Abi videoyu ben yaptım. Böcek "Memleket neresi kardeşim?" diyor, sen dürümü uzatıyorsun. Bir dürüm yeter.
+A: Deniz utancından yorumlara kodunun linkini bıraktı. Üç bin yorumda kimse tıklamadı. Biri hariç: böceği paylaşan yemek şirketinin Adanalı kurucusu.
 D: Mülakat görüntülüydü. Yarım saat SerinYol'u sordu, sonra "Acılı mı, acısız mı?" dedi. Doğru cevabı verdim. Asıl soru oymuş.
-A: Deniz İstanbul'a taşındı. Kira maaşın üçte ikisiydi. Altı ay sonra caps unutuldu, şirket küçüldü. Deniz Adana'ya döndü.
+A: Deniz İstanbul'a taşındı. Kira maaşın üçte ikisiydi. Altı ay sonra böcek unutuldu, şirket küçüldü. Deniz Adana'ya döndü.
 **Son kartı · VİRAL KAZA** — Şans gerçek ama kira ödemez. O da ancak ortada duranı bulur; o linki bırakmasaydın üç bin kişi gülüp geçerdi. Şans kapıyı açar, içeride tutmaz; orada yetkinlik ve çevre sınanır, onlar da garanti vermez.
 
 ### S3 · REMOTE DOLAR (Y ≥ 5 ve G ≥ 3) — oda, gece 02.00
@@ -317,7 +317,7 @@ D: Bir gün teklif gelirse diye maaş hesabı yaptım: kira, yol, yemek. Teklif 
 Panel: takvim 2027 → 2029 → 2033; masada "Staj Defteri" tutan yeni 3. sınıflar.
 D: Yüksek lisansı bitirdim, piyasa düzelmedi. Doktoraya başladım. Hocam "piyasa düzelince çıkarsın" dedi.
 A: Hocası doksanlardan beri bekliyor. Bu arada yeni bir üçüncü sınıf öğrencisi kapıyı çaldı: staj defterini imzalatacaktı.
-T: Doktora mı abi? Helal. Bizim şirkette de bir doktoralı var, caps sayfasının altyazılarını düzeltiyor. Çok titiz.
+T: Doktora mı abi? Helal. Bizim şirkette de bir doktoralı var, böceklerin dudak senkronunu düzeltiyor. Çok titiz.
 D: Biraz görünürdüm, biraz tanıdık, biraz yetkin. Piyasa "biraz"ı sevmiyormuş. Ben de "biraz daha" okudum.
 **Son kartı · YÜKSEK LİSANS DÖNGÜSÜ** — Zaman kazanmak strateji değildir; zamanı neye harcadığın stratejidir. Her şeyden biraz yapmak, hiçbir şey yapmamanın en yorucu hâlidir. Bir yön seç, görünür ol, insanlarla tanış. Garantisi yok; beklemenin de yok.
 
@@ -336,7 +336,7 @@ S: Yeni pozisyonumdaki ilk işim, genç yeteneklere kapı açmak! Junior alımı
 ## M5 · Epilog (15 sn, sessiz)
 - OZAN: "1.204. başvuruda teklif aldı. Maaş kirayı karşılamadı. Şimdi yüksek lisansta; akşamları özel ders veriyor."
 - BUSE: "Dördüncü denemede Kuzey Yazılım'da. Kahve makinesi hâlâ şekerli veriyor."
-- TOLGA: "Şirket maaşları üç ay geciktirdi. Caps sayfası bir gün bile gecikmedi."
+- TOLGA: "Şirket maaşları üç ay geciktirdi. Böcek düğünü bir gün bile gecikmedi."
 - ASUMAN: "Chief Innovation Officer. Maaşı: rekabetçi. Yolunu kendi çizdi."
 
 → Son kartı (yukarıda) → **Final kartı (SESSİZ, seslendirilmez; `type:'final'`):** "Mezuniyet.exe yanıt veriyor." / "Bu salondan, henüz adını bilmediğin biriyle tanışmadan çıkma."
@@ -352,5 +352,5 @@ S: Yeni pozisyonumdaki ilk işim, genç yeteneklere kapı açmak! Junior alımı
 ## Öz-eleştiri notları
 - Açıklayan cümleler atıldı: Ozan'ın commit repliğine "kimse beğenmedi" eki yok; kahve makinesi sahnesinde anlatıcı susar; "iç kaynak" ile Asuman'ın terfisi kurguyla yan yana, söylenmez.
 - Eklenen tanıdık gerçekler: staj defterini naylonla kaplamak, binde iki startup hissesi, "dört yılda bitirirsem bir yıl eksik", tek hala üç hesap, ret maillerine otomatik teşekkür, mezunlar grubunda yazıp silmek, "annesi devreye girecek".
-- Sesli okunuş: sembol ve kısaltmalar `oyun/okunus.js` içinde (O(n log n), CV, İK, CTO, LinkedIn, GitHub, README, production, caps, Leetcode, remote, stand-up…). Rakamlar seslendirilen metinde yazıyla.
+- Sesli okunuş: sembol ve kısaltmalar `oyun/okunus.js` içinde (O(n log n), CV, İK, CTO, LinkedIn, GitHub, README, production, lülülü, Leetcode, remote, stand-up…). Rakamlar seslendirilen metinde yazıyla.
 - Zayıf olabilecek yerler: K1-C'de iki Deniz repliği art arda; S1'de Y=1 ile referans mümkün (bilinçli).

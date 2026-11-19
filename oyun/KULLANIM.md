@@ -22,7 +22,8 @@
 | M | sesi kapat/aç |
 | F | tam ekran |
 | R | baştan başla |
-| K | ekran kaydı (video) |
+| P | duraklat / devam (ses, müzik, yazı, montaj ve oylama sayacı durur; telefonlardaki oylama da durur) |
+| K | o anki ekranın kaydını başlat (köşede ● KAYIT); tekrar K: durdur ve dosyayı indir (mezuniyet-kesit-SSDDss) |
 
 Dikkat: oylama sırasında ekrana tıklamak oylamayı erken bitirir.
 

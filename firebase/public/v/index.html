@@ -117,7 +117,7 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
     var st = $('status');
     if (S.failed) { st.textContent = 'Oy gönderilemedi, tekrar dokun'; st.className = 'status bad'; }
     else if (!open) { st.textContent = S.myVote !== null ? 'Süre doldu · oyun sayıldı ✓' : 'Süre doldu, sonuç bekleniyor…'; st.className = 'status'; }
-    else if (S.saved && S.myVote !== null) { st.textContent = 'Oyun kaydedildi ✓ (değiştirebilirsin)'; st.className = 'status ok'; }
+    else if (S.saved && S.myVote !== null) { st.textContent = 'Seçimin kaydedildi ✓ (değiştirebilirsin)'; st.className = 'status ok'; }
     else { st.textContent = 'Birine dokun, oyun verilsin'; st.className = 'status'; }
   }
   function renderResult() {

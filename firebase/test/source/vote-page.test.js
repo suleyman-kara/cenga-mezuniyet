@@ -39,7 +39,7 @@ describe('telefon oy sayfasi', () => {
     btns(d)[1].click(); await sleep(60);
     expect(voteDoc('aud1')).toMatchObject({ o: 1 }); expect(voteDoc('aud1').at).toBeTruthy();
     expect(btns(d)[1].getAttribute('aria-pressed')).toBe('true'); expect(btns(d)[0].getAttribute('aria-pressed')).toBe('false');
-    expect(text(d)).toMatch(/Oyun kaydedildi/);
+    expect(text(d)).toMatch(/Seçimin kaydedildi/);
   });
   it('sure dolmadan oy degistirilebilir (son secim)', async () => {
     seedSession(); const d = await mount('aud1'); btns(d)[0].click(); await sleep(40); btns(d)[2].click(); await sleep(60);
@@ -47,7 +47,7 @@ describe('telefon oy sayfasi', () => {
   });
   it('sayfa yenilenince (ayni uid) onceki secim geri gelir, yeni oy cift sayilmaz', async () => {
     seedSession(); const d1 = await mount('aud1'); btns(d1)[1].click(); await sleep(60); d1.window.close();
-    const d2 = await mount('aud1'); expect(btns(d2)[1].getAttribute('aria-pressed')).toBe('true'); expect(text(d2)).toMatch(/Oyun kaydedildi/);
+    const d2 = await mount('aud1'); expect(btns(d2)[1].getAttribute('aria-pressed')).toBe('true'); expect(text(d2)).toMatch(/Seçimin kaydedildi/);
     expect([...be.docs.keys()].filter((k) => k.includes('/votes/'))).toHaveLength(1);
   });
   it('yeni karar (yeni decKey) secimi sifirlar', async () => {
@@ -62,7 +62,7 @@ describe('telefon oy sayfasi', () => {
   });
   it('oy yazimi basarisizsa uyari gosterir, kaydedildi gostermez', async () => {
     seedSession(); const d = await mount('aud1'); be.failWritesTo = '/votes/'; btns(d)[0].click(); await sleep(80);
-    expect(text(d)).toMatch(/gönderilemedi/); expect(text(d)).not.toMatch(/Oyun kaydedildi/);
+    expect(text(d)).toMatch(/gönderilemedi/); expect(text(d)).not.toMatch(/Seçimin kaydedildi/);
   });
   it('sonuc: kazanan ve yuzdeler (toplam 100)', async () => {
     seedSession({ phase: 'result', winner: 1, counts: [1, 2, 1] }); const d = await mount('aud1');

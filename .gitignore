@@ -1,0 +1,16 @@
+node_modules/
+**/node_modules/
+*.log
+.firebase/
+firebase-debug*.log
+firestore-debug.log
+ui-debug.log
+# anahtarlar asla repoya girmez
+gemini_key.txt
+*key*.txt
+.env*
+# büyük ikili çıktılar
+*.wav
+*.mp4
+videolar/
+_toplu.json

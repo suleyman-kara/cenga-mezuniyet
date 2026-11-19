@@ -67,7 +67,7 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
   var SDK = '12.19.0'; // firebase-config.js'in yaninda, CDN surumu
   var $ = function (id) { return document.getElementById(id); };
   var app = $('app'), sid = new URLSearchParams(location.search).get('s');
-  var S = { sess: null, uid: null, fb: null, myVote: null, myKey: null, saved: false, failed: false, offset: 0, first: true, lastKey: null, timer: null };
+  var S = { sess: null, uid: null, fb: null, myVote: null, myKey: null, saved: false, failed: false, offset: 0, lastKey: null, drawnKey: null, timer: null };
 
   function setState(s) { app.dataset.state = s; }
   function fail(msg) { $('errmsg').textContent = msg; setState('error'); }
@@ -76,12 +76,28 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
     var t = c.reduce(function (a, b) { return a + b; }, 0), p = c.map(function (x) { return t ? Math.round(x / t * 100) : 0; });
     if (t) { var m = c.indexOf(Math.max.apply(null, c)); p[m] += 100 - p.reduce(function (a, b) { return a + b; }, 0); } return p;
   }
-  function remaining() { var c = ms(S.sess && S.sess.closesAt); return c === null ? 0 : Math.max(0, c - (Date.now() + S.offset)); }
+  function isPaused() { return !!(S.sess && S.sess.paused === true && S.sess.phase === 'vote'); }
+  function remaining() {
+    if (isPaused()) return Math.max(0, Number(S.sess.pausedLeftMs) || 0); // duraklatildi: kalan sure sabit
+    var c = ms(S.sess && S.sess.closesAt); return c === null ? 0 : Math.max(0, c - (Date.now() + S.offset));
+  }
+  // Sunucu-yerel saat farki: sunucunun Date basligindan (gidis-donus yarisiyla duzeltilmis). Alinamazsa 0 (telefon saati NTP ile senkron).
+  async function syncClock() {
+    var off = 0;
+    try {
+      if (typeof fetch === 'function') {
+        var t0 = Date.now(), r = await fetch(location.href, { method: 'HEAD', cache: 'no-store' }), t1 = Date.now();
+        var d = Date.parse(r && r.headers && r.headers.get('date'));
+        if (isFinite(d)) off = Math.round(d - (t0 + t1) / 2);
+      }
+    } catch (e) { off = 0; }
+    S.offset = off; render();
+  }
 
   async function wakeLock() {
     try { if (navigator.wakeLock && navigator.wakeLock.request) { await navigator.wakeLock.request('screen'); } } catch (e) { /* sessiz */ }
   }
-  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') wakeLock(); });
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') { wakeLock(); render(); syncClock(); } });
   window.addEventListener('offline', function () { app.dataset.conn = 'off'; });
   window.addEventListener('online', function () { app.dataset.conn = 'on'; });
 
@@ -97,12 +113,12 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
   }
 
   function renderVote() {
-    var s = S.sess, left = remaining(), open = left > 0;
+    var s = S.sess, left = remaining(), paused = isPaused(), open = left > 0;
     $('q').textContent = s.q || '';
     $('polltag').hidden = !s.poll;
     var box = $('opts');
-    if (S.lastKey !== s.decKey || box.children.length !== s.options.length) {
-      box.textContent = '';
+    if (S.drawnKey !== s.decKey || box.children.length !== s.options.length) {
+      S.drawnKey = s.decKey; box.textContent = '';
       s.options.forEach(function (o, i) {
         var b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.dataset.opt = i;
         var k = document.createElement('span'); k.className = 'k'; k.textContent = i + 1;
@@ -110,12 +126,13 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
         b.addEventListener('click', function () { choose(i); }); box.appendChild(b);
       });
     }
-    [].forEach.call(box.children, function (b, i) { b.setAttribute('aria-pressed', S.myVote === i ? 'true' : 'false'); b.disabled = !open; });
+    [].forEach.call(box.children, function (b, i) { b.setAttribute('aria-pressed', S.myVote === i ? 'true' : 'false'); b.disabled = !open || paused; });
     var secs = Math.ceil(left / 1000), dur = Math.max(1, (ms(s.closesAt) - (ms(s.openedAt) || ms(s.closesAt) - 30000)) / 1000);
-    $('cnt').textContent = secs; $('ringwrap').classList.toggle('hot', secs <= 5 && open);
+    $('cnt').textContent = secs; $('ringwrap').classList.toggle('hot', secs <= 5 && open && !paused);
     $('ring').style.strokeDashoffset = 276.5 * Math.min(1, Math.max(0, 1 - left / 1000 / dur));
     var st = $('status');
-    if (S.failed) { st.textContent = 'Oy gönderilemedi, tekrar dokun'; st.className = 'status bad'; }
+    if (paused) { st.textContent = '⏸ Duraklatıldı'; st.className = 'status'; }
+    else if (S.failed) { st.textContent = 'Oy gönderilemedi, tekrar dokun'; st.className = 'status bad'; }
     else if (!open) { st.textContent = S.myVote !== null ? 'Süre doldu · oyun sayıldı ✓' : 'Süre doldu, sonuç bekleniyor…'; st.className = 'status'; }
     else if (S.saved && S.myVote !== null) { st.textContent = 'Seçimin kaydedildi ✓ (değiştirebilirsin)'; st.className = 'status ok'; }
     else { st.textContent = 'Birine dokun, oyun verilsin'; st.className = 'status'; }
@@ -141,7 +158,7 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
     render();
   }
   async function choose(i) {
-    var s = S.sess; if (!s || s.phase !== 'vote' || remaining() <= 0) return;
+    var s = S.sess; if (!s || s.phase !== 'vote' || isPaused() || remaining() <= 0) return;
     var prev = S.myVote, fs = S.fb.fs; S.myVote = i; S.saved = false; S.failed = false; render();
     try {
       await fs.setDoc(fs.doc(S.fb.db, 'sessions', sid, 'votes', s.decKey + '__' + S.uid), { o: i, at: fs.serverTimestamp() });
@@ -159,17 +176,14 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
     app.dataset.conn = navigator.onLine === false ? 'off' : 'on';
     if (!snap.exists()) return fail('Bu oturum bulunamadı');
     var s = snap.data(), keyChanged = s.decKey !== S.lastKey;
-    if (keyChanged && !S.first && s.phase === 'vote' && ms(s.openedAt) !== null) { // canli acilis: sunucu saatine gore yerel fark
-      var o = ms(s.openedAt) - Date.now(); if (Math.abs(o) < 120000) S.offset = o;
-    }
-    S.sess = s; S.first = false;
+    S.sess = s;
     if (keyChanged) { S.lastKey = s.decKey; if (s.phase === 'vote') loadMyVote(s.decKey); else { S.myVote = null; S.saved = false; S.failed = false; } }
     render();
   }
 
   (async function init() {
     if (!sid) return fail('Oturum bulunamadı. QR kodu yeniden okut.');
-    wakeLock();
+    wakeLock(); syncClock();
     try { S.fb = await getFb(); } catch (e) { return fail('Bağlantı kurulamadı'); }
     S.uid = S.fb.uid;
     var fs = S.fb.fs;

@@ -8,7 +8,7 @@ Telefon (public/v/index.html)  --anonim oy-->  Firestore  <--dinler/sayar--  Hos
         ^                                         |  sessions/{sid}                 |
         +------ sonucu oturum belgesinden --------+  sessions/{sid}/votes/{decKey}__{uid}
 ```
-- `sessions/{sid}`: `hostUid, phase('lobby'|'vote'|'result'|'ended'), decKey, q, options, n, poll, openedAt, closesAt, winner, counts, forced`.
+- `sessions/{sid}`: `hostUid, phase('lobby'|'vote'|'result'|'ended'), decKey, q, options, n, poll, openedAt, closesAt, winner, counts, forced, paused, pausedLeftMs`.
 - Oy belgesi: `{o, at: serverTimestamp()}`; kimlik `decKey__uid` (kişi başı tek oy, süre bitene dek değiştirilebilir).
 - Host yalnız `at <= closesAt` oyları sayar; süre dolunca `winner/counts/phase='result'` yazar.
 - `vote-core.js` (saf mantık): `tally, pickWinner, remainingMs, makeDecKey, percents` — tarayıcıda global `VoteCore`, Node'da `require`.
@@ -22,6 +22,7 @@ Telefon (public/v/index.html)  --anonim oy-->  Firestore  <--dinler/sayar--  Hos
 | `onUpdate(cb({counts,total,remainingMs,error}))` | ~250 ms'de bir ve her yeni oyda. `remainingMs<=0` olunca motor `close()` çağırır. |
 | `forceWin(i)` | Sunucu tuşu: `i` kazanır, süre ~1,5 sn'ye kısalır. Geçersiz `i` yok sayılır. |
 | `await close()` → `{counts,winner,forced,total,error,errors}` | **Her durumda çözülür**, kazanan döner (oysuz/hata: rastgele). `error` doluysa ağ/izin sorunu vardı. |
+| `pause()` / `resume()` | Oyun duraklatılınca (P) çağrılır. Karar açıksa kalan süre saklanır (`paused:true, pausedLeftMs`), sayaç/emit sabit kalır, süre dolmaz; `resume` `closesAt = şimdi + kalan` yazar. Karar yokken yalnız `paused` yazılır. Kurallar duraklatılmışken oyu reddeder. `Promise<{ok,error}>` döner, asla takılmaz. |
 | `voteUrl(sid)` | `https://<proje>.web.app/v/?s=<sid>` (GitHub Pages için `voteBaseUrl` verin). |
 
 Kaynaklar: `src/firebase-source.js` (`connectFirebaseSource(config)` CDN modüler SDK'yı yükler), `src/mock-source.js` (`createMockSource()` eski sahte akış; otomatik oynatma/video). QR: `vendor/qr.js` + `qr-svg.js` → `QrSvg.qrSvg(url)` SVG string.
@@ -55,5 +56,5 @@ Proje: `cenga-mezuniyet` (`.firebaserc`). 1) Firestore'u etkinleştir. 2) Authen
 - Telefon tarafı: bağlantı kopunca kırmızı şerit; oy yazımı başarısızsa "gönderilemedi" ve yeniden dokunma.
 
 ## Bilinen sınırlar
-- Telefon saati sunucuya göre sapmışsa halka birkaç sn şaşabilir; sayım sunucu zamanıyla yapıldığı için sonuç etkilenmez (telefon, canlı açılışta `openedAt` ile ofset düzeltir).
+- Telefon saat farkı, sayfa yüklenirken ve ekran tekrar görünür olunca sunucunun `Date` başlığından (HEAD isteği, gidiş-dönüş yarısı düzeltmeli) ölçülür; alınamazsa 0 kabul edilir. Sayım sunucu zamanıyla yapıldığı için sonuç etkilenmez.
 - CDN SDK sürümü (`12.19.0`) `gstatic` üzerinde sandbox'tan doğrulanamadı; deploy öncesi tarayıcıda test edin.

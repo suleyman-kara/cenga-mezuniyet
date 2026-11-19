@@ -39,6 +39,8 @@ service cloud.firestore {
         // Olusturma ve guncelleme (oy degistirme) izinli; silme yasak.
         allow create, update: if ownId()
           && session().phase == 'vote'
+          // Host oyunu duraklattiysa (paused:true) oy verilemez; alan yoksa false sayilir.
+          && session().get('paused', false) != true
           && request.time < session().closesAt + duration.value(1, 's')
           && validVote();
         allow delete: if false;

@@ -7,12 +7,13 @@ export function createMockSource(opts = {}) {
   const rng = opts.rng || Math.random;
   const tickMs = opts.tickMs || 100;
   const base = opts.voteBaseUrl || 'https://example.web.app';
-  let cb = null, timer = null, V = null;
+  let cb = null, timer = null, V = null, paused = false;
 
   function paint() {
     if (cb && V) cb({ counts: V.c.slice(), total: V.c.reduce((a, b) => a + b, 0), remainingMs: Math.max(0, Math.round((V.end - V.el) * 1000)), error: null });
   }
   function tick() {
+    if (paused) { paint(); return; }
     V.el += tickMs / 1000;
     if (V.el <= V.end + 1e-9) { // eski tick(): sure bitince oy akmaz
       const burst = opts.votesPerTick != null ? opts.votesPerTick : (V.forced !== null ? 4 : (rng() < 0.7 ? Math.floor(rng() * 3) : 0));
@@ -39,6 +40,8 @@ export function createMockSource(opts = {}) {
       paint();
       return Promise.resolve({ ok: true, error: null });
     },
+    pause() { paused = true; return Promise.resolve({ ok: true, error: null }); },
+    resume() { paused = false; return Promise.resolve({ ok: true, error: null }); },
     forceWin(i) {
       if (!V || V.forced !== null || !(i >= 0 && i < V.n)) return;
       V.forced = i; V.w = V.c.map((_, k) => (k === i ? 1 - 0.06 * (V.n - 1) : 0.06)); V.end = Math.min(V.end, V.el + 1.5);

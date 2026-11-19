@@ -27,7 +27,7 @@ export function createFirebaseSource(deps) {
   const finalFetchTimeoutMs = deps.finalFetchTimeoutMs ?? 2500;
   const base = (deps.voteBaseUrl || '').replace(/\/$/, '');
 
-  let sid = null, uid = null, offsetMs = 0, cb = null, timer = null, cur = null, errors = [];
+  let sid = null, uid = null, offsetMs = 0, cb = null, timer = null, cur = null, errors = [], isPaused = false;
   const rec = (e) => { if (e) errors.push(e); return e; };
   const sessRef = () => fs.doc(db, 'sessions', sid);
   const votesRef = () => fs.collection(db, 'sessions', sid, 'votes');
@@ -41,7 +41,7 @@ export function createFirebaseSource(deps) {
   function emit() {
     if (!cb || !cur) return;
     const counts = VC.tally(cur.votes, cur.n, cur.closesAtMs);
-    cb({ counts, total: sum(counts), remainingMs: VC.remainingMs(cur.closesAtMs, now(), offsetMs), error: errors.length ? errors[errors.length - 1] : null });
+    cb({ counts, total: sum(counts), remainingMs: cur.paused ? cur.pausedLeftMs : VC.remainingMs(cur.closesAtMs, now(), offsetMs), error: errors.length ? errors[errors.length - 1] : null });
   }
   function stop() { clearInterval(timer); timer = null; if (cur && cur.unsub) { try { cur.unsub(); } catch (_) {} cur.unsub = null; } }
 
@@ -58,7 +58,7 @@ export function createFirebaseSource(deps) {
       const t0 = now();
       const w = await guard(fs.setDoc(fs.doc(db, 'sessions', id), {
         hostUid: uid, phase: 'lobby', decKey: null, q: '', options: [], n: 0, poll: false,
-        openedAt: fs.serverTimestamp(), closesAt: null, winner: null, counts: null, forced: false,
+        openedAt: fs.serverTimestamp(), closesAt: null, winner: null, counts: null, forced: false, paused: false,
       }), writeTimeoutMs, 'oturum olusturma');
       if (!w.ok) throw new Error(w.error);
       sid = id;
@@ -84,7 +84,7 @@ export function createFirebaseSource(deps) {
       stop(); errors = [];
       const n = options.length;
       const closesAtMs = now() + offsetMs + (durMs || 30000);
-      cur = { decKey, n, closesAtMs, forced: null, votes: [], unsub: null, result: null };
+      cur = { decKey, n, closesAtMs, forced: null, votes: [], unsub: null, result: null, paused: isPaused, pausedLeftMs: isPaused ? (durMs || 30000) : null };
       try {
         cur.unsub = fs.onSnapshot(votesRef(), (snap) => { cur.votes = votesFrom(snap.docs, decKey); emit(); }, (e) => rec(`oy dinleme: ${e && e.code ? e.code + ' ' : ''}${(e && e.message) || e}`));
       } catch (e) { rec(`oy dinleme: ${e.message}`); }
@@ -92,15 +92,45 @@ export function createFirebaseSource(deps) {
       return guard(fs.updateDoc(sessRef(), {
         phase: 'vote', decKey, q, options, n, poll: !!poll, openedAt: fs.serverTimestamp(),
         closesAt: fs.Timestamp.fromMillis(closesAtMs), winner: null, counts: null, forced: false,
+        paused: isPaused, pausedLeftMs: isPaused ? cur.pausedLeftMs : null,
       }), writeTimeoutMs, 'karar acma').then((r) => ({ ok: r.ok, error: r.ok ? null : rec(r.error) }));
     },
 
     forceWin(i) {
       if (!cur || cur.result || cur.forced !== null || !Number.isInteger(i) || i < 0 || i >= cur.n) return;
       cur.forced = i;
+      if (cur.paused) { // duraklatilmisken: kalan sure kisalir, closesAt resume'da hesaplanir
+        cur.pausedLeftMs = Math.min(cur.pausedLeftMs, 1500);
+        guard(fs.updateDoc(sessRef(), { pausedLeftMs: cur.pausedLeftMs }), writeTimeoutMs, 'sure kisaltma').then((r) => { if (!r.ok) rec(r.error); });
+        emit(); return;
+      }
       cur.closesAtMs = Math.min(cur.closesAtMs, now() + offsetMs + 1500);
       guard(fs.updateDoc(sessRef(), { closesAt: fs.Timestamp.fromMillis(cur.closesAtMs) }), writeTimeoutMs, 'sure kisaltma').then((r) => { if (!r.ok) rec(r.error); });
       emit();
+    },
+
+    // Oyun duraklatildi (P). Karar aciksa kalan sure korunur; telefonlar da durur. Asla reddetmez: Promise<{ok,error}>.
+    pause() {
+      if (!sid || isPaused) return Promise.resolve({ ok: true, error: null });
+      isPaused = true;
+      const data = { paused: true };
+      if (cur && !cur.result && !cur.paused) {
+        cur.pausedLeftMs = VC.remainingMs(cur.closesAtMs, now(), offsetMs); cur.paused = true;
+        data.pausedLeftMs = cur.pausedLeftMs; emit();
+      }
+      return guard(fs.updateDoc(sessRef(), data), writeTimeoutMs, 'duraklatma').then((r) => ({ ok: r.ok, error: r.ok ? null : rec(r.error) }));
+    },
+
+    // Devam: closesAt = simdi (sunucu saatine gore) + kalan sure.
+    resume() {
+      if (!sid || !isPaused) return Promise.resolve({ ok: true, error: null });
+      isPaused = false;
+      const data = { paused: false };
+      if (cur && !cur.result && cur.paused) {
+        cur.closesAtMs = now() + offsetMs + cur.pausedLeftMs; cur.paused = false; cur.pausedLeftMs = null;
+        data.closesAt = fs.Timestamp.fromMillis(cur.closesAtMs); data.pausedLeftMs = null; emit();
+      }
+      return guard(fs.updateDoc(sessRef(), data), writeTimeoutMs, 'devam').then((r) => ({ ok: r.ok, error: r.ok ? null : rec(r.error) }));
     },
 
     // Her durumda cozulur: { counts, winner, forced, total, error, errors }

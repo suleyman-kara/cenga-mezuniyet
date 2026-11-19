@@ -2251,6 +2251,7 @@ function showTime(left){
 }
 function startDecision(st){
  const d=st.d;
+ if(!OY_SIM()&&window.VOTE_PENDING&&(st._bekle=(st._bekle||0)+1)<=20){ phase='freeze'; clearAll(); later(()=>{ if(script[pos]===st) startDecision(st); },400); return; }
  phase='freeze'; clearAll(); cues=[]; mouthOff(); wipeReset(); if(fullText) txt.textContent=fullText; stopVoice();
  stage.classList.remove('shake','mont'); stage.classList.add('frozen');
  setMusic('none'); SFX.boom();
@@ -2535,15 +2536,16 @@ const Q=new URLSearchParams(location.search), D=document.getElementById('oyDurum
 const durum=(m,c)=>{ D.textContent=m; D.className=c||''; if(c==='ok') setTimeout(()=>D.classList.add('gizle'),15000); };
 if(Q.has('sahte')||Q.has('test')){ durum('Sahte oylama (deneme kipi)','off'); setTimeout(()=>D.classList.add('gizle'),8000); }
 else{
+ window.VOTE_PENDING=true;
  try{
   const {connectFirebaseSource}=await import('./oylama/firebase-source.js');
   const src=await connectFirebaseSource(window.FIREBASE_CONFIG,{voteBaseUrl:'https://cenga-mezuniyet.pages.dev'});
   const sid=await src.createSession();
-  window.VOTE=src; window.VOTE_OK=true;
+  window.VOTE=src; window.VOTE_OK=true; window.VOTE_PENDING=false;
   const url=src.voteUrl(sid); window.qrHazir(QrSvg.qrSvg(url),url);
   durum('● Canlı oylama hazır · oturum '+sid,'ok'); console.log('[oylama] oturum',sid,url);
   addEventListener('pagehide',()=>{ try{ src.end(); }catch(_){} });
- }catch(e){ console.warn('[oylama] bağlanamadı',e); durum('Çevrimdışı: oylama yok, kararlar kurayla (1-4 tuşlarıyla seçebilirsin)','off'); }
+ }catch(e){ console.warn('[oylama] bağlanamadı',e); window.VOTE_PENDING=false; durum('Çevrimdışı: oylama yok, kararlar kurayla (1-4 tuşlarıyla seçebilirsin)','off'); }
 }
 </script>
 </body>

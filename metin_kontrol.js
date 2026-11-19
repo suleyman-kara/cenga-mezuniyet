@@ -9,7 +9,7 @@ if (a < 0 || b < 0) { console.log('HATA: HİKÂYE / SES işaret yorumları yok')
 const G = new Function(html.slice(a, b) + ';return {build,A,VOICE,hid,decVid,endVid};')();
 const now = {};
 (function gez(c) {
-  const s = G.build(c), d = s.find(x => x.k === 'dec' && !x.poll && c[x.id] === undefined);
+  const s = G.build(c), d = s.find(x => x.k === 'dec' && c[x.id] === undefined);
   if (d) { for (let i = 0; i < d.d.o.length; i++) gez(c.concat(i)); return; }
   for (const st of s) {
     if (st.k === 'beat' && st.text !== '...') now[G.hid(st.text)] = G.VOICE[st.who] + ' | ' + st.text;

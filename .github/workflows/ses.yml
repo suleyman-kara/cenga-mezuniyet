@@ -1,0 +1,54 @@
+name: seslendirme
+on:
+  workflow_dispatch:
+    inputs:
+      kip:
+        description: "ornek = her karakterden tek replik, tam = bütün replikler"
+        required: true
+        default: ornek
+        type: choice
+        options: [ornek, tam]
+permissions:
+  contents: write
+concurrency: { group: seslendirme, cancel-in-progress: false }
+jobs:
+  ses:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with: { node-version: 22 }
+      - uses: actions/setup-python@v6
+        with: { python-version: "3.12" }
+      - name: Hikâyeden replikleri çıkar
+        run: |
+          mkdir -p is
+          { echo '<script>'; cat hikaye/build.js; echo; echo '/* ---------- SES ---------- */'; echo '</script>'; } > is/index.html
+          cp oyun/okunus.js oyun/sesler.json is/
+          node replik_cikar.js is
+      - name: Önceki sesleri al (aynı metin = aynı kimlik, yeniden üretilmez)
+        run: |
+          if git fetch --depth 1 origin ses 2>/dev/null; then
+            git --work-tree=is checkout FETCH_HEAD -- ses ses_ornek 2>/dev/null || true
+            git reset -q
+          fi
+          ls is/ses | wc -l
+      - name: Seslendir
+        run: |
+          if [ "${{ inputs.kip }}" = "ornek" ]; then python ses_uret_gemini.py is --ornek; else
+            python ses_uret_gemini.py is
+            python ses_denetle.py is --sil
+            python ses_uret_gemini.py is
+            python ses_denetle.py is
+          fi
+      - name: Sesleri 'ses' dalına gönder
+        run: |
+          cd is
+          git init -q -b ses && git config user.name "github-actions" && git config user.email "github-actions@users.noreply.github.com"
+          printf '*.html\nokunus.js\n' > .gitignore
+          git add -A ses ses_ornek sesler.json .gitignore 2>/dev/null || git add -A
+          git commit -q -m "Seslendirme (${{ inputs.kip }}): $(ls ses/*.wav 2>/dev/null | wc -l) wav"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ses

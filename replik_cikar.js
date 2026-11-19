@@ -25,7 +25,7 @@ const ekle = (id, voice, text, ham) => {
 };
 (function gez(c) {
   const s = G.build(c);
-  const d = s.find(x => x.k === 'dec' && !x.poll && c[x.id] === undefined);
+  const d = s.find(x => x.k === 'dec' && c[x.id] === undefined);
   if (d) { for (let i = 0; i < d.d.o.length; i++) gez(c.concat(i)); return; }
   uzunluk.push(s.filter(x => x.k === 'beat').length);
   for (const st of s) {

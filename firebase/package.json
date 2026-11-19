@@ -1,0 +1,26 @@
+{
+  "name": "salon-oylama",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Canli salon oylama altyapisi (Firebase Spark: Firestore + Anonymous Auth + Hosting)",
+  "scripts": {
+    "test:unit": "vitest run test/unit test/source",
+    "test:rules": "firebase emulators:exec --only firestore --project demo-mezuniyet \"vitest run test/rules\"",
+    "test:int": "firebase emulators:exec --only firestore --project demo-mezuniyet \"vitest run test/int\"",
+    "test": "npm run test:unit && npm run test:rules && npm run test:int",
+    "emulators": "firebase emulators:start --project demo-mezuniyet",
+    "sync-config": "node scripts/sync-config.mjs",
+    "lint:rules": "eslint -c eslint.rules.config.mjs firestore.rules"
+  },
+  "devDependencies": {
+    "@firebase/eslint-plugin-security-rules": "^0.0.2",
+    "@firebase/rules-unit-testing": "^5.0.2",
+    "eslint": "^10.15.0",
+    "firebase": "^12.19.0",
+    "firebase-tools": "^15.37.0",
+    "jsdom": "^31.0.1",
+    "jsqr": "^1.4.0",
+    "qrcode-generator": "^2.0.4",
+    "vitest": "^5.1.1"
+  }
+}

@@ -94,8 +94,8 @@ function build(c){
  }else{
   art(0,0,3);
   b({who:D,bg:'oda',v:'gece',c:[['deniz',260,'laptop']],panel:{type:'kod',id:'k1c',satirlar:['$ npm start','GölgePark çalışıyor ✓','(localhost)'],tur:'ok'},cue:[[.4,'deniz','cheer'],[.75,'deniz','shrug']],text:'Kendi projemi yazdım: kampüste gölgeli otopark bulan bir uygulama. Çalışıyor. Bende çalışıyor.'});
-  b({who:D,c:[['deniz',960,'present']],cue:[[.25,'deniz','smug'],[.55,'deniz','point'],[.85,'deniz','wag']],text:'Kırk iş günü boyunca patron da bendim, stajyer de. Patron olarak stajyerden çok memnunum. Stajyer olarak zam istiyorum.'});
-  b({who:A,c:[['deniz',260,'think']],panel:{type:'defter',id:'defter',baslik:'STAJ DEFTERİ',satirlar:['Gün 40 · Kendi projem','İşyeri amiri imzası:'],imza:'______',not:'ben atarım? — annen'},cue:[[.5,'fx','p:not'],[.8,'deniz','facepalm']],text:'Staj defterini annesine imzalatmayı düşündü. Annesinin kaşesi yoktu.'});
+  b({who:A,c:[['deniz',960,'present']],cue:[[.25,'deniz','smug'],[.55,'deniz','point'],[.85,'deniz','wag']],text:"Kırk iş günü boyunca patron da oydu, stajyer de. Patron stajyerden çok memnundu. Stajyer zam istedi; patron \"bütçe yok\" dedi."});
+  b({who:D,c:[['deniz',260,'think']],panel:{type:'defter',id:'defter',baslik:'STAJ DEFTERİ',satirlar:['Gün 40 · Kendi projem','İşyeri amiri imzası:'],imza:'______',not:'ben atarım? — annen'},cue:[[.5,'fx','p:not'],[.8,'deniz','facepalm']],text:"Staj defterini anneme imzalatmayı düşündüm. \"Ben atarım\" dedi. Kaşesi yok ama imzası okulda tanınıyor; on iki yıl karnemi o imzaladı."});
  }
  b({who:B,bg:'koridor',v:'',yer:'Eylül',c:[['deniz',260,'look'],['buse',1660,'present','inR']],panel:{type:'afis',id:'afis',baslik:'KARİYER SÖYLEŞİSİ',satirlar:['Cuma · 18.00','Konuk: Kuzey Yazılım'],alt:'sonunda pizza'},cue:[[.2,'buse','point'],[.6,'buse','wave'],[.9,'deniz','think']],text:'Cuma akşamı söyleşi var: bir şirketten mühendis gelecek, sonunda pizza. Gel, en kötü ihtimalle pizza yersin.'});
  const k2=K('Buse seni söyleşiye çağırıyor. Ne yapıyorsun?',[['Git, tanış','Konuşmacıya soru sor. Evet, sesli.'],['Seriyi bozma','Leetcode serisi 247 gün. Bu akşam 248 olacak.'],['Pizza gelince kaç','Etkinliğe değil, ikrama katılım.']]);
@@ -104,7 +104,7 @@ function build(c){
   art(1,2,0);
   b({who:D,bg:'soylesi',c:[['deniz',260,'point']],panel:{type:'kartvizit',id:'kaan',ad:'Kaan Er',unvan:'Engineering Manager',sirket:'Kuzey Yazılım'},cue:[[.15,'deniz','worry'],[.4,'deniz','shrug'],[.75,'deniz','phone'],[.8,'fx','ding']],text:"Soru sordum. Sesim titredi, soru da biraz saçmaydı. Çıkışta adımı söyledim, akşam LinkedIn'den ekledim. İstek hâlâ beklemede."});
   b({who:B,c:[['deniz',620,'heart'],['buse',1300,'clap']],cue:[[.3,'buse','point'],[.7,'buse','smug'],[.9,'deniz','facepalm']],text:'Gördün mü? Saçma soru diye bir şey yok, hatırlanan soru var. Seninki çok hatırlanacak, inan bana.'});
-  b({who:A,c:[['deniz',960,'phone']],panel:{type:'linkedin',id:'dli0',ad:'Kaan Er',baslik:'Engineering Manager · Kuzey Yazılım',alt:'Bağlantı isteği: Beklemede · 3 ay',foto:'gri'},cue:[[.8,'deniz','sad']],text:"Bağlantı isteği üç ay beklemede kaldı. Konuşmacı soruyu hatırladı. Soranı hatırlamadı, ama soruyu hatırladı."});
+  b({who:A,c:[['deniz',960,'phone']],panel:{type:'linkedin',id:'dli0',ad:'Kaan Er',baslik:'Engineering Manager · Kuzey Yazılım',alt:'Bağlantı isteği: Beklemede · 3 ay',foto:'gri'},cue:[[.8,'deniz','sad']],text:"Bağlantı isteği üç ay beklemede kaldı. Konuşmacı bir sonraki söyleşide o soruyu örnek verdi: \"Geçen sefer biri şunu sormuştu.\" Biri."});
  }else if(k2===1){
   art(0,0,1);
   b({who:D,bg:'oda',v:'gece',c:[['deniz',260,'laptop:tired']],panel:{type:'leetcode',id:'lc',gun:248,cozulen:612,zorluk:'Hard',durum:'Kabul edildi',alev:1},cue:[[.3,'deniz','cheer'],[.6,'deniz','phone'],[.85,'deniz','sad']],text:'İki yüz kırk sekizinci gün, Hard soru, kabul edildi. Kutlayacak kimse yoktu; herkes söyleşiden sonra konuşmacıyla yemeğe gitmişti.'});
@@ -122,18 +122,18 @@ function build(c){
  // ================= PERDE 2 =================
  perde(2,'4. SINIF','BITIRME-1 · Mezun ol · Öncelik: Yüksek · Atanan: Sen · Son tarih: Dün','jira');
  M('B21',[{ms:3200,bg:'lab',c:[],panel:{type:'lbildirim',id:'bnot',ad:'Buse',foto:'buse',metin:"Kuzey Yazılım'da gönüllü etkinlik asistanı olarak başladı. (Ücretsiz)",zaman:'şimdi'},fx:'ding'}]);
- b({who:A,bg:'lab',yer:'Bitirme Laboratuvarı · Ekim',c:[['deniz',420,'laptop'],['ozan',960,'laptop'],['tolga',1500,'sip']],cue:[[.5,'tolga','tired'],[.85,'deniz','think']],text:'Dördüncü sınıf. Herkes bitirme projesine bir isim buldu. Projeyi bulmak sonraya kaldı.'});
+ b({who:A,bg:'lab',yer:'Bitirme Laboratuvarı · Ekim',c:[['deniz',420,'laptop'],['ozan',960,'laptop'],['tolga',1500,'sip']],cue:[[.5,'tolga','tired'],[.85,'deniz','think']],text:"Dördüncü sınıf. Herkes bitirme projesine bir isim buldu, bazıları logo da yaptı. Projeyi bulmak sonraya kaldı."});
  b({who:D,c:[['deniz',260,'present'],['ozan',1660,'laptop']],panel:{type:'dosya',id:'serin',ad:'SerinYol',alt:'gölgeden gölgeye en kısa rota · −2°C',ikon:'pdf'},cue:[[.2,'deniz','present'],[.7,'deniz','smug']],text:'Benimki SerinYol: kampüste gölgeden gölgeye en kısa rotayı buluyor. Balcalı yokuşunu iki derece serin çıkıyorsunuz.'});
  b({who:O,c:[['deniz',620,'look'],['ozan',1300,'laptop']],cue:[[.3,'ozan','type'],[.85,'ozan','calm'],[.9,'deniz','brow']],text:'Ben bir derleyici yazdım, kendi dilim için. Dilin adı yok, dokümantasyonu yok, kullanıcısı yok. Ama çok hızlı.'});
- b({who:T,c:[['deniz',620,'look'],['tolga',1300,'present']],panel:{type:'dosya',id:'rapor',ad:'Bitirme_Raporu_SON_son2.pdf',alt:'İçindekiler: otomatik ✓',ikon:'pdf',x:1180,y:160},cue:[[.3,'tolga','sip'],[.75,'tolga','smug']],text:'Ben raporu yazdım abi. Proje henüz yok ama rapor çok güzel; içindekiler tablosu otomatik.'});
- b({who:S,bg:'holding',c:[['asuman',1660,'present']],panel:{type:'dosya',id:'asupp',ad:'Yıldızlar Holding Dijital Dönüşüm Stratejisi.pptx',alt:'112 slayt · Saha desteği: Yıldızlar Holding',ikon:'pptx'},cue:[[.25,'asuman','cheer'],[.5,'asuman','clap'],[.85,'asuman','heart']],text:'Projemi şirketteki herkese sundum, hepsi ayakta alkışladı! Sonra öğrendim, salonda sandalye yokmuş. Yine de çok duygusaldı.'});
- b({who:A,bg:'lab',c:[['deniz',960,'laptop']],cue:[[.6,'deniz','think']],text:"SerinYol çalışıyor, en azından Deniz'in bilgisayarında. Şimdi dünyada birinin bundan haberi olması lazım."});
+ b({who:T,c:[['deniz',620,'look'],['tolga',1300,'present']],panel:{type:'dosya',id:'rapor',ad:'Bitirme_Raporu_SON_son2.pdf',alt:'İçindekiler: otomatik ✓',ikon:'pdf',x:1180,y:160},cue:[[.3,'tolga','sip'],[.75,'tolga','smug']],text:"Ben raporu yazdım abi. Proje henüz yok ama rapor çok güzel; içindekiler tablosu otomatik, kaynakça da hazır."});
+ b({who:S,bg:'holding',c:[['asuman',1660,'present']],panel:{type:'dosya',id:'asupp',ad:'Yıldızlar Holding Dijital Dönüşüm Stratejisi.pptx',alt:'112 slayt · Saha desteği: Yıldızlar Holding',ikon:'pptx'},cue:[[.25,'asuman','cheer'],[.5,'asuman','clap'],[.85,'asuman','heart']],text:"Projemi şirketteki herkese sundum, hepsi ayakta alkışladı! Sonra öğrendim, toplantı odasında sandalye yokmuş. Yine de çok duygusaldı."});
+ b({who:A,bg:'lab',c:[['deniz',960,'laptop']],cue:[[.6,'deniz','think']],text:"SerinYol hazır. Şu an varlığından haberi olan üç kişi var: Deniz, danışman hocası ve pek emin olmayan bir asistan."});
  const k3=K('SerinYol dünyaya nasıl çıkıyor?',[['Demo videoyla paylaş','Doksan saniyelik video. Arkada epik müzik, önde Balcalı yokuşu.'],["Sessizce GitHub'a koy",'README dosyası: "TODO: README yaz."'],["Hackathon'a götür",'48 saat, sınırsız enerji içeceği, sıfır uyku.']]);
  if(k3===undefined) return s;
  if(k3===0){
   art(2,0,1);
   b({who:D,bg:'oda',v:'',c:[['deniz',260,'phone']],panel:{type:'lgonderi',id:'serinli',ad:'Deniz',foto:'cuppe',unvan:'Öğrenci',metin:"SerinYol'u tanıtmaktan mutluluk duyuyorum! ▶ 1:30",begeni:214,yorumlar:[['Halam','Maşallah'],['İK Uzmanı · Akdeniz Teknoloji','Tebrikler!']]},cue:[[.25,'deniz','worry'],[.55,'fx','p:yorum'],[.6,'fx','ding'],[.8,'fx','p:yorum'],[.85,'deniz','shock']],text:'Paylaşımı yaptım, telefonu ters çevirdim. Yarım saat sonra baktım: halam beğenmiş, bir de bir İK uzmanı. Ona mesaj attım. Görüldü.'});
-  b({who:A,bg:'lab',c:[['ozan',1660,'laptop']],panel:Object.assign({},OZAN_GH,{commit:42}),cue:[[.3,'fx','p:yesil']],text:'Aynı gün Ozan kırk iki commit attı.'});
+  b({who:A,bg:'lab',c:[['ozan',1660,'laptop']],panel:Object.assign({},OZAN_GH,{commit:42}),cue:[[.3,'fx','p:yesil']],text:"Aynı gün Ozan kırk iki commit attı. Profili yemyeşil oldu. O yeşili gören tek kişi yine Ozan'dı."});
   b({who:B,bg:'kahve',c:[['buse',960,'phone']],cue:[[.2,'buse','wave'],[.6,'buse','present'],[.9,'buse','smug']],text:'Videonu ben de paylaştım! İki yüz on dört beğeninin otuzu benim çevremden. Merak etme, sana fatura etmeyeceğim.'});
  }else if(k3===1){
   art(0,0,2);
@@ -150,7 +150,7 @@ function build(c){
  b({who:B,c:[['buse',620,'wave'],['tolga',1300,'sip']],cue:[[.2,'buse','wave'],[.5,'buse','present'],[.85,'buse','smug']],text:'Ben bugün otuz kişiyle tanıştım. Sırrı basit: ikinci kez gidiyorum. İkinci kez gidince insanlar seni hatırladıklarını sanıyor.'});
  b({who:T,c:[['buse',620,'look'],['tolga',1300,'present']],cue:[[.2,'fx','bubble:9 KALEM:1300:200'],[.5,'tolga','cheer'],[.85,'tolga','smug']],text:'Dokuz kalem, üç termos, bir stres topu. Kariyer günü benim için verimli geçti abi. Mezun olunca kalem almayacağım.'});
  b({who:S,c:[['asuman',1660,'selfie']],panel:ILAN({id:'rollup',rollup:1}),cue:[[.2,'asuman','wave'],[.55,'asuman','present'],[.9,'asuman','heart']],text:'Standımızda junior alıyoruz! En az beş yıl deneyim. Bence çok makul; ben de beş yıldır şirkette stajyerim. Yaz tatillerinde.'});
- b({who:D,c:[['deniz',260,'think']],panel:ILAN({id:'rollup',rollup:1}),cue:[[.25,'fx','p:maas'],[.45,'deniz','write'],[.85,'deniz','point']],text:'Bir standda junior ilanı vardı: en az beş yıl deneyim. Dört yılda bitirirsem bir yıl eksik kalıyor. Uzatan arkadaşlar, sizin devriniz.'});
+ b({who:D,c:[['deniz',260,'think']],panel:ILAN({id:'rollup',rollup:1}),cue:[[.25,'fx','p:maas'],[.45,'deniz','write'],[.85,'deniz','point']],text:"Dört yılda bitirirsem bir yıl eksik kalıyor. Demek ki bu ilan bize değil. Okulu uzatan arkadaşlar, sonunda sizin devriniz geldi."});
  b({who:A,bg:'oda',v:'gece',yer:'LinkedIn · Doğal yaşam alanı',c:[['deniz',960,'phone']],cue:[[.6,'deniz','tired']],text:"LinkedIn. Türkiye'nin en kalabalık motivasyon konuşması. Herkes konuşuyor, kimse dinlemiyor, herkes beğeniyor."});
  M('M1',[{ms:24000,bg:'oda',v:'gece',c:[],panel:{type:'akis',id:'akis',sure:24000,gonderiler:[
   {ad:'Emre T.',foto:'gri',unvan:'Stajyer',metin:'Bugün stajımda bana çay ikram edildi. Bu bana liderlik hakkında 7 ders öğretti.',begeni:842},
@@ -162,7 +162,7 @@ function build(c){
   {ad:'Asuman Yıldız',foto:'asuman',unvan:'Chief Innovation Intern @ Yıldızlar Holding',metin:'Bitirme projemi Yıldızlar Holding yönetim kuruluna sundum. Kendi yolumu kendim çizdim.',begeni:1200},
   {ad:'Ozan K.',foto:'gri',unvan:'—',metin:'0 bağlantı',begeni:0,flas:1}
  ]}}]);
-b({who:T,bg:'oda',v:'gece',c:[['tolga',1660,'phone']],cue:[[.3,'tolga','sip'],[.8,'tolga','smug']],text:"Abi ben LinkedIn'e caps atıyorum. Kimse anlamıyor ama İK'cılar beğeniyor. Sanırım onlar da anlamıyor."});
+b({who:T,bg:'oda',v:'gece',c:[['tolga',1660,'phone']],cue:[[.3,'tolga','sip'],[.8,'tolga','smug']],text:"Abi ben LinkedIn'e caps atıyorum. En çok İK'cılar beğeniyor. CV atınca beğenmiyorlar ama; caps atınca beğeniyorlar."});
  b({who:D,c:[['deniz',260,'facepalm']],panel:{type:'linkedin',id:'dli',ad:'Deniz',baslik:'',alt:'Çukurova Üniversitesi',foto:'cuppe',baglanti:38},cue:[[.3,'deniz','phone'],[.7,'deniz','facepalm']],text:'Herkes yeşil çerçeveyle dolaşıyor. Benim profilimde hâlâ lise mezuniyet fotoğrafım var. Cüppeli. Bıyıklı.'});
  b({who:B,bg:'koridor',v:'',c:[['deniz',620,'sad'],['buse',1300,'present']],cue:[[.3,'buse','point'],[.75,'buse','smug'],[.9,'deniz','brow']],text:'İnsanlar seninle tanışmadan önce profiline bakıyor. Profilin boşsa tanışmıyorlar. Ben öyle değilim tabii, ben herkesle tanışırım.'});
  const k4=K("Deniz'in profili nasıl olacak?",[['Düzgün profil','Gün ışığında fotoğraf, net başlık, ayda iki paylaşım.'],['Kod konuşsun','Profil boş, GitHub linki yeter. Ozan gibi.'],['Dürümlü fotoğraf','Elinde Adana dürüm, arkada 44 derecelik termometre. Samimi.']]);
@@ -173,7 +173,7 @@ b({who:T,bg:'oda',v:'gece',c:[['tolga',1660,'phone']],cue:[[.3,'tolga','sip'],[.
   b({who:A,c:[['deniz',260,'phone']],panel:{type:'linkedin',id:'dli',ad:'Deniz',baslik:'Mobil Geliştirici · SerinYol',alt:'Çukurova Üniversitesi',foto:'deniz',gor:[3,47]},cue:[[.1,'fx','p:say'],[.8,'deniz','brow']],text:'Profili bir haftada kırk yedi kişi görüntüledi. Üçü halasıydı; hala tek ama üç ayrı hesabı var.'});
  }else if(k4===1){
   art(0,0,1);
-  b({who:D,bg:'oda',v:'',c:[['deniz',260,'laptop']],panel:{type:'linkedin',id:'dli',ad:'Deniz',baslik:'',alt:'github.com/deniz',foto:'gri',baglanti:12},cue:[[.3,'deniz','present'],[.85,'deniz','shrug']],text:'Profili boş bıraktım. Kodum her şeyi anlatıyor. Kodu açan olursa.'});
+  b({who:D,bg:'oda',v:'',c:[['deniz',260,'laptop']],panel:{type:'linkedin',id:'dli',ad:'Deniz',baslik:'',alt:'github.com/deniz',foto:'gri',baglanti:12},cue:[[.3,'deniz','present'],[.85,'deniz','shrug']],text:"Profili boş bıraktım, sadece GitHub linki var. Kodum her şeyi anlatıyor. Linke tıklayan olursa anlatacak, söz verdi."});
   b({who:O,bg:'lab',c:[['deniz',620,'look'],['ozan',1300,'laptop']],cue:[[.3,'ozan','calm'],[.7,'ozan','type'],[.9,'deniz','worry']],text:'Doğru karar. Ben de öyle yaptım, iki yıldır bekliyorum. Ama doğru karar.'});
  }else{
   art(1,0,0); H.st.durum=1;
@@ -188,18 +188,18 @@ b({who:T,bg:'oda',v:'gece',c:[['tolga',1660,'phone']],cue:[[.3,'tolga','sip'],[.
  b({who:O,c:[['ozan',960,'present']],cue:[[.3,'ozan','present'],[.6,'ozan','shrug'],[.9,'ozan','calm']],text:'Bölüm birincisi olarak kürsüye çıktım. Mikrofon kapalıydı. Konuşmamı bölümün sitesine koydular. Sayfa açılmıyor.'});
  b({who:S,c:[['asuman',960,'heart:happy']],cue:[[.2,'asuman','wave'],[.5,'asuman','present'],[.85,'asuman','heart']],text:'Mezuniyetime babam da geldi! Kürsüde konuşma yaptı. Aslında her yıl yapıyormuş ama bu yıl bana baktı.'});
  b({who:B,c:[['buse',960,'selfie']],cue:[[.3,'buse','selfie'],[.6,'buse','phone'],[.85,'buse','cheer']],text:'Kep atmadan önce yirmi üç kişiyle fotoğraf çektim, hepsini etiketledim. Kepim kayboldu ama rehberim kaldı.'});
- b({who:A,bg:'oda',v:'',c:[['deniz',260,'laptop']],panel:ILAN({}),cue:[[.5,'fx','p:maas'],[.8,'deniz','brow']],text:'Deniz ilk ilanı açtı. Her şey yazıyordu. Bir şey hariç.'});
+ b({who:A,bg:'oda',v:'',c:[['deniz',260,'laptop']],panel:ILAN({}),cue:[[.5,'fx','p:maas'],[.8,'deniz','brow']],text:"Deniz ilk ilanı açtı. Teknolojiler, yan haklar, masa tenisi, meyve tabağı. Her şey yazıyordu. Bir şey hariç."});
  const n1=N('İlanda "Maaş: Rekabetçi" yazıyor. Sence rakam ne?',[['Asgari ücret','Rekabet, asgari ücretle.'],['Asgari artı yemek kartı','Rekabetçi olan yemek kartı.'],['Yazsalar başvururdum','Rakamsız sevgi olmaz.']]);
  if(n1===undefined) return s;
  b({who:O,bg:'oda',v:'gece',c:[['ozan',260,'laptop']],panel:{type:'tablo',id:'xls',dosya:'Basvuru_takip.xlsx',sutunlar:['#','Şirket','Durum'],satirlar:[['845','—','Değerlendirmeniz sonucunda…'],['846','—','Değerlendirmeniz sonucunda…'],['847','—','Değerlendirmeniz sonucunda…']],toplam:'847 satır'},cue:[[.2,'fx','p:kay'],[.85,'ozan','calm']],text:'Sekiz yüz kırk yedi başvuru. Hepsini Excel\'de takip ediyorum. Durum sütununda tek bir cümle var: "Değerlendirmeniz sonucunda".'});
  b({who:B,bg:'kahve',c:[['buse',1660,'phone']],panel:{type:'arama',id:'ara',ad:'Selin · Kuzey Yazılım İK',alt:'arıyor…'},cue:[[.2,'fx','ding'],[.5,'buse','shrug'],[.85,'buse','sip']],text:"Kuzey'e üç kez başvurdum, üçünde de otomatik ret. Dördüncüde Selin Hanım'a yazdım. Mülakata çağırdılar. Sadece mülakata."});
- b({who:T,bg:'oda',v:'',c:[['tolga',1660,'phone']],panel:{type:'dosya',id:'tdosya',ad:'pazartesi_sabahi.jpg',alt:'CV olarak yüklendi',ikon:'jpg',yukle:1},cue:[[.3,'tolga','sip'],[.6,'tolga','shrug'],[.85,'tolga','smug']],text:"CV'mi yükledim abi. Yanlış dosya gitmiş: pazartesi sabahı caps'i. Ertesi gün mülakata çağırdılar."});
- const TEKLIF={type:'mail',id:'teklif',kimden:'İK',konu:'Teklif Mektubu',satirlar:['Ekiniz bizi çok güldürdü.','Kültürümüze uygunsunuz.','~Maaş: ₺ ██.███ (rekabetçi)'],etiket:'Teklif'};
+ b({who:T,bg:'oda',v:'',c:[['tolga',1660,'phone']],panel:{type:'dosya',id:'tdosya',ad:'site_calisiyor_ekran.jpg',alt:'Halı saha kalecisine gönderildi',ikon:'jpg',yukle:1},cue:[[.3,'tolga','sip'],[.6,'tolga','shrug'],[.85,'tolga','smug']],text:"Abi halı sahada rakip kaleciyle laflandık. Yedek parça satıyormuş, sitesi iki gündür çökükmüş. Akşam oturdum, düzelttim. \"Bizde bir yer var\" dedi."});
+ const TEKLIF={type:'mail',id:'teklif',kimden:'İK',konu:'Teklif Mektubu',satirlar:['Sitemizi ayağa kaldırdınız.','Ekibimize bekleriz.','~Maaş: ₺ ██.███ (rekabetçi)'],etiket:'Teklif'};
  const nT=['Teklif geldi abi. Maaş: rekabetçi. Salon "asgari" demişti. Zarfı açmadan bilen bu kadar insan görmedim. Helal.',
            'Teklif geldi abi. Maaş: rekabetçi. Salon "yemek kartı da vardır" demişti. Salon iyimsermiş. Yemek kartı yok.',
-           'Teklif geldi abi. Maaş: rekabetçi. Salon "rakam yazsalar başvururdum" demişti. Ben başvurmadım bile, caps attım.'];
+           "Teklif geldi abi. Maaş: rekabetçi. Salon \"rakam yazsalar başvururdum\" demişti. Ben hiç başvurmadım ki; halı sahaya gittim."];
  b({who:T,c:[['tolga',1660,'present']],panel:TEKLIF,cue:[[.1,'fx','p:ac'],[.4,'tolga','point'],[.85,'tolga','shrug']],text:nT[n1]});
- b({who:D,bg:'oda',v:'',c:[['deniz',260,'laptop']],panel:{type:'dosya',id:'dcv',ad:'Deniz_CV_final_v7.pdf',alt:'+ caps?',ikon:'pdf'},cue:[[.3,'deniz','clap'],[.6,'deniz','think'],[.9,'deniz','brow']],text:"Tolga'yı tebrik ettim. Sonra kendi CV'mi açtım, sonuna bir caps eklesem mi diye düşündüm. Hâlâ düşünüyorum."});
+ b({who:D,bg:'oda',v:'',c:[['deniz',260,'laptop']],panel:{type:'dosya',id:'dcv',ad:'Deniz_CV_final_v7.pdf',alt:'+ Hobiler: halı saha?',ikon:'pdf'},cue:[[.3,'deniz','clap'],[.6,'deniz','think'],[.9,'deniz','brow']],text:"Tolga'yı tebrik ettim. Sonra kendi CV'mi açtım, \"Hobiler: halı saha\" eklesem mi diye düşündüm. Top oynamayı bilmiyorum."});
  b({who:A,bg:'mulakat',yer:'Mülakat mevsimi',c:[],panel:{type:'mulakat',id:'mlk',kisi:0,soru:'',saat:'10:00'},text:'Mülakat mevsimi açıldı. Deniz yedi mülakata girdi. Sorular hep aynıydı, cevaplar hiç yeterli değildi.'});
  const mq=(k,soru,o)=>Object.assign({ms:2800,panel:{type:'mulakat',id:'mlk',kisi:k,soru},alt:soru},o);
  M('M3',[
@@ -228,12 +228,12 @@ b({who:T,bg:'oda',v:'gece',c:[['tolga',1660,'phone']],cue:[[.3,'tolga','sip'],[.
  }else if(k5===1){
   art(1,2,0);
   b({who:D,bg:'kafe',yer:'Yazılımcılar Buluşması · Adana',c:[['deniz',260,'sip']],panel:{type:'etkinlik',id:'bulusma',baslik:'Yazılımcılar Buluşması',yer:'Adana · Kafe',tarih:'Perşembe 19.00',katilimci:32},cue:[[.25,'deniz','worry'],[.55,'deniz','sip'],[.85,'deniz','cheer']],text:'Bir buluşmaya gittim. Konuşmak, kod yazmaktan zormuş. Üçüncü çayda biri "CV\'ni at, içeriye iletirim" dedi. İletmiş. İçeride biri okumuş.'});
-  b({who:B,c:[['deniz',620,'heart'],['buse',1300,'point','inR']],cue:[[.2,'buse','point'],[.6,'buse','smug'],[.9,'buse','shrug']],text:"Gördün mü? CV'yi bir insana atınca okunuyormuş. Okunması işe alınmak demek değil ama. Bunu da dördüncü denemede öğrendim."});
+  b({who:B,c:[['deniz',620,'heart'],['buse',1300,'point','inR']],cue:[[.2,'buse','point'],[.6,'buse','smug'],[.9,'buse','shrug']],text:"Gördün mü? CV'yi bir insana atınca okunuyormuş. Okunmak işe alınmak demek değil ama. Benimkini üç kez okudular; üçünde de okuyan bir yazılımdı."});
   b({who:A,c:[['deniz',620,'sip']],panel:{type:'etkinlik',id:'bulusma',baslik:'Yazılımcılar Buluşması',yer:'Adana · Kafe',tarih:'Perşembe 19.00',katilimci:32},cue:[[.7,'deniz','smug']],text:'Buluşmada otuz iki kişi vardı. Otuz biri ona iş teklif etmedi. Bu, şimdiye kadarki en iyi oranıydı.'});
  }else{
   art(0,0,1);
   b({who:D,bg:'oda',v:'',c:[['deniz',260,'laptop']],panel:{type:'kayit',id:'kayit',baslik:'Tezsiz Yüksek Lisans',alt:'Kayıt tamamlandı ✓',zarf:'Askerlik Şubesi'},cue:[[.3,'deniz','present'],[.85,'deniz','smug']],text:'Yüksek lisansa kaydoldum. Annem komşulara "master yapıyor" diyor. Ben kendime "zaman yapıyorum" diyorum.'});
-  b({who:A,c:[['deniz',260,'look']],panel:{type:'kayit',id:'kayit',baslik:'Tezsiz Yüksek Lisans',alt:'Kayıt tamamlandı ✓',zarf:'Askerlik Şubesi'},cue:[[.6,'deniz','worry']],text:'Askerlik şubesi de not aldı. Acele etmiyor, bekleyebilir.'});
+  b({who:A,c:[['deniz',260,'look']],panel:{type:'kayit',id:'kayit',baslik:'Tezsiz Yüksek Lisans',alt:'Kayıt tamamlandı ✓',zarf:'Askerlik Şubesi'},cue:[[.6,'deniz','worry']],text:"Askerlik şubesi de kaydı not aldı. Acele etmiyor; yüksek lisans biter, doktora biter, şube yine oradadır."});
   b({who:T,c:[['deniz',260,'look'],['tolga',1660,'sip','inR']],cue:[[.3,'tolga','present'],[.65,'tolga','shrug'],[.9,'tolga','smug']],text:'Yüksek lisans mı abi? Ben de düşündüm. Sonra caps sayfamın takipçisi yüz bini geçti, bıraktım. Akademi kaybetti.'});
  }
 
@@ -262,10 +262,10 @@ b({who:T,bg:'oda',v:'gece',c:[['tolga',1660,'phone']],cue:[[.3,'tolga','sip'],[.
   art(2,0,0);
   b({who:D,bg:'oda',v:'',c:[['deniz',260,'laptop']],panel:{type:'lgonderi',id:'hafta7',ad:'Deniz',foto:'deniz',unvan:'Yazılım Geliştirici',metin:'Hafta 7: Bir hatayı 3 gün aradım. Noktalı virgülmüş. Öğrendiklerim:',begeni:61,yorumlar:[['İK Uzmanı','Noktalı virgül bizde de oldu.']]},cue:[[.45,'fx','p:yorum'],[.5,'fx','ding'],[.85,'deniz','cheer']],text:'Yedi hafta üst üste yazdım. Bir İK uzmanı yorum yaptı: "Noktalı virgül bizde de oldu." Ona mesaj attım. Görüldü. Hâlâ görüldü.'});
   b({who:B,bg:'kahve',c:[['buse',960,'phone']],cue:[[.2,'buse','wave'],[.6,'buse','present'],[.85,'buse','smug']],text:'Yazılarını okuyorum! Geçen haftakini ekibe attım, herkes noktalı virgülü konuştu. Adını da söyledim tabii.'});
-  b({who:A,bg:'oda',v:'',c:[['deniz',960,'phone']],cue:[[.6,'deniz','heart']],text:'Yedinci yazının altında kırk bir beğeni vardı. Otuz dokuzunu tanımıyordu. Hiçbiri işe alım yapmıyordu, ama hepsi onun adını biliyordu.'});
+  b({who:A,bg:'oda',v:'',c:[['deniz',960,'phone']],cue:[[.6,'deniz','heart']],text:"Yedinci yazının altında altmış bir beğeni vardı. Elli dokuzunu tanımıyordu. Hiçbiri işe alım yapmıyordu. Hepsi adını biliyordu, o kadar."});
  }else{
   art(0,2,0);
-  b({who:D,bg:'kafe',yer:'Adana · Kafe',c:[['deniz',260,'sip']],panel:{type:'fis',id:'fis',baslik:'ADİSYON',satirlar:[['Filtre kahve','70 ₺'],['Filtre kahve','70 ₺'],['Filtre kahve','70 ₺']],toplam:'210 ₺'},cue:[[.3,'deniz','present'],[.65,'deniz','cheer'],[.9,'deniz','smug']],text:'Üç kişiye kahve ısmarladım, iki yüz on lira tuttu. Biri beni bir ekibe önerdi. Mülakat sözü aldım. İş değil, söz. Yine de borsadan iyi.'});
+  b({who:D,bg:'kafe',yer:'Adana · Kafe',c:[['deniz',260,'sip']],panel:{type:'fis',id:'fis',baslik:'ADİSYON',satirlar:[['Filtre kahve','70 ₺'],['Filtre kahve','70 ₺'],['Filtre kahve','70 ₺']],toplam:'210 ₺'},cue:[[.3,'deniz','present'],[.65,'deniz','cheer'],[.9,'deniz','smug']],text:"Üç kişiye kahve ısmarladım, iki yüz on lira tuttu. Biri beni bir ekibe önerdi. İş değil, mülakat sözü. Bu piyasada yetmiş liraya alınabilecek en iyi şey."});
   b({who:T,c:[['deniz',620,'sip'],['tolga',1300,'sip','inR']],cue:[[.25,'tolga','point'],[.6,'tolga','present'],[.88,'tolga','smug']],text:'Kahveyi bana da ısmarlasaydın abi. Şirkette caps sayfasının başındayım, İK her gün uğruyor. Ben de bir tanıdığım.'});
   b({who:B,c:[['deniz',260,'sip'],['buse',1660,'cheer','inR']],cue:[[.2,'buse','cheer'],[.6,'buse','sip'],[.9,'buse','smug']],text:'Kahve mi ısmarladın? Sonunda! Ben bunu dört yıldır yapıyorum. Artık işim de var. Maaşım kahveye yetmiyor, o ayrı.'});
  }
@@ -277,8 +277,8 @@ b({who:T,bg:'oda',v:'gece',c:[['tolga',1660,'phone']],cue:[[.3,'tolga','sip'],[.
  const E=sonSec(H.st);
  const SON=[null,
   ['Referans Kapısı','Çevre kapıyı aralar; içeri girmek ve içeride tutunmak yine senin işin. Görünür ol, tanış, ne yaptığını anlat. Garanti değil; ama bu ülkede onsuz kapı neredeyse hiç aralanmıyor.'],
-  ['Viral Kaza','Şans gerçek, ama kira ödemez. Şans bile görünür olanı bulur; o fotoğrafı kimse görmeseydi kimse gülmezdi. Şans kapıyı bir kez çalar; içeride tutan yetkinlik ve çevredir.'],
-  ['Remote Dolar','Yetkinlik seni hazırlar, görünürlük seni bulunur kılar. Ama sınırı aşan iş, sınırı aşan riskle gelir. İşini göster, insanlarla bağını koru: bir kapı kapanınca ikincisini çoğu zaman seni hatırlayan biri aralar.'],
+  ['Viral Kaza','Şans gerçek ama kira ödemez. O da ancak ortada duranı bulur; o linki bırakmasaydın üç bin kişi gülüp geçerdi. Şans kapıyı açar, içeride tutmaz; orada yetkinlik ve çevre sınanır, onlar da garanti vermez.'],
+  ['Remote Dolar','Yetkinlik seni hazırlar, görünürlük seni bulunabilir yapar. Ama sınırı aşan iş, sınırı aşan riskle gelir. İşini göster, insanlarla bağını koru: bir kapı kapanınca ikincisini çoğu zaman seni hatırlayan biri aralar.'],
   ['Mükemmel CV · Sıfır Dönüş','Çok çalışmak olmazsa olmazdır ama yetmez. Kimse görmüyor, kimse tanımıyorsa en iyi kod bir klasörde bekler. Yaptığını göster, insanlarla tanış, stratejiyle başvur. Hiçbiri garanti değil; hiçbirini yapmamak ise garanti.'],
   ['Yüksek Lisans Döngüsü','Zaman kazanmak strateji değildir; zamanı neye harcadığın stratejidir. Her şeyden biraz yapmak, hiçbir şey yapmamanın en yorucu hâlidir. Bir yön seç, görünür ol, insanlarla tanış. Garantisi yok; beklemenin de yok.']];
  if(E===1){
@@ -286,17 +286,17 @@ b({who:T,bg:'oda',v:'gece',c:[['tolga',1660,'phone']],cue:[[.3,'tolga','sip'],[.
   b({who:A,bg:'ofis',muzik:'s1',yer:'Kuzey Yazılım · İK',c:[],panel:{type:'cv3',id:'cv3',gonderen:['Kaan Er','Selin T.','Sevgi Abla (?)']},text:"Deniz'in CV'si şirkete üç farklı kişiden ulaştı. İK, CV'yi üç kez okudu. Bu bir rekordu."});
   b({who:D,muzik:'s1',c:[['deniz',960,'present']],cue:[[.3,'deniz','worry'],[.6,'deniz','present'],[.9,'deniz','heart']],text:'Mülakatta Leetcode sorusu bekliyordum. "SerinYol\'u anlat" dediler. İki hafta sonra teklif geldi. Maaş: rekabetçi.'});
   b({who:A,muzik:'s1',bg:'ofis',yer:'Kuzey Yazılım · Ayın 20si',c:[['deniz',260,'tired']],panel:{type:'fis',id:'maas',baslik:'MAAŞ BORDROSU',satirlar:[['Kira','%50'],['Yol','%25'],['Kalan','ayın 20sine kadar']],toplam:'Rekabetçi'},cue:[[.7,'deniz','sad']],text:'Maaşın yarısı kiraya, dörtte biri yola gitti. Deniz ayın yirmisine kadar mühendisti. Yirmisinden sonra yine öğrenci.'});
- b({who:B,muzik:'s1',c:[['deniz',620,'cheer'],['buse',1300,'wave','inR']],cue:[[.2,'buse','cheer'],[.5,'buse','shrug'],[.85,'buse','smug']],text:"Kuzey'e hoş geldin! Ben de dördüncü denemede girmiştim. Selin Hanım'a adını ben söyledim, ama kimseye söyleme."});
+ b({who:B,muzik:'s1',c:[['deniz',620,'cheer'],['buse',1300,'wave','inR']],cue:[[.2,'buse','cheer'],[.5,'buse','shrug'],[.85,'buse','smug']],text:"Kuzey'e hoş geldin! Selin Hanım'a adını ben söyledim, kimseye söyleme. Bir gün ben de senden bir şey isteyeceğim; onu da kimseye söyleme."});
  }else if(E===2){
   b({who:D,bg:'oda',v:'',muzik:'s2',c:[['deniz',260,'phone:shock']],panel:{type:'caps',id:'caps',ust:'İK: 5 yıl deneyimli junior arıyoruz',alt:"Adana'dan başvuran aday:",begeni:'48 bin',yorum:'3.112'},fx:'shake',cue:[[.3,'deniz','shock'],[.85,'deniz','facepalm']],text:'Fotoğrafım bir caps sayfasında paylaşılmış. Altında üç bin yorum var. Hiçbiri kodumla ilgili değil.'});
   b({who:T,muzik:'s2',c:[['deniz',260,'look'],['tolga',1660,'sip','inR']],panel:{type:'caps',id:'caps',ust:'İK: 5 yıl deneyimli junior arıyoruz',alt:"Adana'dan başvuran aday:",begeni:'48 bin',yorum:'3.112'},cue:[[.25,'tolga','present'],[.6,'tolga','shrug'],[.88,'tolga','sip']],text:"Abi o caps'i ben yaptım. Bir sayfaya attım, gerisi bende değil. Komisyon da istemiyorum. Bir dürüm yeter."});
-  b({who:A,muzik:'s2',yer:'İstanbul → Adana',c:[['deniz',260,'phone']],panel:{type:'dm',id:'dm',kimden:'Kurucu · Lezzet Teknoloji',metin:'Hemşehrim! Kodunu da açtım baktım, fena değil. Pazartesi başla.'},cue:[[.2,'fx','ding'],[.8,'deniz','cheer']],text:'Mesaj İstanbul\'dan geldi. Gönderenin şirketi yemek teknolojisi yapıyordu. Kendisi Adanalıydı. Gerisi coğrafya.'});
-  b({who:D,bg:'mulakat',muzik:'s2',c:[['deniz',960,'cheer']],panel:{type:'mulakat',id:'mlk2',kisi:2,soru:'Acılı mı, acısız mı?'},cue:[[.35,'deniz','think'],[.6,'deniz','point'],[.9,'fx','confetti']],text:'Mülakatın ilk sorusu: "Acılı mı, acısız mı?" Doğru cevabı verdim. İkinci soru gelmedi.'});
+  b({who:A,muzik:'s2',yer:'İstanbul → Adana',c:[['deniz',260,'phone']],panel:{type:'dm',id:'dm',kimden:'Kurucu · Lezzet Teknoloji',metin:'Hemşehrim! Yorumdaki linke baktım, kod fena değil. Pazartesi bir gel, konuşalım.'},cue:[[.2,'fx','ding'],[.8,'deniz','cheer']],text:"Deniz utancından yorumlara kodunun linkini bıraktı. Üç bin yorumda kimse tıklamadı. Biri hariç: caps'i paylaşan yemek şirketinin Adanalı kurucusu."});
+  b({who:D,bg:'mulakat',muzik:'s2',c:[['deniz',960,'cheer']],panel:{type:'mulakat',id:'mlk2',kisi:2,soru:'Acılı mı, acısız mı?'},cue:[[.35,'deniz','think'],[.6,'deniz','point'],[.9,'fx','confetti']],text:"Mülakat görüntülüydü. Yarım saat SerinYol'u sordu, sonra \"Acılı mı, acısız mı?\" dedi. Doğru cevabı verdim. Asıl soru oymuş."});
   b({who:A,bg:'yokus',v:'aksam',muzik:'s2',yer:'Adana · 6 ay sonra',c:[['deniz',960,'sip']],cue:[[.6,'deniz','tired'],[.9,'deniz','sip']],text:"Deniz İstanbul'a taşındı. Kira maaşın üçte ikisiydi. Altı ay sonra caps unutuldu, şirket küçüldü. Deniz Adana'ya döndü."});
  }else if(E===3){
-  b({who:D,bg:'oda',v:'gece',muzik:'s3',c:[['deniz',260,'laptop']],panel:{type:'davet',id:'davet',baslik:'Daily Stand-up',saat:'02:00 (GMT+3)',alt:'Berlin · Lizbon · Adana',doviz:1},cue:[[.3,'deniz','type'],[.7,'deniz','smug']],text:'Avrupa\'dan bir şirket yazdıklarımı ve kodumu görmüş. Remote başladım. Maaş dolar, kira lira. Hayatımda ilk kez kurdan yanayım.'});
+  b({who:D,bg:'oda',v:'gece',muzik:'s3',c:[['deniz',260,'laptop']],panel:{type:'davet',id:'davet',baslik:'Daily Stand-up',saat:'02:00 (GMT+3)',alt:'Berlin · Lizbon · Adana',doviz:1},cue:[[.3,'deniz','type'],[.7,'deniz','smug']],text:"Avrupa'daki bir ilana yazılarımın ve kodumun linkiyle başvurdum. Biri tıklamış. Remote başladım. Maaş dolar, kira lira. İlk kez kurdan yanayım."});
   b({who:A,muzik:'s3',yer:'Adana · 02.00',c:[['deniz',960,'laptop:tired']],cue:[[.6,'deniz','tired']],text:'Deniz\'in mesaisi gece ikide başlıyor. Annesi komşulara "bilgisayarla bir şeyler yapıyor" diyor. Gerçek bir iş bulmasını bekliyor.'});
-  b({who:O,bg:'lab',muzik:'s3',c:[['ozan',960,'laptop']],cue:[[.4,'ozan','think'],[.85,'ozan','calm']],text:'Avrupa\'dan iş mi? Benim kodum da açık. Hiç yazmadılar. Belki kodumun saat dilimi uymuyordur.'});
+  b({who:O,bg:'lab',muzik:'s3',c:[['ozan',960,'laptop']],cue:[[.4,'ozan','think'],[.85,'ozan','calm']],text:"Avrupa'dan iş mi? Benim kodum da açık, ben de başvurdum. Dönmediler. Belki kodumun saat dilimi uymuyordur."});
   b({who:D,bg:'oda',v:'gece',muzik:'s3',c:[['deniz',960,'tired']],cue:[[.3,'deniz','present'],[.8,'deniz','shrug']],text:'Stand-up\'ta herkes dün ne yaptığını anlatıyor. Ben "uyudum" diyemiyorum; benim dünüm onların bugünü.'});
   b({who:A,muzik:'s3',yer:'Adana · 02.00 · 3. ay',c:[['deniz',260,'sad']],panel:{type:'mail',id:'layoff',kimden:'People Team',konu:'Organizasyonel güncelleme',satirlar:['Zor bir karar aldık.','Deneme süresindeki ekip arkadaşlarımız…','~Kıdem: —']},cue:[[.2,'fx','p:ac'],[.8,'deniz','sad']],text:'Üçüncü ayın sonunda şirket "yeniden yapılanma" duyurdu. Deneme süresindekiler önce gitti. Deniz son stand-up\'a saat ikide bağlandı.'});
  }else if(E===4){
@@ -317,7 +317,7 @@ b({who:T,bg:'oda',v:'gece',c:[['tolga',1660,'phone']],cue:[[.3,'tolga','sip'],[.
  const nS=['Salon "yetenek" demiş. Ne güzel! Ben de hep söylüyorum: yeteneğin önünde kimse duramaz. Babam da öyle der.',
            'Salon "çevre" demiş. Çok haklısınız! Ben de çevremi hep kendim seçtim. Genelde pazar kahvaltılarında.',
            'Salon "şans" demiş. Ben şansa pek inanmam. Hayatımda hiç şansa ihtiyacım olmadı. Herhalde çok çalıştığım içindir.',
-           'Salon "baba" demiş. Çok tatlısınız! Babama söyleyeceğim, çok gurur duyacak.'];
+           "Salon \"baba\" demiş. Çok tatlısınız! Babama söyleyeceğim, çok gurur duyacak. Kendisi de hep \"her şey emek\" der."];
  b({who:S,bg:'holding',v:'lobi',muzik:'epilog',c:[['asuman',1660,'heart:happy']],panel:ASU_CIO,cue:[[.2,'asuman','wave'],[.6,'asuman','present'],[.9,'asuman','heart']],text:nS[n2]});
  b({who:S,c:[['asuman',1660,'present']],panel:ILAN({id:'ilan2'}),cue:[[.3,'asuman','cheer'],[.7,'fx','p:maas'],[.85,'asuman','clap']],text:'Yeni pozisyonumdaki ilk işim, genç yeteneklere kapı açmak! Junior alımı başlattık. En az beş yıl deneyim arıyoruz.'});
 

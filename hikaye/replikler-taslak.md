@@ -60,8 +60,8 @@ D: Maaş yerine binde iki hisse verdiler. Şirketin değeri şu an sıfır. Bind
 
 **K1-C (ev, vantilatör, gece)**
 D: Kendi projemi yazdım: kampüste gölgeli otopark bulan bir uygulama. Çalışıyor. Bende çalışıyor.
-D: Kırk iş günü boyunca patron da bendim, stajyer de. Patron olarak stajyerden çok memnunum. Stajyer olarak zam istiyorum.
-A: Staj defterini annesine imzalatmayı düşündü. Annesinin kaşesi yoktu.
+A: Kırk iş günü boyunca patron da oydu, stajyer de. Patron stajyerden çok memnundu. Stajyer zam istedi; patron "bütçe yok" dedi.
+D: Staj defterini anneme imzalatmayı düşündüm. "Ben atarım" dedi. Kaşesi yok ama imzası okulda tanınıyor; on iki yıl karnemi o imzaladı.
 
 **Koridor, eylül (ortak)** — panel: bu akşamki CENGA afişine benzeyen afiş.
 B: Cuma akşamı söyleşi var: bir şirketten mühendis gelecek, sonunda pizza. Gel, en kötü ihtimalle pizza yersin.
@@ -74,7 +74,7 @@ B: Cuma akşamı söyleşi var: bir şirketten mühendis gelecek, sonunda pizza.
 **K2-A** — panel: kartvizit "Kaan Er · Engineering Manager · Kuzey Yazılım"
 D: Soru sordum. Sesim titredi, soru da biraz saçmaydı. Çıkışta adımı söyledim, akşam LinkedIn'den ekledim. İstek hâlâ beklemede.
 B: Gördün mü? Saçma soru diye bir şey yok, hatırlanan soru var. Seninki çok hatırlanacak, inan bana.
-A: Bağlantı isteği üç ay beklemede kaldı. Konuşmacı soruyu hatırladı. Soranı hatırlamadı, ama soruyu hatırladı.
+A: Bağlantı isteği üç ay beklemede kaldı. Konuşmacı bir sonraki söyleşide o soruyu örnek verdi: "Geçen sefer biri şunu sormuştu." Biri.
 
 **K2-B** — panel: Leetcode "Gün 248" + Buse'nin hikâyesi "Kaan Bey'e teşekkürler!"
 D: İki yüz kırk sekizinci gün, Hard soru, kabul edildi. Kutlayacak kimse yoktu; herkes söyleşiden sonra konuşmacıyla yemeğe gitmişti.
@@ -96,12 +96,12 @@ A: Yaz bitti. Deniz'in staj defterinde kırk iş günü vardı. Kırkının kar�
 Kart altı (Jira kartı): "BITIRME-1 · Mezun ol · Öncelik: Yüksek · Atanan: Sen · Son tarih: Dün"
 Açılış paneli (sessiz): "Buse, Kuzey Yazılım'da gönüllü etkinlik asistanı olarak başladı. (Ücretsiz)"
 
-A: Dördüncü sınıf. Herkes bitirme projesine bir isim buldu. Projeyi bulmak sonraya kaldı.
+A: Dördüncü sınıf. Herkes bitirme projesine bir isim buldu, bazıları logo da yaptı. Projeyi bulmak sonraya kaldı.
 D: Benimki SerinYol: kampüste gölgeden gölgeye en kısa rotayı buluyor. Balcalı yokuşunu iki derece serin çıkıyorsunuz.
 O: Ben bir derleyici yazdım, kendi dilim için. Dilin adı yok, dokümantasyonu yok, kullanıcısı yok. Ama çok hızlı.
-T: Ben raporu yazdım abi. Proje henüz yok ama rapor çok güzel; içindekiler tablosu otomatik.
-S: Projemi şirketteki herkese sundum, hepsi ayakta alkışladı! Sonra öğrendim, salonda sandalye yokmuş. Yine de çok duygusaldı.
-A: SerinYol çalışıyor, en azından Deniz'in bilgisayarında. Şimdi dünyada birinin bundan haberi olması lazım.
+T: Ben raporu yazdım abi. Proje henüz yok ama rapor çok güzel; içindekiler tablosu otomatik, kaynakça da hazır.
+S: Projemi şirketteki herkese sundum, hepsi ayakta alkışladı! Sonra öğrendim, toplantı odasında sandalye yokmuş. Yine de çok duygusaldı.
+A: SerinYol hazır. Şu an varlığından haberi olan üç kişi var: Deniz, danışman hocası ve pek emin olmayan bir asistan.
 
 ### K3 · SerinYol dünyaya nasıl çıkıyor?
 - **Demo videoyla paylaş** — Doksan saniyelik video. Arkada epik müzik, önde Balcalı yokuşu. (G+2, Y+1)
@@ -110,7 +110,7 @@ A: SerinYol çalışıyor, en azından Deniz'in bilgisayarında. Şimdi dünyada
 
 **K3-A** — LinkedIn gönderisi, 214 beğeni; "Halam: Maşallah", "İK Uzmanı · Akdeniz Teknoloji: Tebrikler!" (DM: görüldü)
 D: Paylaşımı yaptım, telefonu ters çevirdim. Yarım saat sonra baktım: halam beğenmiş, bir de bir İK uzmanı. Ona mesaj attım. Görüldü.
-A: Aynı gün Ozan kırk iki commit attı.
+A: Aynı gün Ozan kırk iki commit attı. Profili yemyeşil oldu. O yeşili gören tek kişi yine Ozan'dı.
 B: Videonu ben de paylaştım! İki yüz on dört beğeninin otuzu benim çevremden. Merak etme, sana fatura etmeyeceğim.
 
 **K3-B** — repo "serinyol · ★ 1" → ★ 0
@@ -128,7 +128,7 @@ O: Bir stant "kendinden bahset" dedi. GitHub linkimi söyledim. Harf harf. Sonra
 B: Ben bugün otuz kişiyle tanıştım. Sırrı basit: ikinci kez gidiyorum. İkinci kez gidince insanlar seni hatırladıklarını sanıyor.
 T: Dokuz kalem, üç termos, bir stres topu. Kariyer günü benim için verimli geçti abi. Mezun olunca kalem almayacağım.
 S: Standımızda junior alıyoruz! En az beş yıl deneyim. Bence çok makul; ben de beş yıldır şirkette stajyerim. Yaz tatillerinde.
-D: Bir standda junior ilanı vardı: en az beş yıl deneyim. Dört yılda bitirirsem bir yıl eksik kalıyor. Uzatan arkadaşlar, sizin devriniz.
+D: Dört yılda bitirirsem bir yıl eksik kalıyor. Demek ki bu ilan bize değil. Okulu uzatan arkadaşlar, sonunda sizin devriniz geldi.
 
 A: LinkedIn. Türkiye'nin en kalabalık motivasyon konuşması. Herkes konuşuyor, kimse dinlemiyor, herkes beğeniyor.
 
@@ -142,7 +142,7 @@ A: LinkedIn. Türkiye'nin en kalabalık motivasyon konuşması. Herkes konuşuyo
 7. "Asuman Yıldız: Bitirme projemi Yıldızlar Holding yönetim kuruluna sundum. Kendi yolumu kendim çizdim." · 1.200 beğeni
 8. Flaş: "Ozan K. · —", gri avatar, 0 bağlantı → kayıp gider
 
-T: Abi ben LinkedIn'e caps atıyorum. Kimse anlamıyor ama İK'cılar beğeniyor. Sanırım onlar da anlamıyor.
+T: Abi ben LinkedIn'e caps atıyorum. En çok İK'cılar beğeniyor. CV atınca beğenmiyorlar ama; caps atınca beğeniyorlar.
 D: Herkes yeşil çerçeveyle dolaşıyor. Benim profilimde hâlâ lise mezuniyet fotoğrafım var. Cüppeli. Bıyıklı.
 B: İnsanlar seninle tanışmadan önce profiline bakıyor. Profilin boşsa tanışmıyorlar. Ben öyle değilim tabii, ben herkesle tanışırım.
 
@@ -156,7 +156,7 @@ D: Başlığa "Mobil geliştirici, SerinYol" yazdım. "Passionate" yazmadım. Ke
 A: Profili bir haftada kırk yedi kişi görüntüledi. Üçü halasıydı; hala tek ama üç ayrı hesabı var.
 
 **K4-B** — gri avatar, "Bağlantı: 12"
-D: Profili boş bıraktım. Kodum her şeyi anlatıyor. Kodu açan olursa.
+D: Profili boş bıraktım, sadece GitHub linki var. Kodum her şeyi anlatıyor. Linke tıklayan olursa anlatacak, söz verdi.
 O: Doğru karar. Ben de öyle yaptım, iki yıldır bekliyorum. Ama doğru karar.
 
 **K4-C** — dürümlü fotoğraf; "Profil görüntülenmesi: 3 → 31 (ikisi kebapçı)"
@@ -174,7 +174,7 @@ D: Rektör "artık hayata atılıyorsunuz" dedi. Nereye atıldığımızı söyl
 O: Bölüm birincisi olarak kürsüye çıktım. Mikrofon kapalıydı. Konuşmamı bölümün sitesine koydular. Sayfa açılmıyor.
 S: Mezuniyetime babam da geldi! Kürsüde konuşma yaptı. Aslında her yıl yapıyormuş ama bu yıl bana baktı.
 B: Kep atmadan önce yirmi üç kişiyle fotoğraf çektim, hepsini etiketledim. Kepim kayboldu ama rehberim kaldı.
-A: Deniz ilk ilanı açtı. Her şey yazıyordu. Bir şey hariç.
+A: Deniz ilk ilanı açtı. Teknolojiler, yan haklar, masa tenisi, meyve tabağı. Her şey yazıyordu. Bir şey hariç.
 
 ### NABIZ 1 · İlanda "Maaş: Rekabetçi" yazıyor. Sence rakam ne? (sonucu değiştirmez)
 - **Asgari ücret** — Rekabet, asgari ücretle.
@@ -183,13 +183,13 @@ A: Deniz ilk ilanı açtı. Her şey yazıyordu. Bir şey hariç.
 
 O: Sekiz yüz kırk yedi başvuru. Hepsini Excel'de takip ediyorum. Durum sütununda tek bir cümle var: "Değerlendirmeniz sonucunda".
 B: Kuzey'e üç kez başvurdum, üçünde de otomatik ret. Dördüncüde Selin Hanım'a yazdım. Mülakata çağırdılar. Sadece mülakata.
-T: CV'mi yükledim abi. Yanlış dosya gitmiş: pazartesi sabahı caps'i. Ertesi gün mülakata çağırdılar.
+T: Abi halı sahada rakip kaleciyle laflandık. Yedek parça satıyormuş, sitesi iki gündür çökükmüş. Akşam oturdum, düzelttim. "Bizde bir yer var" dedi.
 
 **Tolga teklif mektubu (NABIZ 1 çoğunluğuna göre, maaş satırı bulanık)**
 - (Asgari) T: Teklif geldi abi. Maaş: rekabetçi. Salon "asgari" demişti. Zarfı açmadan bilen bu kadar insan görmedim. Helal.
 - (Yemek kartı) T: Teklif geldi abi. Maaş: rekabetçi. Salon "yemek kartı da vardır" demişti. Salon iyimsermiş. Yemek kartı yok.
-- (Yazsalar) T: Teklif geldi abi. Maaş: rekabetçi. Salon "rakam yazsalar başvururdum" demişti. Ben başvurmadım bile, caps attım.
-D: Tolga'yı tebrik ettim. Sonra kendi CV'mi açtım, sonuna bir caps eklesem mi diye düşündüm. Hâlâ düşünüyorum.
+- (Yazsalar) T: Teklif geldi abi. Maaş: rekabetçi. Salon "rakam yazsalar başvururdum" demişti. Ben hiç başvurmadım ki; halı sahaya gittim.
+D: Tolga'yı tebrik ettim. Sonra kendi CV'mi açtım, "Hobiler: halı saha" eklesem mi diye düşündüm. Top oynamayı bilmiyorum.
 
 A: Mülakat mevsimi açıldı. Deniz yedi mülakata girdi. Sorular hep aynıydı, cevaplar hiç yeterli değildi.
 
@@ -218,12 +218,12 @@ O: Beş yüz mü? Ben bir ara ret maillerine otomatik teşekkür yanıtı yazdı
 
 **K5-B (Adana'da kafe, "Yazılımcılar Buluşması · 32 katılımcı")**
 D: Bir buluşmaya gittim. Konuşmak, kod yazmaktan zormuş. Üçüncü çayda biri "CV'ni at, içeriye iletirim" dedi. İletmiş. İçeride biri okumuş.
-B: Gördün mü? CV'yi bir insana atınca okunuyormuş. Okunması işe alınmak demek değil ama. Bunu da dördüncü denemede öğrendim.
+B: Gördün mü? CV'yi bir insana atınca okunuyormuş. Okunmak işe alınmak demek değil ama. Benimkini üç kez okudular; üçünde de okuyan bir yazılımdı.
 A: Buluşmada otuz iki kişi vardı. Otuz biri ona iş teklif etmedi. Bu, şimdiye kadarki en iyi oranıydı.
 
 **K5-C (yüksek lisans kaydı; askerlik şubesi zarfı)**
 D: Yüksek lisansa kaydoldum. Annem komşulara "master yapıyor" diyor. Ben kendime "zaman yapıyorum" diyorum.
-A: Askerlik şubesi de not aldı. Acele etmiyor, bekleyebilir.
+A: Askerlik şubesi de kaydı not aldı. Acele etmiyor; yüksek lisans biter, doktora biter, şube yine oradadır.
 T: Yüksek lisans mı abi? Ben de düşündüm. Sonra caps sayfamın takipçisi yüz bini geçti, bıraktım. Akademi kaybetti.
 
 ---
@@ -258,10 +258,10 @@ O: Altı yüz on iki mi? Hoş geldin. Ben bin dört yüze geldim. Rüyamda artı
 **K6-B** — gönderi "Hafta 7: Bir hatayı 3 gün aradım. Noktalı virgülmüş. Öğrendiklerim:"
 D: Yedi hafta üst üste yazdım. Bir İK uzmanı yorum yaptı: "Noktalı virgül bizde de oldu." Ona mesaj attım. Görüldü. Hâlâ görüldü.
 B: Yazılarını okuyorum! Geçen haftakini ekibe attım, herkes noktalı virgülü konuştu. Adını da söyledim tabii.
-A: Yedinci yazının altında kırk bir beğeni vardı. Otuz dokuzunu tanımıyordu. Hiçbiri işe alım yapmıyordu, ama hepsi onun adını biliyordu.
+A: Yedinci yazının altında altmış bir beğeni vardı. Elli dokuzunu tanımıyordu. Hiçbiri işe alım yapmıyordu. Hepsi adını biliyordu, o kadar.
 
 **K6-C** — fiş "3 filtre kahve · 210 ₺"
-D: Üç kişiye kahve ısmarladım, iki yüz on lira tuttu. Biri beni bir ekibe önerdi. Mülakat sözü aldım. İş değil, söz. Yine de borsadan iyi.
+D: Üç kişiye kahve ısmarladım, iki yüz on lira tuttu. Biri beni bir ekibe önerdi. İş değil, mülakat sözü. Bu piyasada yetmiş liraya alınabilecek en iyi şey.
 T: Kahveyi bana da ısmarlasaydın abi. Şirkette caps sayfasının başındayım, İK her gün uğruyor. Ben de bir tanıdığım.
 B: Kahve mi ısmarladın? Sonunda! Ben bunu dört yıldır yapıyorum. Artık işim de var. Maaşım kahveye yetmiyor, o ayrı.
 
@@ -283,26 +283,26 @@ D: Telefon çaldı. Arayan bir zamanlar tanıştığım biriydi. "Söz veremem a
 A: Deniz'in CV'si şirkete üç farklı kişiden ulaştı. İK, CV'yi üç kez okudu. Bu bir rekordu.
 D: Mülakatta Leetcode sorusu bekliyordum. "SerinYol'u anlat" dediler. İki hafta sonra teklif geldi. Maaş: rekabetçi.
 A: Maaşın yarısı kiraya, dörtte biri yola gitti. Deniz ayın yirmisine kadar mühendisti. Yirmisinden sonra yine öğrenci.
-B: Kuzey'e hoş geldin! Ben de dördüncü denemede girmiştim. Selin Hanım'a adını ben söyledim, ama kimseye söyleme.
+B: Kuzey'e hoş geldin! Selin Hanım'a adını ben söyledim, kimseye söyleme. Bir gün ben de senden bir şey isteyeceğim; onu da kimseye söyleme.
 **Son kartı · REFERANS KAPISI** — Çevre kapıyı aralar; içeri girmek ve içeride tutunmak yine senin işin. Görünür ol, tanış, ne yaptığını anlat. Garanti değil; ama bu ülkede onsuz kapı neredeyse hiç aralanmıyor.
 
 ### S2 · VİRAL KAZA (DÜRÜM ve G ≥ 3) — oda → telefon → İstanbul'dan görüntülü arama
-Panel: caps "İK: 5 yıl deneyimli junior arıyoruz / Adana'dan başvuran aday:" · 48 bin beğeni; DM "Kurucu · Lezzet Teknoloji: Hemşehrim! Kodunu da açtım baktım, fena değil. Pazartesi başla."
+Panel: caps "İK: 5 yıl deneyimli junior arıyoruz / Adana'dan başvuran aday:" · 48 bin beğeni; DM "Kurucu · Lezzet Teknoloji: Hemşehrim! Yorumdaki linke baktım, kod fena değil. Pazartesi bir gel, konuşalım."
 D: Fotoğrafım bir caps sayfasında paylaşılmış. Altında üç bin yorum var. Hiçbiri kodumla ilgili değil.
 T: Abi o caps'i ben yaptım. Bir sayfaya attım, gerisi bende değil. Komisyon da istemiyorum. Bir dürüm yeter.
-A: Mesaj İstanbul'dan geldi. Gönderenin şirketi yemek teknolojisi yapıyordu. Kendisi Adanalıydı. Gerisi coğrafya.
-D: Mülakatın ilk sorusu: "Acılı mı, acısız mı?" Doğru cevabı verdim. İkinci soru gelmedi.
+A: Deniz utancından yorumlara kodunun linkini bıraktı. Üç bin yorumda kimse tıklamadı. Biri hariç: caps'i paylaşan yemek şirketinin Adanalı kurucusu.
+D: Mülakat görüntülüydü. Yarım saat SerinYol'u sordu, sonra "Acılı mı, acısız mı?" dedi. Doğru cevabı verdim. Asıl soru oymuş.
 A: Deniz İstanbul'a taşındı. Kira maaşın üçte ikisiydi. Altı ay sonra caps unutuldu, şirket küçüldü. Deniz Adana'ya döndü.
-**Son kartı · VİRAL KAZA** — Şans gerçek, ama kira ödemez. Şans bile görünür olanı bulur; o fotoğrafı kimse görmeseydi kimse gülmezdi. Şans kapıyı bir kez çalar; içeride tutan yetkinlik ve çevredir.
+**Son kartı · VİRAL KAZA** — Şans gerçek ama kira ödemez. O da ancak ortada duranı bulur; o linki bırakmasaydın üç bin kişi gülüp geçerdi. Şans kapıyı açar, içeride tutmaz; orada yetkinlik ve çevre sınanır, onlar da garanti vermez.
 
 ### S3 · REMOTE DOLAR (Y ≥ 5 ve G ≥ 3) — oda, gece 02.00
 Panel: "Daily Stand-up · 02:00 (GMT+3)"; köşede tırmanan kur grafiği.
-D: Avrupa'dan bir şirket yazdıklarımı ve kodumu görmüş. Remote başladım. Maaş dolar, kira lira. Hayatımda ilk kez kurdan yanayım.
+D: Avrupa'daki bir ilana yazılarımın ve kodumun linkiyle başvurdum. Biri tıklamış. Remote başladım. Maaş dolar, kira lira. İlk kez kurdan yanayım.
 A: Deniz'in mesaisi gece ikide başlıyor. Annesi komşulara "bilgisayarla bir şeyler yapıyor" diyor. Gerçek bir iş bulmasını bekliyor.
-O: Avrupa'dan iş mi? Benim kodum da açık. Hiç yazmadılar. Belki kodumun saat dilimi uymuyordur.
+O: Avrupa'dan iş mi? Benim kodum da açık, ben de başvurdum. Dönmediler. Belki kodumun saat dilimi uymuyordur.
 D: Stand-up'ta herkes dün ne yaptığını anlatıyor. Ben "uyudum" diyemiyorum; benim dünüm onların bugünü.
 A: Üçüncü ayın sonunda şirket "yeniden yapılanma" duyurdu. Deneme süresindekiler önce gitti. Deniz son stand-up'a saat ikide bağlandı.
-**Son kartı · REMOTE DOLAR** — Yetkinlik seni hazırlar, görünürlük seni bulunur kılar. Ama sınırı aşan iş, sınırı aşan riskle gelir. İşini göster, insanlarla bağını koru: bir kapı kapanınca ikincisini çoğu zaman seni hatırlayan biri aralar.
+**Son kartı · REMOTE DOLAR** — Yetkinlik seni hazırlar, görünürlük seni bulunabilir yapar. Ama sınırı aşan iş, sınırı aşan riskle gelir. İşini göster, insanlarla bağını koru: bir kapı kapanınca ikincisini çoğu zaman seni hatırlayan biri aralar.
 
 ### S4 · MÜKEMMEL CV · SIFIR DÖNÜŞ (Y ≥ 5, G ≤ 2, Ç ≤ 3) — kampüs bankı, akşam
 Panel: "Profil görüntülenmesi: 0"; HUD'da Y dolu, G ve Ç boş.
@@ -329,7 +329,7 @@ NABIZ 2 çoğunluğuna göre:
 - (Yetenek) S: Salon "yetenek" demiş. Ne güzel! Ben de hep söylüyorum: yeteneğin önünde kimse duramaz. Babam da öyle der.
 - (Çevre) S: Salon "çevre" demiş. Çok haklısınız! Ben de çevremi hep kendim seçtim. Genelde pazar kahvaltılarında.
 - (Şans) S: Salon "şans" demiş. Ben şansa pek inanmam. Hayatımda hiç şansa ihtiyacım olmadı. Herhalde çok çalıştığım içindir.
-- (Baba) S: Salon "baba" demiş. Çok tatlısınız! Babama söyleyeceğim, çok gurur duyacak.
+- (Baba) S: Salon "baba" demiş. Çok tatlısınız! Babama söyleyeceğim, çok gurur duyacak. Kendisi de hep "her şey emek" der.
 S: Yeni pozisyonumdaki ilk işim, genç yeteneklere kapı açmak! Junior alımı başlattık. En az beş yıl deneyim arıyoruz.
 (Panel: Perde 3'teki ilanın aynısı. Rakam yine yok.)
 

@@ -1,0 +1,28 @@
+name: testler
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  oylama:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: firebase
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: firebase/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: npm ci
+      - name: Birim testleri
+        run: npm run test:unit
+      - name: Firestore kural testleri (emülatör)
+        run: npm run test:rules
+      - name: Entegrasyon testi (50 sanal seyirci, emülatör)
+        run: npm run test:int

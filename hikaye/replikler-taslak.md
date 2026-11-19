@@ -37,8 +37,8 @@ D: Staj zorunlu: kırk iş günü, defter, imza, kaşe. Bir de birinin beni kabu
 O: Ben staja başvurmadım. Önce şu algoritmayı O(n log n)'e indireceğim. İyi iş kendini gösterir, değil mi?
 B: Deniz! Bu Selin Hanım, İK'dan. Bu kantinci Hüseyin Abi, oğlu yazılımcı. Hepsiyle staj fuarında tanıştım. Sen neredeydin?
 D: Fuar mı vardı? Ben o gün staj defterimin kapağını kaplıyordum. Şeffaf naylonla. Çok güzel oldu, gerçekten.
-T: Abi CV klasörüm iki megabayt, böcek videolarım dört gigabayt. Hayatta öncelikler var abi.
-D: Benim de böcek klasörüm var, adı "Staj Belgeleri". Annem açmasın diye. Annem açmıyor; staj belgesi de yok.
+T: Abi bu yıl bir CV hazırladım, iki yüz on dört böcek videosu. Hayatta öncelikler var abi.
+D: Ben on dört CV hazırladım. Hepsi aynı CV, sadece adları farklı: CV son, CV sonson, CV gerçekson.
 A: Bu sırada Asuman da staj yerini bulmuştu. Daha doğrusu, staj yeri yirmi iki yıldır onu bekliyordu.
 S: İlk günüm! Kimse beni tanımıyordu. Sadece güvenlik "hoş geldiniz Asuman Hanım" dedi. Bir de genel müdür. Bir de herkes.
 A: Deniz'in ise önünde üç kapı var. Hangisini çalacağına bu akşam salon karar verecek.

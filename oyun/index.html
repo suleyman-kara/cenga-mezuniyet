@@ -938,6 +938,57 @@ body{font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-
 #card.title .pen{transform:scale(1.3)}
 
 .av .sakal{display:none}
+
+/* dolmuş */
+#stage[data-bg=dolmus] #sv-dolmus{display:block}
+.kb{opacity:0;animation:kbIn 1.2s cubic-bezier(.3,1.3,.5,1) forwards}
+@keyframes kbIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+#kalab{transform-box:view-box;transform-origin:1150px 770px;animation:sikis 16s ease-in-out forwards}
+@keyframes sikis{from{transform:scaleX(1.06)}to{transform:scaleX(.9)}}
+.bugu{animation:buguA 6s ease-in-out infinite alternate}
+@keyframes buguA{from{opacity:.55}to{opacity:.8}}
+.dsal{transform-box:fill-box;transform-origin:50% 0;animation:sway 1.6s ease-in-out infinite alternate}
+#stage[data-bg=dolmus] #cam{animation:dolmusS 3.1s ease-in-out infinite}
+@keyframes dolmusS{0%,100%{transform:none}20%{transform:translate(2px,-3px)}45%{transform:translate(-2px,2px)}70%{transform:translate(1px,-2px)}}
+.ch[data-act=tutun] .armR{transform:rotate(-168deg) scaleY(.92)}.ch[data-act=tutun] .armL{transform:rotate(8deg)}.ch[data-act=tutun] .head{transform:rotate(-4deg)}.ch[data-act=tutun] .jump{animation:sway 1.6s ease-in-out infinite alternate}.ch[data-act=tutun] .pR{opacity:0}
+.korB{position:absolute;padding:18px 44px 22px;font:900 96px Impact,"Arial Black","Segoe UI",sans-serif;letter-spacing:6px;color:#fff;background:#d0261a;border:9px solid #1d2a4a;border-radius:30px;transform-origin:50% 100%;animation:bubIn .35s cubic-bezier(.3,1.4,.5,1) both,bubOut .4s 1.8s forwards;text-shadow:0 5px 0 #7a0f08}
+.korB:after{content:"";position:absolute;left:20%;bottom:-44px;border:22px solid transparent;border-top:26px solid #1d2a4a}
+/* reels */
+.reels{width:440px;height:740px;background:#111;border-radius:52px;padding:14px;box-shadow:0 20px 0 rgba(0,0,0,.25),0 0 0 5px #333}
+.reels .sc{position:relative;height:100%;border-radius:40px;overflow:hidden;background:linear-gradient(170deg,#ffd6e8,#ffb36b 55%,#ff7a59)}
+.reels .vb{position:absolute;inset:0}.reels .vb svg{width:100%;height:100%}
+.reels .tp{position:absolute;left:22px;right:22px;top:20px;display:flex;justify-content:space-between;align-items:center;font:800 24px "Segoe UI",sans-serif;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.4)}
+.reels .cnl{background:#ff2d55;color:#fff;border-radius:8px;padding:2px 12px;font:900 22px "Segoe UI",sans-serif;animation:blink 1.4s steps(2) infinite;text-shadow:none}
+.reels .izl{background:rgba(0,0,0,.35);border-radius:8px;padding:2px 10px;font:800 20px "Segoe UI",sans-serif}
+.reels .rt{position:absolute;right:16px;bottom:170px;display:flex;flex-direction:column;gap:18px;align-items:center;font:900 22px "Segoe UI",sans-serif;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.5)}
+.reels .rt i{font-style:normal;display:block;font-size:44px;line-height:1}
+.reels .rt .hp{animation:hotP .8s ease-in-out infinite}
+.reels .bt{position:absolute;left:20px;right:90px;bottom:24px;color:#fff;text-shadow:0 2px 5px rgba(0,0,0,.55)}
+.reels .bt b{display:block;font:900 26px "Segoe UI",sans-serif}
+.reels .bt p{font:700 28px/1.2 "Segoe UI",sans-serif;margin:6px 0}
+.reels .bt .al{font:700 22px "Segoe UI",sans-serif;opacity:.95}
+.reels .ms{overflow:hidden;white-space:nowrap;font:700 22px "Segoe UI",sans-serif;margin-top:8px}
+.reels .ms span{display:inline-block;animation:marq 7s linear infinite}
+@keyframes marq{from{transform:translateX(60%)}to{transform:translateX(-100%)}}
+.reels .hd{position:absolute;left:20px;top:70px;background:rgba(0,0,0,.45);color:#ffe28a;border-radius:16px;padding:6px 14px;font:900 22px "Segoe UI",sans-serif;animation:lineIn .4s 1s both}
+.reels .hg{position:absolute;bottom:160px;width:56px;height:56px;animation:hgA 3.2s ease-out infinite;opacity:0}
+.reels .hg svg{width:100%;height:100%}
+@keyframes hgA{0%{transform:translate(0,0) scale(.5);opacity:0}15%{opacity:1}100%{transform:translate(var(--hx,-60px),-460px) scale(1.2) rotate(20deg);opacity:0}}
+.reels .roach{transform-box:fill-box;transform-origin:50% 100%;animation:roachD .7s ease-in-out infinite alternate}
+@keyframes roachD{from{transform:rotate(-4deg) translateY(0)}to{transform:rotate(4deg) translateY(-8px)}}
+.reels .ant{transform-box:fill-box;transform-origin:50% 100%;animation:sway .5s ease-in-out infinite alternate}
+.reels .halay{animation:halayA 2.4s ease-in-out infinite}
+@keyframes halayA{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}
+.reels .hb{transform-box:fill-box;transform-origin:50% 100%;animation:hbA .6s ease-in-out infinite alternate}
+@keyframes hbA{from{transform:translateY(0)}to{transform:translateY(-10px)}}
+/* duraklatma + kayıt */
+#pauseOv{position:absolute;inset:0;z-index:40;display:none;align-items:center;justify-content:center;background:rgba(10,14,26,.55);backdrop-filter:blur(2px)}
+#pauseOv b{font:900 96px "Segoe UI",sans-serif;color:#fff;letter-spacing:6px;background:rgba(29,42,74,.85);border:6px solid #ffc93c;border-radius:28px;padding:24px 60px;text-shadow:0 6px 0 #000}
+#pauseOv b small{display:block;font:700 40px "Segoe UI",sans-serif;color:#ffe9b8;letter-spacing:2px;margin-top:8px;text-align:center}
+#stage.paused #pauseOv{display:flex}
+#stage.paused *,#stage.paused *:before,#stage.paused *:after{animation-play-state:paused!important}
+#recOn{position:absolute;right:30px;bottom:20px;z-index:41;display:none;font:900 26px "Segoe UI",sans-serif;color:#fff;background:rgba(208,38,26,.9);border-radius:12px;padding:4px 14px}
+#recOn.on{display:block}#recOn i{font-style:normal;animation:blink 1s steps(2) infinite}
 </style>
 </head>
 <body>
@@ -1182,6 +1233,30 @@ body{font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-
     <g transform="translate(960 770)"><rect x="-300" y="-82" width="600" height="22" rx="6" fill="#8a5a32"/><rect x="-300" y="-170" width="600" height="18" rx="6" fill="#8a5a32"/><rect x="-300" y="-130" width="600" height="18" rx="6" fill="#8a5a32"/><rect x="-280" y="-170" width="14" height="170" fill="#3a2a2a"/><rect x="266" y="-170" width="14" height="170" fill="#3a2a2a"/></g>
     <rect y="770" width="1920" height="310" fill="#4a3a4a"/><rect y="770" width="1920" height="10" fill="#3a2a3a"/>
    </svg>
+
+   <!-- BALCALI DOLMUŞU (içeriden) -->
+   <svg id="sv-dolmus" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+    <rect width="1920" height="1080" fill="#e8dcc0"/><rect width="1920" height="190" fill="#d6c8a6"/><rect y="186" width="1920" height="10" fill="#bfae86"/>
+    <g fill="#d9a066"><circle cx="700" cy="120" r="10"/><circle cx="1300" cy="120" r="10"/></g>
+    <rect x="300" y="210" width="1620" height="270" fill="#bfe6ff"/>
+    <g fill="#a8c98a" opacity=".8"><path d="M300 420l200-40 220 30 260-50 300 40 300-30 340 40v70H300z"/></g><use href="#palm" x="900" y="250" width="110" height="210"/><use href="#palm" x="1560" y="240" width="120" height="230"/>
+    <rect class="bugu" x="300" y="210" width="1620" height="270" fill="#f4f7fa"/>
+    <g fill="none" stroke="#c7d3db" stroke-width="5" opacity=".9"><path d="M520 300q4 60 0 170M880 260q4 80 0 210M1240 290q4 70 0 180M1640 270q4 90 0 200"/></g>
+    <text x="1460" y="300" font-size="40" font-weight="700" fill="#b7c3cc" font-family="Segoe Print,Comic Sans MS,cursive" transform="rotate(-6 1460 300)">kurtarın :(</text>
+    <g fill="#9a8a6a"><rect x="300" y="200" width="22" height="290"/><rect x="700" y="200" width="22" height="290"/><rect x="1100" y="200" width="22" height="290"/><rect x="1500" y="200" width="22" height="290"/><rect x="1898" y="200" width="22" height="290"/></g>
+    <rect x="300" y="480" width="1620" height="290" fill="#8a3a2a"/><g fill="#6b2a1e"><rect x="340" y="500" width="300" height="250" rx="22"/><rect x="700" y="500" width="300" height="250" rx="22"/><rect x="1060" y="500" width="300" height="250" rx="22"/><rect x="1420" y="500" width="300" height="250" rx="22"/></g>
+    <rect x="300" y="290" width="1620" height="10" rx="5" fill="#c9b48a"/><path d="M340 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="340" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M430 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="430" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M520 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="520" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M610 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="610" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M700 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="700" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M790 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="790" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M880 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="880" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M970 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="970" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1060 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1060" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1150 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1150" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1240 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1240" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1330 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1330" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1420 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1420" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1510 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1510" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1600 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1600" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1690 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1690" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1780 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1780" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/><path d="M1870 300v34" stroke="#c9b48a" stroke-width="5"/><ellipse cx="1870" cy="352" rx="14" ry="20" fill="none" stroke="#d9d0c0" stroke-width="7"/>
+    <g id="kalab"><g class="kb" style="animation-delay:0s;opacity:.92"><rect x="373" y="361" width="16" height="141" rx="8" fill="#5b6b8c"/><circle cx="381" cy="357" r="10" fill="#f0c39b"/><rect x="317" y="509" width="76" height="261" rx="30" fill="#5b6b8c" opacity=".9"/><circle cx="355" cy="475" r="34" fill="#f0c39b"/><path d="M321 469q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#3a3a48"/><path d="M385 459q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:1.5s;opacity:.92"><rect x="415" y="520" width="76" height="250" rx="30" fill="#8a3a2a" opacity=".9"/><circle cx="453" cy="486" r="34" fill="#f0c39b"/><path d="M419 480q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#2a2018"/><path d="M483 470q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:3.0s;opacity:.92"><rect x="559" y="377" width="16" height="125" rx="8" fill="#3e8a6a"/><circle cx="567" cy="373" r="10" fill="#f0c39b"/><rect x="503" y="525" width="76" height="245" rx="30" fill="#3e8a6a" opacity=".9"/><circle cx="541" cy="491" r="34" fill="#f0c39b"/><path d="M507 485q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#5a3a22"/><path d="M571 475q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:0s;opacity:.92"><rect x="599" y="524" width="76" height="246" rx="30" fill="#7a3fb0" opacity=".9"/><circle cx="637" cy="490" r="34" fill="#e9b48a"/><path d="M603 484q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#1d1a24"/><path d="M667 474q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:3.6s;opacity:.92"><rect x="721" y="394" width="16" height="108" rx="8" fill="#c0392b"/><circle cx="729" cy="390" r="10" fill="#d9a07a"/><rect x="665" y="542" width="76" height="228" rx="30" fill="#c0392b" opacity=".9"/><circle cx="703" cy="508" r="34" fill="#d9a07a"/><path d="M669 502q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#2a2018"/><path d="M733 492q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:4.5s;opacity:.92"><rect x="758" y="541" width="76" height="229" rx="30" fill="#1f6b57" opacity=".9"/><circle cx="796" cy="507" r="34" fill="#d9a07a"/><path d="M762 501q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#1d1a24"/><path d="M826 491q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:0s;opacity:.92"><rect x="904" y="382" width="16" height="120" rx="8" fill="#a8530b"/><circle cx="912" cy="378" r="10" fill="#e0aa82"/><rect x="848" y="530" width="76" height="240" rx="30" fill="#a8530b" opacity=".9"/><circle cx="886" cy="496" r="34" fill="#e0aa82"/><path d="M852 490q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#1d1a24"/><path d="M916 480q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:6.3s;opacity:.92"><rect x="923" y="544" width="76" height="226" rx="30" fill="#2d3e6b" opacity=".9"/><circle cx="961" cy="510" r="34" fill="#e0aa82"/><path d="M927 504q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#888"/><path d="M991 494q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:6.6s;opacity:.92"><rect x="1094" y="357" width="16" height="145" rx="8" fill="#6b4a8a"/><circle cx="1102" cy="353" r="10" fill="#f6cfae"/><rect x="1038" y="505" width="76" height="265" rx="30" fill="#6b4a8a" opacity=".9"/><circle cx="1076" cy="471" r="34" fill="#f6cfae"/><path d="M1042 465q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#1d1a24"/><path d="M1106 455q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:0s;opacity:.92"><rect x="1099" y="550" width="76" height="220" rx="30" fill="#4a5a7a" opacity=".9"/><circle cx="1137" cy="516" r="34" fill="#c98d68"/><path d="M1103 510q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#1d1a24"/><path d="M1167 500q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:8.1s;opacity:.92"><rect x="1238" y="400" width="16" height="102" rx="8" fill="#9a4a6a"/><circle cx="1246" cy="396" r="10" fill="#e0aa82"/><rect x="1182" y="548" width="76" height="222" rx="30" fill="#9a4a6a" opacity=".9"/><circle cx="1220" cy="514" r="34" fill="#e0aa82"/><path d="M1186 508q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#1d1a24"/><path d="M1250 498q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:9.0s;opacity:.92"><rect x="1302" y="502" width="76" height="268" rx="30" fill="#3a6a8a" opacity=".9"/><circle cx="1340" cy="468" r="34" fill="#c98d68"/><path d="M1306 462q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#1d1a24"/><path d="M1370 452q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:0s;opacity:.92"><rect x="1441" y="370" width="16" height="132" rx="8" fill="#7a6a3a"/><circle cx="1449" cy="366" r="10" fill="#d9a07a"/><rect x="1385" y="518" width="76" height="252" rx="30" fill="#7a6a3a" opacity=".9"/><circle cx="1423" cy="484" r="34" fill="#d9a07a"/><path d="M1389 478q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#5a3a22"/><path d="M1453 468q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:10.8s;opacity:.92"><rect x="1465" y="506" width="76" height="264" rx="30" fill="#5a3a5a" opacity=".9"/><circle cx="1503" cy="472" r="34" fill="#f0c39b"/><path d="M1469 466q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#2a2018"/><path d="M1533 456q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:11.3s;opacity:.92"><rect x="1592" y="371" width="16" height="131" rx="8" fill="#2a5a4a"/><circle cx="1600" cy="367" r="10" fill="#e9b48a"/><rect x="1536" y="519" width="76" height="251" rx="30" fill="#2a5a4a" opacity=".9"/><circle cx="1574" cy="485" r="34" fill="#e9b48a"/><path d="M1540 479q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#7a4524"/><path d="M1604 469q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:0s;opacity:.92"><rect x="1656" y="531" width="76" height="239" rx="30" fill="#8a5a2a" opacity=".9"/><circle cx="1694" cy="497" r="34" fill="#f6cfae"/><path d="M1660 491q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#3a3a48"/><path d="M1724 481q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:13.2s;opacity:.92"><rect x="1787" y="351" width="16" height="151" rx="8" fill="#4a4a6a"/><circle cx="1795" cy="347" r="10" fill="#d9a07a"/><rect x="1731" y="499" width="76" height="271" rx="30" fill="#4a4a6a" opacity=".9"/><circle cx="1769" cy="465" r="34" fill="#d9a07a"/><path d="M1735 459q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#2a2018"/><path d="M1799 449q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g><g class="kb" style="animation-delay:13.1s;opacity:.92"><rect x="1824" y="548" width="76" height="222" rx="30" fill="#6a2a3a" opacity=".9"/><circle cx="1862" cy="514" r="34" fill="#e0aa82"/><path d="M1828 508q0-40 34-40t34 40q-12-18-34-18t-34 18z" fill="#888"/><path d="M1892 498q6 10 0 16q-6-6 0-16z" fill="#9fdcff"/></g></g>
+    <!-- şoför bölümü -->
+    <rect x="0" y="0" width="300" height="770" fill="#3a3a44"/>
+    <path d="M0 110h290l10 400H0z" fill="#ffe9b0"/><path d="M0 380l90-40 120 20 90-10v160H0z" fill="#d8b98a"/><rect x="0" y="470" width="300" height="40" fill="#c9a66a"/>
+    <g transform="translate(150 130)"><rect x="-130" y="-20" width="260" height="56" rx="8" fill="#fff" stroke="#c0392b" stroke-width="5"/><text y="18" text-anchor="middle" font-size="26" font-weight="900" fill="#c0392b">BALCALI ⇄ HASTANE</text></g>
+    <g transform="translate(230 200)"><rect x="-90" y="-26" width="180" height="56" rx="16" fill="#222"/><rect x="-82" y="-19" width="164" height="42" rx="12" fill="#9fb8c8"/><circle cx="-26" cy="2" r="7" fill="#1b1f2a"/><circle cx="26" cy="2" r="7" fill="#1b1f2a"/><path d="M-40-10q14-8 28 0M12-10q14-8 28 0" stroke="#2a2018" stroke-width="6" fill="none"/>
+     <g class="dsal"><path d="M0 30v60" stroke="#7a5a22" stroke-width="3"/><g fill="#c9a24a"><circle cy="96" r="7"/><circle cx="-6" cy="110" r="6"/><circle cx="6" cy="110" r="6"/><circle cy="124" r="7"/></g><path d="M0 130l-8 26h16z" fill="#c0392b"/></g></g>
+    <g transform="translate(150 560)"><circle r="60" fill="#2a2a2a"/><path d="M-40-20h-26a20 20 0 0 1 0 40h26z" fill="#4a3020"/><rect x="-110" y="-160" width="220" height="190" rx="70" fill="#4a6a8a"/><circle cy="-200" r="58" fill="#c98d68"/><path d="M-58-210q0-60 58-60t58 60q-20-30-58-30t-58 30z" fill="#2a2018"/><circle r="70" fill="none" stroke="#1d1d1d" stroke-width="18"/></g>
+    <g transform="translate(240 300)"><rect x="-26" y="-30" width="52" height="150" rx="16" fill="#fff" stroke="#c0392b" stroke-width="4"/><rect x="-8" y="-10" width="16" height="100" fill="#d0261a"/><circle cy="96" r="16" fill="#d0261a"/><text x="-60" y="-44" font-size="22" font-weight="900" fill="#c0392b">hissedilen 47</text></g>
+    <rect y="770" width="1920" height="310" fill="#3a3a40"/><g stroke="#2a2a30" stroke-width="8"><path d="M0 820h1920M0 880h1920M0 940h1920M0 1000h1920M0 1060h1920"/></g><rect y="770" width="1920" height="12" fill="#55555d"/>
+   </svg>
   </div>
   <div id="cast"></div>
   <div id="fore">
@@ -1226,6 +1301,8 @@ body{font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-
  </div>
  <div id="card"></div>
  <div id="flash"></div>
+ <div id="pauseOv"><b>⏸ DURAKLATILDI<small>P ile devam</small></b></div>
+ <div id="recOn"><i>●</i> KAYIT</div>
 </div>
 <script>
 "use strict";
@@ -1639,6 +1716,7 @@ const SFX={
 SFX.ding=(at=0)=>{tone(1318,.12,{type:'sine',vol:.16,at});tone(1760,.3,{type:'sine',vol:.14,at:at+.1});};
 SFX.click=()=>{noise(.02,{ft:'highpass',fq:3000,vol:.2});tone(1800,.02,{type:'square',vol:.05});};
 SFX.cash=()=>{seq([1568,2093],.08,{type:'square',vol:.06,d:.12});noise(.2,{ft:'highpass',fq:5000,vol:.08,at:.15});};
+SFX.korna=()=>{ [0,.32].forEach((at,i)=>{ const d=i?.75:.22; tone(415,d,{type:'square',vol:.13,at,a:.01}); tone(523,d,{type:'square',vol:.11,at,a:.01}); tone(830,d,{type:'sawtooth',vol:.04,at}); }); };
 SFX.whit=()=>{tone(900,.4,{to:2200,type:'sine',vol:.08});};
 const hz=n=>440*Math.pow(2,(n-69)/12);
 // müzik: bas + arp + (isteğe bağlı) davul/zil/ağustos böceği. Perde havalarına göre modlar.
@@ -1701,7 +1779,7 @@ function playVoice(id,onMeta,delay){
  if(AC){ try{ const src=AC.createMediaElementSource(a),an=AC.createAnalyser(); an.fftSize=512; src.connect(an); an.connect(AC.destination); VA=an; VBUF=new Uint8Array(an.fftSize); }catch(e){ VA=null; } }
  a.onloadedmetadata=()=>{ if(VO===a&&onMeta) onMeta(a.duration); };
  a.onended=a.onerror=()=>{ if(VO===a){VO=null;duck(false);} };
- setTimeout(()=>{ if(VO===a){ duck(true); a.play().catch(()=>{ if(VO===a){VO=null;duck(false);} }); } },delay||0);
+ setTimeout(()=>{ if(VO===a&&!paused){ duck(true); a.play().catch(()=>{ if(VO===a){VO=null;duck(false);} }); } },delay||0);
 }
 /* ---------- KARAKTERLER ---------- */
 function fig(c){
@@ -1778,7 +1856,7 @@ const av=(k,s)=>`<span class="av" style="width:${s||90}px;height:${s||90}px">${a
 const DURUM_SVG='<svg viewBox="0 0 100 100"><defs><linearGradient id="dGr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#ff6a3d"/></linearGradient></defs><rect width="100" height="100" fill="url(#dGr)"/><g transform="translate(78 14)"><rect x="-6" y="0" width="12" height="52" rx="6" fill="#fff" stroke="#c0392b" stroke-width="2"/><rect x="-2.5" y="14" width="5" height="34" fill="#d0261a"/><circle cy="54" r="8" fill="#d0261a"/><text x="-8" y="-2" font-size="9" font-weight="900" fill="#fff">44°</text></g><path d="M10 100q6-30 36-30t36 30z" fill="#8c929c"/><circle cx="46" cy="46" r="21" fill="#f0c39b"/><path d="M26 44q-4-22 14-28 8-6 18 0 14 4 12 24-4-12-12-14-6 6-16 2-10 6-16 16z" fill="#5a3a22"/><circle cx="39" cy="46" r="2.6" fill="#1b1f2a"/><circle cx="53" cy="46" r="2.6" fill="#1b1f2a"/><path d="M38 56q8 7 16 0" stroke="#5a1f1f" stroke-width="2.6" fill="none"/><path d="M66 30q4 6 0 12" stroke="#9fdcff" stroke-width="3" fill="none"/><g transform="rotate(-30 64 70)"><rect x="52" y="54" width="30" height="40" rx="12" fill="#f6e2b0" stroke="#c99a4a" stroke-width="2"/><path d="M54 60q12-8 26 0" stroke="#7a3a1a" stroke-width="5" fill="none"/><path d="M56 56l4-8M66 54l2-9M74 56l4-7" stroke="#3e9a4b" stroke-width="3"/></g><circle cx="62" cy="78" r="7" fill="#f0c39b"/></svg>';
 const GAIT={walk:[850,'cubic-bezier(.3,.1,.7,.9)'],march:[760,'cubic-bezier(.3,.1,.7,.9)'],run:[1500,'cubic-bezier(.2,.75,.3,1.07)'],stroll:[600,'cubic-bezier(.3,.1,.7,.9)']};
 const GAITS=['walk','run','march','stroll'];
-const EXM={wave:'happy',cheer:'happy',clap:'happy',heart:'happy',calm:'happy',bow:'sad',sad:'sad',panic:'shock',shock:'shock',alarm:'shock',facepalm:'worried',worry:'worried',think:'skeptic',shrug:'skeptic',weigh:'skeptic',brow:'skeptic',smug:'smug',present:'smug',wag:'stern',type:'skeptic',sip:'happy',selfie:'happy',tired:'tired',laptop:'',phone:'',sit:'',look:'',point:'',write:''};
+const EXM={tutun:'tired',wave:'happy',cheer:'happy',clap:'happy',heart:'happy',calm:'happy',bow:'sad',sad:'sad',panic:'shock',shock:'shock',alarm:'shock',facepalm:'worried',worry:'worried',think:'skeptic',shrug:'skeptic',weigh:'skeptic',brow:'skeptic',smug:'smug',present:'smug',wag:'stern',type:'skeptic',sip:'happy',selfie:'happy',tired:'tired',laptop:'',phone:'',sit:'',look:'',point:'',write:''};
 const FID={deniz:['look','shift','scratch'],ozan:['look','shift'],buse:['look','shift','g1'],tolga:['scratch','shift'],asuman:['look','shift']};
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const chars={}; let speaker='';
@@ -1907,6 +1985,23 @@ function kisiSvg(n){
  ${k===5?'<g transform="translate(860 420) rotate(-30)"><rect x="-14" y="-120" width="28" height="200" rx="10" fill="#ff6f61"/><rect x="-14" y="-120" width="28" height="40" fill="#1d2a4a"/><path d="M-14 80l14 30 14-30z" fill="#f2d0a0"/><text x="0" y="0" text-anchor="middle" font-size="18" font-weight="900" fill="#fff" transform="rotate(90)">KUZEY</text></g><path d="M780 640q30-120 80-180" stroke="'+Tt[k]+'" stroke-width="60" fill="none"/>':''}
  </svg>`;
 }
+
+// yapay zekâ üretimi tatlı-absürt insansı hamamböceği (Reels içeriği)
+function roachSvg(o){ o=o||{}; const c=o.c||'#8a4a22',j=o.j||'#d0261a',s=o.s||1;
+ return `<g transform="translate(${o.x||0} ${o.y||0}) scale(${s})"><g class="roach">
+ <g class="ant"><path d="M-14-150q-30-60-70-70" stroke="#5a2a10" stroke-width="5" fill="none"/><circle cx="-86" cy="-222" r="8" fill="#ff7a9a"/></g>
+ <g class="ant" style="animation-delay:-.25s"><path d="M14-150q30-60 70-70" stroke="#5a2a10" stroke-width="5" fill="none"/><circle cx="86" cy="-222" r="8" fill="#ff7a9a"/></g>
+ <path d="M-34 60q-20 40-46 50M34 60q20 40 46 50" stroke="#5a2a10" stroke-width="10" stroke-linecap="round" fill="none"/>
+ <ellipse cx="-80" cy="112" rx="18" ry="9" fill="#5a2a10"/><ellipse cx="80" cy="112" rx="18" ry="9" fill="#5a2a10"/>
+ <ellipse cy="0" rx="62" ry="90" fill="${c}"/><path d="M0-80v170" stroke="#6a3416" stroke-width="4" opacity=".5"/>
+ <path d="M-58-30h116v70q-58 30-116 0z" fill="${j}"/><path d="M-58-30q58 22 116 0" stroke="#fff" stroke-width="6" fill="none"/>${o.no!==0?`<text y="30" text-anchor="middle" font-size="34" font-weight="900" fill="#fff" font-family="Arial Black,Segoe UI,sans-serif">${o.no||'10'}</text>`:''}
+ <path d="M-58-20q-40 10-56-24M58-20q40 10 56-24" stroke="${c}" stroke-width="14" stroke-linecap="round" fill="none"/><path d="M-58 10q-44 0-60 20M58 10q44 0 60 20" stroke="${c}" stroke-width="12" stroke-linecap="round" fill="none"/>
+ <ellipse cy="-108" rx="50" ry="44" fill="#a85a2a"/><ellipse cy="-96" rx="40" ry="26" fill="#c47a44" opacity=".6"/>
+ <circle cx="-18" cy="-114" r="15" fill="#fff"/><circle cx="18" cy="-114" r="15" fill="#fff"/><circle cx="-15" cy="-111" r="8" fill="#1b1f2a"/><circle cx="21" cy="-111" r="8" fill="#1b1f2a"/><circle cx="-12" cy="-115" r="3" fill="#fff"/><circle cx="24" cy="-115" r="3" fill="#fff"/>
+ <ellipse cx="-34" cy="-92" rx="9" ry="5" fill="#ff8a9a" opacity=".7"/><ellipse cx="34" cy="-92" rx="9" ry="5" fill="#ff8a9a" opacity=".7"/>
+ <path d="M-12-88q12 12 24 0" stroke="#3a1a08" stroke-width="4" fill="none" stroke-linecap="round"/>
+ ${o.kep?'<path d="M-46-140l46-22 46 22-46 18z" fill="#1d1a24"/>':''}</g></g>`; }
+const GIFT=['<svg viewBox="0 0 60 60"><rect x="8" y="24" width="44" height="30" rx="4" fill="#ff4fa3"/><rect x="4" y="16" width="52" height="12" rx="3" fill="#ff7ac0"/><rect x="26" y="16" width="8" height="38" fill="#ffd84a"/><path d="M30 16q-16-18-18-4 0 6 18 4q16-18 18-4 0 6-18 4z" fill="#ffd84a"/></svg>','<svg viewBox="0 0 60 60"><path d="M30 54C10 40 4 28 12 18s18-4 18 4c0-8 10-14 18-4s2 22-18 36z" fill="#ff2d55"/></svg>','<svg viewBox="0 0 60 60"><path d="M30 4l7 16 18 2-13 12 4 18-16-9-16 9 4-18L5 22l18-2z" fill="#ffd84a"/></svg>','<svg viewBox="0 0 60 60"><circle cx="30" cy="22" r="14" fill="#ff4f6e"/><path d="M30 36v20" stroke="#3e9a4b" stroke-width="5"/><path d="M30 46q-12-6-14 2" stroke="#3e9a4b" stroke-width="5" fill="none"/></svg>'];
 const PANEL={
  hava:{mk:p=>`<div class="pn hava" ${at(p,200,150)}><div class="yr">📍 ${esc(p.yer||'Adana')}</div><div class="tp"><svg viewBox="-60 -60 120 120"><g stroke="#fff3a0" stroke-width="8" stroke-linecap="round" class="rays"><path d="M0-56v-0M0-52v-6M0 52v6M-52 0h-6M52 0h6M-37-37l-4-4M37 37l4 4M-37 37l-4 4M37-37l4-4"/></g><circle r="34" fill="#fff3a0"/></svg><b>${esc(String(p.t).replace(/°C?$/,''))}°</b></div><div class="hs2">${esc(/hiss/i.test(String(p.his))?p.his:'Hissedilen '+p.his+'°')}</div><div class="dr">${esc(p.durum||'')}</div></div>`,snd:'whit'},
  github:{mk:p=>{ seedV=7; let g=''; const y=p.yogun==null?.9:p.yogun; for(let i=0;i<182;i++){ const r=rnd(); const l=r>y?0:r>y*.7?1:r>y*.4?2:r>y*.15?3:4; g+=`<i class="l${l}" style="transition-delay:${(i*6)}ms"></i>`; }
@@ -1921,7 +2016,7 @@ const PANEL={
   act:(el,a,inst)=>{ if(a[0]==='sec'){ el.querySelectorAll('.fr').forEach((r,i)=>r.classList.toggle('hi',i===+a[1])); if(!inst) SFX.click(); } }},
  linkedin:{mk:p=>{ const g=p.gor; return `<div class="pn li${p.foto==='asuman'?' as':''}" ${at(p,460,120)}><div class="cv"></div><div class="bd"><div class="pp${p.yesil?' otw':''}">${avSvg(p.foto||'gri')}</div>${p.foto==='asuman'||/Yıldızlar/i.test(p.baslik||'')?`<div class="tb"><svg viewBox="0 0 640 120" width="300" height="56"><use href="#yhSign"/></svg></div>`:''}<h3>${esc(p.ad)}</h3><div class="hl">${esc(p.baslik||'')}</div>${p.alt?`<div class="al">${esc(p.alt)}</div>`:''}<div class="mt">${g?`<span class="gv"><small>Profil görüntülenmesi</small><b class="gs">${g[0]}</b></span>`:''}<span>${p.baglanti!=null?esc(p.baglanti)+' bağlantı':''}</span></div>${p.eski?`<div class="old">${av(p.eski.foto,120)}<b>${esc(p.eski.baslik||'(başlık yok)')}</b></div>`:''}</div></div>`; },
   upd:(el,p,inst)=>{ if(inst&&p.gor){ const s=el.querySelector('.gs'); if(s) s.textContent=p.gor[1]; } },
-  act:(el,a,inst)=>{ if(a[0]==='say'&&panelSpec&&panelSpec.gor){ const s=el.querySelector('.gs'),[f,t]=panelSpec.gor; if(inst){ s.textContent=t; return; } let k=0; const tt=every(()=>{ k++; s.textContent=Math.round(f+(t-f)*k/30); if(k%3===0) SFX.tick(); if(k>=30) clearInterval(tt); },60); } }},
+  act:(el,a,inst)=>{ if(a[0]==='say'&&panelSpec&&panelSpec.gor){ const s=el.querySelector('.gs'),[f,t]=panelSpec.gor; if(inst){ s.textContent=t; return; } let k=0; const tt=every(()=>{ k++; s.textContent=Math.round(f+(t-f)*k/30); if(k%3===0) SFX.tick(); if(k>=30) stopT(tt); },60); } }},
  lbildirim:{mk:p=>`<div class="pn lbil" ${at(p,410,200)}>${av(p.foto,150)}<div><p><b>${esc(p.ad)}</b> · ${esc(p.metin)}</p><small>LinkedIn · ${esc(p.zaman||'şimdi')}</small></div><div class="bell">1</div></div>`,snd:'ding'},
  lgonderi:{mk:p=>`<div class="pn lgon" ${at(p,440,110)}><div class="hd">${av(p.foto,100)}<div><b>${esc(p.ad)}</b><small>${esc(p.unvan||'')}</small></div></div><div class="tx">${esc(p.metin)}</div>${/SerinYol|▶/.test(p.metin||'')?'<div class="im"></div>':''}<div class="bg">👍❤️ <b>${fmt(p.begeni||0)}</b> beğeni</div>`+(p.yorumlar||[]).map(y=>`<div class="yr"><b>${esc(y[0])}:</b><span>${esc(y[1])}</span></div>`).join('')+`</div>`,
   upd:(el,p,inst)=>{ if(inst) el.querySelectorAll('.yr').forEach(y=>y.classList.add('on')); },
@@ -1939,7 +2034,7 @@ const PANEL={
  jirakart:{mk:p=>`<div class="pn jk" ${at(p,510,150)}><div class="kd">${esc(p.kod)}</div><h3>${esc(p.baslik)}</h3><div class="rw">Öncelik <b class="r">${esc(p.oncelik)}</b></div><div class="rw">Atanan <b>${esc(p.atanan)}</b></div><div class="rw">Son tarih <b class="r">${esc(p.son)}</b></div></div>`},
  leetcode:{mk:p=>`<div class="pn lc" ${at(p,560,130)}><div class="lg">⟨/⟩ LeetCode</div><div class="rw"><svg class="fl" viewBox="0 0 100 120"><path d="M50 4q30 34 30 62a30 30 0 0 1-60 0q0-16 12-28 0 16 10 20 0-30 8-54z" fill="#ffa116"/><path d="M50 60q14 14 14 26a14 14 0 0 1-28 0q0-12 14-26z" fill="#ffe08a"/></svg><div class="gn"><b>${p.gun?p.gun:fmt(p.cozulen||0)}</b><small>${p.gun?'günlük seri':'çözülen soru'}</small></div></div>${p.gun&&p.cozulen?`<div style="font:800 32px Segoe UI;color:#aaa;margin-top:8px">Çözülen: ${fmt(p.cozulen)}</div>`:''}<div class="zr${/med/i.test(p.zorluk||'')?' m':''}">${esc(p.zorluk||'Hard')}</div><div class="ok">✓ ${esc(p.durum||'Kabul edildi')}</div></div>`},
  fotokopi:{mk:p=>`<div class="pn fk" ${at(p,650,150)}><small>FOTOKOPİ · BUGÜNKÜ KOPYA</small><b class="fs">0</b><em>Kağıt sıkıştı ×14</em></div>`,
-  upd:(el,p,inst)=>{ const s=el.querySelector('.fs'),t=p.sayi||0; if(inst){ s.textContent=fmt(t); return; } let k=0; const tt=every(()=>{ k++; s.textContent=fmt(t*Math.min(1,k/45)); if(k%4===0) SFX.paper(); if(k>=45) clearInterval(tt); },50); }},
+  upd:(el,p,inst)=>{ const s=el.querySelector('.fs'),t=p.sayi||0; if(inst){ s.textContent=fmt(t); return; } let k=0; const tt=every(()=>{ k++; s.textContent=fmt(t*Math.min(1,k/45)); if(k%4===0) SFX.paper(); if(k>=45) stopT(tt); },50); }},
  kartvizit:{mk:p=>`<div class="pn kv${p.yagli?' yg':''}" ${at(p,550,150)}><div class="lgk"><i></i>${esc(p.sirket)}</div><h3>${esc(p.ad)}</h3><p>${esc(p.unvan)}</p><p style="font-size:30px;margin-top:20px">+90 5•• ••• •• ••</p>${p.yagli?'<i class="ys" style="left:470px;top:40px;width:260px;height:200px"></i><i class="ys" style="left:80px;top:280px;width:140px;height:110px"></i>':''}</div>`,snd:'paper'},
  insta:{mk:p=>`<div class="pn insta" ${at(p,730,90)}><div class="ph2"><svg viewBox="0 0 460 720" preserveAspectRatio="xMidYMid slice"><rect width="460" height="720" fill="#2b2f4a"/><rect x="40" y="120" width="380" height="220" fill="#ffc93c"/><text x="70" y="200" font-size="40" font-weight="900" fill="#1a1f3a">KARİYER</text><text x="70" y="250" font-size="40" font-weight="900" fill="#1a1f3a">SÖYLEŞİSİ</text><g transform="translate(150 560)"><circle cy="-120" r="50" fill="#f6cfae"/><path d="M-50-130q0-70 50-70t50 70q-14-30-50-30t-50 30z" fill="#7a4524"/><rect x="-60" y="-70" width="120" height="160" rx="40" fill="#ff6f61"/></g><g transform="translate(320 570)"><circle cy="-130" r="48" fill="#e9b48a"/><path d="M-46-140q0-60 46-60t46 60q-16-24-46-24t-46 24z" fill="#555"/><rect x="-60" y="-80" width="120" height="170" rx="40" fill="#1d2a4a"/></g></svg></div><div class="bars"><i></i></div><div class="ih">${av('buse',60)}${esc(p.ad||'buse')} · 2 dk</div><div class="st">${esc(p.metin)}</div></div>`,snd:'notify'},
  defter:{mk:p=>`<div class="pn defter${p.notAcik?' not':''}" ${at(p,520,120)}><h4>${esc(p.baslik||'STAJ DEFTERİ')}</h4>`+(p.satirlar||[]).map(s=>`<div class="dr">${esc(s)}</div>`).join('')+(p.imza!=null&&p.imza!==''?`<div class="im">İşyeri amiri imzası: ${esc(p.imza)}</div>`:'')+(p.not?`<div class="nt">${esc(p.not)}</div>`:'')+`</div>`,snd:'paper',
@@ -1970,7 +2065,7 @@ const PANEL={
   upd:(el,p,inst)=>{ const bs=el.querySelectorAll('.bln'); if(inst){ bs.forEach((b,i)=>{ if(i<bs.length-1) b.classList.add('old'); }); return; } bs.forEach((b,i)=>later(()=>{ SFX.bub(); bs.forEach((x,j)=>{ if(j<i) x.classList.add('old'); }); },300+i*900)); }},
  durum:{mk:p=>`<div class="pn durum" ${at(p,440,150)}><div class="pf">${DURUM_SVG}</div><div><h3>Deniz</h3><div style="font:600 32px Segoe UI;color:#333">Bilgisayar Mühendisi · Adana</div><div class="gv"><small>Profil görüntülenmesi</small><b class="gs">${(p.gor||[3,31])[0]}</b></div><div class="nt">${esc(p.not?'('+p.not+')':'')}</div></div></div>`,
   upd:(el,p,inst)=>{ if(inst) el.querySelector('.gs').textContent=(p.gor||[3,31])[1]; },
-  act:(el,a,inst)=>{ if(a[0]==='say'&&panelSpec){ const s=el.querySelector('.gs'),[f,t]=panelSpec.gor||[3,31]; if(inst){ s.textContent=t; return; } let k=0; const tt=every(()=>{ k++; s.textContent=Math.round(f+(t-f)*k/28); if(k>=28) clearInterval(tt); },60); } }},
+  act:(el,a,inst)=>{ if(a[0]==='say'&&panelSpec){ const s=el.querySelector('.gs'),[f,t]=panelSpec.gor||[3,31]; if(inst){ s.textContent=t; return; } let k=0; const tt=every(()=>{ k++; s.textContent=Math.round(f+(t-f)*k/28); if(k>=28) stopT(tt); },60); } }},
  kod:{mk:p=>`<div class="pn kod ${p.tur==='hata'?'hata':'ok'}" ${at(p,480,230)}><div class="wbar"><i></i><i></i><i></i></div>`+(p.satirlar||[]).map((s,i)=>`<div class="kl" style="animation-delay:${(.25+i*.45).toFixed(2)}s">${esc(s)}</div>`).join('')+`</div>`,
   upd:(el,p,inst)=>{ if(!inst) (p.satirlar||[]).forEach((s,i)=>later(()=>{ if(i===(p.satirlar.length-1)) (p.tur==='hata'?SFX.err:SFX.pop)(); else SFX.tkey(); },250+i*450)); }},
  mulakat:{mk:p=>`<div class="pn mul"><div class="vid">${kisiSvg(p.kisi||0)}</div><div class="nm2">${['İK Uzmanı','Tech Lead','İK','Kurucu','Yönetici','Satış Müdürü','İK Direktörü','İK'][(p.kisi||0)%8]}</div>${p.soru&&!(p._alt)?`<div class="sq">${esc(p.soru)}</div>`:''}${p.kopuk?'<div class="kp"><i></i>Bağlantı koptu<small>Yeniden bağlanılıyor…</small></div>':''}${p.saat?`<div class="clk">🕒 ${esc(p.saat)}</div>`:''}</div>`,
@@ -1978,10 +2073,17 @@ const PANEL={
  kolay:{mk:p=>`<div class="pn kolay"><div class="btn">Kolay Başvuru</div><svg class="fg" viewBox="0 0 120 140"><path d="M40 140V60q0-14 14-14t14 14v-6q0-12 12-12t12 12v8q0-10 10-10t10 10v40q0 30-30 38z" fill="#f0c39b" stroke="#8a5a32" stroke-width="4"/><rect x="40" y="0" width="28" height="70" rx="14" fill="#f0c39b" stroke="#8a5a32" stroke-width="4"/></svg><div class="cn"><small>BAŞVURU</small><b class="kn">0</b><small>Yanıt: <span class="kr">0</span> ret</small></div><div class="rain"></div></div>`,
   upd:(el,p,inst)=>{ const n=el.querySelector('.kn'),kr=el.querySelector('.kr'),H=p.hedef||500,T=Math.max(6000,(p._ms||20000)-2500),M=p.mailler||[];
    if(inst){ n.textContent=H; kr.textContent=492; return; }
-   const t0=performance.now(); let last=0; const tt=every(()=>{ const f=Math.min(1,(performance.now()-t0)/T), v=Math.round(H*f*f); if(v!==last){ last=v; n.textContent=v; kr.textContent=Math.round(492*f*f*f); if(Math.random()<.5) SFX.click(); } if(f>=1) clearInterval(tt); },60);
+   const t0=performance.now(); let last=0; const tt=every(()=>{ const f=Math.min(1,(performance.now()-t0)/T), v=Math.round(H*f*f); if(v!==last){ last=v; n.textContent=v; kr.textContent=Math.round(492*f*f*f); if(Math.random()<.5) SFX.click(); } if(f>=1) stopT(tt); },60);
    const rain=el.querySelector('.rain'); let k=0; const drop=()=>{ const m=M[k%M.length], last2=k>=M.length*2&&k%M.length===M.length-1; rain.insertAdjacentHTML('beforeend',`<div class="rm${/puan/i.test(m)?' an':''}" style="left:${(40+Math.random()*300).toFixed(0)}px;--r:${(Math.random()*8-4).toFixed(1)}deg;--d:${(2.4+Math.random()).toFixed(2)}s">✉ ${esc(m)}</div>`); while(rain.children.length>10) rain.firstChild.remove(); k++; SFX.notify(); };
    const iv=()=>{ drop(); const f=Math.min(1,(performance.now()-t0)/T); if(f<1) later(iv,Math.max(260,1300-f*1000)); }; later(iv,600); }},
  epilog:{mk:p=>`<div class="pn epilog"><div class="fg"><div class="ch c-${p.kim}" data-act="${{ozan:'phone',buse:'sip',tolga:'phone',asuman:'heart',deniz:'look'}[p.kim]||'look'}" data-ex="happy"><div class="fc"><div class="mv">${(CH[p.kim]||CH.deniz).svg}</div></div></div></div><div class="tx"><b style="color:${WHOCOL[{ozan:O,buse:B,tolga:T,asuman:S,deniz:D}[p.kim]]}">${esc((CH[p.kim]||CH.deniz).name)}</b><p>${esc(p.metin)}</p>${p.kim==='asuman'?'<svg viewBox="0 0 640 120" width="420" height="80" style="margin-top:20px"><use href="#yhSign"/></svg>':''}</div></div>`,snd:'pop'},
+ reels:{mk:p=>{ const cn=!!p.canli; let gifts=''; if(cn) for(let i=0;i<7;i++) gifts+=`<i class="hg" style="right:${(20+(i*37)%90)}px;--hx:${(-40-(i*53)%140)}px;animation-delay:${(i*.45).toFixed(2)}s">${GIFT[i%GIFT.length]}</i>`;
+   const halay=cn?`<g class="halay">${[0,1,2,3,4].map(i=>`<g class="hb" style="animation-delay:${(-i*.12).toFixed(2)}s">${roachSvg({x:70+i*75,y:470,s:.3,j:['#d0261a','#1fb5a8','#ffc93c','#7a3fb0','#ff6f61'][i],no:0})}</g>`).join('')}<path d="M70 466h300" stroke="#a85a2a" stroke-width="6" stroke-dasharray="20 55" stroke-dashoffset="-10"/></g>`:'';
+   return `<div class="pn reels" ${at(p,740,96)}><div class="sc"><div class="vb"><svg viewBox="0 0 412 712" preserveAspectRatio="xMidYMid slice"><rect width="412" height="712" fill="none"/><g fill="#fff" opacity=".35"><circle cx="70" cy="140" r="40"/><circle cx="340" cy="220" r="60"/><circle cx="300" cy="520" r="30"/></g>${roachSvg({x:206,y:cn?290:420,s:cn?.85:1.35,kep:/mezun/i.test(p.baslik||'')})}${halay}</svg></div>
+    <div class="tp">${cn?`<span class="cnl">CANLI</span><span class="izl">👁 ${esc(p.izleyen||'12,4 B')}</span>`:'<span>Takip · <b>Senin İçin</b></span><span>🔍</span>'}</div>
+    ${p.hediye&&cn?`<div class="hd">🎁 ${esc(p.hediye)}</div>`:''}${gifts}
+    <div class="rt"><div class="hp"><i>❤</i>${esc(p.begeni||'0')}</div><div><i>💬</i>${esc(p.yorum||'0')}</div><div><i>↗</i>Paylaş</div></div>
+    <div class="bt"><b>@${esc(String(p.hesap||'hesap').replace(/^@/,''))} · AI</b><p>${esc(p.baslik||'')}</p>${p.alt?`<div class="al">${esc(p.alt)}</div>`:''}<div class="ms"><span>${esc(p.ses||'♫ lülülü (orijinal ses)')}</span></div></div></div></div>`; },snd:'boing'},
  pencere:{mk:p=>pencereHTML(p.baslik||'Mezuniyet.exe',p.metin||'Mezuniyet.exe yanıt vermiyor.',false).replace('class="pen"',`class="pn pen" ${at(p,460,250)}`),snd:'err',
   act:(el,a,inst)=>{ if(a[0]==='bekle') penAnim(el.querySelector('.pen'),inst); }}
 };
@@ -2073,6 +2175,7 @@ function fxDo(f,inst){
  else if(k==='kep') kepler();
  else if(k==='plus0'){ L.insertAdjacentHTML('beforeend','<div class="plus0">+0</div>'); later(()=>HUDK.forEach(x=>hudFly(x,'+0',1)),900); SFX.buzz(); }
  else if(k==='ding') SFX.ding();
+ else if(k==='korna'){ SFX.korna(); stage.classList.remove('shake');void stage.offsetWidth;stage.classList.add('shake'); L.insertAdjacentHTML('beforeend',`<div class="korB" style="left:${a[1]||260}px;top:${a[2]||200}px">DIIIT!</div>`); }
  else if(k==='click') SFX.click();
  else if(k==='whoosh') SFX.whoosh();
  else if(k==='zoom'){ $('cam').classList.add('zoomin'); SFX.zoom(); }
@@ -2087,9 +2190,16 @@ let yap=build;                 // vitrin modunda başka bir dizi üretici
 let choices=[],script=yap(choices),pos=0;
 let timers=[],typing=null,fullText='',ti=0;
 let phase='',V=null,last={bg:''},perdeAd='',montDone=false,voHad=false,audioOk=false,titleGo=false;
-const later=(f,ms)=>{const t=setTimeout(f,ms);timers.push(t);return t;};
-const every=(f,ms)=>{const t=setInterval(f,ms);timers.push(t);return t;};
-function clearAll(){timers.forEach(t=>{clearTimeout(t);clearInterval(t);});timers=[];typing=null;}
+// duraklatılabilir zamanlayıcılar: later/every bir nesne döndürür (stopT ile durdurulur); pause/resume kalan süreyi korur
+let paused=false,pauseT0=0;
+const TM=new Set();
+function _arm(o){ if(o.iv) o.id=setInterval(o.f,o.ms); else o.id=setTimeout(()=>{ TM.delete(o); o.f(); },o.rem); o.due=performance.now()+(o.iv?0:o.rem); }
+const later=(f,ms)=>{ const o={f,ms:ms||0,rem:ms||0,iv:false,id:null}; TM.add(o); if(!paused) _arm(o); return o; };
+const every=(f,ms)=>{ const o={f,ms,iv:true,id:null}; TM.add(o); if(!paused) _arm(o); return o; };
+function stopT(o){ if(!o)return; if(typeof o==='number'){ clearTimeout(o); clearInterval(o); return; } if(o.id!=null){ o.iv?clearInterval(o.id):clearTimeout(o.id); } o.id=null; TM.delete(o); }
+function clearAll(){ TM.forEach(o=>{ if(o.id!=null) o.iv?clearInterval(o.id):clearTimeout(o.id); }); TM.clear(); typing=null; }
+function timersPause(){ const now=performance.now(); TM.forEach(o=>{ if(o.id==null)return; if(o.iv) clearInterval(o.id); else{ clearTimeout(o.id); o.rem=Math.max(0,o.due-now); } o.id=null; }); }
+function timersResume(){ TM.forEach(o=>{ if(o.id==null) _arm(o); }); }
 let cues=[],beatT0=0;
 function applyCue(c,inst){
  if(c[1]==='fx') fxDo(c[2],inst);
@@ -2099,8 +2209,8 @@ function applyCue(c,inst){
 function runCues(){ if(!cues.length)return; const f=fullText.length?ti/fullText.length:1,el=performance.now()-beatT0; cues=cues.filter(c=>{ if(f>=c[0]&&el>=(c[3]||0)){ applyCue(c); return false; } return true; }); }
 function flushCues(){ const el=performance.now()-beatT0; cues.forEach(c=>{ const w=(c[3]||0)-el; if(w>0) later(()=>applyCue(c),w); else applyCue(c); }); cues=[]; }
 function type(t){ fullText=t; txt.textContent=''; more.classList.remove('on'); ti=0; runType(34); }
-function runType(ms){ if(typing) clearInterval(typing); typing=every(()=>{ ti++; txt.textContent=fullText.slice(0,ti); if(!VO&&ti%2===0&&fullText[ti-1]!==' ')SFX.key(); runCues(); if(ti>=fullText.length) endType(); },ms); }
-function endType(){ if(typing){clearInterval(typing);typing=null;} txt.textContent=fullText; more.classList.add('on'); flushCues(); }
+function runType(ms){ if(typing) stopT(typing); typing=every(()=>{ ti++; txt.textContent=fullText.slice(0,ti); if(!VO&&ti%2===0&&fullText[ti-1]!==' ')SFX.key(); runCues(); if(ti>=fullText.length) endType(); },ms); }
+function endType(){ if(typing){stopT(typing);typing=null;} txt.textContent=fullText; more.classList.add('on'); flushCues(); }
 let wipeOn=false,wipeIn=false;
 function wipeOut(){ const W=$('wipe'); wipeOn=wipeIn=false; W.className=''; void W.offsetWidth; W.className='out'; later(()=>{ if(!wipeOn&&W.className==='out') W.className=''; },700); }
 function wipeReset(){ wipeOn=wipeIn=false; $('wipe').className=''; }
@@ -2182,7 +2292,7 @@ function runMontage(st,instant){
  if(!F.length){ montDone=true; return; }
  if(instant){ F.forEach((f,i)=>frameApply(f,true,i===0)); montDone=true; return; }
  if(!MUSIC[mMode]||mMode==='vote') setMusic('lofi');
- const play=k=>{ frameApply(F[k],false,k===0); if(k<F.length-1) later(()=>play(k+1),F[k].ms||2500); else later(()=>{ montDone=true; },F[k].ms||2500); };
+ const play=k=>{ frameApply(F[k],false,k===0); if(k<F.length-1) later(()=>play(k+1),F[k].ms||2500); else later(()=>{ montDone=true; if(script[pos]===st&&phase==='') next(); },F[k].ms||2500); };
  play(0);
  every(idleTick,1300);
 }
@@ -2227,7 +2337,7 @@ function titleRun(){ if(titleGo)return; titleGo=true; const pen=card.querySelect
 //  'sim'  : eski rastgele oy akışı — yalnızca ?sahte=1, ?test=1 ve video kaydında
 //  'off'  : bağlantı yok — oy gösterilmez, süre dolunca kura (sunucu 1-4 ile seçebilir)
 const OYQ=new URLSearchParams(location.search);
-const OY_SIM=()=>OYQ.has('sahte')||OYQ.has('test')||!!rec||!!recArmed;
+const OY_SIM=()=>OYQ.has('sahte')||OYQ.has('test');
 const OY_LIVE=()=>!OY_SIM()&&!!window.VOTE&&!!window.VOTE_OK;
 function qrSvg(){
  let seed=7,h='';const N=25,r=()=>(seed=(seed*16807)%2147483647)/2147483647;
@@ -2389,7 +2499,7 @@ let AUTO_PATH=null;
 let auto=true,aKey='',aT0=0,aIdle=0,rec=null,recStream=null,recArmed=false;
 function setAuto(on){ auto=on; aKey=''; stage.style.cursor=on?'none':''; }
 setInterval(()=>{
- if(!auto)return;
+ if(!auto||paused)return;
  const st=script[pos],key=pos+'|'+phase,now=performance.now();
  if(key!==aKey){aKey=key;aT0=now;aIdle=0;}
  const el=now-aT0, go=()=>{aKey='';next();};
@@ -2405,55 +2515,59 @@ setInterval(()=>{
  }else if(st.type==='title'){ /* imleç animasyonu kendisi geçer */ }
  else if(st.type==='act'){ if(el>=5200) go(); }
  else if(st.type==='end'){ if(VO){aIdle=0;return;} aIdle+=250; if(aIdle>=2500&&el>=(voHad?6000:12000)) go(); }
- else if(st.type==='final'){ if(rec&&el>=9000){ setAuto(false); stopRec(); } }
 },250);
-async function armRec(){
- if(rec||recArmed)return;
- try{ recStream=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:30},audio:true,preferCurrentTab:true,selfBrowserSurface:'include'}); }
- catch(e){ return; }
- recStream.getVideoTracks()[0].onended=stopRec;
- recArmed=true; setAuto(false); restart();
- const k=card.querySelector('.ttl'); if(k) k.innerHTML='<b>F</b> tam ekran (isteğe bağlı) <b>BOŞLUK</b> kaydı başlat';
-}
-function beginRec(){
+// K: o anki ekranın kaydını başlatır (bu sekme, sesli); tekrar K: durdurur ve dosyayı indirir. Oyunun akışına dokunmaz.
+async function startRec(){
+ if(rec||recArmed)return; recArmed=true;
+ try{ recStream=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:30},audio:true,preferCurrentTab:true,selfBrowserSurface:'include',systemAudio:'include'}); }
+ catch(e){ recArmed=false; return; }
  recArmed=false;
- const mime=['video/mp4;codecs=avc1,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm'].find(m=>MediaRecorder.isTypeSupported(m));
- const parts=[]; rec=new MediaRecorder(recStream,{mimeType:mime,videoBitsPerSecond:8e6});
+ const mime=['video/mp4;codecs=avc1,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm'].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m));
+ const parts=[],t0=new Date(); rec=new MediaRecorder(recStream,mime?{mimeType:mime,videoBitsPerSecond:8e6}:{});
  rec.ondataavailable=e=>{ if(e.data.size) parts.push(e.data); };
  rec.onstop=()=>{
-  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(parts,{type:mime}));
-  a.download='mezuniyet-exe.'+(mime.indexOf('mp4')>=0?'mp4':'webm'); document.body.appendChild(a); a.click(); a.remove();
-  recStream.getTracks().forEach(t=>t.stop()); rec=null; recStream=null;
+  const ty=rec&&rec.mimeType||mime||'video/webm', a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(parts,{type:ty}));
+  a.download='mezuniyet-kesit-'+pad(t0.getHours())+pad(t0.getMinutes())+pad(t0.getSeconds())+'.'+(ty.indexOf('mp4')>=0?'mp4':'webm'); document.body.appendChild(a); a.click(); a.remove();
+  if(recStream) recStream.getTracks().forEach(t=>t.stop()); rec=null; recStream=null; $('recOn').classList.remove('on');
  };
- if(!AUTO_PATH) AUTO_PATH=[0,0,0,2,0,1,2,3];
- rec.start(1000); setAuto(true); restart(); titleRun();
+ recStream.getVideoTracks()[0].onended=stopRec;
+ rec.start(1000); $('recOn').classList.add('on');
 }
-function stopRec(){ recArmed=false; if(rec&&rec.state!=='inactive') rec.stop(); else if(recStream&&!rec){ recStream.getTracks().forEach(t=>t.stop()); recStream=null; } }
+function stopRec(){ recArmed=false; if(rec&&rec.state!=='inactive') rec.stop(); else{ if(recStream) recStream.getTracks().forEach(t=>t.stop()); recStream=null; rec=null; $('recOn').classList.remove('on'); } }
+// P: duraklat / sürdür
+function setPause(on){
+ if(on===paused)return; paused=on; stage.classList.toggle('paused',on);
+ if(on){ pauseT0=performance.now(); timersPause(); if(VO&&!VO.paused) VO.pause(); if(AC&&AC.state==='running') AC.suspend();
+  if(phase==='vote'&&V&&V.mode==='live'&&window.VOTE&&typeof window.VOTE.pause==='function'){ try{ window.VOTE.pause(); }catch(_){} } }
+ else{ const d=performance.now()-pauseT0; aT0+=d; beatT0+=d; timersResume(); if(AC&&AC.state==='suspended') AC.resume(); if(VO&&VO.paused&&!VO.ended){ duck(true); VO.play().catch(()=>{}); }
+  if(phase==='vote'&&V&&V.mode==='live'&&window.VOTE&&typeof window.VOTE.resume==='function'){ try{ window.VOTE.resume(); }catch(_){} } }
+}
 function unlock(){ audio(); if(!audioOk){ audioOk=true; const st=script[pos]; if(st&&st.type==='title'){ const k=card.querySelector('.ttl b'); if(k&&k.textContent==='BOŞLUK') k.parentNode.innerHTML='<b>F</b> tam ekran <b>M</b> ses'; } } }
 addEventListener('keydown',e=>{
  if(e.ctrlKey||e.metaKey||e.altKey)return;
  const k=e.key;
  unlock();
  if(k==='m'||k==='M'){toggleMute();return;}
- if(k==='k'||k==='K'){ if(rec) stopRec(); else armRec(); return; }
+ if(k==='p'||k==='P'){ setPause(!paused); return; }
+ if(k==='k'||k==='K'){ if(rec) stopRec(); else startRec(); return; }
+ if(paused) return;
  if(k==='o'||k==='O'){ setAuto(!auto); return; }
- if(recArmed&&k===' '){ e.preventDefault(); beginRec(); return; }
  if(k===' '||k==='ArrowRight'||k==='Enter'||k==='PageDown'){e.preventDefault();next();}
  else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();back();}
  else if(k>='1'&&k<='4') forceWin(+k-1);
  else if(k==='f'||k==='F'){ if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{}); }
  else if(k==='r'||k==='R')restart();
 });
-stage.addEventListener('click',()=>{unlock();next();});
+stage.addEventListener('click',()=>{unlock(); if(paused) return; next();});
 
 /* ---------- VİTRİN: index.html?vitrin=1 (bütün mekânlar, pozlar, paneller, montajlar, kartlar) ---------- */
 function vitrinScript(){
- const s=[{k:'card',type:'title'}], BGS=['yokus','koridor','cayocagi','holding','startup','oda','soylesi','kahve','lab','kariyer','hackathon','mezuniyet','mulakat','kafe','bayram','ofis','bank'];
+ const s=[{k:'card',type:'title'}], BGS=['yokus','koridor','cayocagi','holding','startup','oda','soylesi','kahve','lab','kariyer','hackathon','mezuniyet','mulakat','kafe','bayram','ofis','bank','dolmus'];
  const kad=(p)=>[['deniz',300,p[0]],['ozan',640,p[1]],['buse',960,p[2]],['tolga',1280,p[3]],['asuman',1620,p[4]]];
  const bt=(o)=>s.push(Object.assign({k:'beat',who:A,perde:1,sayac:{g:2,c:3,y:4}},o));
  BGS.forEach(g=>bt({bg:g,v:'',yer:'VİTRİN · mekân: '+g,c:kad(['wave','laptop','sip','phone','selfie']),text:'Vitrin: mekân "'+g+'". Beş karakter ve pozları.'}));
  [['yokus','aksam'],['koridor','asistan'],['holding','lobi'],['oda','gece'],['soylesi','pizza']].forEach(([g,v])=>bt({bg:g,v,yer:'VİTRİN · '+g+' · '+v,c:kad(['look','think','cheer','sit','heart']),text:'Vitrin: mekân "'+g+'", varyant "'+v+'".'}));
- const POZ='look wave point shrug facepalm think cheer clap shock sad worry panic phone laptop type present smug calm heart bow brow sip write wag weigh alarm sit tired selfie'.split(' ');
+ const POZ='tutun look wave point shrug facepalm think cheer clap shock sad worry panic phone laptop type present smug calm heart bow brow sip write wag weigh alarm sit tired selfie'.split(' ');
  for(let i=0;i<POZ.length;i+=5){ const p=POZ.slice(i,i+5); while(p.length<5) p.push('look'); bt({bg:'koridor',v:'',sakal:i>=20?1:0,yer:'VİTRİN · pozlar: '+p.join(' · '),c:kad(p),text:'Pozlar: '+p.join(', ')+'.'}); }
  ['happy','sad','shock','skeptic','smug','stern','worried','tired'].forEach((e,i)=>{ if(i%2) return; const e2=['happy','sad','shock','skeptic','smug','stern','worried','tired'][i+1]; bt({bg:'lab',yer:'VİTRİN · ifadeler: '+e+' / '+e2,c:kad(['look:'+e,'look:'+e2,'calm:'+e,'calm:'+e2,'look:'+e]),text:'İfadeler: '+e+', '+e2+'.'}); });
  [D,O,B,T,S].forEach(w=>bt({bg:'kahve',who:w,c:kad(['look','look','look','look','look']),text:'HUD profili: '+w+' konuşurken.'}));
@@ -2462,6 +2576,9 @@ function vitrinScript(){
  const mons={};
  try{ (function gez(c,dep){ if(dep>9) return; const sc=build(c); sc.forEach(x=>{ if(x.k==='beat') ekle(x.panel,x.bg); if(x.k==='montage'){ if(!mons[x.id]) mons[x.id]=x; (x.frames||[]).forEach(f=>{ if(f.panel&&!['akis','kolay','mulakat','whatsapp','epilog','pencere'].includes(f.panel.type)) ekle(f.panel,f.bg); }); } }); const d=sc.find(x=>x.k==='dec'&&c[x.id]===undefined); if(d) for(let i=0;i<d.d.o.length;i++) gez(c.concat(i),dep+1); })([],0); }catch(e){}
  ekle({type:'jirakart',id:'jk',kod:'BITIRME-1',baslik:'Mezun ol',oncelik:'Yüksek',atanan:'Sen',son:'Dün'},'lab');
+ ekle({type:'reels',id:'rl',hesap:'yapayzeka.bocek',baslik:'Hamamböceği mezun oldu, iş arıyor 🎓',alt:'#keşfet #adana #yapayzeka',ses:'♫ lülülü (orijinal ses)',begeni:'48 B',yorum:'3.112'},'oda');
+ bt({bg:'oda',v:'gece',yer:'VİTRİN · panel: reels (canlı)',c:[['deniz',230,'phone'],['tolga',1690,'phone']],panel:{type:'reels',id:'rl2',hesap:'yapayzeka.bocek',baslik:'Böcek düğünü CANLI',ses:'♫ halay remix (orijinal ses)',begeni:'210 B',yorum:'9.870',canli:1,hediye:'Tolga bir aslan gönderdi'},text:'Panel: reels, canlı yayın.'});
+ bt({bg:'dolmus',v:'',yer:'VİTRİN · Balcalı dolmuşu · korna',c:[['deniz',700,'tutun'],['tolga',1150,'tutun'],['buse',1550,'tutun']],fx:'korna',text:'Mekân: dolmuş, poz: tutun, efekt: korna.'});
  Object.values(mons).forEach(m=>s.push(m));
  s.push({k:'card',type:'act',n:1,title:'3. SINIF',sub:'Staj zorunludur. Ücret: —',sty:'yonetmelik'},{k:'card',type:'act',n:2,title:'4. SINIF',sub:'BITIRME-1 · Mezun ol · Öncelik: Yüksek · Atanan: Sen · Son tarih: Dün',sty:'jira'},{k:'card',type:'act',n:3,title:'MEZUNİYET',sub:'Aranan: Junior. Maaş: Rekabetçi.',sty:'ilan'},{k:'card',type:'act',n:4,title:'MEZUNİYETİN 4. AYI',sub:'Bayram. Sofrada 12 kişi, 1 soru.',sty:'bayram'});
  s.push({k:'dec',id:0,nabiz:1,d:{q:'Vitrin: dört seçenekli nabız',o:[['Yetenek','İyi olan kazanır.'],['Çevre','Kimi tanıdığın.'],['Şans','Doğru dosya.'],['Baba','Açıklama gerekmiyor.']]}});
@@ -2504,6 +2621,17 @@ async function selfTest(){
   }
   for(pos=script.length-1;pos>=0;pos--){ try{ panelKey='~'; show(true); }catch(e){ errs.push('geri ['+c+'] #'+pos+': '+e.message); } }
  }
+ // gerçek zamanlı montaj sınaması: otomatik kapalıyken de montaj kendiliğinden bitmeli; duraklatma montajı dondurmalı; otomatik kipte de takılmamalı
+ try{
+  restart(); setAuto(false); choices=pick[0].slice(); script=build(choices);
+  const ms=st=>(st.frames||[]).reduce((a,f)=>a+(f.ms||2500),0);
+  let mi=-1; script.forEach((x,i)=>{ if(x.k==='montage'&&(mi<0||ms(x)<ms(script[mi]))) mi=i; });
+  if(mi>=0){ const tot=ms(script[mi]);
+   pos=mi; show(false); await wait(tot/2); setPause(true); await wait(tot); if(pos!==mi) errs.push('duraklatma montajı dondurmadı: '+script[mi].id);
+   setPause(false); await wait(tot/2+1500); if(pos!==mi+1) errs.push('montaj kendiliğinden bitmedi (otomatik kapalı): '+script[mi].id);
+   pos=mi; show(false); setAuto(true); await wait(tot+1800); if(pos<mi+1) errs.push('montaj takıldı (otomatik açık): '+script[mi].id); setAuto(false);
+  } else errs.push('montaj sınaması: montaj bulunamadı');
+ }catch(e){ errs.push('montaj sınaması: '+e.message); }
  const missing=[];
  if(location.protocol!=='file:') await Promise.all([...ids.keys()].map(id=>fetch('ses/'+id+'.wav',{method:'HEAD'}).then(r=>{ if(!r.ok) missing.push(id); }).catch(()=>missing.push(id))));
  try{ restart(); setAuto(false); }catch(e){ errs.push('son restart: '+e.message); }

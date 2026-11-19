@@ -62,4 +62,16 @@ describe('MockSource (eski sahte oylama davranisi)', () => {
     s.open({ decKey: 'k', q: 'q', options: ['a', 'b', 'c'], poll: false, durMs: 500 });
     await vi.advanceTimersByTimeAsync(600); const r = await s.close(); expect(r.winner).toBe(2); expect(r.total).toBeGreaterThanOrEqual(0);
   });
+  it('pause: sahte akis duraksar, kalan sure ve oylar sabit; resume devam ettirir', async () => {
+    const s = createMockSource({ rng: seeded(9) }); await s.createSession(); const ups = []; s.onUpdate((u) => ups.push(u));
+    s.open({ decKey: 'k', q: 'q', options: ['a', 'b', 'c'], poll: false, durMs: 10000 });
+    await vi.advanceTimersByTimeAsync(2000); const r = await s.pause(); expect(r.ok).toBe(true);
+    const a = ups[ups.length - 1]; await vi.advanceTimersByTimeAsync(5000); const b = ups[ups.length - 1];
+    expect(b.remainingMs).toBe(a.remainingMs); expect(b.total).toBe(a.total); expect(b.remainingMs).toBeGreaterThan(0);
+    await s.resume(); await vi.advanceTimersByTimeAsync(1000);
+    const c = ups[ups.length - 1]; expect(c.remainingMs).toBeLessThan(a.remainingMs); expect(c.remainingMs).toBeGreaterThan(a.remainingMs - 1200);
+  });
+  it('pause/resume karar yokken de cokmez', async () => {
+    const s = createMockSource({ rng: seeded() }); expect((await s.pause()).ok).toBe(true); expect((await s.resume()).ok).toBe(true);
+  });
 });

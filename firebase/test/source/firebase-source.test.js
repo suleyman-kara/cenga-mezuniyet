@@ -144,3 +144,66 @@ describe('hata dayanikliligi: motor kilitlenmez', () => {
     await expect(src.createSession()).rejects.toThrow();
   });
 });
+
+describe('pause / resume', () => {
+  const clocked = (extra = {}) => { const k = { adv: 0 }; return { k, ...mk({ now: () => Date.now() + k.adv, ...extra }) }; };
+  it('pause: kalan sureyi yazar, emit edilen remainingMs sabit kalir', async () => {
+    const { k, src } = clocked(); const sid = await src.createSession(); const ups = []; src.onUpdate((u) => ups.push(u));
+    src.open(OPEN({ durMs: 5000 })); await sleep(60);
+    await src.pause();
+    const s = sess(sid); expect(s.paused).toBe(true); expect(s.pausedLeftMs).toBeGreaterThan(4000); expect(s.pausedLeftMs).toBeLessThanOrEqual(5000);
+    k.adv += 10000; ups.length = 0; await sleep(100);
+    expect(ups.length).toBeGreaterThan(0); expect(ups.every((u) => u.remainingMs === s.pausedLeftMs)).toBe(true);
+    await src.close();
+  });
+  it('pause sirasinda sure dolmaz (remainingMs > 0), close tetiklenecek bir sey olmaz', async () => {
+    const { k, src } = clocked(); const sid = await src.createSession(); const ups = []; src.onUpdate((u) => ups.push(u));
+    src.open(OPEN({ durMs: 300 })); await sleep(50); src.pause(); await sleep(10);
+    k.adv += 60000; await sleep(80);
+    expect(ups[ups.length - 1].remainingMs).toBeGreaterThan(0); expect(sess(sid).phase).toBe('vote');
+    await src.close();
+  });
+  it('resume: closesAt = simdi(sunucu saati) + kalan, paused=false, akis devam eder', async () => {
+    be.serverSkewMs = 5000; const { k, src } = clocked(); const sid = await src.createSession(); const ups = []; src.onUpdate((u) => ups.push(u));
+    src.open(OPEN({ durMs: 8000 })); await sleep(50); await src.pause(); const left = sess(sid).pausedLeftMs;
+    k.adv += 20000; await sleep(30); await src.resume();
+    const s = sess(sid); expect(s.paused).toBe(false);
+    expect(Math.abs(s.closesAt.toMillis() - (Date.now() + k.adv + 5000 + left))).toBeLessThan(300);
+    await sleep(80); expect(ups[ups.length - 1].remainingMs).toBeLessThan(left); expect(ups[ups.length - 1].remainingMs).toBeGreaterThan(left - 600);
+    await src.close();
+  });
+  it('pause sirasinda gelen eski oylar sayilir; resume sonrasi gelen de sayilir', async () => {
+    const { src } = clocked(); const sid = await src.createSession(); src.open(OPEN({ durMs: 5000 }));
+    await castVote(sid, '0_abcd1234', 'p', 1); await src.pause(); await sleep(20); await src.resume(); await castVote(sid, '0_abcd1234', 'q', 1);
+    const res = await src.close(); expect(res.counts).toEqual([0, 2, 0]);
+  });
+  it('karar acik degilken pause/resume yalnizca paused alanini yazar', async () => {
+    const { src } = clocked(); const sid = await src.createSession(); const before = { ...sess(sid) };
+    await src.pause(); expect(sess(sid)).toEqual({ ...before, paused: true }); expect('pausedLeftMs' in sess(sid)).toBe(false);
+    await src.resume(); expect(sess(sid)).toEqual({ ...before, paused: false });
+  });
+  it('cift pause/resume zararsiz; kalan sure ilk pause anindaki kalir', async () => {
+    const { k, src } = clocked(); const sid = await src.createSession(); src.open(OPEN({ durMs: 5000 }));
+    await src.pause(); const l1 = sess(sid).pausedLeftMs; k.adv += 3000; await src.pause(); expect(sess(sid).pausedLeftMs).toBe(l1);
+    await src.resume(); await src.resume(); expect(sess(sid).paused).toBe(false); await src.close();
+  });
+  it('ag yokken pause/resume takilmaz; yerel sayac yine de durur', async () => {
+    const { k, src } = clocked(); const sid = await src.createSession(); const ups = []; src.onUpdate((u) => ups.push(u));
+    src.open(OPEN({ durMs: 5000 })); await sleep(30); be.offline = true;
+    const t0 = Date.now(); const r = await src.pause(); expect(r.ok).toBe(false); expect(Date.now() - t0).toBeLessThan(1000);
+    const v = ups[ups.length - 1].remainingMs; k.adv += 4000; await sleep(60); expect(ups[ups.length - 1].remainingMs).toBe(v);
+    const r2 = await src.resume(); expect(r2.ok).toBe(false); await src.close();
+  });
+  it('pause sirasinda forceWin kalan sureyi 1.5 sn e kisaltir; kapanis resume e kadar bekler', async () => {
+    const { src } = clocked(); const sid = await src.createSession(); const ups = []; src.onUpdate((u) => ups.push(u));
+    src.open(OPEN({ durMs: 60000 })); await src.pause(); src.forceWin(2); await sleep(40);
+    expect(ups[ups.length - 1].remainingMs).toBeLessThanOrEqual(1500); expect(ups[ups.length - 1].remainingMs).toBeGreaterThan(0);
+    const res = await src.close(); expect(res.winner).toBe(2);
+  });
+  it('createSession ve open paused=false yazar; duraklatilmisken acilirsa donuk baslar', async () => {
+    const { src } = clocked(); const sid = await src.createSession(); expect(sess(sid).paused).toBe(false);
+    await src.pause(); src.open(OPEN({ durMs: 7000 })); await sleep(30);
+    expect(sess(sid)).toMatchObject({ phase: 'vote', paused: true, pausedLeftMs: 7000 }); await src.close();
+  });
+});
+

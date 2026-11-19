@@ -43,6 +43,10 @@ describe('sessions: create/update/delete', () => {
   it('host gunceller', async () => {
     await seed(); await assertSucceeds(updateDoc(doc(db(HOSTU), 'sessions', SID), { phase: 'result', winner: 1, counts: [1, 2, 0] }));
   });
+  it('host paused/pausedLeftMs yazabilir, host olmayan yazamaz', async () => {
+    await seed(); await assertSucceeds(updateDoc(doc(db(HOSTU), 'sessions', SID), { paused: true, pausedLeftMs: 9000 }));
+    await assertFails(updateDoc(doc(db(A), 'sessions', SID), { paused: false }));
+  });
   it('host olmayan guncelleyemez', async () => {
     await seed(); await assertFails(updateDoc(doc(db(A), 'sessions', SID), { phase: 'result', winner: 0 }));
   });
@@ -96,6 +100,11 @@ describe('votes: yazma', () => {
   it('phase vote degilse reddedilir (lobby, result)', async () => {
     await seed({ phase: 'lobby' }); await assertFails(setDoc(voteRef(A, `${DK}__${A}`), vote(1)));
     await seed({ phase: 'result' }); await assertFails(setDoc(voteRef(A, `${DK}__${A}`), vote(1)));
+  });
+  it('duraklatilmisken (paused:true) oy reddedilir; paused:false veya alan yoksa kabul', async () => {
+    await seed({ paused: true, pausedLeftMs: 12000 }); await assertFails(setDoc(voteRef(A, `${DK}__${A}`), vote(1)));
+    await seed({ paused: false }); await assertSucceeds(setDoc(voteRef(A, `${DK}__${A}`), vote(1)));
+    await seed(); await assertSucceeds(setDoc(voteRef(B, `${DK}__${B}`), vote(1)));
   });
   it('girissiz oy veremez', async () => {
     await seed(); await assertFails(setDoc(voteRef(null, `${DK}__${A}`), vote(1)));

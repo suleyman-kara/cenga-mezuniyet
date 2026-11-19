@@ -70,4 +70,15 @@ describe('uctan uca oylama (emulator)', () => {
     await assertSucceeds(vote('zed', sid, 0, '1_second01'));
     await src.close();
   });
+  it('duraklatilmisken oy reddedilir, devam edince kabul edilir; sure korunur', async () => {
+    const src = hostSource(); const sid = await src.createSession();
+    await src.open({ decKey: DK, q: 'Q', options: ['A', 'B'], poll: false, durMs: 10000 });
+    await assertSucceeds(vote('p1', sid, 0));
+    await src.pause(); const left = (await sessionDoc(sid)).pausedLeftMs;
+    expect((await sessionDoc(sid)).paused).toBe(true); expect(left).toBeGreaterThan(8000);
+    await assertFails(vote('p2', sid, 1));
+    await src.resume(); expect((await sessionDoc(sid)).paused).toBe(false);
+    await assertSucceeds(vote('p2', sid, 1));
+    const res = await src.close(); expect(res.counts).toEqual([1, 1]);
+  });
 });

@@ -1,0 +1,51 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+
+    match /sessions/{sid} {
+      // Giris yapmis (anonim dahil) herkes oturumu okuyabilir.
+      allow read: if signedIn();
+      // Oturumu olusturan kendi uid'sini hostUid yapar.
+      allow create: if signedIn() && request.resource.data.hostUid == request.auth.uid;
+      // Guncelleme/silme sadece host; hostUid degistirilemez.
+      allow update: if signedIn() && resource.data.hostUid == request.auth.uid
+                    && request.resource.data.hostUid == resource.data.hostUid;
+      allow delete: if signedIn() && resource.data.hostUid == request.auth.uid;
+
+      match /votes/{voteId} {
+        function session() { return get(/databases/$(database)/documents/sessions/$(sid)).data; }
+        function isHost() { return signedIn() && session().hostUid == request.auth.uid; }
+        // Belge kimligi tam olarak "<decKey>__<uid>" olmali.
+        function ownId() { return signedIn() && voteId == session().decKey + '__' + request.auth.uid; }
+        // Okuma icin: kimligin son parcasi "__<uid>" ise bu seyircinin kendi oyudur.
+        function isOwnDoc() {
+          return signedIn()
+            && voteId.size() > request.auth.uid.size() + 2
+            && voteId[voteId.size() - request.auth.uid.size() - 2 : voteId.size()] == '__' + request.auth.uid;
+        }
+        function validVote() {
+          let d = request.resource.data;
+          return d.keys().hasOnly(['o', 'at']) && d.keys().hasAll(['o', 'at'])
+            && d.o is int && d.o >= 0 && d.o < session().n
+            && d.at == request.time;
+        }
+
+        allow get: if isHost() || isOwnDoc();
+        allow list: if isHost();
+
+        // Olusturma ve guncelleme (oy degistirme) izinli; silme yasak.
+        allow create, update: if ownId()
+          && session().phase == 'vote'
+          && request.time < session().closesAt + duration.value(1, 's')
+          && validVote();
+        allow delete: if false;
+      }
+    }
+
+    // Diger tum yollar kapali.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

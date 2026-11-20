@@ -14,3 +14,6 @@ gemini_key.txt
 *.mp4
 videolar/
 _toplu.json
+
+# oyunun sesleri repoda tutulur (başka bilgisayarda doğrudan çalışsın)
+!oyun/ses/*.wav

@@ -1,0 +1,878 @@
+[
+ {
+  "id": "k8grk3",
+  "voice": "anlatici",
+  "text": "Çukurova, haziran. Üçüncü sınıf Deniz, dolmuşta ayakta staj yeri arıyor. Kapasite on dört kişi. Şoföre göre bu bir öneri.",
+  "ham": "Çukurova, haziran. Üçüncü sınıf Deniz, dolmuşta ayakta staj yeri arıyor. Kapasite on dört kişi. Şoföre göre bu bir öneri."
+ },
+ {
+  "id": "ffqlfg",
+  "voice": "deniz",
+  "text": "Staj zorunlu: kırk iş günü, defter, imza, kaşe. Bir de birinin beni kabul etmesi lazım. O kısım yönetmelikte yazmıyor.",
+  "ham": "Staj zorunlu: kırk iş günü, defter, imza, kaşe. Bir de birinin beni kabul etmesi lazım. O kısım yönetmelikte yazmıyor."
+ },
+ {
+  "id": "16e0p7k",
+  "voice": "ozan",
+  "text": "Ben staja başvurmadım. Önce şu algoritmayı o en log en'e indireceğim. İyi iş kendini gösterir, değil mi?",
+  "ham": "Ben staja başvurmadım. Önce şu algoritmayı O(n log n)'e indireceğim. İyi iş kendini gösterir, değil mi?"
+ },
+ {
+  "id": "17clxew",
+  "voice": "buse",
+  "text": "Deniz! Bu Selin Hanım, i ka'dan. Bu kantinci Hüseyin Abi, oğlu yazılımcı. Hepsiyle staj fuarında tanıştım. Sen neredeydin?",
+  "ham": "Deniz! Bu Selin Hanım, İK'dan. Bu kantinci Hüseyin Abi, oğlu yazılımcı. Hepsiyle staj fuarında tanıştım. Sen neredeydin?"
+ },
+ {
+  "id": "ek2euk",
+  "voice": "deniz",
+  "text": "Fuar mı vardı? Ben o gün staj defterimin kapağını kaplıyordum. Şeffaf naylonla. Çok güzel oldu, gerçekten.",
+  "ham": "Fuar mı vardı? Ben o gün staj defterimin kapağını kaplıyordum. Şeffaf naylonla. Çok güzel oldu, gerçekten."
+ },
+ {
+  "id": "16ejria",
+  "voice": "tolga",
+  "text": "Abi bu yıl bir si vi hazırladım, iki yüz on dört böcek videosu. Hayatta öncelikler var abi.",
+  "ham": "Abi bu yıl bir CV hazırladım, iki yüz on dört böcek videosu. Hayatta öncelikler var abi."
+ },
+ {
+  "id": "ohhb8b",
+  "voice": "deniz",
+  "text": "Ben on dört si vi hazırladım. Hepsi aynı si vi, sadece adları farklı: si vi son, si vi sonson, si vi gerçekson.",
+  "ham": "Ben on dört CV hazırladım. Hepsi aynı CV, sadece adları farklı: CV son, CV sonson, CV gerçekson."
+ },
+ {
+  "id": "1sld2zz",
+  "voice": "anlatici",
+  "text": "Bu sırada Asuman da staj yerini bulmuştu. Daha doğrusu, staj yeri yirmi iki yıldır onu bekliyordu.",
+  "ham": "Bu sırada Asuman da staj yerini bulmuştu. Daha doğrusu, staj yeri yirmi iki yıldır onu bekliyordu."
+ },
+ {
+  "id": "vaxo6w",
+  "voice": "asuman",
+  "text": "İlk günüm! Kimse beni tanımıyordu. Sadece güvenlik \"hoş geldiniz Asuman Hanım\" dedi. Bir de genel müdür. Bir de herkes.",
+  "ham": "İlk günüm! Kimse beni tanımıyordu. Sadece güvenlik \"hoş geldiniz Asuman Hanım\" dedi. Bir de genel müdür. Bir de herkes."
+ },
+ {
+  "id": "304ziv",
+  "voice": "anlatici",
+  "text": "Deniz'in ise önünde üç kapı var. Hangisini çalacağına bu akşam salon karar verecek.",
+  "ham": "Deniz'in ise önünde üç kapı var. Hangisini çalacağına bu akşam salon karar verecek."
+ },
+ {
+  "id": "kzbpt8h",
+  "voice": "anlatici",
+  "text": "Deniz stajını nerede yapıyor? Bir: Tanıdık torpili. İki: Ücretsiz startap. Üç: Kendi projen.",
+  "ham": "Deniz stajını nerede yapıyor?"
+ },
+ {
+  "id": "19cj7xo",
+  "voice": "anlatici",
+  "text": "Yıldızlar Holding, bodrum kat. Deniz'e bir masa verildi, bilgisayar verilmedi. Fotokopi makinesi zaten oradaydı.",
+  "ham": "Yıldızlar Holding, bodrum kat. Deniz'e bir masa verildi, bilgisayar verilmedi. Fotokopi makinesi zaten oradaydı."
+ },
+ {
+  "id": "lujjlx",
+  "voice": "deniz",
+  "text": "Kırk gün fotokopi çektim. Ama çay ocağında herkes adımı biliyor; Sevgi Abla kimin kaç şekerli içtiğini bana devretti.",
+  "ham": "Kırk gün fotokopi çektim. Ama çay ocağında herkes adımı biliyor; Sevgi Abla kimin kaç şekerli içtiğini bana devretti."
+ },
+ {
+  "id": "1c69ipv",
+  "voice": "asuman",
+  "text": "Fotokopi mi? Ben hiç çekmedim. Herhalde sıra bana gelmedi. Çok öğretici olmuştur, değil mi?",
+  "ham": "Fotokopi mi? Ben hiç çekmedim. Herhalde sıra bana gelmedi. Çok öğretici olmuştur, değil mi?"
+ },
+ {
+  "id": "13c35be",
+  "voice": "buse",
+  "text": "Cuma akşamı söyleşi var: bir şirketten mühendis gelecek, sonunda pizza. Gel, en kötü ihtimalle pizza yersin.",
+  "ham": "Cuma akşamı söyleşi var: bir şirketten mühendis gelecek, sonunda pizza. Gel, en kötü ihtimalle pizza yersin."
+ },
+ {
+  "id": "kj0u3d5",
+  "voice": "anlatici",
+  "text": "Buse seni söyleşiye çağırıyor. Ne yapıyorsun? Bir: Git, tanış. İki: Seriyi bozma. Üç: Pizza gelince kaç.",
+  "ham": "Buse seni söyleşiye çağırıyor. Ne yapıyorsun?"
+ },
+ {
+  "id": "175autp",
+  "voice": "deniz",
+  "text": "Soru sordum. Sesim titredi, soru da biraz saçmaydı. Çıkışta adımı söyledim, akşam Linkdin'den ekledim. İstek hâlâ beklemede.",
+  "ham": "Soru sordum. Sesim titredi, soru da biraz saçmaydı. Çıkışta adımı söyledim, akşam LinkedIn'den ekledim. İstek hâlâ beklemede."
+ },
+ {
+  "id": "11sfvt",
+  "voice": "buse",
+  "text": "Gördün mü? Saçma soru diye bir şey yok, hatırlanan soru var. Seninki çok hatırlanacak, inan bana.",
+  "ham": "Gördün mü? Saçma soru diye bir şey yok, hatırlanan soru var. Seninki çok hatırlanacak, inan bana."
+ },
+ {
+  "id": "1kce6rw",
+  "voice": "anlatici",
+  "text": "Bağlantı isteği üç ay beklemede kaldı. Konuşmacı bir sonraki söyleşide o soruyu örnek verdi: \"Geçen sefer biri şunu sormuştu.\" Biri.",
+  "ham": "Bağlantı isteği üç ay beklemede kaldı. Konuşmacı bir sonraki söyleşide o soruyu örnek verdi: \"Geçen sefer biri şunu sormuştu.\" Biri."
+ },
+ {
+  "id": "1hxhv2h",
+  "voice": "buse",
+  "text": "Bu makine hep şekerli veriyor, değil mi? Ben Buse, bilgisayar üçüncü sınıf. Siz de mi şekersiz seviyorsunuz?",
+  "ham": "Bu makine hep şekerli veriyor, değil mi? Ben Buse, bilgisayar üçüncü sınıf. Siz de mi şekersiz seviyorsunuz?"
+ },
+ {
+  "id": "y9hwbf",
+  "voice": "anlatici",
+  "text": "Yaz bitti. Deniz'in staj defterinde kırk iş günü vardı. Kırkının karşısında da aynı kelime yazıyordu: gözlem.",
+  "ham": "Yaz bitti. Deniz'in staj defterinde kırk iş günü vardı. Kırkının karşısında da aynı kelime yazıyordu: gözlem."
+ },
+ {
+  "id": "2jyedg",
+  "voice": "anlatici",
+  "text": "Dördüncü sınıf. Herkes bitirme projesine bir isim buldu, bazıları logo da yaptı. Projeyi bulmak sonraya kaldı.",
+  "ham": "Dördüncü sınıf. Herkes bitirme projesine bir isim buldu, bazıları logo da yaptı. Projeyi bulmak sonraya kaldı."
+ },
+ {
+  "id": "jh2z5v",
+  "voice": "deniz",
+  "text": "Benimki SerinYol: kampüste gölgeden gölgeye en kısa rotayı buluyor. Durağa kadar serin. Dolmuşta işe yaramıyor.",
+  "ham": "Benimki SerinYol: kampüste gölgeden gölgeye en kısa rotayı buluyor. Durağa kadar serin. Dolmuşta işe yaramıyor."
+ },
+ {
+  "id": "1md031y",
+  "voice": "ozan",
+  "text": "Ben bir derleyici yazdım, kendi dilim için. Dilin adı yok, dokümantasyonu yok, kullanıcısı yok. Ama çok hızlı.",
+  "ham": "Ben bir derleyici yazdım, kendi dilim için. Dilin adı yok, dokümantasyonu yok, kullanıcısı yok. Ama çok hızlı."
+ },
+ {
+  "id": "14rfdsb",
+  "voice": "tolga",
+  "text": "Ben raporu yazdım abi. Proje henüz yok ama rapor çok güzel; içindekiler tablosu otomatik, kaynakça da hazır.",
+  "ham": "Ben raporu yazdım abi. Proje henüz yok ama rapor çok güzel; içindekiler tablosu otomatik, kaynakça da hazır."
+ },
+ {
+  "id": "sxohfs",
+  "voice": "asuman",
+  "text": "Projemi şirketteki herkese sundum, hepsi ayakta alkışladı! Sonra öğrendim, toplantı odasında sandalye yokmuş. Yine de çok duygusaldı.",
+  "ham": "Projemi şirketteki herkese sundum, hepsi ayakta alkışladı! Sonra öğrendim, toplantı odasında sandalye yokmuş. Yine de çok duygusaldı."
+ },
+ {
+  "id": "7hqkhf",
+  "voice": "anlatici",
+  "text": "SerinYol hazır. Şu an varlığından haberi olan üç kişi var: Deniz, danışman hocası ve pek emin olmayan bir asistan.",
+  "ham": "SerinYol hazır. Şu an varlığından haberi olan üç kişi var: Deniz, danışman hocası ve pek emin olmayan bir asistan."
+ },
+ {
+  "id": "k1aveuc1",
+  "voice": "anlatici",
+  "text": "SerinYol dünyaya nasıl çıkıyor? Bir: Demo videoyla paylaş. İki: Sessizce Githab'a koy. Üç: Hekatın'a götür.",
+  "ham": "SerinYol dünyaya nasıl çıkıyor?"
+ },
+ {
+  "id": "kv4ooc",
+  "voice": "deniz",
+  "text": "Paylaşımı yaptım, telefonu ters çevirdim. Yarım saat sonra baktım: halam beğenmiş, bir de bir i ka uzmanı. Ona mesaj attım. Görüldü.",
+  "ham": "Paylaşımı yaptım, telefonu ters çevirdim. Yarım saat sonra baktım: halam beğenmiş, bir de bir İK uzmanı. Ona mesaj attım. Görüldü."
+ },
+ {
+  "id": "1t7yv1",
+  "voice": "anlatici",
+  "text": "Aynı gün Ozan kırk iki komit attı. Profili yemyeşil oldu. O yeşili gören tek kişi yine Ozan'dı.",
+  "ham": "Aynı gün Ozan kırk iki commit attı. Profili yemyeşil oldu. O yeşili gören tek kişi yine Ozan'dı."
+ },
+ {
+  "id": "1f06err",
+  "voice": "buse",
+  "text": "Videonu ben de paylaştım! İki yüz on dört beğeninin otuzu benim çevremden. Merak etme, sana fatura etmeyeceğim.",
+  "ham": "Videonu ben de paylaştım! İki yüz on dört beğeninin otuzu benim çevremden. Merak etme, sana fatura etmeyeceğim."
+ },
+ {
+  "id": "1opf33j",
+  "voice": "ozan",
+  "text": "Bir stant \"kendinden bahset\" dedi. Githab linkimi söyledim. Harf harf. Sonra \"biz sizi ararız\" dediler. Numaramı sormadılar.",
+  "ham": "Bir stant \"kendinden bahset\" dedi. GitHub linkimi söyledim. Harf harf. Sonra \"biz sizi ararız\" dediler. Numaramı sormadılar."
+ },
+ {
+  "id": "a9vxlw",
+  "voice": "buse",
+  "text": "Ben bugün otuz kişiyle tanıştım. Sırrı basit: ikinci kez gidiyorum. İkinci kez gidince insanlar seni hatırladıklarını sanıyor.",
+  "ham": "Ben bugün otuz kişiyle tanıştım. Sırrı basit: ikinci kez gidiyorum. İkinci kez gidince insanlar seni hatırladıklarını sanıyor."
+ },
+ {
+  "id": "1x1adpe",
+  "voice": "tolga",
+  "text": "Dokuz kalem, üç termos, bir stres topu. Kariyer günü benim için verimli geçti abi. Mezun olunca kalem almayacağım.",
+  "ham": "Dokuz kalem, üç termos, bir stres topu. Kariyer günü benim için verimli geçti abi. Mezun olunca kalem almayacağım."
+ },
+ {
+  "id": "n0y2yu",
+  "voice": "asuman",
+  "text": "Standımızda cunyır alıyoruz! Çok samimi bir ortamımız var; herkes birbirini çocukluğundan tanıyor. Bayramlarda bile görüşüyoruz.",
+  "ham": "Standımızda junior alıyoruz! Çok samimi bir ortamımız var; herkes birbirini çocukluğundan tanıyor. Bayramlarda bile görüşüyoruz."
+ },
+ {
+  "id": "1curynh",
+  "voice": "deniz",
+  "text": "Dört yılda bitirirsem bir yıl eksik kalıyor. Demek ki bu ilan bize değil. Okulu uzatan arkadaşlar, sonunda sizin devriniz geldi.",
+  "ham": "Dört yılda bitirirsem bir yıl eksik kalıyor. Demek ki bu ilan bize değil. Okulu uzatan arkadaşlar, sonunda sizin devriniz geldi."
+ },
+ {
+  "id": "dokp5b",
+  "voice": "anlatici",
+  "text": "Linkdin. Türkiye'nin en kalabalık motivasyon konuşması. Herkes konuşuyor, kimse dinlemiyor, herkes beğeniyor.",
+  "ham": "LinkedIn. Türkiye'nin en kalabalık motivasyon konuşması. Herkes konuşuyor, kimse dinlemiyor, herkes beğeniyor."
+ },
+ {
+  "id": "u6xt74",
+  "voice": "tolga",
+  "text": "Abi ben Linkdin'e böcek atıyorum. En çok i ka'cılar beğeniyor. si vi atınca beğenmiyorlar; böcek atınca beğeniyorlar.",
+  "ham": "Abi ben LinkedIn'e böcek atıyorum. En çok İK'cılar beğeniyor. CV atınca beğenmiyorlar; böcek atınca beğeniyorlar."
+ },
+ {
+  "id": "b5xp1y",
+  "voice": "deniz",
+  "text": "Herkes yeşil çerçeveyle dolaşıyor. Benim profilimde hâlâ lise mezuniyet fotoğrafım var. Cüppeli. Bıyıklı.",
+  "ham": "Herkes yeşil çerçeveyle dolaşıyor. Benim profilimde hâlâ lise mezuniyet fotoğrafım var. Cüppeli. Bıyıklı."
+ },
+ {
+  "id": "1hcztj9",
+  "voice": "buse",
+  "text": "İnsanlar seninle tanışmadan önce profiline bakıyor. Profilin boşsa tanışmıyorlar. Ben öyle değilim tabii, ben herkesle tanışırım.",
+  "ham": "İnsanlar seninle tanışmadan önce profiline bakıyor. Profilin boşsa tanışmıyorlar. Ben öyle değilim tabii, ben herkesle tanışırım."
+ },
+ {
+  "id": "k7v4dh1",
+  "voice": "anlatici",
+  "text": "Deniz'in profili nasıl olacak? Bir: Düzgün profil. İki: Kod konuşsun. Üç: Dürümlü fotoğraf.",
+  "ham": "Deniz'in profili nasıl olacak?"
+ },
+ {
+  "id": "17ylsyg",
+  "voice": "deniz",
+  "text": "Başlığa \"Mobil geliştirici, SerinYol\" yazdım. \"Peşınıt\" yazmadım. Kendimi tutmak çok zor oldu.",
+  "ham": "Başlığa \"Mobil geliştirici, SerinYol\" yazdım. \"Passionate\" yazmadım. Kendimi tutmak çok zor oldu."
+ },
+ {
+  "id": "7fp1mb",
+  "voice": "anlatici",
+  "text": "Profili bir haftada kırk yedi kişi görüntüledi. Üçü halasıydı; hala tek ama üç ayrı hesabı var.",
+  "ham": "Profili bir haftada kırk yedi kişi görüntüledi. Üçü halasıydı; hala tek ama üç ayrı hesabı var."
+ },
+ {
+  "id": "elnczy",
+  "voice": "anlatici",
+  "text": "Mezuniyet. Kepler havaya atıldı. Üçü geri gelmedi; Çukurova rüzgârı kep sever.",
+  "ham": "Mezuniyet. Kepler havaya atıldı. Üçü geri gelmedi; Çukurova rüzgârı kep sever."
+ },
+ {
+  "id": "p0f743",
+  "voice": "deniz",
+  "text": "Rektör \"artık hayata atılıyorsunuz\" dedi. Nereye atıldığımızı söylemedi. Ben odama atıldım.",
+  "ham": "Rektör \"artık hayata atılıyorsunuz\" dedi. Nereye atıldığımızı söylemedi. Ben odama atıldım."
+ },
+ {
+  "id": "19j1bex",
+  "voice": "ozan",
+  "text": "Bölüm birincisi olarak kürsüye çıktım. Mikrofon kapalıydı. Konuşmamı bölümün sitesine koydular. Sayfa açılmıyor.",
+  "ham": "Bölüm birincisi olarak kürsüye çıktım. Mikrofon kapalıydı. Konuşmamı bölümün sitesine koydular. Sayfa açılmıyor."
+ },
+ {
+  "id": "1epoh4m",
+  "voice": "asuman",
+  "text": "Mezuniyetime babam da geldi! Kürsüde konuşma yaptı. Aslında her yıl yapıyormuş ama bu yıl bana baktı.",
+  "ham": "Mezuniyetime babam da geldi! Kürsüde konuşma yaptı. Aslında her yıl yapıyormuş ama bu yıl bana baktı."
+ },
+ {
+  "id": "wxu6yp",
+  "voice": "buse",
+  "text": "Kep atmadan önce yirmi üç kişiyle fotoğraf çektim, hepsini etiketledim. Kepim kayboldu ama rehberim kaldı.",
+  "ham": "Kep atmadan önce yirmi üç kişiyle fotoğraf çektim, hepsini etiketledim. Kepim kayboldu ama rehberim kaldı."
+ },
+ {
+  "id": "njn3md",
+  "voice": "anlatici",
+  "text": "Deniz ilk ilanı açtı. Teknolojiler, yan haklar, masa tenisi, meyve tabağı. Her şey yazıyordu. Bir şey hariç.",
+  "ham": "Deniz ilk ilanı açtı. Teknolojiler, yan haklar, masa tenisi, meyve tabağı. Her şey yazıyordu. Bir şey hariç."
+ },
+ {
+  "id": "kh5imfl",
+  "voice": "anlatici",
+  "text": "İlanda \"Maaş: Rekabetçi\" yazıyor. Sence rakam ne? Bir: Asgari ücret. İki: Asgari artı yemek kartı. Üç: Yazsalar başvururdum.",
+  "ham": "İlanda \"Maaş: Rekabetçi\" yazıyor. Sence rakam ne?"
+ },
+ {
+  "id": "45kf0u",
+  "voice": "ozan",
+  "text": "Sekiz yüz kırk yedi başvuru. Hepsini Eksel'de takip ediyorum. Durum sütununda tek bir cümle var: \"Değerlendirmeniz sonucunda\".",
+  "ham": "Sekiz yüz kırk yedi başvuru. Hepsini Excel'de takip ediyorum. Durum sütununda tek bir cümle var: \"Değerlendirmeniz sonucunda\"."
+ },
+ {
+  "id": "1tlum72",
+  "voice": "buse",
+  "text": "Kuzey'e üç kez başvurdum, üçünde de otomatik ret. Dördüncüde Selin Hanım'a yazdım. Mülakata çağırdılar. Sadece mülakata.",
+  "ham": "Kuzey'e üç kez başvurdum, üçünde de otomatik ret. Dördüncüde Selin Hanım'a yazdım. Mülakata çağırdılar. Sadece mülakata."
+ },
+ {
+  "id": "1e2wq8i",
+  "voice": "tolga",
+  "text": "Abi halı sahada rakip kaleciyle laflandık. Yedek parça satıyormuş, sitesi iki gündür çökükmüş. Akşam oturdum, düzelttim. \"Bizde bir yer var\" dedi.",
+  "ham": "Abi halı sahada rakip kaleciyle laflandık. Yedek parça satıyormuş, sitesi iki gündür çökükmüş. Akşam oturdum, düzelttim. \"Bizde bir yer var\" dedi."
+ },
+ {
+  "id": "llx35t",
+  "voice": "tolga",
+  "text": "Teklif geldi abi. Maaş: rekabetçi. Salon \"asgari\" demişti. Zarfı açmadan bilen bu kadar insan görmedim. Helal.",
+  "ham": "Teklif geldi abi. Maaş: rekabetçi. Salon \"asgari\" demişti. Zarfı açmadan bilen bu kadar insan görmedim. Helal."
+ },
+ {
+  "id": "1c5ix4d",
+  "voice": "deniz",
+  "text": "Tolga'yı tebrik ettim. Sonra kendi si vi'mi açtım, \"Hobiler: halı saha\" eklesem mi diye düşündüm. Top oynamayı bilmiyorum.",
+  "ham": "Tolga'yı tebrik ettim. Sonra kendi CV'mi açtım, \"Hobiler: halı saha\" eklesem mi diye düşündüm. Top oynamayı bilmiyorum."
+ },
+ {
+  "id": "1ntkwtu",
+  "voice": "anlatici",
+  "text": "Mülakat mevsimi açıldı. Deniz yedi mülakata girdi. Sorular hep aynıydı, cevaplar hiç yeterli değildi.",
+  "ham": "Mülakat mevsimi açıldı. Deniz yedi mülakata girdi. Sorular hep aynıydı, cevaplar hiç yeterli değildi."
+ },
+ {
+  "id": "igq2xd",
+  "voice": "deniz",
+  "text": "Maaş beklentimi söyleyecektim, bağlantı koptu. Tekrar bağlandım. Bu sefer onlar \"biz sizi ararız\" dedi.",
+  "ham": "Maaş beklentimi söyleyecektim, bağlantı koptu. Tekrar bağlandım. Bu sefer onlar \"biz sizi ararız\" dedi."
+ },
+ {
+  "id": "80m1l0",
+  "voice": "anlatici",
+  "text": "Deniz'in ilk teklifi geldi: on iki aylık ücretsiz \"yetenek programı\". Yetenek ondan, program onlardan.",
+  "ham": "Deniz'in ilk teklifi geldi: on iki aylık ücretsiz \"yetenek programı\". Yetenek ondan, program onlardan."
+ },
+ {
+  "id": "14oue7p",
+  "voice": "deniz",
+  "text": "İş için deneyim, deneyim için iş lazım. Bu döngüyü birinci sınıfta ben de yazmıştım. Çıkış koşulunu unutmuştum.",
+  "ham": "İş için deneyim, deneyim için iş lazım. Bu döngüyü birinci sınıfta ben de yazmıştım. Çıkış koşulunu unutmuştum."
+ },
+ {
+  "id": "k1uk47cd",
+  "voice": "anlatici",
+  "text": "Deniz işi nasıl arıyor? Bir: Beş yüz kolay başvuru. İki: Buluşma ve referans. Üç: Zaman kazan.",
+  "ham": "Deniz işi nasıl arıyor?"
+ },
+ {
+  "id": "hhtf6v",
+  "voice": "deniz",
+  "text": "Beş yüz başvuru: dört yüz doksan iki ret, yedi sessizlik, bir anket. \"Başvuru deneyiminizi puanlayın.\" Bir yıldız verdim.",
+  "ham": "Beş yüz başvuru: dört yüz doksan iki ret, yedi sessizlik, bir anket. \"Başvuru deneyiminizi puanlayın.\" Bir yıldız verdim."
+ },
+ {
+  "id": "1afl26h",
+  "voice": "ozan",
+  "text": "Beş yüz mü? Ben bir ara ret maillerine otomatik teşekkür yanıtı yazdım. Şimdi onlar da bana otomatik teşekkür ediyor.",
+  "ham": "Beş yüz mü? Ben bir ara ret maillerine otomatik teşekkür yanıtı yazdım. Şimdi onlar da bana otomatik teşekkür ediyor."
+ },
+ {
+  "id": "18g1xu0",
+  "voice": "anlatici",
+  "text": "Bayram. Sofrada on iki kişi, bir soru. Soru her yemekte yeniden soruluyor, cevap hiç değişmiyor.",
+  "ham": "Bayram. Sofrada on iki kişi, bir soru. Soru her yemekte yeniden soruluyor, cevap hiç değişmiyor."
+ },
+ {
+  "id": "1gzntoa",
+  "voice": "deniz",
+  "text": "Evet, yazılımcıyım. Hayır, yazıcı tamir etmiyoruz. Evet, yemekten sonra bakarım.",
+  "ham": "Evet, yazılımcıyım. Hayır, yazıcı tamir etmiyoruz. Evet, yemekten sonra bakarım."
+ },
+ {
+  "id": "js33qc",
+  "voice": "deniz",
+  "text": "Yazıcıya baktım. Kâğıt sıkışmış. Çıkardım, çalıştı. Sofrada artık mühendis olduğuma herkes ikna oldu.",
+  "ham": "Yazıcıya baktım. Kâğıt sıkışmış. Çıkardım, çalıştı. Sofrada artık mühendis olduğuma herkes ikna oldu."
+ },
+ {
+  "id": "31wph4",
+  "voice": "asuman",
+  "text": "Bizim bayram da çok kalabalık geçti! Babam bütün çalışanlara ikramiye dağıttı. Ben de aldım; ben de çalışıyorum sonuçta.",
+  "ham": "Bizim bayram da çok kalabalık geçti! Babam bütün çalışanlara ikramiye dağıttı. Ben de aldım; ben de çalışıyorum sonuçta."
+ },
+ {
+  "id": "1vvp3sd",
+  "voice": "deniz",
+  "text": "Herkes bir yere gitmiş. Ben de bir şey yazacaktım. \"İyiyim\" yazdım, sildim. \"Bakıyorum\" yazdım, onu da sildim.",
+  "ham": "Herkes bir yere gitmiş. Ben de bir şey yazacaktım. \"İyiyim\" yazdım, sildim. \"Bakıyorum\" yazdım, onu da sildim."
+ },
+ {
+  "id": "181v1cr",
+  "voice": "ozan",
+  "text": "Bin iki yüz dört başvuru. Bugün bir tanesi döndü: \"Pozisyon iç kaynaklardan karşılanmıştır.\" İç kaynak kim, merak ediyorum.",
+  "ham": "Bin iki yüz dört başvuru. Bugün bir tanesi döndü: \"Pozisyon iç kaynaklardan karşılanmıştır.\" İç kaynak kim, merak ediyorum."
+ },
+ {
+  "id": "447ubg",
+  "voice": "buse",
+  "text": "Deniz, grupta hiçbir şey yazmadın. Bir şey soracağım: bu ay kaç kişiyle konuştun? İnsanla diyorum, botla değil.",
+  "ham": "Deniz, grupta hiçbir şey yazmadın. Bir şey soracağım: bu ay kaç kişiyle konuştun? İnsanla diyorum, botla değil."
+ },
+ {
+  "id": "ocrmta",
+  "voice": "anlatici",
+  "text": "Mezuniyetin dördüncü ayı. Deniz'in son bir hamle hakkı var. Ondan sonra annesi devreye girecek.",
+  "ham": "Mezuniyetin dördüncü ayı. Deniz'in son bir hamle hakkı var. Ondan sonra annesi devreye girecek."
+ },
+ {
+  "id": "khqiu99",
+  "voice": "anlatici",
+  "text": "Deniz'in son hamlesi ne? Bir: Gece gündüz Lit kod. İki: Her hafta paylaş. Üç: Kahve ısmarla.",
+  "ham": "Deniz'in son hamlesi ne?"
+ },
+ {
+  "id": "a5hsbh",
+  "voice": "deniz",
+  "text": "Altı yüz on iki soru çözdüm. Rüyamda iki işaretçi birbirine yaklaşıyordu. Uyandım, hâlâ işsizdim. Ama o en.",
+  "ham": "Altı yüz on iki soru çözdüm. Rüyamda iki işaretçi birbirine yaklaşıyordu. Uyandım, hâlâ işsizdim. Ama O(n)."
+ },
+ {
+  "id": "1eza3sc",
+  "voice": "anlatici",
+  "text": "Bu arada annesi devreye girdi. Kuzeninin bankasından bir müdür aradı. Deniz açmadı; Hart soru çözüyordu.",
+  "ham": "Bu arada annesi devreye girdi. Kuzeninin bankasından bir müdür aradı. Deniz açmadı; Hard soru çözüyordu."
+ },
+ {
+  "id": "4mcw0d",
+  "voice": "ozan",
+  "text": "Altı yüz on iki mi? Hoş geldin. Ben bin dört yüze geldim. Rüyamda artık işaretçiler değil, ret mailleri yaklaşıyor.",
+  "ham": "Altı yüz on iki mi? Hoş geldin. Ben bin dört yüze geldim. Rüyamda artık işaretçiler değil, ret mailleri yaklaşıyor."
+ },
+ {
+  "id": "1sa6p9d",
+  "voice": "anlatici",
+  "text": "Deniz'in hikâyesi bitmek üzere. Sonu açmadan önce salona tek bir soru.",
+  "ham": "Deniz'in hikâyesi bitmek üzere. Sonu açmadan önce salona tek bir soru."
+ },
+ {
+  "id": "kl4mo1z",
+  "voice": "anlatici",
+  "text": "Bu ülkede iş bulmanın en büyük belirleyicisi ne? Bir: Yetenek. İki: Çevre. Üç: Şans. Dört: Baba.",
+  "ham": "Bu ülkede iş bulmanın en büyük belirleyicisi ne?"
+ },
+ {
+  "id": "9vidlc",
+  "voice": "deniz",
+  "text": "Yüksek lisansı bitirdim, piyasa düzelmedi. Doktoraya başladım. Hocam \"piyasa düzelince çıkarsın\" dedi.",
+  "ham": "Yüksek lisansı bitirdim, piyasa düzelmedi. Doktoraya başladım. Hocam \"piyasa düzelince çıkarsın\" dedi."
+ },
+ {
+  "id": "1vcdkfz",
+  "voice": "anlatici",
+  "text": "Hocası doksanlardan beri bekliyor. Bu arada yeni bir üçüncü sınıf öğrencisi kapıyı çaldı: staj defterini imzalatacaktı.",
+  "ham": "Hocası doksanlardan beri bekliyor. Bu arada yeni bir üçüncü sınıf öğrencisi kapıyı çaldı: staj defterini imzalatacaktı."
+ },
+ {
+  "id": "6b895z",
+  "voice": "tolga",
+  "text": "Doktora mı abi? Helal. Bizim şirkette de bir doktoralı var, böceklerin dudak senkronunu düzeltiyor. Çok titiz.",
+  "ham": "Doktora mı abi? Helal. Bizim şirkette de bir doktoralı var, böceklerin dudak senkronunu düzeltiyor. Çok titiz."
+ },
+ {
+  "id": "kexmcf",
+  "voice": "deniz",
+  "text": "Biraz görünürdüm, biraz tanıdık, biraz yetkin. Piyasa \"biraz\"ı sevmiyormuş. Ben de \"biraz daha\" okudum.",
+  "ham": "Biraz görünürdüm, biraz tanıdık, biraz yetkin. Piyasa \"biraz\"ı sevmiyormuş. Ben de \"biraz daha\" okudum."
+ },
+ {
+  "id": "1lk2t0b",
+  "voice": "asuman",
+  "text": "Salon \"yetenek\" demiş. Ne güzel! Ben de hep söylüyorum: yeteneğin önünde kimse duramaz. Babam da öyle der.",
+  "ham": "Salon \"yetenek\" demiş. Ne güzel! Ben de hep söylüyorum: yeteneğin önünde kimse duramaz. Babam da öyle der."
+ },
+ {
+  "id": "oti1fd",
+  "voice": "asuman",
+  "text": "Yeni pozisyonumdaki ilk işim, genç yeteneklere kapı açmak! Cunyır alımı başlattık. En az beş yıl deneyim arıyoruz.",
+  "ham": "Yeni pozisyonumdaki ilk işim, genç yeteneklere kapı açmak! Junior alımı başlattık. En az beş yıl deneyim arıyoruz."
+ },
+ {
+  "id": "sondriyxg",
+  "voice": "anlatici",
+  "text": "Yüksek Lisans Döngüsü. Zaman kazanmak strateji değildir; zamanı neye harcadığın stratejidir. Her şeyden biraz yapmak, hiçbir şey yapmamanın en yorucu hâlidir. Bir yön seç, görünür ol, insanlarla tanış. Garantisi yok; beklemenin de yok.",
+  "ham": "Yüksek Lisans Döngüsü"
+ },
+ {
+  "id": "131ik2p",
+  "voice": "asuman",
+  "text": "Salon \"çevre\" demiş. Çok haklısınız! Ben de çevremi hep kendim seçtim. Genelde pazar kahvaltılarında.",
+  "ham": "Salon \"çevre\" demiş. Çok haklısınız! Ben de çevremi hep kendim seçtim. Genelde pazar kahvaltılarında."
+ },
+ {
+  "id": "1lqpu2y",
+  "voice": "asuman",
+  "text": "Salon \"şans\" demiş. Ben şansa pek inanmam. Hayatımda hiç şansa ihtiyacım olmadı. Herhalde çok çalıştığım içindir.",
+  "ham": "Salon \"şans\" demiş. Ben şansa pek inanmam. Hayatımda hiç şansa ihtiyacım olmadı. Herhalde çok çalıştığım içindir."
+ },
+ {
+  "id": "1iea3vp",
+  "voice": "asuman",
+  "text": "Salon \"baba\" demiş. Çok tatlısınız! Babama söyleyeceğim, çok gurur duyacak. Kendisi de hep \"her şey emek\" der.",
+  "ham": "Salon \"baba\" demiş. Çok tatlısınız! Babama söyleyeceğim, çok gurur duyacak. Kendisi de hep \"her şey emek\" der."
+ },
+ {
+  "id": "evjgc8",
+  "voice": "deniz",
+  "text": "Yedi hafta üst üste yazdım. Bir i ka uzmanı yorum yaptı: \"Noktalı virgül bizde de oldu.\" Ona mesaj attım. Görüldü. Hâlâ görüldü.",
+  "ham": "Yedi hafta üst üste yazdım. Bir İK uzmanı yorum yaptı: \"Noktalı virgül bizde de oldu.\" Ona mesaj attım. Görüldü. Hâlâ görüldü."
+ },
+ {
+  "id": "1re5bj4",
+  "voice": "buse",
+  "text": "Yazılarını okuyorum! Geçen haftakini ekibe attım, herkes noktalı virgülü konuştu. Adını da söyledim tabii.",
+  "ham": "Yazılarını okuyorum! Geçen haftakini ekibe attım, herkes noktalı virgülü konuştu. Adını da söyledim tabii."
+ },
+ {
+  "id": "qo4qei",
+  "voice": "anlatici",
+  "text": "Yedinci yazının altında altmış bir beğeni vardı. Elli dokuzunu tanımıyordu. Hiçbiri işe alım yapmıyordu. Hepsi adını biliyordu, o kadar.",
+  "ham": "Yedinci yazının altında altmış bir beğeni vardı. Elli dokuzunu tanımıyordu. Hiçbiri işe alım yapmıyordu. Hepsi adını biliyordu, o kadar."
+ },
+ {
+  "id": "1bn8e3a",
+  "voice": "deniz",
+  "text": "Üç kişiye kahve ısmarladım, iki yüz on lira tuttu. Biri beni bir ekibe önerdi. İş değil, mülakat sözü. Bu piyasada yetmiş liraya alınabilecek en iyi şey.",
+  "ham": "Üç kişiye kahve ısmarladım, iki yüz on lira tuttu. Biri beni bir ekibe önerdi. İş değil, mülakat sözü. Bu piyasada yetmiş liraya alınabilecek en iyi şey."
+ },
+ {
+  "id": "tj9ris",
+  "voice": "tolga",
+  "text": "Kahveyi bana da ısmarlasaydın abi. Şirketin böcek hesabı bende, i ka her gün uğruyor. Ben de bir tanıdığım.",
+  "ham": "Kahveyi bana da ısmarlasaydın abi. Şirketin böcek hesabı bende, İK her gün uğruyor. Ben de bir tanıdığım."
+ },
+ {
+  "id": "1bb5nu1",
+  "voice": "buse",
+  "text": "Kahve mi ısmarladın? Sonunda! Ben bunu dört yıldır yapıyorum. Artık işim de var. Maaşım kahveye yetmiyor, o ayrı.",
+  "ham": "Kahve mi ısmarladın? Sonunda! Ben bunu dört yıldır yapıyorum. Artık işim de var. Maaşım kahveye yetmiyor, o ayrı."
+ },
+ {
+  "id": "r3bdey",
+  "voice": "deniz",
+  "text": "Telefon çaldı. Arayan bir zamanlar tanıştığım biriydi. \"Söz veremem ama bir mülakat ayarlarım\" dedi. Bu ülkede buna kapı denir.",
+  "ham": "Telefon çaldı. Arayan bir zamanlar tanıştığım biriydi. \"Söz veremem ama bir mülakat ayarlarım\" dedi. Bu ülkede buna kapı denir."
+ },
+ {
+  "id": "1t935fl",
+  "voice": "anlatici",
+  "text": "Deniz'in si vi'si şirkete üç farklı kişiden ulaştı. i ka, si vi'yi üç kez okudu. Bu bir rekordu.",
+  "ham": "Deniz'in CV'si şirkete üç farklı kişiden ulaştı. İK, CV'yi üç kez okudu. Bu bir rekordu."
+ },
+ {
+  "id": "1tdqxh6",
+  "voice": "deniz",
+  "text": "Mülakatta Lit kod sorusu bekliyordum. \"SerinYol'u anlat\" dediler. İki hafta sonra teklif geldi. Maaş: rekabetçi.",
+  "ham": "Mülakatta Leetcode sorusu bekliyordum. \"SerinYol'u anlat\" dediler. İki hafta sonra teklif geldi. Maaş: rekabetçi."
+ },
+ {
+  "id": "1ui6tda",
+  "voice": "anlatici",
+  "text": "Maaşın yarısı kiraya, dörtte biri yola gitti. Deniz ayın yirmisine kadar mühendisti. Yirmisinden sonra yine öğrenci.",
+  "ham": "Maaşın yarısı kiraya, dörtte biri yola gitti. Deniz ayın yirmisine kadar mühendisti. Yirmisinden sonra yine öğrenci."
+ },
+ {
+  "id": "n4tpq1",
+  "voice": "buse",
+  "text": "Kuzey'e hoş geldin! Selin Hanım'a adını ben söyledim, kimseye söyleme. Bir gün ben de senden bir şey isteyeceğim; onu da kimseye söyleme.",
+  "ham": "Kuzey'e hoş geldin! Selin Hanım'a adını ben söyledim, kimseye söyleme. Bir gün ben de senden bir şey isteyeceğim; onu da kimseye söyleme."
+ },
+ {
+  "id": "son9mys9i",
+  "voice": "anlatici",
+  "text": "Referans Kapısı. Çevre kapıyı aralar; içeri girmek ve içeride tutunmak yine senin işin. Görünür ol, tanış, ne yaptığını anlat. Garanti değil; ama bu ülkede onsuz kapı neredeyse hiç aralanmıyor.",
+  "ham": "Referans Kapısı"
+ },
+ {
+  "id": "1gvtq6j",
+  "voice": "deniz",
+  "text": "Bir buluşmaya gittim. Konuşmak, kod yazmaktan zormuş. Üçüncü çayda biri \"si vi'ni at, içeriye iletirim\" dedi. İletmiş. İçeride biri okumuş.",
+  "ham": "Bir buluşmaya gittim. Konuşmak, kod yazmaktan zormuş. Üçüncü çayda biri \"CV'ni at, içeriye iletirim\" dedi. İletmiş. İçeride biri okumuş."
+ },
+ {
+  "id": "11nlph4",
+  "voice": "buse",
+  "text": "Gördün mü? si vi'yi bir insana atınca okunuyormuş. Okunmak işe alınmak demek değil ama. Benimkini üç kez okudular; üçünde de okuyan bir yazılımdı.",
+  "ham": "Gördün mü? CV'yi bir insana atınca okunuyormuş. Okunmak işe alınmak demek değil ama. Benimkini üç kez okudular; üçünde de okuyan bir yazılımdı."
+ },
+ {
+  "id": "1ok0rz8",
+  "voice": "anlatici",
+  "text": "Buluşmada otuz iki kişi vardı. Otuz biri ona iş teklif etmedi. Bu, şimdiye kadarki en iyi oranıydı.",
+  "ham": "Buluşmada otuz iki kişi vardı. Otuz biri ona iş teklif etmedi. Bu, şimdiye kadarki en iyi oranıydı."
+ },
+ {
+  "id": "1e5e78m",
+  "voice": "deniz",
+  "text": "Yüksek lisansa kaydoldum. Annem komşulara \"mastır yapıyor\" diyor. Ben kendime \"zaman yapıyorum\" diyorum.",
+  "ham": "Yüksek lisansa kaydoldum. Annem komşulara \"master yapıyor\" diyor. Ben kendime \"zaman yapıyorum\" diyorum."
+ },
+ {
+  "id": "1fbrplx",
+  "voice": "anlatici",
+  "text": "Askerlik şubesi de kaydı not aldı. Acele etmiyor; yüksek lisans biter, doktora biter, şube yine oradadır.",
+  "ham": "Askerlik şubesi de kaydı not aldı. Acele etmiyor; yüksek lisans biter, doktora biter, şube yine oradadır."
+ },
+ {
+  "id": "udjf0z",
+  "voice": "tolga",
+  "text": "Yüksek lisans mı abi? Ben de düşündüm. Sonra böcek düğünü yayınıma hediye yağdı, bıraktım. Akademi kaybetti.",
+  "ham": "Yüksek lisans mı abi? Ben de düşündüm. Sonra böcek düğünü yayınıma hediye yağdı, bıraktım. Akademi kaybetti."
+ },
+ {
+  "id": "113zzl1",
+  "voice": "tolga",
+  "text": "Teklif geldi abi. Maaş: rekabetçi. Salon \"yemek kartı da vardır\" demişti. Salon iyimsermiş. Yemek kartı yok.",
+  "ham": "Teklif geldi abi. Maaş: rekabetçi. Salon \"yemek kartı da vardır\" demişti. Salon iyimsermiş. Yemek kartı yok."
+ },
+ {
+  "id": "1lpx9oa",
+  "voice": "tolga",
+  "text": "Teklif geldi abi. Maaş: rekabetçi. Salon \"rakam yazsalar başvururdum\" demişti. Ben hiç başvurmadım ki; halı sahaya gittim.",
+  "ham": "Teklif geldi abi. Maaş: rekabetçi. Salon \"rakam yazsalar başvururdum\" demişti. Ben hiç başvurmadım ki; halı sahaya gittim."
+ },
+ {
+  "id": "1s49cw4",
+  "voice": "deniz",
+  "text": "Profili boş bıraktım, sadece Githab linki var. Kodum her şeyi anlatıyor. Linke tıklayan olursa anlatacak, söz verdi.",
+  "ham": "Profili boş bıraktım, sadece GitHub linki var. Kodum her şeyi anlatıyor. Linke tıklayan olursa anlatacak, söz verdi."
+ },
+ {
+  "id": "n94bzt",
+  "voice": "ozan",
+  "text": "Doğru karar. Ben de öyle yaptım, iki yıldır bekliyorum. Ama doğru karar.",
+  "ham": "Doğru karar. Ben de öyle yaptım, iki yıldır bekliyorum. Ama doğru karar."
+ },
+ {
+  "id": "uqkz61",
+  "voice": "deniz",
+  "text": "Avrupa'daki bir ilana yazılarımın ve kodumun linkiyle başvurdum. Biri tıklamış. Rimot başladım. Maaş dolar, kira lira. İlk kez kurdan yanayım.",
+  "ham": "Avrupa'daki bir ilana yazılarımın ve kodumun linkiyle başvurdum. Biri tıklamış. Remote başladım. Maaş dolar, kira lira. İlk kez kurdan yanayım."
+ },
+ {
+  "id": "d5l4z2",
+  "voice": "anlatici",
+  "text": "Deniz'in mesaisi gece ikide başlıyor. Annesi komşulara \"bilgisayarla bir şeyler yapıyor\" diyor. Gerçek bir iş bulmasını bekliyor.",
+  "ham": "Deniz'in mesaisi gece ikide başlıyor. Annesi komşulara \"bilgisayarla bir şeyler yapıyor\" diyor. Gerçek bir iş bulmasını bekliyor."
+ },
+ {
+  "id": "zcz5sy",
+  "voice": "ozan",
+  "text": "Avrupa'dan iş mi? Benim kodum da açık, ben de başvurdum. Dönmediler. Belki kodumun saat dilimi uymuyordur.",
+  "ham": "Avrupa'dan iş mi? Benim kodum da açık, ben de başvurdum. Dönmediler. Belki kodumun saat dilimi uymuyordur."
+ },
+ {
+  "id": "1mkpvg8",
+  "voice": "deniz",
+  "text": "Stend ap'ta herkes dün ne yaptığını anlatıyor. Ben \"uyudum\" diyemiyorum; benim dünüm onların bugünü.",
+  "ham": "Stand-up'ta herkes dün ne yaptığını anlatıyor. Ben \"uyudum\" diyemiyorum; benim dünüm onların bugünü."
+ },
+ {
+  "id": "5egjps",
+  "voice": "anlatici",
+  "text": "Üçüncü ayın sonunda şirket \"yeniden yapılanma\" duyurdu. Deneme süresindekiler önce gitti. Deniz son stend ap'a saat ikide bağlandı.",
+  "ham": "Üçüncü ayın sonunda şirket \"yeniden yapılanma\" duyurdu. Deneme süresindekiler önce gitti. Deniz son stand-up'a saat ikide bağlandı."
+ },
+ {
+  "id": "sonteyqlx",
+  "voice": "anlatici",
+  "text": "Rimot Dolar. Yetkinlik seni hazırlar, görünürlük seni bulunabilir yapar. Ama sınırı aşan iş, sınırı aşan riskle gelir. İşini göster, insanlarla bağını koru: bir kapı kapanınca ikincisini çoğu zaman seni hatırlayan biri aralar.",
+  "ham": "Remote Dolar"
+ },
+ {
+  "id": "fo3wbp",
+  "voice": "deniz",
+  "text": "Fotoğrafı yükledim. Annem aradı: \"Oğlum, i ka bunu görünce aç olduğunu düşünür.\" Açtım zaten, o yüzden dürüm.",
+  "ham": "Fotoğrafı yükledim. Annem aradı: \"Oğlum, İK bunu görünce aç olduğunu düşünür.\" Açtım zaten, o yüzden dürüm."
+ },
+ {
+  "id": "1uhv6yt",
+  "voice": "tolga",
+  "text": "Abi o fotoğrafı ben çektim. Profesyonelim, böcek düğünü çekiyorum. Işık doğal, ter doğal, dürüm acılı.",
+  "ham": "Abi o fotoğrafı ben çektim. Profesyonelim, böcek düğünü çekiyorum. Işık doğal, ter doğal, dürüm acılı."
+ },
+ {
+  "id": "g4frhf",
+  "voice": "deniz",
+  "text": "Yüzüm bir böcekte. Elimde dürüm, lü lü lü. Altında üç bin yorum var. Hiçbiri kodumla ilgili değil.",
+  "ham": "Yüzüm bir böcekte. Elimde dürüm, lülülü. Altında üç bin yorum var. Hiçbiri kodumla ilgili değil."
+ },
+ {
+  "id": "118bb6p",
+  "voice": "tolga",
+  "text": "Abi videoyu ben yaptım. Böcek \"Memleket neresi kardeşim?\" diyor, sen dürümü uzatıyorsun. Bir dürüm yeter.",
+  "ham": "Abi videoyu ben yaptım. Böcek \"Memleket neresi kardeşim?\" diyor, sen dürümü uzatıyorsun. Bir dürüm yeter."
+ },
+ {
+  "id": "k2fvvc",
+  "voice": "anlatici",
+  "text": "Deniz utancından yorumlara kodunun linkini bıraktı. Üç bin yorumda kimse tıklamadı. Biri hariç: böceği paylaşan yemek şirketinin Adanalı kurucusu.",
+  "ham": "Deniz utancından yorumlara kodunun linkini bıraktı. Üç bin yorumda kimse tıklamadı. Biri hariç: böceği paylaşan yemek şirketinin Adanalı kurucusu."
+ },
+ {
+  "id": "jlmh60",
+  "voice": "deniz",
+  "text": "Mülakat görüntülüydü. Yarım saat SerinYol'u sordu, sonra \"Acılı mı, acısız mı?\" dedi. Doğru cevabı verdim. Asıl soru oymuş.",
+  "ham": "Mülakat görüntülüydü. Yarım saat SerinYol'u sordu, sonra \"Acılı mı, acısız mı?\" dedi. Doğru cevabı verdim. Asıl soru oymuş."
+ },
+ {
+  "id": "14wm4sz",
+  "voice": "anlatici",
+  "text": "Deniz İstanbul'a taşındı. Kira maaşın üçte ikisiydi. Altı ay sonra böcek unutuldu, şirket küçüldü. Deniz Adana'ya döndü.",
+  "ham": "Deniz İstanbul'a taşındı. Kira maaşın üçte ikisiydi. Altı ay sonra böcek unutuldu, şirket küçüldü. Deniz Adana'ya döndü."
+ },
+ {
+  "id": "son1pvf3ec",
+  "voice": "anlatici",
+  "text": "Viral Kaza. Şans gerçek ama kira ödemez. O da ancak ortada duranı bulur; o linki bırakmasaydın üç bin kişi gülüp geçerdi. Şans kapıyı açar, içeride tutmaz; orada yetkinlik ve çevre sınanır, onlar da garanti vermez.",
+  "ham": "Viral Kaza"
+ },
+ {
+  "id": "xy2v04",
+  "voice": "deniz",
+  "text": "Kodu Githab'a koydum. Bir yıldız geldi. Profiline baktım, bot. Ertesi gün bot da yıldızı geri aldı.",
+  "ham": "Kodu GitHub'a koydum. Bir yıldız geldi. Profiline baktım, bot. Ertesi gün bot da yıldızı geri aldı."
+ },
+ {
+  "id": "ope9hb",
+  "voice": "ozan",
+  "text": "ridmi yazmamışsın. Ben de yazmadım. Kodu okuyan anlar. Şimdiye kadar okuyan çıkmadı ama anlardı.",
+  "ham": "README yazmamışsın. Ben de yazmadım. Kodu okuyan anlar. Şimdiye kadar okuyan çıkmadı ama anlardı."
+ },
+ {
+  "id": "g35fs",
+  "voice": "deniz",
+  "text": "ridmi'ye sonunda bir satır yazdım: \"Kurulum için bana yazın.\" Kimse yazmadı. Demek ki herkes kurabiliyor.",
+  "ham": "README'ye sonunda bir satır yazdım: \"Kurulum için bana yazın.\" Kimse yazmadı. Demek ki herkes kurabiliyor."
+ },
+ {
+  "id": "310tvw",
+  "voice": "deniz",
+  "text": "Sabah dörtte demo çalıştı. Jüri önünde çalışmadı. Jürideki si ti o \"bizde de hiç çalışmaz\" dedi ve kartını verdi.",
+  "ham": "Sabah dörtte demo çalıştı. Jüri önünde çalışmadı. Jürideki CTO \"bizde de hiç çalışmaz\" dedi ve kartını verdi."
+ },
+ {
+  "id": "1pse0d4",
+  "voice": "tolga",
+  "text": "Ben hekatına yemek için gelmiştim abi. Kırk sekiz saatte on bir pizza. Bizim takım birinci oldu; yemekte.",
+  "ham": "Ben hackathona yemek için gelmiştim abi. Kırk sekiz saatte on bir pizza. Bizim takım birinci oldu; yemekte."
+ },
+ {
+  "id": "1r10z1p",
+  "voice": "anlatici",
+  "text": "Jürideki si ti o, Deniz'in numarasını telefonuna kaydetti: \"Deniz, hekatın, çalışmayan demo\". Rehberinde dört yüz kişi daha vardı.",
+  "ham": "Jürideki CTO, Deniz'in numarasını telefonuna kaydetti: \"Deniz, hackathon, çalışmayan demo\". Rehberinde dört yüz kişi daha vardı."
+ },
+ {
+  "id": "17ib2e6",
+  "voice": "deniz",
+  "text": "İki yüz kırk sekizinci gün, Hart soru, kabul edildi. Kutlayacak kimse yoktu; herkes söyleşiden sonra konuşmacıyla yemeğe gitmişti.",
+  "ham": "İki yüz kırk sekizinci gün, Hard soru, kabul edildi. Kutlayacak kimse yoktu; herkes söyleşiden sonra konuşmacıyla yemeğe gitmişti."
+ },
+ {
+  "id": "12zkjlh",
+  "voice": "anlatici",
+  "text": "Gecenin sonunda Deniz'in serisi iki yüz kırk sekiz gündü. Buse'nin rehberi iki kişi büyümüştü.",
+  "ham": "Gecenin sonunda Deniz'in serisi iki yüz kırk sekiz gündü. Buse'nin rehberi iki kişi büyümüştü."
+ },
+ {
+  "id": "j2pbb0",
+  "voice": "ozan",
+  "text": "İki yüz kırk sekiz mi? Benim serim altı yüz on gün. Söyleşiye ben de gitmedim. Gitmeyenler kulübüyüz, toplanmıyoruz.",
+  "ham": "İki yüz kırk sekiz mi? Benim serim altı yüz on gün. Söyleşiye ben de gitmedim. Gitmeyenler kulübüyüz, toplanmıyoruz."
+ },
+ {
+  "id": "nk32ps",
+  "voice": "deniz",
+  "text": "Kodum temiz, testlerim yeşil, karmaşıklığım yerinde. Bunları benden başka bilen yok. Bir de Ozan.",
+  "ham": "Kodum temiz, testlerim yeşil, karmaşıklığım yerinde. Bunları benden başka bilen yok. Bir de Ozan."
+ },
+ {
+  "id": "1jq2xdc",
+  "voice": "ozan",
+  "text": "Hoş geldin. Eksel'i paylaşayım mı? Durum sütunu hazır, formülü de yazdım. Hepsi aynı cümleyle doluyor zaten.",
+  "ham": "Hoş geldin. Excel'i paylaşayım mı? Durum sütunu hazır, formülü de yazdım. Hepsi aynı cümleyle doluyor zaten."
+ },
+ {
+  "id": "1d2fe5b",
+  "voice": "deniz",
+  "text": "Ozan'a profil fotoğrafı koymayı önerdim. \"Kod konuşsun\" dedi. Kod konuşuyor aslında. Sadece kimse dinlemiyor.",
+  "ham": "Ozan'a profil fotoğrafı koymayı önerdim. \"Kod konuşsun\" dedi. Kod konuşuyor aslında. Sadece kimse dinlemiyor."
+ },
+ {
+  "id": "mf4oq9",
+  "voice": "anlatici",
+  "text": "İkisi akşama kadar bankta oturdu. Bu sırada bölümün en iyi iki yazılımcısını hiçbir şirket aramadı.",
+  "ham": "İkisi akşama kadar bankta oturdu. Bu sırada bölümün en iyi iki yazılımcısını hiçbir şirket aramadı."
+ },
+ {
+  "id": "12rthi2",
+  "voice": "deniz",
+  "text": "Bir gün teklif gelirse diye maaş hesabı yaptım: kira, yol, yemek. Teklif gelmedi ama hesap eksi çıktı. En azından hazırlıklıyım.",
+  "ham": "Bir gün teklif gelirse diye maaş hesabı yaptım: kira, yol, yemek. Teklif gelmedi ama hesap eksi çıktı. En azından hazırlıklıyım."
+ },
+ {
+  "id": "sonkzxdpl",
+  "voice": "anlatici",
+  "text": "Mükemmel si vi · Sıfır Dönüş. Çok çalışmak olmazsa olmazdır ama yetmez. Kimse görmüyor, kimse tanımıyorsa en iyi kod bir klasörde bekler. Yaptığını göster, insanlarla tanış, stratejiyle başvur. Hiçbiri garanti değil; hiçbirini yapmamak ise garanti.",
+  "ham": "Mükemmel CV · Sıfır Dönüş"
+ },
+ {
+  "id": "5lynm7",
+  "voice": "deniz",
+  "text": "Son beş dakikaya girdim. Pizza kuyruğunda arkamdaki adam \"sucuklu kaldı mı\" dedi. Konuşmacıymış. Sucukluyu ona verdim.",
+  "ham": "Son beş dakikaya girdim. Pizza kuyruğunda arkamdaki adam \"sucuklu kaldı mı\" dedi. Konuşmacıymış. Sucukluyu ona verdim."
+ },
+ {
+  "id": "1hjunf3",
+  "voice": "anlatici",
+  "text": "Konuşmacı ona kartını uzattı. Kartın üstünde bir yağ lekesi, altında bir telefon numarası vardı. İkisi de kalıcıydı.",
+  "ham": "Konuşmacı ona kartını uzattı. Kartın üstünde bir yağ lekesi, altında bir telefon numarası vardı. İkisi de kalıcıydı."
+ },
+ {
+  "id": "1b90ifq",
+  "voice": "buse",
+  "text": "Konuşmacıyla pizza paylaşmışsın! Ben bir saat soru sordum, sen bir dilimle geçtin. Strateji değil ama işe yarıyor.",
+  "ham": "Konuşmacıyla pizza paylaşmışsın! Ben bir saat soru sordum, sen bir dilimle geçtin. Strateji değil ama işe yarıyor."
+ },
+ {
+  "id": "25sd8t",
+  "voice": "deniz",
+  "text": "Üçüncü gün prodakşın'a kod attım. Beşinci gün prodakşın'ı ben düşürdüm. Kimse kızmadı, çünkü kimse fark etmedi.",
+  "ham": "Üçüncü gün production'a kod attım. Beşinci gün production'ı ben düşürdüm. Kimse kızmadı, çünkü kimse fark etmedi."
+ },
+ {
+  "id": "1003nlh",
+  "voice": "anlatici",
+  "text": "Şirketin si ti o'su onun adını öğrendi. si ti o aynı zamanda kurucu, muhasebeci ve armut koltuğun tek sahibiydi.",
+  "ham": "Şirketin CTO'su onun adını öğrendi. CTO aynı zamanda kurucu, muhasebeci ve armut koltuğun tek sahibiydi."
+ },
+ {
+  "id": "1ufpahy",
+  "voice": "deniz",
+  "text": "Maaş yerine binde iki hisse verdiler. Şirketin değeri şu an sıfır. Binde ikisini hesapladım, yine sıfır çıktı. Tutarlı.",
+  "ham": "Maaş yerine binde iki hisse verdiler. Şirketin değeri şu an sıfır. Binde ikisini hesapladım, yine sıfır çıktı. Tutarlı."
+ },
+ {
+  "id": "12vksk5",
+  "voice": "deniz",
+  "text": "Kendi projemi yazdım: kampüste gölgeli otopark bulan bir uygulama. Çalışıyor. Bende çalışıyor.",
+  "ham": "Kendi projemi yazdım: kampüste gölgeli otopark bulan bir uygulama. Çalışıyor. Bende çalışıyor."
+ },
+ {
+  "id": "18tiyu6",
+  "voice": "anlatici",
+  "text": "Kırk iş günü boyunca patron da oydu, stajyer de. Patron stajyerden çok memnundu. Stajyer zam istedi; patron \"bütçe yok\" dedi.",
+  "ham": "Kırk iş günü boyunca patron da oydu, stajyer de. Patron stajyerden çok memnundu. Stajyer zam istedi; patron \"bütçe yok\" dedi."
+ },
+ {
+  "id": "1cbvyk8",
+  "voice": "deniz",
+  "text": "Staj defterini anneme imzalatmayı düşündüm. \"Ben atarım\" dedi. Kaşesi yok ama imzası okulda tanınıyor; on iki yıl karnemi o imzaladı.",
+  "ham": "Staj defterini anneme imzalatmayı düşündüm. \"Ben atarım\" dedi. Kaşesi yok ama imzası okulda tanınıyor; on iki yıl karnemi o imzaladı."
+ }
+]

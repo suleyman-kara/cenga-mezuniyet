@@ -207,3 +207,73 @@ describe('pause / resume', () => {
   });
 });
 
+
+describe('salon oyunlari: ek alanlar, oyuncular, kisi bazli sonuc', () => {
+  const clocked = (extra = {}) => { const k = { adv: 0 }; return { k, ...mk({ now: () => Date.now() + k.adv, ...extra }) }; };
+  it('createSession(ek) ek alanlari yazar; cekirdek alanlari ezemez', async () => {
+    const { src } = mk(); const sid = await src.createSession({ takmaAd: true, oyun: 'yarisma', hostUid: 'kotu', phase: 'vote', winner: 3 });
+    expect(sess(sid)).toMatchObject({ takmaAd: true, oyun: 'yarisma', hostUid: 'hostU', phase: 'lobby', winner: null });
+  });
+  it('createSession() eski gibi: ek alan yok (Mezuniyet.exe oturumlari degismez)', async () => {
+    const { src } = mk(); const sid = await src.createSession();
+    expect('takmaAd' in sess(sid)).toBe(false);
+    expect(Object.keys(sess(sid)).sort()).toEqual(['closesAt', 'counts', 'decKey', 'forced', 'hostUid', 'n', 'openedAt', 'options', 'paused', 'phase', 'poll', 'q', 'winner']);
+  });
+  it('close() kisi bazli sayilan oylari, acilis/kapanis zamanlarini ve decKey i doner', async () => {
+    const { src } = mk(); const sid = await src.createSession();
+    src.open(OPEN({ durMs: 2000 })); await sleep(20);
+    const t0 = Date.now();
+    await castVote(sid, '0_abcd1234', 'a1', 1); await castVote(sid, '0_abcd1234', 'a2', 2);
+    await castVote(sid, '0_abcd1234', 'gec', 0, FakeTimestamp.fromMillis(Date.now() + 60000)); // kapanistan sonra: sayilmaz
+    await castVote(sid, '0_abcd1234', 'bozuk', 7);                                             // gecersiz o: sayilmaz
+    const r = await src.close();
+    expect(r.decKey).toBe('0_abcd1234'); expect(r.durMs).toBe(2000);
+    expect(r.closesAtMs - r.openedAtMs).toBe(2000);
+    expect(r.votes.map((v) => [v.uid, v.o]).sort()).toEqual([['a1', 1], ['a2', 2]]);
+    for (const v of r.votes) { expect(v.atMs).toBeGreaterThanOrEqual(t0 - 5); expect(v.atMs).toBeLessThanOrEqual(r.closesAtMs); }
+    expect(r.pauses).toEqual([]);
+  });
+  it('close({sonucEk}) ek alanlari sonucla AYNI yazimda yazar; cekirdek alanlari ezemez', async () => {
+    const { src } = mk(); const sid = await src.createSession({ takmaAd: true });
+    src.open(OPEN()); await castVote(sid, '0_abcd1234', 'a1', 1);
+    let gorulen = null;
+    const r = await src.close({ sonucEk: (x) => { gorulen = x; return { dogru: 1, sonucIcin: x.decKey, puan: { a1: 900 }, winner: 0, phase: 'vote' }; } });
+    expect(gorulen.votes.map((v) => v.uid)).toEqual(['a1']);
+    expect(sess(sid)).toMatchObject({ phase: 'result', dogru: 1, sonucIcin: '0_abcd1234', puan: { a1: 900 }, winner: r.winner });
+  });
+  it('sonucEk hata firlatirsa sonuc yine yazilir (ek alansiz), close cozulur', async () => {
+    const { src } = mk(); const sid = await src.createSession();
+    src.open(OPEN()); const r = await src.close({ sonucEk: () => { throw new Error('bozuk'); } });
+    expect(sess(sid).phase).toBe('result'); expect('dogru' in sess(sid)).toBe(false);
+    expect(r.errors.some((e) => /sonuc eki/.test(e))).toBe(true);
+  });
+  it('duraklatma araliklari (pauses) sunucu saatiyle doner', async () => {
+    const { k, src } = clocked(); await src.createSession();
+    src.open(OPEN({ durMs: 5000 })); await src.pause(); k.adv += 3000; await src.resume();
+    const r = await src.close();
+    expect(r.pauses).toHaveLength(1); expect(r.pauses[0][1] - r.pauses[0][0]).toBeGreaterThanOrEqual(3000);
+  });
+  it('onPlayers: oturumdan once cagrilsa da oturum acilinca listeyi verir; ad 20 karakterle sinirli', async () => {
+    const { src } = mk(); const lists = []; src.onPlayers((l) => lists.push(l));
+    const sid = await src.createSession({ takmaAd: true }); await sleep(10);
+    const p = be.client('p1'); await p.fs.setDoc(p.fs.doc(p.db, 'sessions', sid, 'players', 'p1'), { ad: 'Ayşe', at: p.fs.serverTimestamp() });
+    const q = be.client('p2'); await q.fs.setDoc(q.fs.doc(q.db, 'sessions', sid, 'players', 'p2'), { ad: 'x'.repeat(40), at: q.fs.serverTimestamp() });
+    await sleep(20);
+    const last = lists[lists.length - 1];
+    expect(last.map((x) => x.uid).sort()).toEqual(['p1', 'p2']);
+    expect(last.find((x) => x.uid === 'p1').ad).toBe('Ayşe'); expect(last.find((x) => x.uid === 'p2').ad).toHaveLength(20);
+  });
+  it('onPlayers dinlemeyi kapatma fonksiyonu doner', async () => {
+    const { src } = mk(); const sid = await src.createSession(); const lists = []; const off = src.onPlayers((l) => lists.push(l)); await sleep(10);
+    off(); const n = lists.length;
+    const p = be.client('p1'); await p.fs.setDoc(p.fs.doc(p.db, 'sessions', sid, 'players', 'p1'), { ad: 'A', at: p.fs.serverTimestamp() }); await sleep(20);
+    expect(lists.length).toBe(n);
+  });
+  it('updateSession ek alanlari yazar, cekirdek alanlari yok sayar; oturumsuz takilmaz', async () => {
+    const { src } = mk();
+    expect((await src.updateSession({ x: 1 })).ok).toBe(false);
+    const sid = await src.createSession();
+    const r = await src.updateSession({ tur: 3, phase: 'ended', hostUid: 'baska' });
+    expect(r.ok).toBe(true); expect(sess(sid)).toMatchObject({ tur: 3, phase: 'lobby', hostUid: 'hostU' });
+  });
+});

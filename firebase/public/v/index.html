@@ -39,23 +39,37 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
 .bar.mine span b::after{content:" ✓ senin oyun";font-weight:600;font-size:13px;opacity:.85}
 #app>:is(main) .view{display:none}
 #app[data-state=loading] .v-loading,#app[data-state=waiting] .v-waiting,#app[data-state=vote] .v-vote,#app[data-state=result] .v-result,#app[data-state=error] .v-error,#app[data-state=ended] .v-ended{display:flex;flex-direction:column;gap:16px}
-.pulse{animation:p 1.6s ease-in-out infinite}@keyframes p{50%{transform:scale(1.12);opacity:.7}}
+.pulse{animation:p 1.6s ease-in-out infinite}
+/* salon oyunlari (oturumda takmaAd:true): takma ad ve yarisma sonucu */
+.adform{display:flex;flex-direction:column;gap:8px;background:#ffffff10;border-radius:18px;padding:14px;text-align:left;margin-top:6px}
+.adform[hidden]{display:none}
+.adform label{font-weight:800;font-size:17px}.adform label small{font-weight:600;opacity:.7;font-size:13px}
+.adrow{display:flex;gap:8px}
+.adrow input{flex:1;min-width:0;font:inherit;font-size:20px;font-weight:700;padding:12px 14px;border-radius:14px;border:2px solid #ffffff30;background:#0a0e1a;color:#fff}
+.adrow input:focus{outline:none;border-color:#00e5ff}
+.adrow button{font:inherit;font-size:18px;font-weight:800;padding:0 18px;border-radius:14px;border:0;background:#00e5ff;color:#04202b}
+.addurum{min-height:20px;font-weight:700;font-size:15px}.addurum.ok{color:#5dff9e}.addurum.bad{color:#ff7a93}
+.qsonuc{border-radius:24px;padding:20px 18px;text-align:center;display:flex;flex-direction:column;gap:6px;background:#1b2140}
+.qsonuc[hidden],.win[hidden]{display:none}
+.qsonuc b{font-size:34px;font-weight:900}.qsonuc.ok{background:linear-gradient(135deg,#0f9d58,#17c964);color:#04210f}.qsonuc.bad{background:linear-gradient(135deg,#b3133b,#ff4d6d)}
+.qsonuc span{font-size:18px;font-weight:700}.qsonuc #qpuan{font-size:20px;font-weight:900}@keyframes p{50%{transform:scale(1.12);opacity:.7}}
 </style>
 </head>
 <body>
 <div id="app" data-state="loading" data-conn="on">
   <div id="conn" role="status">Bağlantı koptu, yeniden deneniyor…</div>
-  <header><span>Salon Oylaması</span><span class="tag" id="polltag" hidden>Anket · sonucu değiştirmez</span></header>
+  <header><span>Salon Oylaması</span><span class="tag" id="adtag" hidden></span><span class="tag" id="polltag" hidden>Anket · sonucu değiştirmez</span></header>
   <main>
     <section class="view v-loading center"><p class="big pulse">⏳</p><p class="sub">Bağlanıyor…</p></section>
-    <section class="view v-waiting center"><p class="big pulse">📱</p><h1>Sıradaki karar anında burada</h1><p class="sub">Bu sayfayı açık tut. Oylama başlayınca ekran kendiliğinden değişir.</p></section>
+    <section class="view v-waiting center"><p class="big pulse">📱</p><h1 id="bekleh">Sıradaki karar anında burada</h1><p class="sub">Bu sayfayı açık tut. Oylama başlayınca ekran kendiliğinden değişir.</p>
+      <form class="adform" id="adform" hidden><label for="adin">Takma adın <small>(isteğe bağlı · sıralamada görünür)</small></label><div class="adrow"><input id="adin" maxlength="20" autocomplete="nickname" enterkeyhint="done" placeholder="ör. Kod Canavarı"><button type="submit">Kaydet</button></div><div class="addurum" id="addurum" aria-live="polite"></div></form></section>
     <section class="view v-vote">
       <h1 id="q"></h1>
       <div class="ringwrap" id="ringwrap"><svg width="96" height="96" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="#ffffff22" stroke-width="9"/><circle id="ring" cx="50" cy="50" r="44" fill="none" stroke="#00e5ff" stroke-width="9" stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="0"/></svg><div class="n" id="cnt">30</div></div>
       <div class="opts" id="opts"></div>
       <div class="status" id="status" aria-live="polite"></div>
     </section>
-    <section class="view v-result"><div class="win"><small id="rtag">Salon karar verdi</small><span id="rwin"></span></div><div id="rbars" style="display:flex;flex-direction:column;gap:10px"></div><p class="sub center">Sıradaki karar için sayfayı açık tut.</p></section>
+    <section class="view v-result"><div class="qsonuc" id="qsonuc" hidden><b id="qbas"></b><span id="qdogru"></span><span id="qpuan"></span></div><div class="win" id="winkart"><small id="rtag">Salon karar verdi</small><span id="rwin"></span></div><div id="rbars" style="display:flex;flex-direction:column;gap:10px"></div><p class="sub center">Sıradaki karar için sayfayı açık tut.</p></section>
     <section class="view v-error center"><p class="big">⚠️</p><h1 id="errmsg">Bir sorun oluştu</h1><p class="sub">Ekrandaki QR kodu yeniden okutmayı dene.</p></section>
     <section class="view v-ended center"><p class="big">🎉</p><h1>Teşekkürler!</h1><p class="sub">Oturum sona erdi.</p></section>
   </main>
@@ -67,7 +81,14 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
   var SDK = '12.19.0'; // firebase-config.js'in yaninda, CDN surumu
   var $ = function (id) { return document.getElementById(id); };
   var app = $('app'), sid = new URLSearchParams(location.search).get('s');
-  var S = { sess: null, uid: null, fb: null, myVote: null, myKey: null, saved: false, failed: false, offset: 0, lastKey: null, drawnKey: null, timer: null };
+  var S = { sess: null, uid: null, fb: null, myVote: null, myKey: null, saved: false, failed: false, offset: 0, lastKey: null, drawnKey: null, timer: null, ad: '', katildi: false, adGirdi: false };
+  // Salon oyunlari: oturum belgesinde takmaAd === true ise takma ad sorulur (Mezuniyet.exe oturumlarinda alan yok -> eski davranis).
+  var AD_K = 'salon.takmaAd';
+  function adTemiz(x) { return String(x == null ? '' : x).replace(/\s+/g, ' ').trim().slice(0, 20); }
+  try { S.ad = adTemiz(localStorage.getItem(AD_K)); } catch (e) { S.ad = ''; }
+  function takmaAdli() { return !!(S.sess && S.sess.takmaAd === true); }
+  // Yarisma sonucu: host sonucla ayni yazimda {dogru, sonucIcin: decKey, puan:{uid:toplam}} yazar.
+  function yarismaSonucu(s) { return s.takmaAd === true && s.sonucIcin === s.decKey && Object.prototype.hasOwnProperty.call(s, 'dogru'); }
 
   function setState(s) { app.dataset.state = s; }
   function fail(msg) { $('errmsg').textContent = msg; setState('error'); }
@@ -137,8 +158,43 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
     else if (S.saved && S.myVote !== null) { st.textContent = 'Seçimin kaydedildi ✓ (değiştirebilirsin)'; st.className = 'status ok'; }
     else { st.textContent = 'Birine dokun, oyun verilsin'; st.className = 'status'; }
   }
+  function renderAd() {
+    var on = takmaAdli() && S.sess.phase !== 'ended';
+    $('adform').hidden = !on; $('adtag').hidden = !(on && S.ad); $('adtag').textContent = '👤 ' + S.ad;
+    $('bekleh').textContent = takmaAdli() ? 'Sıradaki soru burada çıkacak' : 'Sıradaki karar anında burada';
+    if (on && !S.adGirdi) { S.adGirdi = true; $('adin').value = S.ad; }
+  }
+  function oyuncuYaz(ad) {
+    var fs = S.fb.fs;
+    return Promise.resolve().then(function () { return fs.setDoc(fs.doc(S.fb.db, 'sessions', sid, 'players', S.uid), { ad: ad, at: fs.serverTimestamp() }); });
+  }
+  $('adform').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var ad = adTemiz($('adin').value), d = $('addurum'); $('adin').value = ad;
+    if (!S.fb || !takmaAdli()) return;
+    S.ad = ad; try { localStorage.setItem(AD_K, ad); } catch (x) { /* sessiz */ }
+    d.textContent = 'Kaydediliyor…'; d.className = 'addurum'; renderAd();
+    try { $('adin').blur(); } catch (x) { /* sessiz */ }
+    oyuncuYaz(ad).then(function () { d.textContent = ad ? 'Kaydedildi ✓ Ekranda böyle görüneceksin.' : 'Ad silindi ✓'; d.className = 'addurum ok'; S.katildi = true; },
+      function () { d.textContent = 'Kaydedilemedi, tekrar dene'; d.className = 'addurum bad'; });
+  });
   function renderResult() {
     var s = S.sess, c = s.counts || (s.options || []).map(function () { return 0; }), p = percents(c), w = s.winner;
+    var puanli = yarismaSonucu(s) && Number.isInteger(s.dogru);
+    $('qsonuc').hidden = !puanli; $('winkart').hidden = puanli;
+    if (puanli) {
+      w = s.dogru;
+      var dogru = S.myVote === s.dogru;
+      $('qsonuc').className = 'qsonuc' + (S.myVote === null ? '' : dogru ? ' ok' : ' bad');
+      $('qbas').textContent = S.myVote === null ? 'Cevap vermedin' : dogru ? '✓ Doğru!' : '✗ Yanlış';
+      $('qdogru').textContent = 'Doğru cevap: ' + ((s.options && s.options[s.dogru]) || '');
+      var tablo = s.puan && typeof s.puan === 'object' ? s.puan : null, ben = tablo && typeof tablo[S.uid] === 'number' ? tablo[S.uid] : null;
+      if (ben !== null) {
+        var hepsi = Object.keys(tablo).map(function (k) { return tablo[k]; }).filter(function (x) { return typeof x === 'number'; });
+        var sira = 1 + hepsi.filter(function (x) { return x > ben; }).length;
+        $('qpuan').textContent = 'Toplam ' + ben + ' puan · ' + sira + '. sıra / ' + hepsi.length;
+      } else $('qpuan').textContent = '';
+    }
     $('rtag').textContent = s.poll ? 'Salon böyle düşünüyor' : 'Salon karar verdi';
     $('rwin').textContent = (s.options && s.options[w]) || '';
     var box = $('rbars'); box.textContent = '';
@@ -146,7 +202,7 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
       var d = document.createElement('div'); d.className = 'bar' + (i === w ? ' w' : '') + (S.myVote === i ? ' mine' : '');
       var f = document.createElement('i'); f.style.width = p[i] + '%';
       var sp = document.createElement('span'), a = document.createElement('b'), b = document.createElement('em');
-      a.textContent = o; b.textContent = '%' + p[i]; b.style.fontStyle = 'normal'; sp.append(a, b); d.append(f, sp); box.appendChild(d);
+      a.textContent = (puanli && i === w ? '✓ ' : '') + o; b.textContent = '%' + p[i]; b.style.fontStyle = 'normal'; sp.append(a, b); d.append(f, sp); box.appendChild(d);
     });
   }
   async function loadMyVote(key) {
@@ -168,6 +224,7 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
   }
   function render() {
     var s = S.sess; if (!s) return;
+    renderAd();
     if (s.phase === 'vote' && s.decKey) { setState('vote'); renderVote(); if (!S.timer) S.timer = setInterval(function () { if (S.sess && S.sess.phase === 'vote') renderVote(); }, 200); }
     else { clearInterval(S.timer); S.timer = null; $('polltag').hidden = !(s.poll && s.phase === 'result');
       if (s.phase === 'result' && s.counts) { setState('result'); renderResult(); } else if (s.phase === 'ended') setState('ended'); else setState('waiting'); }
@@ -177,7 +234,9 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
     if (!snap.exists()) return fail('Bu oturum bulunamadı');
     var s = snap.data(), keyChanged = s.decKey !== S.lastKey;
     S.sess = s;
-    if (keyChanged) { S.lastKey = s.decKey; if (s.phase === 'vote') loadMyVote(s.decKey); else { S.myVote = null; S.saved = false; S.failed = false; } }
+    if (keyChanged) { S.lastKey = s.decKey; if (s.phase === 'vote' || (s.phase === 'result' && s.decKey && s.takmaAd === true)) loadMyVote(s.decKey); else { S.myVote = null; S.saved = false; S.failed = false; } }
+    // takma adli oturum: katildigini bildir (bir kez; kayitli ad varsa onunla) -> projektordeki katilimci sayisi
+    if (s.takmaAd === true && s.phase !== 'ended' && !S.katildi) { S.katildi = true; oyuncuYaz(S.ad).catch(function () { S.katildi = false; }); }
     render();
   }
 

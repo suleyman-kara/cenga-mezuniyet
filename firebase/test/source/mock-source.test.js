@@ -91,5 +91,9 @@ describe('MockSource: oturum surdurme ve kumanda (bos surumler)', () => {
     expect(typeof off1).toBe('function'); expect(typeof off2).toBe('function'); off1(); off2();
     expect(() => s.pushRemoteState({ pos: 1 })).not.toThrow();
     await expect(s.end()).resolves.toBeUndefined();
+  });  it('salon metotlari (onPlayers, updateSession) zararsiz bos surumler', async () => {
+    const s = createMockSource({ rng: seeded() }); await s.createSession();
+    const off = s.onPlayers(() => {}); expect(typeof off).toBe('function'); off();
+    await expect(s.updateSession({ a: 1 })).resolves.toEqual({ ok: true, error: null });
   });
 });

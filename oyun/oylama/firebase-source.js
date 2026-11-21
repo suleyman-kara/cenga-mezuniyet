@@ -1,5 +1,6 @@
 // FirebaseSource (host tarafi). VoteSource arayuzu: createSession, resumeSession, open, onUpdate, forceWin, close, voteUrl.
 // Telefon kumandasi: createRemote, resumeRemote, resetRemote, onRemoteCommand, onRemoteStatus, pushRemoteState.
+// Salon oyunlari (yarisma vb.): createSession(ek), updateSession, onPlayers, close({sonucEk}) ve close() sonucunda kisi bazli oylar.
 // Bagimliliklar enjekte edilir (test: npm "firebase" paketi / sahte; tarayici: connectFirebaseSource ile CDN modulleri).
 const ALPHA = 'abcdefghjkmnpqrstuvwxyz23456789';
 const SECRET_ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -33,6 +34,15 @@ function guard(promise, ms, label) {
   });
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// Oturum belgesinin cekirdek alanlari: ek alanlar (createSession(ek), updateSession, sonucEk) bunlari ezemez.
+export const CORE_FIELDS = ['hostUid', 'phase', 'decKey', 'q', 'options', 'n', 'poll', 'openedAt', 'closesAt', 'winner', 'counts', 'forced', 'paused', 'pausedLeftMs'];
+function extraFields(o) {
+  const out = {};
+  if (!o || typeof o !== 'object' || Array.isArray(o)) return out;
+  for (const [k, v] of Object.entries(o)) if (!CORE_FIELDS.includes(k) && v !== undefined) out[k] = v;
+  return out;
+}
+const msOf = (t) => (t && typeof t.toMillis === 'function' ? t.toMillis() : (typeof t === 'number' ? t : null));
 
 export function createFirebaseSource(deps) {
   const { db, auth, fs } = deps;
@@ -54,7 +64,7 @@ export function createFirebaseSource(deps) {
 
   function votesFrom(docs, decKey) {
     const prefix = decKey + '__', out = [];
-    docs.forEach((d) => { if (d.id.startsWith(prefix)) { const v = d.data({ serverTimestamps: 'estimate' }); out.push({ o: v.o, at: v.at }); } });
+    docs.forEach((d) => { if (d.id.startsWith(prefix)) { const v = d.data({ serverTimestamps: 'estimate' }); out.push({ o: v.o, at: v.at, uid: d.id.slice(prefix.length) }); } });
     return out;
   }
   function emit() {
@@ -72,6 +82,23 @@ export function createFirebaseSource(deps) {
       const ms = o && typeof o.toMillis === 'function' ? o.toMillis() : null;
       if (ms !== null) offsetMs = Math.round(ms - (t0 + t1) / 2);
     } else rec(g.error);
+  }
+
+  // ---- Oyuncular (takma ad): sessions/{sid}/players/{uid} = {ad, at}; yalnizca host listeler ----
+  let plCb = null, plUnsub = null;
+  function detachPlayers() { if (plUnsub) { try { plUnsub(); } catch (_) {} plUnsub = null; } }
+  function attachPlayers() {
+    detachPlayers();
+    if (!plCb || !sid) return;
+    const fn = plCb;
+    try {
+      plUnsub = fs.onSnapshot(fs.collection(db, 'sessions', sid, 'players'), (snap) => {
+        if (plCb !== fn) return;
+        const list = [];
+        snap.docs.forEach((d) => { let v = null; try { v = d.data(); } catch (_) {} list.push({ uid: d.id, ad: v && typeof v.ad === 'string' ? v.ad.slice(0, 20) : '' }); });
+        try { fn(list); } catch (e) { rec(errText('oyuncu listesi', e)); }
+      }, (e) => rec(errText('oyuncu dinleme', e)));
+    } catch (e) { rec(errText('oyuncu dinleme', e)); }
   }
 
   // ---- Telefon kumandasi: sessions/{sid}/remotes/{secret} (+ /cmds) ----
@@ -153,7 +180,8 @@ export function createFirebaseSource(deps) {
     get sid() { return sid; },
     get errors() { return errors.slice(); },
 
-    async createSession() {
+    // ek: oyuna ozgu ek alanlar (or. {takmaAd: true, oyun: 'yarisma'}); cekirdek alanlar ezilemez.
+    async createSession(ek) {
       errors = [];
       const a = await guard(fs.signInAnonymously(auth), writeTimeoutMs, 'anonim giris');
       if (!a.ok) throw new Error(a.error);
@@ -161,12 +189,13 @@ export function createFirebaseSource(deps) {
       let id = ''; for (let i = 0; i < 6; i++) id += ALPHA[Math.floor(rng() * ALPHA.length)];
       const t0 = now();
       const w = await guard(fs.setDoc(fs.doc(db, 'sessions', id), {
+        ...extraFields(ek),
         hostUid: uid, phase: 'lobby', decKey: null, q: '', options: [], n: 0, poll: false,
         openedAt: fs.serverTimestamp(), closesAt: null, winner: null, counts: null, forced: false, paused: false,
       }), writeTimeoutMs, 'oturum olusturma');
       if (!w.ok) throw new Error(w.error);
       stop(); detachRemote(); cur = null; isPaused = false;
-      sid = id;
+      sid = id; attachPlayers();
       // Sunucu saati ile yerel saat farki (host closesAt'i sunucu saatine gore yazar).
       await measureOffset(id, t0, now());
       return id;
@@ -194,7 +223,7 @@ export function createFirebaseSource(deps) {
       }), writeTimeoutMs, 'oturum surdurme');
       if (!w.ok) throw new Error(w.error);
       stop(); detachRemote(); cur = null; isPaused = false;
-      uid = me; sid = id;
+      uid = me; sid = id; attachPlayers();
       await measureOffset(id, t0, now());
       return id;
     },
@@ -209,8 +238,8 @@ export function createFirebaseSource(deps) {
       if (!decKey || /__|\//.test(decKey)) throw new Error('gecersiz decKey');
       stop(); errors = [];
       const n = options.length;
-      const closesAtMs = now() + offsetMs + (durMs || 30000);
-      cur = { decKey, n, closesAtMs, forced: null, votes: [], unsub: null, result: null, paused: isPaused, pausedLeftMs: isPaused ? (durMs || 30000) : null };
+      const openedAtMs = now() + offsetMs, closesAtMs = openedAtMs + (durMs || 30000);
+      cur = { decKey, n, closesAtMs, openedAtMs, durMs: durMs || 30000, pauses: [], pauseStart: isPaused ? openedAtMs : null, forced: null, votes: [], unsub: null, result: null, paused: isPaused, pausedLeftMs: isPaused ? (durMs || 30000) : null };
       try {
         cur.unsub = fs.onSnapshot(votesRef(), (snap) => { cur.votes = votesFrom(snap.docs, decKey); emit(); }, (e) => rec(`oy dinleme: ${e && e.code ? e.code + ' ' : ''}${(e && e.message) || e}`));
       } catch (e) { rec(`oy dinleme: ${e.message}`); }
@@ -241,7 +270,7 @@ export function createFirebaseSource(deps) {
       isPaused = true;
       const data = { paused: true };
       if (cur && !cur.result && !cur.paused) {
-        cur.pausedLeftMs = VC.remainingMs(cur.closesAtMs, now(), offsetMs); cur.paused = true;
+        cur.pausedLeftMs = VC.remainingMs(cur.closesAtMs, now(), offsetMs); cur.paused = true; cur.pauseStart = now() + offsetMs;
         data.pausedLeftMs = cur.pausedLeftMs; emit();
       }
       return guard(fs.updateDoc(sessRef(), data), writeTimeoutMs, 'duraklatma').then((r) => ({ ok: r.ok, error: r.ok ? null : rec(r.error) }));
@@ -254,29 +283,39 @@ export function createFirebaseSource(deps) {
       const data = { paused: false };
       if (cur && !cur.result && cur.paused) {
         cur.closesAtMs = now() + offsetMs + cur.pausedLeftMs; cur.paused = false; cur.pausedLeftMs = null;
+        if (cur.pauseStart !== null) { cur.pauses.push([cur.pauseStart, now() + offsetMs]); cur.pauseStart = null; }
         data.closesAt = fs.Timestamp.fromMillis(cur.closesAtMs); data.pausedLeftMs = null; emit();
       }
       return guard(fs.updateDoc(sessRef(), data), writeTimeoutMs, 'devam').then((r) => ({ ok: r.ok, error: r.ok ? null : rec(r.error) }));
     },
 
-    // Her durumda cozulur: { counts, winner, forced, total, error, errors }
-    async close() {
+    // Her durumda cozulur: { counts, winner, forced, total, error, errors,
+    //   decKey, votes:[{uid,o,atMs}] (sayilan oylar), openedAtMs, closesAtMs, durMs, pauses:[[bas,son]] (sunucu saatiyle ms) }
+    // opts.sonucEk(sonuc) -> {alan: deger}: sonuc yazimina eklenecek oyuna ozgu alanlar (ayni yazimda; cekirdek alanlar ezilemez).
+    async close(opts) {
       if (!cur) return { counts: [], winner: null, forced: false, total: 0, error: rec('open cagrilmadi'), errors: errors.slice() };
       if (cur.result) return cur.result;
       const c = cur;
       stop();
-      let counts = new Array(c.n).fill(0), winner;
+      let counts = new Array(c.n).fill(0), winner, counted = [];
       try {
         await sleep(settleMs);
         let votes = c.votes;
         const f = await guard(fs.getDocs(votesRef()), finalFetchTimeoutMs, 'son oy okuma');
         if (f.ok) votes = votesFrom(f.value.docs, c.decKey); else rec(f.error);
         counts = VC.tally(votes, c.n, c.closesAtMs);
+        // tally ile ayni filtre: gecerli o ve at <= closesAt
+        counted = votes.map((v) => ({ uid: v.uid, o: v.o, atMs: msOf(v.at) }))
+          .filter((v) => Number.isInteger(v.o) && v.o >= 0 && v.o < c.n && v.atMs !== null && v.atMs <= c.closesAtMs);
       } catch (e) { rec(`sayim: ${e.message}`); }
       try { winner = VC.pickWinner(counts, { forced: c.forced, rng }); } catch (e) { rec(`kazanan: ${e.message}`); winner = Math.floor(rng() * Math.max(1, c.n)); }
-      const w = await guard(fs.updateDoc(sessRef(), { phase: 'result', winner, counts, forced: c.forced !== null }), writeTimeoutMs, 'sonuc yazma');
+      const pauses = c.pauses.slice(); if (c.pauseStart !== null) pauses.push([c.pauseStart, now() + offsetMs]);
+      const base = { counts, winner, forced: c.forced !== null, total: sum(counts), decKey: c.decKey, votes: counted, openedAtMs: c.openedAtMs, closesAtMs: c.closesAtMs, durMs: c.durMs, pauses };
+      let ek = {};
+      if (opts && typeof opts.sonucEk === 'function') { try { ek = extraFields(opts.sonucEk({ ...base })); } catch (e) { rec(`sonuc eki: ${e.message}`); ek = {}; } }
+      const w = await guard(fs.updateDoc(sessRef(), { ...ek, phase: 'result', winner, counts, forced: c.forced !== null }), writeTimeoutMs, 'sonuc yazma');
       if (!w.ok) rec(w.error);
-      c.result = { counts, winner, forced: c.forced !== null, total: sum(counts), error: errors.length ? errors[0] : null, errors: errors.slice() };
+      c.result = { ...base, error: errors.length ? errors[0] : null, errors: errors.slice() };
       return c.result;
     },
 
@@ -314,6 +353,15 @@ export function createFirebaseSource(deps) {
     pushRemoteState(st) {
       try { if (st === undefined) return; push.pending = st; if (rem) schedulePush(); } catch (_) { /* asla firlatma */ }
     },
+
+    // Oyuna ozgu oturum alanlari (or. lobi bilgisi); cekirdek alanlar yok sayilir. Asla reddetmez: Promise<{ok,error}>.
+    updateSession(fields) {
+      const ek = extraFields(fields);
+      if (!sid || !Object.keys(ek).length) return Promise.resolve({ ok: !!sid, error: sid ? null : 'oturum yok' });
+      return guard(fs.updateDoc(sessRef(), ek), writeTimeoutMs, 'oturum alanlari').then((r) => ({ ok: r.ok, error: r.ok ? null : rec(r.error) }));
+    },
+    // cb([{uid, ad}]): takma adli oyuncular (sessions/{sid}/players). Oturumdan once de cagrilabilir; oturum acilinca baglanir.
+    onPlayers(fn) { plCb = fn; attachPlayers(); return () => { if (plCb === fn) { plCb = null; detachPlayers(); } }; },
 
     async end() { stop(); if (!sid) return; const r = await guard(fs.updateDoc(sessRef(), { phase: 'ended' }), writeTimeoutMs, 'oturum kapatma'); if (!r.ok) rec(r.error); },
   };

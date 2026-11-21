@@ -17,3 +17,6 @@ _toplu.json
 
 # oyunun sesleri repoda tutulur (başka bilgisayarda doğrudan çalışsın)
 !oyun/ses/*.wav
+
+# ajan çalışma kopyaları (geçici)
+.claude/worktrees/

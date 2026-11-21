@@ -17,6 +17,10 @@ _toplu.json
 
 # oyunun sesleri repoda tutulur (başka bilgisayarda doğrudan çalışsın)
 !oyun/ses/*.wav
+# tanıtım videoları ve açılış sayfasının önizleme videosu repoda tutulur
+!tanitim/*.mp4
+!site/vitrin/onizleme.mp4
+tanitim/_kayit/
 
 # ajan çalışma kopyaları (geçici)
 .claude/worktrees/

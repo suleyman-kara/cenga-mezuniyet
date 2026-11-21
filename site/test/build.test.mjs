@@ -59,8 +59,33 @@ test('gerçek repo: beklenen dosyalar üretilir, hariç tutulanlar girmez', () =
   const bas = fs.readFileSync(path.join(cikis, '_headers'), 'utf8');
   assert.match(bas, /\/oyun\/sw\.js\n\s+Cache-Control: no-cache/);
   assert.match(bas, /\/oyun\/manifest\.json\n\s+Cache-Control: no-cache/);
-  assert.match(fs.readFileSync(path.join(cikis, 'index.html'), 'utf8'), /\/oyun\//);
+  // açılış sayfası: site/vitrin/ kökte; denetim görüntüleri (goruntuler/) yayına girmez
+  const giris = fs.readFileSync(path.join(cikis, 'index.html'), 'utf8');
+  assert.match(giris, /href="oyun\/\?demo=1"/);
+  assert.match(giris, /<meta property="og:image" content="https:\/\/cenga-mezuniyet\.pages\.dev\/og\.jpg">/);
+  for (const f of ['og.jpg', 'onizleme.mp4', 'onizleme.webp', 'img/karar.webp']) assert.ok(fs.existsSync(path.join(cikis, f)), f + ' yok');
+  assert.ok(!fs.existsSync(path.join(cikis, 'goruntuler')), 'vitrin/goruntuler girmemeliydi');
+  // sayfadaki bütün göreli src/href dosyaları dist'te var
+  for (const [, u] of giris.matchAll(/(?:src|href|poster)="([^"#:]+?)(?:\?[^"]*)?"/g)) {
+    const hedef = path.join(cikis, u.endsWith('/') || u === './' ? path.join(u, 'index.html') : u);
+    assert.ok(fs.existsSync(hedef), 'kırık bağlantı: ' + u);
+  }
   fs.rmSync(path.dirname(cikis), { recursive: true, force: true });
+});
+
+test('sahte kök: site/vitrin/ yoksa kökte /oyun/ yönlendirmesi, varsa vitrin kopyalanır', () => {
+  const k = sahteKok();
+  buildSite({ kok: k, cikis: path.join(k, 'dist') });
+  assert.match(fs.readFileSync(path.join(k, 'dist/index.html'), 'utf8'), /location\.replace\('\/oyun\/'/);
+  yaz(k, 'site/vitrin/index.html', '<title>vitrin</title>');
+  yaz(k, 'site/vitrin/img/a.webp', 'webp');
+  yaz(k, 'site/vitrin/goruntuler/390.png', 'png');
+  buildSite({ kok: k, cikis: path.join(k, 'dist') });
+  assert.equal(fs.readFileSync(path.join(k, 'dist/index.html'), 'utf8'), '<title>vitrin</title>');
+  assert.equal(fs.readFileSync(path.join(k, 'dist/img/a.webp'), 'utf8'), 'webp');
+  assert.ok(!fs.existsSync(path.join(k, 'dist/goruntuler')));
+  assert.ok(!fs.existsSync(path.join(k, 'dist/oyun/img')), 'vitrin oyun manifestine karışmamalı');
+  fs.rmSync(k, { recursive: true, force: true });
 });
 
 test('gerçek repo: oylama kopyaları asıllarıyla aynı', () => {

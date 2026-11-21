@@ -4,7 +4,7 @@
 //
 // dist/
 //   (firebase/public/ ağacının tamamı: /v/ oy sayfası, firebase-config.js, ...)
-//   index.html            → /oyun/'a yönlendirme (asıl açılış sayfası sonra gelecek)
+//   index.html, og.jpg, img/, onizleme.*  → site/vitrin/ (açılış sayfası; yoksa /oyun/'a yönlendirme)
 //   _headers              → Cloudflare önbellek başlıkları
 //   oyun/                 → oyun + sesler + oylama modülü + sw.js + manifest.json (hash'li dosya listesi)
 import crypto from 'node:crypto';
@@ -127,7 +127,14 @@ export function buildSite({ kok = VARSAYILAN_KOK, cikis = path.join(kok, 'dist')
   for (const f of fs.readdirSync(path.join(oy, 'ses'))) if (f.endsWith('.wav')) fs.copyFileSync(path.join(oy, 'ses', f), path.join(hedef, 'ses', f));
   agacKopyala(path.join(oy, 'oylama'), path.join(hedef, 'oylama'));
 
-  // 3) kök yönlendirme (firebase/public bir gün kendi index.html'ini getirirse ona dokunma)
+  // 3) açılış sayfası: site/vitrin/ → dist/ kökü (goruntuler/ yalnız denetim ekran görüntüleri, yayına girmez);
+  //    vitrin yoksa ve firebase/public kendi index.html'ini getirmediyse /oyun/'a yönlendirme
+  const vitrin = path.join(kok, 'site/vitrin');
+  if (fs.existsSync(vitrin)) for (const e of fs.readdirSync(vitrin, { withFileTypes: true })) {
+    if (e.name === 'goruntuler') continue;
+    const k = path.join(vitrin, e.name), h = path.join(cikis, e.name);
+    if (e.isDirectory()) agacKopyala(k, h); else if (e.isFile()) fs.copyFileSync(k, h);
+  }
   if (!fs.existsSync(path.join(cikis, 'index.html'))) fs.writeFileSync(path.join(cikis, 'index.html'), YONLENDIRME);
   fs.writeFileSync(path.join(cikis, '_headers'), BASLIKLAR);
 

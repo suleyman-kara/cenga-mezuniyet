@@ -179,10 +179,13 @@ section{padding:72px 0}
 .kulup ul.liste{margin:12px 0 0;padding-left:20px}
 .kulup ul.liste li{margin:6px 0}
 .iletisim{list-style:none;padding:0;margin:0;display:grid;gap:10px;position:relative;z-index:1}
-.iletisim a{display:flex;align-items:center;gap:10px;background:var(--lacivert);color:#fff;text-decoration:none;font-weight:700;border-radius:12px;padding:14px 16px;word-break:break-all}
-.iletisim a span{font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--sari);min-width:78px}
+.iletisim a{display:flex;align-items:center;gap:10px;background:var(--lacivert);color:#fff;text-decoration:none;font-weight:700;border-radius:12px;padding:14px 16px;overflow-wrap:anywhere}
+.iletisim em{font-style:normal}
+@media (max-width:559px){.iletisim a{flex-direction:column;align-items:flex-start;gap:4px}}
+.iletisim a span{font:700 12px var(--mono);letter-spacing:.1em;color:var(--sari);min-width:78px}
 .iletisim a:hover{background:#26386a}
 .kulup .yedek{position:relative;z-index:1}
+.iletisim:not([hidden])+.yedek{margin-top:18px}
 .kulup .yedek .dugme{border-color:var(--lacivert);background:var(--lacivert);color:#fff;box-shadow:0 6px 0 #0d1426}
 
 /* ---------- alt bilgi ---------- */
@@ -284,8 +287,8 @@ footer .not{font-size:13px;opacity:.85}
         <div class="sayi"><b>5</b><span>farklı son</span></div>
         <div class="sayi"><b>146</b><span>seslendirilmiş replik</span></div>
         <div class="sayi"><b>~20</b><span>dakika, baştan sona</span></div>
-        <!-- SALON SAYISI: etkinlikte oy veren kişi sayısını aşağıdaki SALON_SAYISI sabitine yazın (boşsa bu kutu gizlenir) -->
-        <div class="sayi" id="salonKutu" hidden><b id="salonSayi">—</b><span>kişi telefonla oy verdi</span></div>
+        <!-- Sayı, sayfanın altındaki SALON_SAYISI sabitinden gelir (boşsa kutu gizli kalır). -->
+        <div class="sayi genis" id="salonKutu" hidden><b id="salonSayi">—</b><span>kişi salonda canlı oynadı, kararları telefonla verdi</span></div>
       </div>
     </div>
   </section>
@@ -345,12 +348,12 @@ footer .not{font-size:13px;opacity:.85}
           </ul>
         </div>
         <div>
-          <!-- İLETİŞİM: buraya — bağlantıları sayfanın altındaki ILETISIM sabitine yazın. Boş olanlar gizlenir; hepsi boşsa yalnızca demo düğmesi görünür. -->
+          <!-- Bağlantılar sayfanın altındaki ILETISIM sabitinden doldurulur; boş olanlar gizli kalır. -->
           <ul class="iletisim" id="iletisim" hidden>
-            <li hidden><a data-tur="eposta" href="#"><span>E-posta</span><em></em></a></li>
-            <li hidden><a data-tur="linkedin" href="#" rel="noopener" target="_blank"><span>LinkedIn</span><em></em></a></li>
-            <li hidden><a data-tur="instagram" href="#" rel="noopener" target="_blank"><span>Instagram</span><em></em></a></li>
-            <li hidden><a data-tur="github" href="#" rel="noopener" target="_blank"><span>GitHub</span><em></em></a></li>
+            <li hidden><a data-tur="eposta" href="#"><span>E-POSTA</span><em></em></a></li>
+            <li hidden><a data-tur="linkedin" href="#" rel="noopener" target="_blank"><span>LINKEDIN</span><em></em></a></li>
+            <li hidden><a data-tur="instagram" href="#" rel="noopener" target="_blank"><span>INSTAGRAM</span><em></em></a></li>
+            <li hidden><a data-tur="github" href="#" rel="noopener" target="_blank"><span>GITHUB</span><em></em></a></li>
           </ul>
           <div class="yedek" id="iletisimYedek"><a class="dugme" href="oyun/?demo=1">Önce demoyu oyna ▶</a></div>
         </div>
@@ -363,8 +366,7 @@ footer .not{font-size:13px;opacity:.85}
   <div class="kap">
     <div>
       <p style="margin:0 0 6px"><b>Mezuniyet.exe Yanıt Vermiyor</b> · CENGA sosyal etkinliği, 20 Kasım 2026</p>
-      <!-- HAZIRLAYANLAR: isimleri aşağıdaki HAZIRLAYANLAR sabitine yazın (ör. ['Ad Soyad — hikâye', 'Ad Soyad — kod']) -->
-      <p style="margin:0" id="hazirlayanlar">Hazırlayanlar: CENGA ekibi</p>
+      <p style="margin:0" id="hazirlayanlar">Geliştiren: <b>Süleyman Kara</b> · Fikir: <b>CENGA</b></p>
       <p class="not">Karakterler ve olaylar kurgudur. Seslendirme yapay zekâ (Gemini TTS) ile üretilmiştir.</p>
     </div>
     <nav aria-label="Alt bağlantılar">
@@ -377,17 +379,16 @@ footer .not{font-size:13px;opacity:.85}
 </footer>
 
 <script>
-/* ===== DÜZENLENECEK SABİTLER ===== */
-// İLETİŞİM: boş bırakılan satır sayfada görünmez. Uydurma bilgi yazmayın.
+/* ===== SABİTLER ===== */
+// İletişim: anahtarlar yukarıdaki data-tur değerleriyle eşleşir; boş olan satır gizli kalır.
 const ILETISIM = {
-  eposta: '',      // ör. 'kulup@ornek.edu.tr'
-  linkedin: '',    // ör. 'https://www.linkedin.com/company/...'
-  instagram: '',   // ör. 'https://www.instagram.com/...'
-  github: '',      // ör. 'https://github.com/...'
+  eposta: 'suleymankara600@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/suleymankara/',
+  instagram: '',
+  github: 'https://github.com/suleyman-kara',
 };
-const SALON_SAYISI = '';     // ör. '180' → "180 kişi telefonla oy verdi" kutusu görünür
-const HAZIRLAYANLAR = [];    // ör. ['Ad Soyad', 'Ad Soyad']; boşsa "CENGA ekibi" yazar
-/* ================================= */
+const SALON_SAYISI = '20';   // etkinlikte canlı oynayıp oy veren kişi sayısı
+/* ==================== */
 (function () {
   var liste = document.getElementById('iletisim'), dolu = 0;
   liste.querySelectorAll('a[data-tur]').forEach(function (a) {
@@ -399,7 +400,6 @@ const HAZIRLAYANLAR = [];    // ör. ['Ad Soyad', 'Ad Soyad']; boşsa "CENGA eki
   });
   if (dolu) { liste.hidden = false; }
   if (SALON_SAYISI) { document.getElementById('salonSayi').textContent = SALON_SAYISI; document.getElementById('salonKutu').hidden = false; }
-  if (HAZIRLAYANLAR.length) document.getElementById('hazirlayanlar').textContent = 'Hazırlayanlar: CENGA ekibi — ' + HAZIRLAYANLAR.join(', ');
 
   // önizleme: hareket azaltma tercihinde oynatma; duraklat/oynat düğmesi
   var v = document.getElementById('vid'), d = document.getElementById('vidDugme');

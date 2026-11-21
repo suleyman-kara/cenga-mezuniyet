@@ -5,17 +5,19 @@ Bağlantılar:
 - Tek kişilik demo: https://cenga-mezuniyet.pages.dev/oyun/?demo=1
 - Videolar: `tanitim/linkedin-16x9.mp4` (1920×1080, 75 sn), `tanitim/linkedin-kare.mp4` (1080×1080, akışta daha büyük görünür; LinkedIn için önerilen)
 
-Köşeli parantezli yerler (`[...]`) sizin dolduracağınız yerler. Etiketlenecek kişileri gönderiyi yazarken `@` ile seçin.
+Sabit bilgiler doldu: oyunu **Süleyman Kara** geliştirdi, fikir **CENGA**'dan; etkinlikte **20 kişi** canlı oynayıp oy verdi; hikâye ve karakterler **tamamen kurgu**; seslendirme **yapay zekâ (Gemini TTS)**. İletişim: suleymankara600@gmail.com · https://www.linkedin.com/in/suleymankara/ · https://github.com/suleyman-kara
+
+Köşeli parantezli yerler (`[...]`) hâlâ sizin dolduracağınız ya da sileceğiniz yerler. Etiketlenecek kişileri gönderiyi yazarken `@` ile seçin.
 
 ---
 
 ## Paylaşmadan önce kontrol listesi
 
-- [ ] **Gerçek kişiler:** Karakterlerde ya da esprilerde tanıdık birine (hoca, arkadaş, kulüp üyesi, kantinci, bölüm çalışanı…) gönderme varsa o kişiden **açık izin alındı**. İzin yoksa o sahne videodan/görsellerden çıkarıldı ya da isim değiştirildi.
+- [x] **Gerçek kişiler:** Geçerli değil. Hikâye, karakterler ve olaylar tamamen kurgu; gerçek bir kişiye gönderme yok.
 - [ ] **Yapay zekâ seslendirmesi:** Gönderide seslendirmenin yapay zekâ (Gemini TTS) ile üretildiği yazıyor (aşağıdaki taslaklarda var; silmeyin). Açılış sayfasının altında da yazıyor.
 - [ ] Gönderide adı geçen/etiketlenen herkes etiketlenmeyi kabul etti.
 - [ ] Videonun ve açılış sayfasındaki görsellerin kurum/şirket adlarıyla (Yıldızlar Holding, Kuzey Yazılım… hepsi kurgu) gerçek bir şirketi çağrıştırmadığını bir kez daha gözden geçirdim.
-- [ ] Açılış sayfasındaki yer tutucular dolduruldu ya da bilerek boş bırakıldı: `site/vitrin/index.html` sonundaki `ILETISIM`, `SALON_SAYISI`, `HAZIRLAYANLAR` sabitleri (boş olanlar sayfada görünmez).
+- [x] Açılış sayfası dolduruldu: iletişim (e-posta, LinkedIn, GitHub; Instagram bilerek boş), "20 kişi" kutusu ve alt bilgide "Geliştiren: Süleyman Kara · Fikir: CENGA".
 - [ ] Oyundaki "Bu ne?" penceresinin bağlantısı (`oyun/index.html` içinde `DEMO_BAGLANTI`) istenirse açılış sayfasına yönlendirildi.
 - [ ] Demo bağlantısını telefonda bir kez açıp denedim (sesi aç, ilk kararda seçeneğe dokun).
 - [ ] LinkedIn bağlantı önizlemesi doğru: https://www.linkedin.com/post-inspector/ adresine açılış sayfasını yapıştırıp görseli kontrol et (önbelleği de yeniler).
@@ -27,31 +29,32 @@ Köşeli parantezli yerler (`[...]`) sizin dolduracağınız yerler. Etiketlenec
 
 > Projeksiyonda bir Windows hata penceresi: "Mezuniyet.exe yanıt vermiyor."
 >
-> 20 Kasım'da [CENGA etkinliğinin adı]'nda salona bir hikâye izletmedik; salona bir hikâye oynattık.
+> 20 Kasım'daki CENGA sosyal etkinliğinde salona bir hikâye izletmedik; salona bir hikâye oynattık.
 >
 > Kahramanımız Deniz, bilgisayar mühendisliği öğrencisi. Dolmuşta ayakta staj arıyor (kapasite on dört kişi, şoföre göre bu bir öneri). Sonra mezun oluyor ve Türkiye'de iş arıyor. Torpil mi, ücretsiz startup mı? LinkedIn'e düzgün profil fotoğrafı mı, dürümlü fotoğraf mı? Bu kararları biz vermedik: salon verdi.
 >
-> Her karar anında perdede bir QR çıktı. Herkes telefonundan okuttu, 30 saniyede oy verdi, çubuklar canlı doldu ve "SALON KARAR VERDİ!" yazısıyla hikâye o yöne dallandı. 6 karar, 5 farklı son, yaklaşık 20 dakika. Bizim salon [son adı] sonuna ulaştı. 😅
+> Her karar anında perdede bir QR çıktı. Herkes telefonundan okuttu, 30 saniyede oy verdi, çubuklar canlı doldu ve "SALON KARAR VERDİ!" yazısıyla hikâye o yöne dallandı. 6 karar, 5 farklı son, yaklaşık 20 dakika. Etkinlikte 20 kişi canlı oynadı; bizim salon [son adı] sonuna ulaştı. 😅
 >
-> Arkasında bir oyun motoru, gerçek zamanlı oylama, telefondan kumanda ve yapay zekâyla seslendirilmiş 146 replik var. Hepsini [kaç] kişilik ekip olarak [süre] içinde kurduk.
+> Arkasında bir oyun motoru, gerçek zamanlı oylama, telefondan kumanda ve yapay zekâyla seslendirilmiş 146 replik var. Fikir CENGA'dan geldi; oyunu ben geliştirdim[, süre: ör. üç haftada].
 >
 > Kaçıranlar için tek kişilik demo açık; kararları siz veriyorsunuz:
 > 👉 https://cenga-mezuniyet.pages.dev
 >
-> Emeği geçen herkese teşekkürler: [@isim], [@isim], [@isim].
+> Fikir ve etkinlik için CENGA'ya teşekkürler[: @CENGA sayfası ve etiketlemek istediğiniz kişiler; izinlerini aldıktan sonra ekleyin, yoksa bu kısmı silin].
 > Kulübünüzün etkinliği için benzerini düşünüyorsanız yazın, konuşalım.
 >
-> Not: Karakterler kurgudur, seslendirmeler yapay zekâ (Gemini TTS) ile üretilmiştir.
+> Not: Hikâye, karakterler ve olaylar tamamen kurgudur; seslendirmeler yapay zekâ (Gemini TTS) ile üretilmiştir.
 >
 > #CENGA #bilgisayarmühendisliği #öğrencikulübü #interaktifhikaye #oyungeliştirme [#üniversiteadı]
 
 ## Taslak 2 — Kısa ve teknik (Türkçe)
 
-> Bir öğrenci kulübü etkinliği için salonun telefonla oy verdiği interaktif bir animasyon oyunu yaptık: "Mezuniyet.exe yanıt vermiyor."
+> CENGA'nın fikriyle, kulübün etkinliği için salonun telefonla oy verdiği interaktif bir animasyon oyunu geliştirdim: "Mezuniyet.exe yanıt vermiyor."
 >
 > 🎬 Projeksiyonda kendi kendine akan, seslendirilmiş bir hikâye
 > 📱 Karar anında QR → telefondan oy → çubuklar canlı dolar
 > 🌳 6 karar, 5 son
+> 👥 Etkinlikte 20 kişi canlı oynadı
 >
 > Teknik taraf:
 > • Tek dosyalık oyun motoru (HTML/CSS/JS, çatı ve derleme yok)
@@ -63,21 +66,21 @@ Köşeli parantezli yerler (`[...]`) sizin dolduracağınız yerler. Etiketlenec
 >
 > Demo (tek kişilik, kararları siz veriyorsunuz): https://cenga-mezuniyet.pages.dev
 >
-> [@ekip arkadaşları] · #webdev #firebase #javascript #gamedev #CENGA
+> Hikâye tamamen kurgudur. [@CENGA ve etiketlenecek kişiler; izin aldıktan sonra] · #webdev #firebase #javascript #gamedev #CENGA
 
 ## Draft 3 — English
 
 > "Mezuniyet.exe is not responding." (Mezuniyet = graduation, in Turkish.)
 >
-> For our computer engineering club's social night on 20 November, we built an interactive animated story that the whole room played together. It follows Deniz, a CS student hunting for an internship and then a job in Turkey, with plenty of dark humour about what happens after graduation.
+> For CENGA's (our computer engineering club) social night on 20 November, I built an interactive animated story that the whole room played together. The idea came from CENGA; I developed the game. It follows Deniz, a CS student hunting for an internship and then a job in Turkey, with plenty of dark humour about what happens after graduation.
 >
-> At each decision point a QR code appeared on the projector. The audience scanned it, voted on their phones within 30 seconds, watched the bars fill live, and the story branched with "THE ROOM HAS DECIDED!". 6 decisions, 5 endings, ~20 minutes.
+> At each decision point a QR code appeared on the projector. The audience scanned it, voted on their phones within 30 seconds, watched the bars fill live, and the story branched with "THE ROOM HAS DECIDED!". 6 decisions, 5 endings, ~20 minutes; 20 people played it live.
 >
 > Under the hood: a single-file game engine (plain HTML/CSS/JS), real-time voting on Firebase Firestore with no Cloud Functions (the presenter's laptop does the counting), an offline cache via Service Worker, a phone remote for the presenter, and 146 lines voiced with AI text-to-speech (Gemini TTS).
 >
 > The story is in Turkish, but there is a single-player demo where you make the choices: https://cenga-mezuniyet.pages.dev
 >
-> Thanks to [@names]. If your club or community wants something like this for an event, get in touch.
+> The story and characters are entirely fictional. Thanks to CENGA for the idea [@CENGA and anyone else you tag, with their permission]. If your club or community wants something like this for an event, get in touch.
 >
 > #studentclubs #interactivestorytelling #webdev #firebase #gamedev
 
@@ -93,7 +96,7 @@ Köşeli parantezli yerler (`[...]`) sizin dolduracağınız yerler. Etiketlenec
 
 > Merhaba [kulüp adı] ekibi,
 >
-> Biz [üniversite] CENGA'dan [adınız]. 20 Kasım'daki etkinliğimizde salonun telefonla oy verdiği interaktif bir animasyon oyunu oynattık: "Mezuniyet.exe yanıt vermiyor." Projeksiyonda hikâye akıyor, karar anlarında herkes QR'ı okutup oy veriyor, hikâye salonun kararıyla dallanıyor. Uygulama indirmek ya da hesap açmak gerekmiyor.
+> Ben Süleyman Kara, [üniversite] CENGA'dan. 20 Kasım'daki etkinliğimizde 20 kişilik salona telefonla oy verdikleri interaktif bir animasyon oyunu oynattık: "Mezuniyet.exe yanıt vermiyor." Fikir CENGA'dan geldi, oyunu ben geliştirdim. Projeksiyonda hikâye akıyor, karar anlarında herkes QR'ı okutup oy veriyor, hikâye salonun kararıyla dallanıyor. Uygulama indirmek ya da hesap açmak gerekmiyor.
 >
 > Kısa özet: https://cenga-mezuniyet.pages.dev (oradan tek kişilik demoyu da oynayabilirsiniz)
 >
@@ -101,11 +104,11 @@ Köşeli parantezli yerler (`[...]`) sizin dolduracağınız yerler. Etiketlenec
 >
 > Uygun olduğunuz bir zaman var mı?
 >
-> [Ad Soyad] · [iletişim]
+> Süleyman Kara · suleymankara600@gmail.com · https://www.linkedin.com/in/suleymankara/
 
 **Kısa DM sürümü:**
 
-> Selam! CENGA'dan [ad]. Etkinliğimizde salonun telefonla oy verip yön verdiği bir hikâye oyunu yaptık; özeti ve demosu burada: https://cenga-mezuniyet.pages.dev. Sizin etkinliğiniz için de uyarlayabiliriz; 15 dakikalık bir canlı gösterim ister misiniz?
+> Selam! CENGA'dan Süleyman Kara. Etkinliğimizde salonun telefonla oy verip yön verdiği bir hikâye oyunu yaptık; özeti ve demosu burada: https://cenga-mezuniyet.pages.dev. Sizin etkinliğiniz için de uyarlayabiliriz; 15 dakikalık bir canlı gösterim ister misiniz?
 
 ---
 

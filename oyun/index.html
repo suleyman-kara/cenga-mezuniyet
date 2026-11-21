@@ -2691,5 +2691,35 @@ else{
  }catch(e){ console.warn('[oylama] bağlanamadı',e); window.VOTE_PENDING=false; durum('Çevrimdışı: oylama yok, kararlar kurayla (1-4 tuşlarıyla seçebilirsin)','off'); }
 }
 </script>
+<!-- ---------- ÇEVRİMDIŞI ÖNBELLEK (sw.js) · ?sw=0 kapatır · ayrıntı: oyun/sw.js ---------- -->
+<style>
+#swRozet{position:fixed;right:14px;bottom:12px;z-index:60;max-width:46vw;font:600 15px/1.3 system-ui,Segoe UI,sans-serif;padding:5px 11px;border-radius:9px;background:rgba(0,0,0,.5);color:#e8f0ff;pointer-events:none;opacity:0;transition:opacity .8s}
+#swRozet.on{opacity:.9}#swRozet.ok{color:#7df9a4}#swRozet.uy{color:#ffd27a}
+body:has(#dec.on) #swRozet{opacity:0}
+</style>
+<script>
+(function(){
+ const Q=new URLSearchParams(location.search), SW=navigator.serviceWorker;
+ if(!/^https?:$/.test(location.protocol)||!SW||Q.get('sw')==='0'||(Q.has('test')&&Q.get('sw')!=='1')) return;
+ const R=document.createElement('div'); R.id='swRozet'; document.body.appendChild(R);
+ const onceden=!!SW.controller; let indirdi=false, t=0;
+ const goster=(m,c,sure)=>{ R.textContent=m; R.className='on '+(c||''); clearTimeout(t); if(sure) t=setTimeout(()=>R.classList.remove('on'),sure); };
+ const cevrimdisi=()=>goster('Çevrimdışı · önbellekten','',6000);
+ SW.addEventListener('message',e=>{
+  const m=e.data||{}; window.SW_DURUM=m;
+  if(m.t==='ilerleme'){ indirdi=true; const y=Math.floor(100*(m.toplamBayt?m.bayt/m.toplamBayt:m.bitti/m.toplam));
+   goster((onceden?'Güncelleme indiriliyor… %':'Çevrimdışı için hazırlanıyor… %')+y+' ('+m.bitti+'/'+m.toplam+')'); }
+  else if(m.t==='hazir'){ if(m.cevrimdisi||!navigator.onLine) cevrimdisi(); else goster('✓ Çevrimdışı oynamaya hazır','ok',indirdi?6000:3500); }
+  else if(m.t==='guncelleme') goster('Güncelleme indirildi — sayfayı yenileyince geçerli','ok',9000);
+  else if(m.t==='hata'){ console.warn('[önbellek]',m.mesaj); goster(onceden?'⚠ Güncelleme inemedi · önceki sürüm önbellekte':'⚠ Çevrimdışı önbellek tamamlanamadı (internet?)','uy',9000); }
+ });
+ SW.startMessages();
+ addEventListener('offline',()=>{ if(SW.controller) cevrimdisi(); });
+ try{ navigator.storage&&navigator.storage.persist&&navigator.storage.persist(); }catch(_){}
+ SW.register('sw.js',{scope:'./',updateViaCache:'none'})
+  .then(()=>SW.ready).then(r=>{ (SW.controller||r.active).postMessage({t:'kontrol'}); })
+  .catch(e=>console.warn('[önbellek] service worker kaydedilemedi',e));
+})();
+</script>
 </body>
 </html>

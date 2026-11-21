@@ -1,9 +1,19 @@
 # Mezuniyet.exe Yanıt Vermiyor — sunum notu
 
 ## Başlatma
-1. `baslat.bat`'a çift tıkla. Siyah pencere (yerel sunucu) açık kalmalı, kapatma.
-   (Python yoksa: bu klasörde `npx serve -l 8765` de olur. Dosyaya çift tıklayarak açma: canlı oylama çalışmaz.)
-2. Tarayıcıda oyun açılır. Sol altta **"● Canlı oylama hazır · oturum xxxxxx"** yazısını gör.
+1. Chrome/Edge'de **https://cenga-mezuniyet.pages.dev/oyun/** adresini aç.
+   - **Önceden bir kez** (etkinlikten önceki gün/sabah, iyi internette) sunum dizüstünde aç ve sağ altta
+     **"✓ Çevrimdışı oynamaya hazır"** yazısını bekle (ilk seferde ~57 MB ses iner: "Çevrimdışı için hazırlanıyor… %42 (65/154)").
+     Bundan sonra oyun ve sesler internetsiz de açılır (sağ altta "Çevrimdışı · önbellekten"); internet yalnız **canlı oylama** için gerekir.
+   - Aynı tarayıcı ve aynı profil kullanılmalı; gizli pencere önbellek tutmaz. Tarayıcı verilerini temizleme.
+   - Repoda yeni sürüm yayınlanınca açılışta yalnız değişen dosyalar iner; "Güncelleme indirildi — sayfayı yenileyince geçerli"
+     yazısı çıkar. Açık sayfa kendiliğinden yenilenmez (sunum bölünmez); yeni sürüm sonraki açılışta geçerli olur.
+   - `?sw=0` önbelleği devre dışı bırakır (sorun ayıklama). Diğer parametreler aynen çalışır: `.../oyun/?sahte=1`, `?test=1`.
+   - Yedek yol: `baslat.bat`'a çift tıkla (yerel sunucu; siyah pencere açık kalmalı). Python yoksa bu klasörde `npx serve -l 8765`.
+     Dosyaya çift tıklayarak açma: canlı oylama çalışmaz.
+   - Kurulum notu: Firebase Console > Authentication > Settings > Authorized domains listesinde `cenga-mezuniyet.pages.dev`
+     olmalı (oy sayfası /v/ orada çalıştığına göre büyük olasılıkla zaten ekli).
+2. Oyun açılır. Sol altta **"● Canlı oylama hazır · oturum xxxxxx"** yazısını gör.
    "Çevrimdışı" yazıyorsa internet/Wi-Fi'ı kontrol et, sayfayı yenile (F5).
 3. **F** ile tam ekran, sonra boşluk ya da tıklama: oyun başlar ve kendi kendine akar.
 
@@ -29,11 +39,11 @@ Dikkat: oylama sırasında ekrana tıklamak oylamayı erken bitirir.
 
 ## B planları
 - İnternet yok: oyun "çevrimdışı" kipte akar; kararlar kurayla ya da senin 1–4 seçiminle.
-- Prova / sahte oylar: `http://localhost:8765/index.html?sahte=1`
+- Prova / sahte oylar: `https://cenga-mezuniyet.pages.dev/oyun/?sahte=1` (yerelde: `http://localhost:8765/index.html?sahte=1`)
 - Test: `?test=1` (bütün yolları dener), `?vitrin=1` (bütün sahneler).
 
 ## Prova kontrol listesi (sabah)
 - [ ] Projektör + ses çıkışı
-- [ ] "Canlı oylama hazır" yazısı
+- [ ] "Canlı oylama hazır" yazısı (sol alt) ve "✓ Çevrimdışı oynamaya hazır" (sağ alt)
 - [ ] 2-3 telefonla ilk kararda oy verip sonucun ekrana düştüğünü gör
 - [ ] Salon Wi-Fi'ında telefonlar pages.dev'e girebiliyor mu

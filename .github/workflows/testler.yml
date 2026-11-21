@@ -26,3 +26,21 @@ jobs:
         run: npm run test:rules
       - name: Entegrasyon testi (50 sanal seyirci, emülatör)
         run: npm run test:int
+  site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Site derlemesi
+        run: node site/build.mjs
+      - name: Derleme testleri
+        run: node --test 'site/test/*.test.mjs'
+      - name: Playwright + Chromium kur
+        run: |
+          npm install -g playwright@1.63.0
+          npx -y playwright@1.63.0 install --with-deps chromium
+      - name: Çevrimdışı önbellek uçtan uca testi
+        run: node site/test/e2e-offline.mjs

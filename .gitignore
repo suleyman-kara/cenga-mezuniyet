@@ -20,3 +20,6 @@ _toplu.json
 
 # ajan çalışma kopyaları (geçici)
 .claude/worktrees/
+
+# site derlemesi (node site/build.mjs)
+dist/

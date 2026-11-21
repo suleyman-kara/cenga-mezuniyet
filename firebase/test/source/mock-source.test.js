@@ -75,3 +75,25 @@ describe('MockSource (eski sahte oylama davranisi)', () => {
     const s = createMockSource({ rng: seeded() }); expect((await s.pause()).ok).toBe(true); expect((await s.resume()).ok).toBe(true);
   });
 });
+
+describe('MockSource: oturum surdurme ve kumanda (bos surumler)', () => {
+  it('resumeSession sid yi aynen doner; bos sid reddedilir', async () => {
+    const s = createMockSource({ rng: seeded() });
+    await expect(s.resumeSession('abc123')).resolves.toBe('abc123');
+    await expect(s.resumeSession('')).rejects.toThrow();
+  });
+  it('kumanda metotlari zararsiz: url null, dinleyiciler kapatilabilir, push firlatmaz', async () => {
+    const s = createMockSource({ rng: seeded() }); await s.createSession();
+    expect(await s.createRemote()).toEqual({ secret: null, url: null });
+    expect(await s.resumeRemote('x')).toMatchObject({ url: null, paired: false });
+    expect(await s.resetRemote()).toEqual({ secret: null, url: null });
+    const off1 = s.onRemoteCommand(() => {}), off2 = s.onRemoteStatus(() => {});
+    expect(typeof off1).toBe('function'); expect(typeof off2).toBe('function'); off1(); off2();
+    expect(() => s.pushRemoteState({ pos: 1 })).not.toThrow();
+    await expect(s.end()).resolves.toBeUndefined();
+  });
+  it('updateSession zararsiz bos surum', async () => {
+    const s = createMockSource({ rng: seeded() }); await s.createSession();
+    await expect(s.updateSession({ a: 1 })).resolves.toEqual({ ok: true, error: null });
+  });
+});

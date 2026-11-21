@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mezuniyet.exe Yanıt Vermiyor · salonun oyuyla dallanan interaktif hikâye</title>
+<meta name="description" content="Projeksiyonda akan, salonun telefonla oy verdiği interaktif animasyon hikâye: 6 karar, 5 son, 146 seslendirilmiş replik. CENGA sosyal etkinliği için yapıldı. Demoyu tarayıcında oyna.">
+<link rel="canonical" href="https://cenga-mezuniyet.pages.dev/">
+<meta name="theme-color" content="#1d2a4a">
+<meta name="color-scheme" content="dark">
+<!-- Open Graph / LinkedIn önizlemesi (mutlak adresler) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Mezuniyet.exe">
+<meta property="og:url" content="https://cenga-mezuniyet.pages.dev/">
+<meta property="og:title" content="Mezuniyet.exe Yanıt Vermiyor — salon oy verdi, hikâye dallandı">
+<meta property="og:description" content="Mezun olup Türkiye'de iş aramak üzerine kara mizahlı, interaktif bir animasyon. Salon 6 kararı telefonla verdi; 5 farklı son. Demoyu oyna.">
+<meta property="og:image" content="https://cenga-mezuniyet.pages.dev/og.jpg">
+<meta property="og:image:secure_url" content="https://cenga-mezuniyet.pages.dev/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Mezuniyet.exe yanıt vermiyor: oyundan bir karar anı, canlı oy çubukları ve QR kod">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mezuniyet.exe Yanıt Vermiyor">
+<meta name="twitter:description" content="Salonun telefonla oy verdiği interaktif animasyon hikâye. 6 karar, 5 son. Demoyu oyna.">
+<meta name="twitter:image" content="https://cenga-mezuniyet.pages.dev/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='8' width='56' height='48' rx='8' fill='%231d2a4a'/%3E%3Crect x='4' y='8' width='56' height='12' rx='6' fill='%23ffc93c'/%3E%3Ccircle cx='32' cy='38' r='11' fill='none' stroke='%237df9e6' stroke-width='5' stroke-dasharray='48 22'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="onizleme.webp">
+<style>
+:root{
+  --lacivert:#1d2a4a; --koyu:#131c33; --gece:#0d1426; --sari:#ffc93c; --camgobegi:#7df9e6; --krem:#fbf6ec; --kirmizi:#f0614f; --yesil:#18a79a;
+  --metin:#eef2fb; --soluk:#a9b6d6; --kenar:rgba(255,255,255,.12);
+  --govde:"Segoe UI",Inter,system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono","Cascadia Mono",Consolas,ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --gutter:16px; --golge:0 18px 0 rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden;overflow-x:clip}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--lacivert);color:var(--metin);font:17px/1.55 var(--govde);overflow-x:hidden;overflow-x:clip}
+img,video{display:block;max-width:100%;height:auto}
+a{color:var(--camgobegi)}
+:focus-visible{outline:3px solid var(--sari);outline-offset:3px;border-radius:6px}
+.atla{position:absolute;left:-999px;top:8px;background:var(--sari);color:var(--lacivert);padding:8px 14px;border-radius:8px;font-weight:800;z-index:10}
+.atla:focus{left:8px}
+.kap{width:100%;max-width:1160px;margin:0 auto;padding:0 var(--gutter)}
+.mono{font-family:var(--mono)}
+.etiket{display:inline-block;font:800 13px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--lacivert);background:var(--sari);padding:8px 12px;border-radius:6px;transform:rotate(-1.5deg);box-shadow:0 0 0 3px var(--lacivert),0 0 0 5px var(--sari)}
+h2{font-size:clamp(30px,7vw,52px);line-height:1.05;letter-spacing:-.02em;margin:16px 0 12px}
+section{padding:72px 0}
+.alt-baslik{color:var(--soluk);max-width:640px;margin:0 0 32px}
+
+/* ---------- üst şerit ---------- */
+.ust{position:sticky;top:0;z-index:5;background:rgba(19,28,51,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--kenar)}
+.ust .kap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;color:#fff;text-decoration:none;white-space:nowrap}
+.logo i{width:22px;height:22px;border-radius:5px;background:var(--lacivert);border:2px solid var(--camgobegi);box-shadow:inset 0 6px 0 var(--sari)}
+.ust nav{display:flex;gap:20px;align-items:center}
+.ust nav a.ic{color:var(--soluk);text-decoration:none;font-weight:600;font-size:15px}
+.ust nav a.ic:hover{color:#fff}
+.ust nav .ic{display:none}
+@media (min-width:860px){.ust nav .ic{display:inline}}
+.dugme{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:800 17px/1 var(--govde);text-decoration:none;border-radius:10px;padding:14px 22px;border:3px solid var(--lacivert);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.dugme.ana{background:var(--sari);color:var(--lacivert);box-shadow:0 6px 0 #b8860b}
+.dugme.ana:hover{transform:translateY(-2px);box-shadow:0 8px 0 #b8860b}
+.dugme.ana:active{transform:translateY(4px);box-shadow:0 2px 0 #b8860b}
+.dugme.ikincil{background:#fff;color:var(--lacivert);border-color:#b9b9b9}
+.dugme.kucuk{padding:10px 14px;font-size:15px;box-shadow:0 4px 0 #b8860b}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:36px 0 64px;background:
+  radial-gradient(900px 500px at 85% 10%,rgba(125,249,230,.12),transparent 60%),
+  radial-gradient(700px 500px at 0% 90%,rgba(255,201,60,.10),transparent 60%),var(--lacivert);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(125,249,230,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(125,249,230,.05) 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(#000,transparent 85%);-webkit-mask-image:linear-gradient(#000,transparent 85%);pointer-events:none}
+.hero .kap{position:relative;display:grid;gap:36px}
+@media (min-width:980px){.hero .kap{grid-template-columns:1fr 1.08fr;align-items:center;gap:48px}.hero{padding:72px 0 96px}}
+.pencere{background:#fff;color:#1d2a4a;border-radius:12px;overflow:hidden;box-shadow:var(--golge),0 0 0 1px rgba(0,0,0,.2)}
+.pencere .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:#f2f2f2;border-bottom:1px solid #d9d9d9;font-weight:600;font-size:15px}
+.pencere .bar b{font-weight:400;font-size:20px;line-height:1;color:#444}
+.diyalog .ic{display:flex;gap:16px;padding:22px 18px 18px}
+.diyalog .ikon{flex:none;width:52px;height:52px;border-radius:50%;background:#0e66c8;color:#fff;display:grid;place-items:center;font:900 30px/1 Georgia,serif}
+.diyalog h1{margin:0;font-size:clamp(34px,9.2vw,64px);line-height:1;letter-spacing:-.03em;color:#174ea6}
+.diyalog h1 .nokta{color:var(--kirmizi)}
+.diyalog .pitch{margin:14px 0 0;font-size:clamp(17px,4.4vw,21px);color:#2b3654}
+.diyalog .uyari{margin:12px 0 0;font:14px/1.45 var(--mono);color:#5b6684;display:flex;gap:10px;align-items:center}
+.cark{flex:none;width:18px;height:18px;border-radius:50%;border:3px solid #c9d8f0;border-top-color:#0e66c8;animation:don 1s linear infinite}
+@keyframes don{to{transform:rotate(1turn)}}
+.diyalog .alt{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end;padding:16px 18px 18px;background:#f5f5f5;border-top:1px solid #e6e6e6}
+.diyalog .alt .dugme{flex:1 1 180px}
+@media (min-width:560px){.diyalog .alt .dugme{flex:0 0 auto}.diyalog .ic{padding:30px 30px 24px;gap:22px}.diyalog .ikon{width:64px;height:64px;font-size:36px}}
+.dugme.ana.buyuk{font-size:20px;padding:18px 28px}
+.dugme.ana.buyuk .cursor{width:18px;height:18px}
+.ipucu{margin:14px 2px 0;color:var(--soluk);font-size:14px}
+.ipucu b{color:#fff}
+.onizleme{position:relative}
+@media (min-width:980px){.onizleme-sar{transform:rotate(1.2deg)}}
+.onizleme-sar{position:relative;padding-top:14px}
+.onizleme .bar{background:var(--koyu);color:#dfe6f7;border-bottom-color:#26345a;padding-left:270px}
+@media (max-width:599px){.onizleme .bar{padding-left:14px}.onizleme .bar .dosya{visibility:hidden}}
+.onizleme .bar .rec{display:inline-flex;align-items:center;gap:8px;font:700 13px var(--mono);color:#ffb3a9}
+.onizleme .bar .rec::before{content:"";width:9px;height:9px;border-radius:50%;background:#ff4d3d;animation:yanson 1.4s steps(2) infinite}
+@keyframes yanson{50%{opacity:.2}}
+.onizleme.pencere{background:var(--gece)}
+.onizleme video,.onizleme img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#0d1426}
+.vid-dugme{position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:rgba(13,20,38,.75);color:#fff;font-size:15px;cursor:pointer;display:grid;place-items:center}
+.etiket-yuzen{position:absolute;left:-6px;top:0;z-index:2}
+
+/* ---------- kayan şerit ---------- */
+.serit{background:var(--sari);color:var(--lacivert);overflow:hidden;border-block:3px solid var(--lacivert);transform:rotate(-1deg) scaleX(1.02);position:relative;z-index:1}
+.serit-sar{overflow:hidden;margin-top:-30px;padding:16px 0;position:relative;z-index:1}
+.serit .ray{display:flex;width:max-content;animation:kay 38s linear infinite}
+.serit span{font:800 15px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:14px 22px;white-space:nowrap}
+.serit span::after{content:"✕";margin-left:44px;opacity:.5}
+@keyframes kay{to{transform:translateX(-50%)}}
+
+/* ---------- nasıl çalıştı ---------- */
+.adimlar{display:grid;gap:16px;counter-reset:a;padding:0;margin:0;list-style:none}
+@media (min-width:860px){.adimlar{grid-template-columns:repeat(3,1fr)}}
+.secenek{position:relative;background:var(--krem);color:#1d2a4a;border-radius:16px;padding:20px 20px 22px 84px;box-shadow:0 0 0 3px #0d1426,0 10px 0 rgba(0,0,0,.25);min-height:100%}
+.secenek .no{position:absolute;left:18px;top:20px;width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font:900 26px/1 var(--govde);color:#fff;border:3px solid #1d2a4a}
+.secenek:nth-child(1) .no{background:var(--yesil)}
+.secenek:nth-child(2) .no{background:var(--sari);color:#1d2a4a}
+.secenek:nth-child(3) .no{background:var(--kirmizi)}
+.secenek h3{margin:0 0 6px;padding-right:58px;font-size:22px;line-height:1.15}
+.secenek p{margin:0;color:#4a5370;font-size:16px}
+.secenek .cubuk{margin-top:16px;height:12px;border-radius:99px;background:#eadfc8;overflow:hidden}
+.secenek .cubuk i{display:block;height:100%;border-radius:99px;width:var(--w);background:currentColor;transform-origin:left;animation:dol 1.6s cubic-bezier(.2,.8,.2,1) both}
+.secenek:nth-child(1) .cubuk i{color:var(--yesil)}
+.secenek:nth-child(2) .cubuk i{color:#e0a800}
+.secenek:nth-child(3) .cubuk i{color:var(--kirmizi)}
+.secenek .yuzde{position:absolute;right:16px;top:20px;font:900 17px var(--mono);color:#1d2a4a}
+@keyframes dol{from{transform:scaleX(0)}}
+.karar-verdi{display:inline-block;margin-top:28px;font:900 clamp(20px,5vw,30px)/1 var(--govde);letter-spacing:.02em;color:#1d2a4a;background:var(--sari);padding:14px 22px;border-radius:12px;transform:rotate(-2deg);box-shadow:0 0 0 3px #0d1426,0 0 60px rgba(255,201,60,.45)}
+
+/* ---------- sayılar ---------- */
+.sayilar{background:var(--koyu);border-block:1px solid var(--kenar)}
+.tablo{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:860px){.tablo{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}}
+.sayi{border:2px solid var(--kenar);border-radius:14px;padding:18px 16px;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent)}
+.sayi b{display:block;font:900 clamp(40px,11vw,64px)/1 var(--mono);color:var(--sari);letter-spacing:-.04em}
+.sayi:nth-child(2) b{color:var(--camgobegi)}
+.sayi:nth-child(3) b{color:#ff9c8f}
+.sayi span{display:block;margin-top:8px;color:var(--soluk);font-size:15px;line-height:1.35}
+.sayi.genis{grid-column:1/-1}
+@media (min-width:860px){.sayi.genis{grid-column:auto}}
+
+/* ---------- galeri ---------- */
+.galeri{display:grid;grid-auto-flow:column;grid-auto-columns:86%;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 18px;margin:0;list-style:none;scrollbar-width:thin;scrollbar-color:var(--sari) transparent;overscroll-behavior-x:contain}
+.galeri li{scroll-snap-align:start}
+@media (min-width:860px){.galeri{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);grid-auto-columns:auto;overflow:visible}.galeri li.genis{grid-column:span 2}}
+.galeri figure{margin:0;background:var(--krem);color:#1d2a4a;border-radius:12px;overflow:hidden;box-shadow:0 0 0 3px #0d1426,0 10px 0 rgba(0,0,0,.25);height:100%}
+.galeri a{display:block}
+.galeri img{width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .3s}
+.galeri li.genis img{aspect-ratio:auto}
+.galeri a:hover img{transform:scale(1.03)}
+.galeri figcaption{padding:10px 14px 12px;font-size:15px;line-height:1.35}
+.galeri figcaption b{display:block;font-size:13px;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#7a5a00}
+.kaydir{color:var(--soluk);font-size:14px;margin:0 0 10px}
+@media (min-width:860px){.kaydir{display:none}}
+
+/* ---------- teknik ---------- */
+.terminal{background:#0b1120;border-radius:14px;overflow:hidden;box-shadow:0 0 0 2px #26345a,var(--golge)}
+.terminal .bar{display:flex;gap:8px;align-items:center;padding:12px 14px;background:#141d33;color:var(--soluk);font:13px var(--mono)}
+.terminal .bar i{width:12px;height:12px;border-radius:50%;background:#ff5f57}.terminal .bar i:nth-child(2){background:#febc2e}.terminal .bar i:nth-child(3){background:#28c840;margin-right:8px}
+.terminal ul{list-style:none;margin:0;padding:18px 16px 22px;display:grid;gap:16px}
+@media (min-width:860px){.terminal ul{grid-template-columns:1fr 1fr;padding:26px 28px 30px;gap:22px 36px}}
+.terminal li{font-size:16px;color:#c9d4ee;padding-left:22px;position:relative}
+.terminal li::before{content:"$";position:absolute;left:0;top:1px;font:700 15px var(--mono);color:var(--camgobegi)}
+.terminal li b{display:block;color:#fff;font:700 16px/1.35 var(--mono);margin-bottom:2px}
+.terminal li code{font:14px var(--mono);color:var(--sari)}
+
+/* ---------- kulübünüz için ---------- */
+.kulup .kart{position:relative;background:var(--sari);color:var(--lacivert);border-radius:20px;padding:30px 20px;box-shadow:0 0 0 3px #0d1426,0 14px 0 rgba(0,0,0,.3);overflow:hidden}
+@media (min-width:860px){.kulup .kart{padding:48px 52px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}}
+.kulup .kart::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;border:26px solid rgba(29,42,74,.08)}
+.kulup h2{margin-top:0;color:var(--lacivert)}
+.kulup p{margin:0 0 12px;font-size:18px}
+.kulup ul.liste{margin:12px 0 0;padding-left:20px}
+.kulup ul.liste li{margin:6px 0}
+.iletisim{list-style:none;padding:0;margin:0;display:grid;gap:10px;position:relative;z-index:1}
+.iletisim a{display:flex;align-items:center;gap:10px;background:var(--lacivert);color:#fff;text-decoration:none;font-weight:700;border-radius:12px;padding:14px 16px;word-break:break-all}
+.iletisim a span{font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--sari);min-width:78px}
+.iletisim a:hover{background:#26386a}
+.kulup .yedek{position:relative;z-index:1}
+.kulup .yedek .dugme{border-color:var(--lacivert);background:var(--lacivert);color:#fff;box-shadow:0 6px 0 #0d1426}
+
+/* ---------- alt bilgi ---------- */
+footer{padding:44px 0 56px;border-top:1px solid var(--kenar);color:var(--soluk);font-size:15px}
+footer .kap{display:grid;gap:14px}
+@media (min-width:860px){footer .kap{grid-template-columns:1fr auto;align-items:end}}
+footer b{color:#fff}
+footer nav{display:flex;flex-wrap:wrap;gap:16px}
+footer .not{font-size:13px;opacity:.85}
+</style>
+</head>
+<body>
+<a class="atla" href="#ana">İçeriğe geç</a>
+
+<header class="ust">
+  <div class="kap">
+    <a class="logo" href="./" aria-label="Mezuniyet.exe ana sayfa"><i aria-hidden="true"></i>Mezuniyet.exe</a>
+    <nav aria-label="Sayfa içi">
+      <a class="ic" href="#nasil">Nasıl çalıştı?</a>
+      <a class="ic" href="#galeri">Görüntüler</a>
+      <a class="ic" href="#teknik">Teknik</a>
+      <a class="ic" href="#kulup">Kulübünüz için</a>
+      <a class="dugme ana kucuk" href="oyun/?demo=1">Demoyu oyna ▶</a>
+    </nav>
+  </div>
+</header>
+
+<main id="ana">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="baslik">
+    <div class="kap">
+      <div>
+        <div class="pencere diyalog" role="group" aria-label="Mezuniyet.exe uyarı penceresi">
+          <div class="bar"><span>Mezuniyet.exe (Yanıt Vermiyor)</span><b aria-hidden="true">✕</b></div>
+          <div class="ic">
+            <div class="ikon" aria-hidden="true">i</div>
+            <div>
+              <h1 id="baslik">Mezuniyet.exe yanıt vermiyor<span class="nokta">.</span></h1>
+              <p class="pitch">Salonun telefonla oy verdiği, mezun olup iş aramak üzerine kara mizahlı interaktif bir animasyon.</p>
+              <p class="uyari"><span class="cark" aria-hidden="true"></span>Programı kapatırsanız kaydedilmemiş kariyeriniz kaybolabilir.</p>
+            </div>
+          </div>
+          <div class="alt">
+            <a class="dugme ikincil" href="#nasil">Nasıl çalıştı?</a>
+            <a class="dugme ana buyuk" href="oyun/?demo=1">Demoyu oyna ▶</a>
+          </div>
+        </div>
+        <p class="ipucu">Tek kişilik demo: kararları <b>sen</b> veriyorsun. ~20 dk · sesi aç · telefonda yatay daha iyi.</p>
+      </div>
+
+      <div class="onizleme-sar">
+      <span class="etiket etiket-yuzen">20 Kasım 2026 · CENGA</span>
+      <div class="onizleme pencere">
+        <div class="bar"><span class="dosya">salon-ekrani.mp4</span><span class="rec">CANLI</span></div>
+        <video id="vid" src="onizleme.mp4" poster="onizleme.webp" width="960" height="540" muted loop playsinline autoplay preload="metadata"
+          aria-label="Oyundan 17 saniyelik sessiz önizleme: dolmuşta staj arayan Deniz, salonun canlı oylaması ve 'Salon karar verdi' anı"></video>
+        <button class="vid-dugme" id="vidDugme" type="button" aria-label="Önizlemeyi duraklat">❚❚</button>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="serit-sar" aria-hidden="true"><div class="serit"><div class="ray">
+    <span>Karar anı</span><span>Salon karar verdi!</span><span>Maaş: rekabetçi</span><span>Kapasite on dört kişi</span><span>CV gerçekson.pdf</span><span>Biz sizi ararız</span><span>Hayır, yazıcı tamir etmiyoruz</span><span>En az 5 yıl deneyimli junior</span>
+    <span>Karar anı</span><span>Salon karar verdi!</span><span>Maaş: rekabetçi</span><span>Kapasite on dört kişi</span><span>CV gerçekson.pdf</span><span>Biz sizi ararız</span><span>Hayır, yazıcı tamir etmiyoruz</span><span>En az 5 yıl deneyimli junior</span>
+  </div></div></div>
+
+  <!-- NASIL ÇALIŞTI -->
+  <section id="nasil" aria-labelledby="nasil-b">
+    <div class="kap">
+      <span class="etiket">Karar 1 / 3</span>
+      <h2 id="nasil-b">Nasıl çalıştı?</h2>
+      <p class="alt-baslik">Bir dizüstü, bir projeksiyon, salondaki herkesin cebindeki telefon. Uygulama indirmek yok, hesap açmak yok.</p>
+      <ol class="adimlar">
+        <li class="secenek"><span class="no" aria-hidden="true">1</span><span class="yuzde mono" aria-hidden="true">%100</span>
+          <h3>Projeksiyonda film gibi akar</h3>
+          <p>Animasyonlu sahneler, seslendirilmiş replikler, müzik. Sunucu yalnızca bir tuşa basar; gerisini oyun kendi oynatır.</p>
+          <div class="cubuk" aria-hidden="true"><i style="--w:100%"></i></div></li>
+        <li class="secenek"><span class="no" aria-hidden="true">2</span><span class="yuzde mono" aria-hidden="true">%73</span>
+          <h3>Karar anında QR çıkar</h3>
+          <p>Salon telefonla okutur, 30 saniyede oy verir. Çubuklar perdede canlı dolar; fikrini süre bitene kadar değiştirebilirsin.</p>
+          <div class="cubuk" aria-hidden="true"><i style="--w:73%"></i></div></li>
+        <li class="secenek"><span class="no" aria-hidden="true">3</span><span class="yuzde mono" aria-hidden="true">%41</span>
+          <h3>Hikâye salonun kararıyla dallanır</h3>
+          <p>Torpil mi, ücretsiz startup mı, dürümlü profil fotoğrafı mı? Her seçim sonraki sahneleri ve sonu değiştirir.</p>
+          <div class="cubuk" aria-hidden="true"><i style="--w:41%"></i></div></li>
+      </ol>
+      <div class="karar-verdi" aria-hidden="true">SALON KARAR VERDİ!</div>
+    </div>
+  </section>
+
+  <!-- SAYILAR -->
+  <section class="sayilar" aria-labelledby="sayilar-b">
+    <div class="kap">
+      <span class="etiket">Karar 2 / 3</span>
+      <h2 id="sayilar-b">Sayılarla</h2>
+      <div class="tablo">
+        <div class="sayi"><b>6</b><span>salonun verdiği karar</span></div>
+        <div class="sayi"><b>5</b><span>farklı son</span></div>
+        <div class="sayi"><b>146</b><span>seslendirilmiş replik</span></div>
+        <div class="sayi"><b>~20</b><span>dakika, baştan sona</span></div>
+        <!-- SALON SAYISI: etkinlikte oy veren kişi sayısını aşağıdaki SALON_SAYISI sabitine yazın (boşsa bu kutu gizlenir) -->
+        <div class="sayi" id="salonKutu" hidden><b id="salonSayi">—</b><span>kişi telefonla oy verdi</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERİ -->
+  <section id="galeri" aria-labelledby="galeri-b">
+    <div class="kap">
+      <span class="etiket">Karar 3 / 3</span>
+      <h2 id="galeri-b">Perdeden kareler</h2>
+      <p class="alt-baslik">Deniz, Ozan, Buse, Tolga ve Asuman: aynı bölümden beş mezun, beş ayrı strateji. Biri hariç hepsi iş arıyor.</p>
+      <p class="kaydir" aria-hidden="true">← kaydır →</p>
+      <ul class="galeri">
+        <li><figure><a href="img/dolmus.webp"><img src="img/dolmus.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Dolmuşta ayakta staj arayan Deniz; 41 derece, hissedilen 47"></a><figcaption><b>Perde 1</b>Kapasite on dört kişi. Şoföre göre bu bir öneri.</figcaption></figure></li>
+        <li><figure><a href="img/karar.webp"><img src="img/karar.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Karar anı: Deniz'in profili nasıl olacak? Salon yüzde 80 ile dürümlü fotoğrafı seçti"></a><figcaption><b>Karar anı</b>Salon oy verdi: dürümlü profil fotoğrafı.</figcaption></figure></li>
+        <li><figure><a href="img/tolga-cv.webp"><img src="img/tolga-cv.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Tolga'nın klasörü: 1 hazırlanan CV, 214 böcek videosu"></a><figcaption><b>Tolga</b>Bir CV, iki yüz on dört böcek videosu.</figcaption></figure></li>
+        <li><figure><a href="img/asuman.webp"><img src="img/asuman.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Asuman Yıldızlar Holding'de ilk gününde"></a><figcaption><b>Asuman</b>Staj yeri yirmi iki yıldır onu bekliyordu.</figcaption></figure></li>
+        <li><figure><a href="img/kariyer.webp"><img src="img/kariyer.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Kariyer günü standı: junior ilanında Java, Go, Rust, Kubernetes ve maaş rekabetçi"></a><figcaption><b>Kariyer günü</b>Junior aranıyor. Maaş: rekabetçi.</figcaption></figure></li>
+        <li><figure><a href="img/bayram.webp"><img src="img/bayram.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Bayram sofrası: akrabalar Deniz'e iş soruyor"></a><figcaption><b>Bayram</b>Hayır, yazıcı tamir etmiyoruz.</figcaption></figure></li>
+        <li><figure><a href="img/viral.webp"><img src="img/viral.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Deniz'in yüzü bir böcek videosunda viral oluyor"></a><figcaption><b>Dal</b>Dürümlü fotoğrafın bedeli: viral bir böcek.</figcaption></figure></li>
+        <li><figure><a href="img/son.webp"><img src="img/son.webp" width="1280" height="720" loading="lazy" decoding="async" alt="Son kartı: Son 2/5, Viral Kaza"></a><figcaption><b>Son 2 / 5</b>Viral Kaza. Diğer dört sonu demoda bul.</figcaption></figure></li>
+        <li><figure><a href="img/demo-telefon.webp"><img src="img/demo-telefon.webp" width="1280" height="584" loading="lazy" decoding="async" alt="Telefonda tek kişilik demo: karar anında seçeneğe dokunuluyor"></a><figcaption><b>Demo</b>Telefonda da oynanıyor: seçeneğe dokun, hikâye dallansın.</figcaption></figure></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TEKNİK -->
+  <section id="teknik" class="sayilar" aria-labelledby="teknik-b">
+    <div class="kap">
+      <span class="etiket">Kaputun altı</span>
+      <h2 id="teknik-b">Teknik</h2>
+      <p class="alt-baslik">Kulüp bütçesiyle, salon Wi-Fi'ının insafına kalmadan çalışsın diye olabildiğince sade.</p>
+      <div class="terminal">
+        <div class="bar"><i></i><i></i><i></i>mezuniyet.exe --nasil-yapildi</div>
+        <ul>
+          <li><b>Tek dosya oyun motoru</b>Sahneler, karakterler, kamera, montaj ve hikâye ağacı tek bir <code>index.html</code> içinde. Çatı yok, derleme yok.</li>
+          <li><b>Firebase Firestore ile gerçek zamanlı oylama</b>Telefonlar QR'dan oy sayfasına girer, oy anında perdeye düşer.</li>
+          <li><b>Cloud Functions yok</b>Sayımı sunucu bilgisayar yapar; Firestore kuralları oyları korur. Sunucu tarafı kod sıfır.</li>
+          <li><b>Çevrimdışı önbellek</b>Service Worker oyunu ve sesleri bir kez indirir; internet giderse oyun akmaya devam eder, karar kurayla verilir.</li>
+          <li><b>Telefon kumandası</b>Sunucu sahnede dolaşırken telefonundan ileri, geri, duraklat ve "bunu kazandır" diyebilir.</li>
+          <li><b>Gemini TTS seslendirme</b>146 replik, her karaktere ayrı ses ve yönerge ile yapay zekâ seslendirmesi.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- KULÜBÜNÜZ İÇİN -->
+  <section id="kulup" class="kulup" aria-labelledby="kulup-b">
+    <div class="kap">
+      <div class="kart">
+        <div>
+          <h2 id="kulup-b">Kulübünüz için</h2>
+          <p>Etkinliğinizde salonu ekrana bağlayan bir şey mi arıyorsunuz?</p>
+          <ul class="liste">
+            <li><b>Bu oyunu</b> kendi bölümünüze, şehrinize ve iç şakalarınıza uyarlayabiliriz.</li>
+            <li>Ya da etkinliğiniz için <b>sıfırdan yeni bir interaktif oyun</b> kurabiliriz.</li>
+            <li>Önce demoyu oynayın, sonra yazın.</li>
+          </ul>
+        </div>
+        <div>
+          <!-- İLETİŞİM: buraya — bağlantıları sayfanın altındaki ILETISIM sabitine yazın. Boş olanlar gizlenir; hepsi boşsa yalnızca demo düğmesi görünür. -->
+          <ul class="iletisim" id="iletisim" hidden>
+            <li hidden><a data-tur="eposta" href="#"><span>E-posta</span><em></em></a></li>
+            <li hidden><a data-tur="linkedin" href="#" rel="noopener" target="_blank"><span>LinkedIn</span><em></em></a></li>
+            <li hidden><a data-tur="instagram" href="#" rel="noopener" target="_blank"><span>Instagram</span><em></em></a></li>
+            <li hidden><a data-tur="github" href="#" rel="noopener" target="_blank"><span>GitHub</span><em></em></a></li>
+          </ul>
+          <div class="yedek" id="iletisimYedek"><a class="dugme" href="oyun/?demo=1">Önce demoyu oyna ▶</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="kap">
+    <div>
+      <p style="margin:0 0 6px"><b>Mezuniyet.exe Yanıt Vermiyor</b> · CENGA sosyal etkinliği, 20 Kasım 2026</p>
+      <!-- HAZIRLAYANLAR: isimleri aşağıdaki HAZIRLAYANLAR sabitine yazın (ör. ['Ad Soyad — hikâye', 'Ad Soyad — kod']) -->
+      <p style="margin:0" id="hazirlayanlar">Hazırlayanlar: CENGA ekibi</p>
+      <p class="not">Karakterler ve olaylar kurgudur. Seslendirme yapay zekâ (Gemini TTS) ile üretilmiştir.</p>
+    </div>
+    <nav aria-label="Alt bağlantılar">
+      <a href="oyun/?demo=1">Demoyu oyna</a>
+      <a href="#nasil">Nasıl çalıştı?</a>
+      <a href="#teknik">Teknik</a>
+      <a href="#kulup">İletişim</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+/* ===== DÜZENLENECEK SABİTLER ===== */
+// İLETİŞİM: boş bırakılan satır sayfada görünmez. Uydurma bilgi yazmayın.
+const ILETISIM = {
+  eposta: '',      // ör. 'kulup@ornek.edu.tr'
+  linkedin: '',    // ör. 'https://www.linkedin.com/company/...'
+  instagram: '',   // ör. 'https://www.instagram.com/...'
+  github: '',      // ör. 'https://github.com/...'
+};
+const SALON_SAYISI = '';     // ör. '180' → "180 kişi telefonla oy verdi" kutusu görünür
+const HAZIRLAYANLAR = [];    // ör. ['Ad Soyad', 'Ad Soyad']; boşsa "CENGA ekibi" yazar
+/* ================================= */
+(function () {
+  var liste = document.getElementById('iletisim'), dolu = 0;
+  liste.querySelectorAll('a[data-tur]').forEach(function (a) {
+    var v = (ILETISIM[a.dataset.tur] || '').trim();
+    if (!v) return;
+    var href = a.dataset.tur === 'eposta' ? 'mailto:' + v : v;
+    a.href = href; a.querySelector('em').textContent = v.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+    a.parentNode.hidden = false; dolu++;
+  });
+  if (dolu) { liste.hidden = false; }
+  if (SALON_SAYISI) { document.getElementById('salonSayi').textContent = SALON_SAYISI; document.getElementById('salonKutu').hidden = false; }
+  if (HAZIRLAYANLAR.length) document.getElementById('hazirlayanlar').textContent = 'Hazırlayanlar: CENGA ekibi — ' + HAZIRLAYANLAR.join(', ');
+
+  // önizleme: hareket azaltma tercihinde oynatma; duraklat/oynat düğmesi
+  var v = document.getElementById('vid'), d = document.getElementById('vidDugme');
+  function durum() { var p = v.paused; d.textContent = p ? '▶' : '❚❚'; d.setAttribute('aria-label', p ? 'Önizlemeyi oynat' : 'Önizlemeyi duraklat'); }
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
+  d.addEventListener('click', function () { if (v.paused) { var r = v.play(); if (r && r.catch) r.catch(function () {}); } else v.pause(); });
+  v.addEventListener('play', durum); v.addEventListener('pause', durum); durum();
+})();
+</script>
+</body>
+</html>

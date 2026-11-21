@@ -1,6 +1,6 @@
 import { describe, it, beforeAll, beforeEach, afterAll } from 'vitest';
 import { initializeTestEnvironment, assertFails, assertSucceeds } from '@firebase/rules-unit-testing';
-import { doc, getDoc, setDoc, updateDoc, deleteDoc, getDocs, collection, serverTimestamp, Timestamp } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, deleteDoc, getDocs, addDoc, collection, serverTimestamp, Timestamp } from 'firebase/firestore';
 import fs from 'node:fs';
 
 const [HOST, HOSTPORT] = (process.env.FIRESTORE_EMULATOR_HOST || '127.0.0.1:8080').split(':');
@@ -141,6 +141,107 @@ describe('votes: okuma', () => {
   });
   it('girissiz okuyamaz', async () => {
     await assertFails(getDoc(voteRef(null, `${DK}__${A}`)));
+  });
+});
+
+const RID = 'Gizli0123456789abcdefXYZ';
+const remRef = (uid, rid = RID) => doc(db(uid), 'sessions', SID, 'remotes', rid);
+const cmdsCol = (uid, rid = RID) => collection(db(uid), 'sessions', SID, 'remotes', rid, 'cmds');
+const seedRemote = (over = {}) => env.withSecurityRulesDisabled((c) => setDoc(doc(c.firestore(), 'sessions', SID, 'remotes', RID), { owner: null, st: null, createdAt: Timestamp.now(), ...over }));
+const seedCmd = (id = 'k1', data = { c: 'ileri', at: Timestamp.now() }) => env.withSecurityRulesDisabled((c) => setDoc(doc(c.firestore(), 'sessions', SID, 'remotes', RID, 'cmds', id), data));
+const cmd = (c = 'ileri', extra = {}) => ({ c, at: serverTimestamp(), ...extra });
+
+describe('remotes: kumanda belgesi', () => {
+  beforeEach(async () => { await seed({ phase: 'lobby' }); });
+  it('host olusturur, gunceller (st), siler ve listeler', async () => {
+    await assertSucceeds(setDoc(remRef(HOSTU), { owner: null, st: null, createdAt: serverTimestamp() }));
+    await assertSucceeds(updateDoc(remRef(HOSTU), { st: { pos: 3, metin: 'merhaba' } }));
+    await assertSucceeds(getDocs(collection(db(HOSTU), 'sessions', SID, 'remotes')));
+    await assertSucceeds(deleteDoc(remRef(HOSTU)));
+  });
+  it('host olmayan olusturamaz, silemez, listeleyemez', async () => {
+    await assertFails(setDoc(remRef(A), { owner: A, st: null }));
+    await seedRemote();
+    await assertFails(deleteDoc(remRef(A)));
+    await assertFails(getDocs(collection(db(A), 'sessions', SID, 'remotes')));
+  });
+  it('kimligi bilen giris yapmis kullanici okuyabilir; girissiz okuyamaz', async () => {
+    await seedRemote();
+    await assertSucceeds(getDoc(remRef(A)));
+    await assertFails(getDoc(remRef(null)));
+  });
+  it('host olmayan owner null iken kendini owner yapabilir (bir kerelik eslesme)', async () => {
+    await seedRemote(); await assertSucceeds(updateDoc(remRef(A), { owner: A }));
+  });
+  it('owner doluyken baskasi (ve ayni kisi) owner i degistiremez', async () => {
+    await seedRemote({ owner: A });
+    await assertFails(updateDoc(remRef(B), { owner: B }));
+    await assertFails(updateDoc(remRef(A), { owner: B }));
+    await assertFails(updateDoc(remRef(A), { owner: null }));
+  });
+  it('baskasinin uid sini owner yapamaz', async () => { await seedRemote(); await assertFails(updateDoc(remRef(A), { owner: B })); });
+  it('eslesirken baska alan degistiremez (st, createdAt, yeni alan)', async () => {
+    await seedRemote();
+    await assertFails(updateDoc(remRef(A), { owner: A, st: { pos: 99 } }));
+    await assertFails(updateDoc(remRef(A), { owner: A, x: 1 }));
+    await assertFails(updateDoc(remRef(A), { st: { pos: 1 } }));
+  });
+  it('girissiz eslesemez', async () => { await seedRemote(); await assertFails(updateDoc(remRef(null), { owner: null })); });
+  it('host owner i sifirlayabilir / st yazabilir', async () => {
+    await seedRemote({ owner: A }); await assertSucceeds(updateDoc(remRef(HOSTU), { owner: null, st: { pos: 1 } }));
+  });
+});
+
+describe('remotes/cmds: kumanda komutlari', () => {
+  beforeEach(async () => { await seed({ phase: 'lobby' }); await seedRemote({ owner: A }); });
+  it('owner gecerli komut yazabilir (a olmadan ve a ile)', async () => {
+    for (const c of ['ileri', 'geri', 'duraklat', 'devam', 'bitir', 'ses', 'oto']) await assertSucceeds(addDoc(cmdsCol(A), cmd(c)));
+    await assertSucceeds(addDoc(cmdsCol(A), cmd('kazan', { a: 0 })));
+    await assertSucceeds(addDoc(cmdsCol(A), cmd('kazan', { a: 3 })));
+  });
+  it('owner olmayan (host dahil) komut yazamaz; girissiz yazamaz', async () => {
+    await assertFails(addDoc(cmdsCol(B), cmd()));
+    await assertFails(addDoc(cmdsCol(HOSTU), cmd()));
+    await assertFails(addDoc(cmdsCol(null), cmd()));
+  });
+  it('owner null iken kimse komut yazamaz', async () => {
+    await seedRemote({ owner: null }); await assertFails(addDoc(cmdsCol(A), cmd()));
+  });
+  it('olmayan (sifirlanmis) kumandaya komut yazilamaz', async () => {
+    await assertFails(addDoc(cmdsCol(A, 'YokBoyleBirKumanda0000000'), cmd()));
+  });
+  it('izin listesinde olmayan komut reddedilir', async () => {
+    await assertFails(addDoc(cmdsCol(A), cmd('restart')));
+    await assertFails(addDoc(cmdsCol(A), cmd('')));
+    await assertFails(addDoc(cmdsCol(A), { c: 1, at: serverTimestamp() }));
+  });
+  it('a aralik disi / tamsayi degilse reddedilir', async () => {
+    await assertFails(addDoc(cmdsCol(A), cmd('kazan', { a: 4 })));
+    await assertFails(addDoc(cmdsCol(A), cmd('kazan', { a: -1 })));
+    await assertFails(addDoc(cmdsCol(A), cmd('kazan', { a: 1.5 })));
+    await assertFails(addDoc(cmdsCol(A), cmd('kazan', { a: '1' })));
+  });
+  it('fazladan/eksik alan reddedilir', async () => {
+    await assertFails(addDoc(cmdsCol(A), cmd('ileri', { x: 1 })));
+    await assertFails(addDoc(cmdsCol(A), { c: 'ileri' }));
+    await assertFails(addDoc(cmdsCol(A), { at: serverTimestamp() }));
+  });
+  it('at sunucu zamani degilse reddedilir', async () => {
+    await assertFails(addDoc(cmdsCol(A), { c: 'ileri', at: Timestamp.fromMillis(Date.now()) }));
+  });
+  it('komutlari yalnizca host okur, listeler ve siler', async () => {
+    await seedCmd('k1');
+    await assertSucceeds(getDocs(cmdsCol(HOSTU)));
+    await assertSucceeds(getDoc(doc(db(HOSTU), 'sessions', SID, 'remotes', RID, 'cmds', 'k1')));
+    await assertFails(getDocs(cmdsCol(A)));
+    await assertFails(getDoc(doc(db(A), 'sessions', SID, 'remotes', RID, 'cmds', 'k1')));
+    await assertFails(deleteDoc(doc(db(A), 'sessions', SID, 'remotes', RID, 'cmds', 'k1')));
+    await assertSucceeds(deleteDoc(doc(db(HOSTU), 'sessions', SID, 'remotes', RID, 'cmds', 'k1')));
+  });
+  it('komut guncellenemez (owner da host da)', async () => {
+    await seedCmd('k2');
+    await assertFails(setDoc(doc(db(A), 'sessions', SID, 'remotes', RID, 'cmds', 'k2'), cmd('geri')));
+    await assertFails(updateDoc(doc(db(HOSTU), 'sessions', SID, 'remotes', RID, 'cmds', 'k2'), { c: 'geri' }));
   });
 });
 

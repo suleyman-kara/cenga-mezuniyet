@@ -1,19 +1,42 @@
-node_modules/
-**/node_modules/
-*.log
-.firebase/
-firebase-debug*.log
-firestore-debug.log
-ui-debug.log
-# anahtarlar asla repoya girmez
+# --- Anahtarlar: asla repoya girmez (GitHub'da GEMINI_API_KEY sırrı kullanılır) ---
 gemini_key.txt
 *key*.txt
 .env*
-# büyük ikili çıktılar
+
+# --- Bağımlılıklar ve derleme çıktısı ---
+node_modules/
+dist/
+
+# --- Firebase / emülatör günlükleri ---
+.firebase/
+*.log
+firebase-debug*.log
+firestore-debug.log
+ui-debug.log
+
+# --- Python ---
+__pycache__/
+*.pyc
+
+# --- Büyük ikili çıktılar (seslendirme, kayıtlar) ---
 *.wav
 *.mp4
 videolar/
 _toplu.json
-
-# oyunun sesleri repoda tutulur (başka bilgisayarda doğrudan çalışsın)
+tanitim/_kayit/
+# istisnalar: oyunun sesleri (başka bilgisayarda doğrudan çalışsın), tanıtım videoları, açılış sayfası önizlemesi
 !oyun/ses/*.wav
+!tanitim/*.mp4
+!site/vitrin/onizleme.mp4
+
+# --- Ajan çalışma kopyaları (geçici) ---
+.claude/worktrees/
+
+# --- İşletim sistemi / düzenleyici kalıntıları ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~

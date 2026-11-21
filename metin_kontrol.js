@@ -2,8 +2,13 @@
 // Kullanım: node metin_kontrol.js <oyun>            -> <oyun>/ses/donmus.json ile karşılaştırır
 //           node metin_kontrol.js <oyun> --dondur   -> şimdiki metni dondurur (yalnızca yönetici çalıştırır)
 const fs = require('fs'), path = require('path');
+const KULLANIM = 'Kullanım: node metin_kontrol.js <oyun>            (ör. node metin_kontrol.js oyun)\n' +
+                 '          node metin_kontrol.js <oyun> --dondur   (şimdiki metni dondurur)';
+if (!process.argv[2] || process.argv[2].startsWith('--')) { console.error('HATA: oyun klasörü verilmedi.\n' + KULLANIM); process.exit(2); }
 const dir = path.resolve(process.cwd(), process.argv[2]);
-const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
+const htmlYol = path.join(dir, 'index.html');
+if (!fs.existsSync(htmlYol)) { console.error('HATA: ' + htmlYol + ' yok.\n' + KULLANIM); process.exit(2); }
+const html = fs.readFileSync(htmlYol, 'utf8');
 const a = html.indexOf('/* ---------- HİKÂYE'), b = html.indexOf('/* ---------- SES');
 if (a < 0 || b < 0) { console.log('HATA: HİKÂYE / SES işaret yorumları yok'); process.exit(1); }
 const G = new Function(html.slice(a, b) + ';return {build,A,VOICE,hid,decVid,endVid};')();
@@ -19,6 +24,10 @@ const now = {};
 })([]);
 const f = path.join(dir, 'ses', 'donmus.json');
 if (process.argv.includes('--dondur')) { fs.writeFileSync(f, JSON.stringify(now, null, 1), 'utf8'); console.log('donduruldu:', Object.keys(now).length, 'kimlik'); process.exit(0); }
+if (!fs.existsSync(f)) {
+  console.error('HATA: ' + path.relative(process.cwd(), f) + ' yok — önce `node metin_kontrol.js ' + process.argv[2] + ' --dondur` ile dondurun.');
+  process.exit(2);
+}
 const eski = JSON.parse(fs.readFileSync(f, 'utf8'));
 const kayip = Object.keys(eski).filter(k => now[k] !== eski[k]), yeni = Object.keys(now).filter(k => !(k in eski));
 if (!kayip.length && !yeni.length) { console.log('METİN AYNI:', Object.keys(now).length, 'kimlik'); process.exit(0); }

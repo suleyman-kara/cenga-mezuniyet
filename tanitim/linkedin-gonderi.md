@@ -1,4 +1,4 @@
-# Mezuniyet.exe — LinkedIn gönderileri ve kulüplere demo
+# Mezuniyet.exe — LinkedIn gönderileri
 
 Bağlantılar:
 - Açılış sayfası: https://cenga-mezuniyet.pages.dev/
@@ -41,7 +41,6 @@ Köşeli parantezli yerler (`[...]`) hâlâ sizin dolduracağınız ya da silece
 > 👉 https://cenga-mezuniyet.pages.dev
 >
 > Fikir ve etkinlik için CENGA'ya teşekkürler[: @CENGA sayfası ve etiketlemek istediğiniz kişiler; izinlerini aldıktan sonra ekleyin, yoksa bu kısmı silin].
-> Kulübünüzün etkinliği için benzerini düşünüyorsanız yazın, konuşalım.
 >
 > Not: Hikâye, karakterler ve olaylar tamamen kurgudur; seslendirmeler yapay zekâ (Gemini TTS) ile üretilmiştir.
 >
@@ -80,7 +79,7 @@ Köşeli parantezli yerler (`[...]`) hâlâ sizin dolduracağınız ya da silece
 >
 > The story is in Turkish, but there is a single-player demo where you make the choices: https://cenga-mezuniyet.pages.dev
 >
-> The story and characters are entirely fictional. Thanks to CENGA for the idea [@CENGA and anyone else you tag, with their permission]. If your club or community wants something like this for an event, get in touch.
+> The story and characters are entirely fictional. Thanks to CENGA for the idea [@CENGA and anyone else you tag, with their permission].
 >
 > #studentclubs #interactivestorytelling #webdev #firebase #gamedev
 
@@ -90,45 +89,23 @@ Köşeli parantezli yerler (`[...]`) hâlâ sizin dolduracağınız ya da silece
 
 ---
 
-## Diğer kulüplere: e-posta / DM şablonu
+## Canlı demo nasıl gösterilir (5 dakika)
 
-**Konu:** Etkinliğiniz için salonun telefonla oynadığı interaktif bir oyun
-
-> Merhaba [kulüp adı] ekibi,
->
-> Ben Süleyman Kara, [üniversite] CENGA'dan. 20 Kasım'daki etkinliğimizde 20 kişilik salona telefonla oy verdikleri interaktif bir animasyon oyunu oynattık: "Mezuniyet.exe yanıt vermiyor." Fikir CENGA'dan geldi, oyunu ben geliştirdim. Projeksiyonda hikâye akıyor, karar anlarında herkes QR'ı okutup oy veriyor, hikâye salonun kararıyla dallanıyor. Uygulama indirmek ya da hesap açmak gerekmiyor.
->
-> Kısa özet: https://cenga-mezuniyet.pages.dev (oradan tek kişilik demoyu da oynayabilirsiniz)
->
-> Benzerini sizin etkinliğiniz için yapabiliriz: bu oyunu kendi bölümünüze ve iç şakalarınıza uyarlayabilir ya da sıfırdan yeni bir interaktif oyun kurabiliriz. İsterseniz 15 dakikalık bir görüntülü görüşmede canlı gösterelim; siz de telefonlarınızla oy verin.
->
-> Uygun olduğunuz bir zaman var mı?
->
-> Süleyman Kara · suleymankara600@gmail.com · https://www.linkedin.com/in/suleymankara/
-
-**Kısa DM sürümü:**
-
-> Selam! CENGA'dan Süleyman Kara. Etkinliğimizde salonun telefonla oy verip yön verdiği bir hikâye oyunu yaptık; özeti ve demosu burada: https://cenga-mezuniyet.pages.dev. Sizin etkinliğiniz için de uyarlayabiliriz; 15 dakikalık bir canlı gösterim ister misiniz?
-
----
-
-## 5 dakikalık canlı demo senaryosu (başka bir kulübe gösterirken)
-
-**Hazırlık (görüşmeden önce):**
+**Hazırlık:**
 - Dizüstünde Chrome/Edge'de iki sekme açık:
-  1. **Canlı oylama:** `https://cenga-mezuniyet.pages.dev/oyun/?yeni=1` (yeni oturum, gerçek QR; karşı taraf kendi telefonuyla oy verebilir). Sol altta "● Canlı oylama hazır" yazısını gör.
+  1. **Canlı oylama:** `https://cenga-mezuniyet.pages.dev/oyun/?yeni=1` (yeni oturum, gerçek QR; izleyenler kendi telefonuyla oy verebilir). Sol altta "● Canlı oylama hazır" yazısını gör.
   2. **B planı:** `https://cenga-mezuniyet.pages.dev/oyun/?sahte=1` (internet/Firebase sorunu olursa sahte oy çubukları).
-- Kendi telefonun elinde (kumanda için). Ses açık; görüntülü görüşmede "bilgisayar sesini paylaş" seçili.
+- Kendi telefonun elinde (kumanda için). Ses açık; görüntülü görüşmedeysen "bilgisayar sesini paylaş" seçili.
 - Açılış sayfası (`https://cenga-mezuniyet.pages.dev`) üçüncü sekmede.
 
 | Süre | Ne gösterilir | Ne söylenir |
 |---|---|---|
 | 0:00–0:30 | Açılış sayfası: hero ve önizleme videosu | "Etkinlikte salon bunu projeksiyonda izledi; ama izlemedi, oynadı." |
 | 0:30–1:15 | 1. sekme. **U** → köşede kumanda QR'ı; kendi telefonunla okut ("✓ Kumanda bağlandı"). **F** ile tam ekran, boşlukla başlat. Başlık penceresinde imleç "Bekle"ye gider. | "Sunucu sahnede dolaşırken her şeyi telefondan yönetiyor." Kumandadan **İleri ▶** ile 2–3 repliği geç (dolmuş, Ozan, Buse). |
-| 1:15–2:45 | İlk **karar anı** gelene kadar ileri. QR perdede. Karşı tarafa: "Telefonunuzla okutun, oy verin." Çubuklar canlı dolar; süre bitince ya da kumandadan **Oylamayı bitir** ile "SALON KARAR VERDİ!" | "Uygulama yok, hesap yok. 30 saniye. Oyunu süre bitene kadar değiştirebilirsiniz. Oy gelmezse ya da berabere kalırsa kura." |
-| 2:45–3:30 | Kararın sonucu olan sahneyi göster (ör. Yıldızlar Holding bodrum katı). Sonra kumandadan **⏸ Duraklat**. | "Her karar sonraki sahneleri ve sonu değiştiriyor: 6 karar, 5 son. Hikâye bizim bölümün iç şakalarıyla dolu; sizinkine uyarlanabilir." |
+| 1:15–2:45 | İlk **karar anı** gelene kadar ileri. QR perdede. İzleyenlere: "Telefonunuzla okutun, oy verin." Çubuklar canlı dolar; süre bitince ya da kumandadan **Oylamayı bitir** ile "SALON KARAR VERDİ!" | "Uygulama yok, hesap yok. 30 saniye. Oyunu süre bitene kadar değiştirebilirsiniz. Oy gelmezse ya da berabere kalırsa kura." |
+| 2:45–3:30 | Kararın sonucu olan sahneyi göster (ör. Yıldızlar Holding bodrum katı). Sonra kumandadan **⏸ Duraklat**. | "Her karar sonraki sahneleri ve sonu değiştiriyor: 6 karar, 5 son. Hikâye bizim bölümün iç şakalarıyla dolu." |
 | 3:30–4:15 | Yeni sekmede `…/oyun/?demo=1` (telefonda da açılabilir). Bir seçeneğe tıkla. | "Paylaşım için tek kişilik demo: herkes kendi kararını veriyor." |
-| 4:15–5:00 | Açılış sayfasında **Teknik** ve **Kulübünüz için** bölümleri. | "Tek dosya oyun motoru, Firestore ile gerçek zamanlı oylama, Cloud Functions yok, çevrimdışı önbellek, AI seslendirme. Sizin etkinliğiniz için ne yapabileceğimizi konuşalım." |
+| 4:15–5:00 | Açılış sayfasında **Teknik** bölümü. | "Tek dosya oyun motoru, Firestore ile gerçek zamanlı oylama, Cloud Functions yok, çevrimdışı önbellek, AI seslendirme." |
 
 **Sorun olursa:**
 - Canlı oylama bağlanmadıysa 2. sekmeye (`?sahte=1`) geç: çubuklar kendiliğinden dolar; **1–4** tuşlarıyla istediğin seçeneği kazandır.

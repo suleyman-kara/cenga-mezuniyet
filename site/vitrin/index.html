@@ -170,23 +170,16 @@ section{padding:72px 0}
 .terminal li b{display:block;color:#fff;font:700 16px/1.35 var(--mono);margin-bottom:2px}
 .terminal li code{font:14px var(--mono);color:var(--sari)}
 
-/* ---------- kulübünüz için ---------- */
-.kulup .kart{position:relative;background:var(--sari);color:var(--lacivert);border-radius:20px;padding:30px 20px;box-shadow:0 0 0 3px #0d1426,0 14px 0 rgba(0,0,0,.3);overflow:hidden}
-@media (min-width:860px){.kulup .kart{padding:48px 52px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}}
-.kulup .kart::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;border:26px solid rgba(29,42,74,.08)}
-.kulup h2{margin-top:0;color:var(--lacivert)}
-.kulup p{margin:0 0 12px;font-size:18px}
-.kulup ul.liste{margin:12px 0 0;padding-left:20px}
-.kulup ul.liste li{margin:6px 0}
-.iletisim{list-style:none;padding:0;margin:0;display:grid;gap:10px;position:relative;z-index:1}
-.iletisim a{display:flex;align-items:center;gap:10px;background:var(--lacivert);color:#fff;text-decoration:none;font-weight:700;border-radius:12px;padding:14px 16px;overflow-wrap:anywhere}
+/* ---------- iletişim ---------- */
+.iletisim-bolum{padding:24px 0 56px}
+.iletisim-bolum h2{font-size:22px;margin:0 0 6px}
+.iletisim-bolum p{margin:0 0 14px;color:var(--soluk)}
+.iletisim{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px}
+.iletisim li{min-width:0;max-width:100%}
+.iletisim a{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:700;border:1px solid var(--kenar);border-radius:10px;padding:10px 14px;overflow-wrap:anywhere}
 .iletisim em{font-style:normal}
-@media (max-width:559px){.iletisim a{flex-direction:column;align-items:flex-start;gap:4px}}
-.iletisim a span{font:700 12px var(--mono);letter-spacing:.1em;color:var(--sari);min-width:78px}
-.iletisim a:hover{background:#26386a}
-.kulup .yedek{position:relative;z-index:1}
-.iletisim:not([hidden])+.yedek{margin-top:18px}
-.kulup .yedek .dugme{border-color:var(--lacivert);background:var(--lacivert);color:#fff;box-shadow:0 6px 0 #0d1426}
+.iletisim a span{font:700 11px var(--mono);letter-spacing:.1em;color:var(--sari)}
+.iletisim a:hover{border-color:var(--sari)}
 
 /* ---------- alt bilgi ---------- */
 footer{padding:44px 0 56px;border-top:1px solid var(--kenar);color:var(--soluk);font-size:15px}
@@ -207,7 +200,7 @@ footer .not{font-size:13px;opacity:.85}
       <a class="ic" href="#nasil">Nasıl çalıştı?</a>
       <a class="ic" href="#galeri">Görüntüler</a>
       <a class="ic" href="#teknik">Teknik</a>
-      <a class="ic" href="#kulup">Kulübünüz için</a>
+      <a class="ic" href="#iletisim">İletişim</a>
       <a class="dugme ana kucuk" href="oyun/?demo=1">Demoyu oyna ▶</a>
     </nav>
   </div>
@@ -334,30 +327,18 @@ footer .not{font-size:13px;opacity:.85}
     </div>
   </section>
 
-  <!-- KULÜBÜNÜZ İÇİN -->
-  <section id="kulup" class="kulup" aria-labelledby="kulup-b">
+  <!-- İLETİŞİM -->
+  <section id="iletisim" class="iletisim-bolum" aria-labelledby="iletisim-b" hidden>
     <div class="kap">
-      <div class="kart">
-        <div>
-          <h2 id="kulup-b">Kulübünüz için</h2>
-          <p>Etkinliğinizde salonu ekrana bağlayan bir şey mi arıyorsunuz?</p>
-          <ul class="liste">
-            <li><b>Bu oyunu</b> kendi bölümünüze, şehrinize ve iç şakalarınıza uyarlayabiliriz.</li>
-            <li>Ya da etkinliğiniz için <b>sıfırdan yeni bir interaktif oyun</b> kurabiliriz.</li>
-            <li>Önce demoyu oynayın, sonra yazın.</li>
-          </ul>
-        </div>
-        <div>
-          <!-- Bağlantılar sayfanın altındaki ILETISIM sabitinden doldurulur; boş olanlar gizli kalır. -->
-          <ul class="iletisim" id="iletisim" hidden>
-            <li hidden><a data-tur="eposta" href="#"><span>E-POSTA</span><em></em></a></li>
-            <li hidden><a data-tur="linkedin" href="#" rel="noopener" target="_blank"><span>LINKEDIN</span><em></em></a></li>
-            <li hidden><a data-tur="instagram" href="#" rel="noopener" target="_blank"><span>INSTAGRAM</span><em></em></a></li>
-            <li hidden><a data-tur="github" href="#" rel="noopener" target="_blank"><span>GITHUB</span><em></em></a></li>
-          </ul>
-          <div class="yedek" id="iletisimYedek"><a class="dugme" href="oyun/?demo=1">Önce demoyu oyna ▶</a></div>
-        </div>
-      </div>
+      <h2 id="iletisim-b">İletişim</h2>
+      <p>Soru ve geri bildirim için:</p>
+      <!-- Bağlantılar sayfanın altındaki ILETISIM sabitinden doldurulur; boş olanlar gizli kalır. -->
+      <ul class="iletisim" id="iletisimListe">
+        <li hidden><a data-tur="eposta" href="#"><span>E-POSTA</span><em></em></a></li>
+        <li hidden><a data-tur="linkedin" href="#" rel="noopener" target="_blank"><span>LINKEDIN</span><em></em></a></li>
+        <li hidden><a data-tur="instagram" href="#" rel="noopener" target="_blank"><span>INSTAGRAM</span><em></em></a></li>
+        <li hidden><a data-tur="github" href="#" rel="noopener" target="_blank"><span>GITHUB</span><em></em></a></li>
+      </ul>
     </div>
   </section>
 </main>
@@ -373,7 +354,7 @@ footer .not{font-size:13px;opacity:.85}
       <a href="oyun/?demo=1">Demoyu oyna</a>
       <a href="#nasil">Nasıl çalıştı?</a>
       <a href="#teknik">Teknik</a>
-      <a href="#kulup">İletişim</a>
+      <a href="#iletisim">İletişim</a>
     </nav>
   </div>
 </footer>
@@ -390,7 +371,7 @@ const ILETISIM = {
 const SALON_SAYISI = '20';   // etkinlikte canlı oynayıp oy veren kişi sayısı
 /* ==================== */
 (function () {
-  var liste = document.getElementById('iletisim'), dolu = 0;
+  var liste = document.getElementById('iletisimListe'), dolu = 0;
   liste.querySelectorAll('a[data-tur]').forEach(function (a) {
     var v = (ILETISIM[a.dataset.tur] || '').trim();
     if (!v) return;
@@ -398,7 +379,7 @@ const SALON_SAYISI = '20';   // etkinlikte canlı oynayıp oy veren kişi sayıs
     a.href = href; a.querySelector('em').textContent = v.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
     a.parentNode.hidden = false; dolu++;
   });
-  if (dolu) { liste.hidden = false; }
+  if (dolu) { document.getElementById('iletisim').hidden = false; }
   if (SALON_SAYISI) { document.getElementById('salonSayi').textContent = SALON_SAYISI; document.getElementById('salonKutu').hidden = false; }
 
   // önizleme: hareket azaltma tercihinde oynatma; duraklat/oynat düğmesi

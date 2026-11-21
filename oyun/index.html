@@ -2826,8 +2826,8 @@ async function selfTest(){
    Herkese açık tek kişilik sürüm (paylaşım bağlantısı için). Firebase'e bağlanmaz, QR yok.
    Karar anında seçenekler düğme olur (tıkla/dokun ya da 1-4); sayaç 45 sn işler, seyrek bir "sanal salon" oyu çubukları canlı tutar.
    Tıklanan seçenek kazanır (forceWin); süre dolarsa sanal salonun çoğunluğu seçer. Normal kip, ?sahte, ?test, ?vitrin, ?yol etkilenmez. */
-const DEMO_BAGLANTI='';                 // ← iletişim / repo bağlantısı buraya (boş kalırsa "Bu ne?" penceresinde bağlantı gösterilmez)
-const DEMO_BAGLANTI_ADI='Proje sayfası';
+const DEMO_BAGLANTI='https://cenga-mezuniyet.pages.dev/';                 // ← iletişim / repo bağlantısı buraya (boş kalırsa "Bu ne?" penceresinde bağlantı gösterilmez)
+const DEMO_BAGLANTI_ADI='Proje sayfası ve iletişim';
 let DEMO_SES=null,demoSessiz='',demoDurdu=false,demoYatayKapali=false;
 function sessizWav(){ // 50 ms sessiz WAV (iOS ses kilidini açmak için)
  const n=1102,b=new ArrayBuffer(44+n*2),v=new DataView(b),w=(o,t)=>{ for(let i=0;i<t.length;i++) v.setUint8(o+i,t.charCodeAt(i)); };

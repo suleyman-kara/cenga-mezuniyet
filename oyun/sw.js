@@ -1,4 +1,8 @@
-/* Mezuniyet.exe · çevrimdışı önbellek (service worker, kapsam: /oyun/)
+/* Salon oyunları · çevrimdışı önbellek (service worker; kapsam: bulunduğu oyun klasörü, ör. /oyun/, /yarisma/)
+ * ASIL DOSYA: ortak/sw.js — oyun/sw.js ve yarisma/sw.js bunun bayt bayt kopyasıdır (site/build.mjs denetler).
+ * Aynı alan adında birden çok oyun: her oyun kendi kapsamındaki anahtarlara dokunur ("<kapsam>__h/…", "<kapsam>__manifest");
+ * bir oyunun güncellemesi/temizliği diğerinin önbelleğini silmez, ilerleme mesajları yalnız kendi sayfalarına gider.
+ * (Önbellek adları "mezuniyet-…" olarak kaldı: etkinlik dizüstündeki mevcut önbellek yeniden inmesin.)
  *
  * manifest.json: { surum, dosyalar: { "<yol>": { h: sha256'nın ilk 16 hanesi, b: bayt } } } (site/build.mjs üretir)
  * - Dosyalar içeriğe göre saklanır: DOSYA önbelleğinde anahtar "<kapsam>__h/<h>". Değişmeyen dosya (aynı h) asla
@@ -38,7 +42,7 @@ async function etkinManifest() {
 
 async function yayinla(m) {
   const liste = await self.clients.matchAll({ includeUncontrolled: true, type: 'window' });
-  for (const c of liste) c.postMessage(m);
+  for (const c of liste) { try { if (!new URL(c.url).pathname.startsWith(KAPSAM)) continue; } catch (_) { continue; } c.postMessage(m); }   // başka oyunun sayfası değil
 }
 
 async function hex16(buf) {
@@ -47,7 +51,7 @@ async function hex16(buf) {
   return s;
 }
 
-function dosyaUrl(yol, h) {   // index.html Cloudflare'de /oyun/'a yönlenir; doğrudan dizini iste
+function dosyaUrl(yol, h) {   // index.html Cloudflare'de dizine (/oyun/) yönlenir; doğrudan dizini iste
   return KAPSAM + (yol === 'index.html' ? '' : yol.split('/').map(encodeURIComponent).join('/')) + '?v=' + h;
 }
 
@@ -124,7 +128,7 @@ async function eslestir() {
     etkin = yeni;
   }
   const gerekli = new Set(Object.values(yeni.dosyalar).map(d => hAnahtar(d.h)));
-  for (const q of await cache.keys()) if (!gerekli.has(new URL(q.url).pathname)) await cache.delete(q);
+  for (const q of await cache.keys()) { const yol = new URL(q.url).pathname; if (yol.startsWith(hAnahtar('')) && !gerekli.has(yol)) await cache.delete(q); }   // yalnız bu kapsamın eskileri
 
   durum = eski && degisti ? { t: 'guncelleme', surum: yeni.surum } : { t: 'hazir', surum: yeni.surum };
   await yayinla(durum);

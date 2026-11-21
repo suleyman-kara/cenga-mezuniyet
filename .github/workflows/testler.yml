@@ -44,3 +44,5 @@ jobs:
           npx -y playwright@1.63.0 install --with-deps chromium
       - name: Çevrimdışı önbellek uçtan uca testi
         run: node site/test/e2e-offline.mjs
+      - name: Salon Yarışması uçtan uca testi (sahte, demo, çevrimdışı)
+        run: node site/test/e2e-yarisma.mjs

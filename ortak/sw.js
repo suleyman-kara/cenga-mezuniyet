@@ -1,5 +1,5 @@
-/* Salon oyunları · çevrimdışı önbellek (service worker; kapsam: bulunduğu oyun klasörü, ör. /oyun/, /yarisma/)
- * ASIL DOSYA: ortak/sw.js — oyun/sw.js ve yarisma/sw.js bunun bayt bayt kopyasıdır (site/build.mjs denetler).
+/* Salon oyunları · çevrimdışı önbellek (service worker; kapsam: bulunduğu oyun klasörü, ör. /oyun/)
+ * ASIL DOSYA: ortak/sw.js — oyunların sw.js dosyaları (ör. oyun/sw.js) bunun bayt bayt kopyasıdır (site/build.mjs denetler).
  * Aynı alan adında birden çok oyun: her oyun kendi kapsamındaki anahtarlara dokunur ("<kapsam>__h/…", "<kapsam>__manifest");
  * bir oyunun güncellemesi/temizliği diğerinin önbelleğini silmez, ilerleme mesajları yalnız kendi sayfalarına gider.
  * (Önbellek adları "mezuniyet-…" olarak kaldı: etkinlik dizüstündeki mevcut önbellek yeniden inmesin.)

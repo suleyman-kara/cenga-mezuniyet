@@ -41,6 +41,7 @@ Dikkat: oylama sırasında ekrana tıklamak oylamayı erken bitirir.
 - İnternet yok: oyun "çevrimdışı" kipte akar; kararlar kurayla ya da senin 1–4 seçiminle.
 - Prova / sahte oylar: `https://cenga-mezuniyet.pages.dev/oyun/?sahte=1` (yerelde: `http://localhost:8765/index.html?sahte=1`)
 - Test: `?test=1` (bütün yolları dener), `?vitrin=1` (bütün sahneler).
+- Paylaşım için tek kişilik demo: `?demo=1` (Firebase yok, QR yok; seçeneğe tıklanır, sayaç 45 sn). İletişim/repo bağlantısı: `index.html` içinde `DEMO_BAGLANTI`.
 
 ## Prova kontrol listesi (sabah)
 - [ ] Projektör + ses çıkışı

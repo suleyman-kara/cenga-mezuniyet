@@ -985,6 +985,41 @@ body{font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-
 #stage.paused *,#stage.paused *:before,#stage.paused *:after{animation-play-state:paused!important}
 #recOn{position:absolute;right:30px;bottom:20px;z-index:41;display:none;font:900 26px "Segoe UI",sans-serif;color:#fff;background:rgba(208,38,26,.9);border-radius:12px;padding:4px 14px}
 #recOn.on{display:block}#recOn i{font-style:normal;animation:blink 1s steps(2) infinite}
+/* ---------- DEMO (?demo=1): tıklanır seçenekler, köşe etiketi, bilgi/son pencereleri ---------- */
+#stage.demo{cursor:auto!important;position:fixed}   /* mobilde ölçekli sahne yerleşim alanını genişletmesin (yoksa sayfa yakınlaşmış görünür) */
+#stage.demo #qr{display:none}
+#stage.demo #qrLbl{font-size:30px;line-height:1.3;color:#fff;background:rgba(255,201,60,.13);border:4px dashed #ffc93c;border-radius:22px;padding:22px 18px}
+#stage.demo #qrLbl b{display:block;font-size:50px;color:#ffc93c;margin-bottom:10px}
+#stage.demo #qrLbl small{display:block;margin-top:8px;font-size:25px;color:#ffe9b8}
+#stage.demo #dec:not(.done) .opt{cursor:pointer;-webkit-tap-highlight-color:transparent}
+@media (hover:hover){#stage.demo #dec:not(.done) .opt:hover{border-color:#ffc93c;transform:translateX(12px);box-shadow:0 0 0 7px rgba(255,201,60,.5)}}
+#stage.demo #dec:not(.done) .opt:active{transform:scale(.98);box-shadow:0 0 0 7px rgba(255,201,60,.7)}
+#stage.demo .opt.secildi{border-color:#ffc93c;box-shadow:0 0 0 12px rgba(255,201,60,.7),0 0 90px rgba(255,201,60,.55);transform:scale(1.02)}
+#card.title .ttl.demo{bottom:56px;font-family:"Segoe UI",system-ui,sans-serif;letter-spacing:1px}
+#card.title .ttl.demo .giris{display:block;font-size:44px;font-weight:700;margin-bottom:22px}
+#card.title .ttl.demo .dokun{display:inline-block;font:900 50px "Segoe UI",system-ui,sans-serif;color:#fff;background:#1d2a4a;border-radius:18px;padding:12px 44px;animation:blink 1.6s infinite}
+#card.title .ttl.demo small{display:block;margin-top:18px;font:600 26px var(--mono);color:#34405e}
+#demoEt{position:fixed;left:50%;top:8px;transform:translateX(-50%);z-index:70;display:flex;gap:6px;align-items:center;font:700 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;opacity:.75;transition:opacity .3s}
+#demoEt:hover{opacity:1}
+#demoEt>*{border-radius:999px;padding:5px 10px;background:rgba(10,14,26,.72);color:#fff;border:1px solid rgba(255,255,255,.3)}
+#demoEt b{background:#ffc93c;color:#1d2a4a;letter-spacing:2px;border-color:#ffc93c}
+#demoEt button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.demoOv{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;background:rgba(5,8,16,.62);padding:16px}
+.demoOv.on{display:flex}
+#demoBilgi{z-index:85}
+.demoKut{max-width:480px;width:100%;max-height:100%;overflow:auto;background:#fffaf0;color:#1d2433;border:3px solid #1d2a4a;border-radius:16px;padding:18px 20px;font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 10px 40px rgba(0,0,0,.45);user-select:text}
+.demoKut h2{font-size:19px;margin-bottom:8px}
+.demoKut p{margin:0 0 9px}
+.demoKut .dg{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:12px}
+.demoKut button,.demoKut a.bag{font:700 15px system-ui,-apple-system,"Segoe UI",sans-serif;padding:10px 16px;border-radius:10px;border:2px solid #1d2a4a;background:#fff;color:#1d2a4a;cursor:pointer;text-decoration:none}
+.demoKut .ana{background:#1d2a4a;color:#fff}
+#demoSon{background:none;align-items:flex-end;pointer-events:none}
+#demoSon .demoKut{pointer-events:auto;text-align:center;max-width:420px}
+#demoSon .demoKut .dg{justify-content:center}
+#demoYatay{position:fixed;left:50%;top:44px;transform:translateX(-50%);z-index:75;display:none;width:min(92vw,360px);background:#fffaf0;color:#1d2a4a;border:2px solid #1d2a4a;border-radius:14px;padding:12px 14px;font:600 15px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+#demoYatay.on{display:block}
+#demoYatay button{margin-top:8px;font:700 14px system-ui,sans-serif;padding:7px 16px;border-radius:9px;border:2px solid #1d2a4a;background:#1d2a4a;color:#fff}
+body.demoBilgi #pauseOv{display:none!important}
 </style>
 </head>
 <body>
@@ -1771,11 +1806,12 @@ function mouthTick(){
 }
 function playVoice(id,onMeta,delay){
  stopVoice();
- const a=new Audio('ses/'+id+'.wav'); VO=a; a.muted=muted;
- if(AC){ try{ const src=AC.createMediaElementSource(a),an=AC.createAnalyser(); an.fftSize=512; src.connect(an); an.connect(AC.destination); VA=an; VBUF=new Uint8Array(an.fftSize); }catch(e){ VA=null; } }
+ const a=DEMO?demoSes(id):new Audio('ses/'+id+'.wav'); VO=a; a.muted=muted; const tok=a._t=(a._t||0)+1;
+ if(a._va){ VA=a._va; VBUF=new Uint8Array(VA.fftSize); }
+ else if(AC){ try{ const src=AC.createMediaElementSource(a),an=AC.createAnalyser(); an.fftSize=512; src.connect(an); an.connect(AC.destination); VA=an; VBUF=new Uint8Array(an.fftSize); if(DEMO) a._va=an; }catch(e){ VA=null; } }
  a.onloadedmetadata=()=>{ if(VO===a&&onMeta) onMeta(a.duration); };
  a.onended=a.onerror=()=>{ if(VO===a){VO=null;duck(false);} };
- setTimeout(()=>{ if(VO===a&&!paused){ duck(true); a.play().catch(()=>{ if(VO===a){VO=null;duck(false);} }); } },delay||0);
+ setTimeout(()=>{ if(VO===a&&a._t===tok&&!paused){ duck(true); a.play().catch(()=>{ if(VO===a){VO=null;duck(false);} }); } },delay||0);
 }
 /* ---------- KARAKTERLER ---------- */
 function fig(c){
@@ -2302,6 +2338,7 @@ function showCard(c,instant){
   setMusic('title'); titleGo=false;
   card.innerHTML=`<div class="ghost">${$('sv-yokus').outerHTML.replace('id="sv-yokus"','style="display:block"')}</div><div class="wash"></div>${pencereHTML('Mezuniyet.exe',(c.title||'Mezuniyet.exe')+' yanıt vermiyor.'.replace(/^/,c.title&&/yanıt/i.test(c.title)?'':''),false)}<div class="ttl">${audioOk||!auto?'':'<b>BOŞLUK</b> başlat · '}<b>F</b> tam ekran <b>M</b> ses <b>O</b> otomatik ${auto?'açık':'kapalı'}</div>`;
   const pen=card.querySelector('.pen'); pen.querySelector('h3').textContent='Mezuniyet.exe yanıt vermiyor.';
+  if(DEMO) demoBaslik();
   if(!instant&&(audioOk||!auto)) titleRun();
  }else if(c.type==='act'){
   setMusic('none'); SFX.fanfare();
@@ -2322,6 +2359,7 @@ function showCard(c,instant){
   card.innerHTML=`${pencereHTML('Mezuniyet.exe',c.title||'Mezuniyet.exe yanıt veriyor.',true)}${c.sub?`<div class="big">${esc(c.sub)}</div>`:''}`;
   card.querySelector('.cur').style.display='none';
   if(!instant) later(()=>SFX.unlock(),700);
+  if(DEMO&&!instant) later(demoSon,4500);
  }else{
   card.innerHTML=`<div class="dec">${STICKY()}</div><div class="kicker">MEZUNİYET.EXE</div><p>${esc(c.title||'')}</p>`;
  }
@@ -2336,6 +2374,8 @@ function titleRun(){ if(titleGo)return; titleGo=true; const pen=card.querySelect
 const OYQ=new URLSearchParams(location.search);
 const OY_SIM=()=>OYQ.has('sahte')||OYQ.has('test');
 const OY_LIVE=()=>!OY_SIM()&&!!window.VOTE&&!!window.VOTE_OK;
+// ?demo=1 : herkese açık tek kişilik demo — Firebase yok, seçenekler tıklanır, hafif sanal salon oyu (bkz. DEMO bölümü)
+const DEMO=OYQ.has('demo')&&!OY_SIM();
 function qrSvg(){
  let seed=7,h='';const N=25,r=()=>(seed=(seed*16807)%2147483647)/2147483647;
  const fin=(x,y)=>x<7&&y<7||x>=N-7&&y<7||x<7&&y>=N-7;
@@ -2350,7 +2390,7 @@ function qrSvg(){
 }
 $('qr').innerHTML=qrSvg();
 window.qrHazir=(svg,url)=>{ $('qr').innerHTML=svg; $('qrLbl').innerHTML='Telefonunla okut, oyunu ver<br><small>'+esc(url.replace(/^https?:\/\//,''))+'</small>'; };
-const DUR=30; let decSeq=0;
+const DUR=DEMO?45:30; let decSeq=0;   // demo: tek kişi okuyup seçsin diye 45 sn
 function showTime(left){
  left=Math.max(0,left);
  if(Math.ceil(left)<V.sec){ V.sec=Math.ceil(left); if(V.sec<=10&&V.sec>0) SFX.tick(V.sec<=5); }
@@ -2371,11 +2411,12 @@ function startDecision(st){
   $('verdict').innerHTML=poll||nab?'<span>SALON BÖYLE DÜŞÜNÜYOR</span><small>BOŞLUK: devam</small>':'<span>SALON KARAR VERDİ!</span><small>BOŞLUK: hikâyeye devam</small>';
   $('q').textContent=d.q;
   $('opts').innerHTML=d.o.map((o,i)=>`<div class="opt ${'abcd'[i]}" id="opt${i}"><div class="key">${i+1}</div><h4>${esc(o[0])}</h4><p>${esc(o[1])}</p><div class="track"><div class="fill" id="fill${i}"></div></div><div class="pct" id="pct${i}">%0</div></div>`).join('');
+  if(DEMO) demoKarar();
   $('cnt').textContent=DUR; $('cnt').classList.remove('hot'); $('ring').style.strokeDashoffset=0; $('total').textContent='0 oy';
   dec.className='on'+(n>3?' n4':n>2?' n3':'')+(poll?' poll':'')+(nab?' nabiz':'');
   let w=d.o.map(()=>poll||nab?1+Math.random()*.3:.55+Math.random()); const ws=w.reduce((a,b)=>a+b,0); w=w.map(x=>x/ws);
-  const mode=OY_LIVE()?'live':OY_SIM()?'sim':'off';
-  V={id:st.id,n,poll,c:d.o.map(()=>0),w,el:0,end:DUR,forced:null,sec:DUR,mode,note:''};
+  const mode=OY_LIVE()?'live':OY_SIM()||DEMO?'sim':'off';
+  V={id:st.id,n,poll,c:d.o.map(()=>0),w,el:0,end:DUR,forced:null,sec:DUR,mode,note:'',demo:DEMO};
   phase='vote'; setMusic('vote'); playVoice(decVid(d),null,500);
   if(mode==='live'){
    const myV=V;
@@ -2391,7 +2432,7 @@ function tick(){
  if(phase!=='vote'||V.mode==='live')return;
  V.el+=.1;
  if(V.mode==='sim'){
-  const burst=V.forced!==null?4:(Math.random()<.45?Math.floor(Math.random()*2):0);
+  const burst=V.forced!==null?(V.demo?2:4):(Math.random()<(V.demo?.12:.45)?Math.floor(Math.random()*2):0);   // demo: daha seyrek sanal salon
   for(let i=0;i<burst;i++){ let r=Math.random(),k=0; while(k<V.n-1&&r>=V.w[k]){ r-=V.w[k]; k++; } V.c[k]++; }
   paintVotes();
  }
@@ -2408,6 +2449,7 @@ function paintVotes(){
 function forceWin(w){
  if(phase!=='vote'||V.forced!==null||!(w>=0&&w<V.n))return;
  V.forced=w;
+ if(DEMO) demoSecildi(w);
  if(V.mode==='live'){ try{ window.VOTE.forceWin(w); }catch(e){ finalize(); } return; }
  V.w=V.c.map((_,i)=>i===w?1-.06*(V.n-1):.06); V.end=V.el+1.5;
 }
@@ -2433,6 +2475,7 @@ function finalize(){
  if(V.mode==='off'){ w=V.forced!==null?V.forced:Math.floor(Math.random()*V.n); if(V.forced===null) V.note='Çevrimdışı · kura çekildi'; }
  else{
   w=V.forced!==null?V.forced:V.c.indexOf(Math.max(...V.c));
+  if(V.demo&&V.forced===null) V.note='Süre doldu · sanal salon seçti';
   let o=-1; V.c.forEach((x,i)=>{ if(i!==w&&(o<0||x>V.c[o])) o=i; });
   if(V.c[w]<=V.c[o]){ const x=V.c[w]; V.c[w]=V.c[o]+1; V.c[o]=x; }
  }
@@ -2656,6 +2699,89 @@ async function selfTest(){
  pre.style.cssText='position:fixed;inset:0;z-index:99;background:#000;color:#7df9c4;font:16px Consolas,monospace;padding:20px;overflow:auto;white-space:pre-wrap;user-select:text';
  document.body.appendChild(pre);
 }
+/* ---------- DEMO: index.html?demo=1 ----------
+   Herkese açık tek kişilik sürüm (paylaşım bağlantısı için). Firebase'e bağlanmaz, QR yok.
+   Karar anında seçenekler düğme olur (tıkla/dokun ya da 1-4); sayaç 45 sn işler, seyrek bir "sanal salon" oyu çubukları canlı tutar.
+   Tıklanan seçenek kazanır (forceWin); süre dolarsa sanal salonun çoğunluğu seçer. Normal kip, ?sahte, ?test, ?vitrin, ?yol etkilenmez. */
+const DEMO_BAGLANTI='';                 // ← iletişim / repo bağlantısı buraya (boş kalırsa "Bu ne?" penceresinde bağlantı gösterilmez)
+const DEMO_BAGLANTI_ADI='Proje sayfası';
+let DEMO_SES=null,demoSessiz='',demoDurdu=false,demoYatayKapali=false;
+function sessizWav(){ // 50 ms sessiz WAV (iOS ses kilidini açmak için)
+ const n=1102,b=new ArrayBuffer(44+n*2),v=new DataView(b),w=(o,t)=>{ for(let i=0;i<t.length;i++) v.setUint8(o+i,t.charCodeAt(i)); };
+ w(0,'RIFF'); v.setUint32(4,36+n*2,true); w(8,'WAVE'); w(12,'fmt '); v.setUint32(16,16,true); v.setUint16(20,1,true); v.setUint16(22,1,true);
+ v.setUint32(24,22050,true); v.setUint32(28,44100,true); v.setUint16(32,2,true); v.setUint16(34,16,true); w(36,'data'); v.setUint32(40,n*2,true);
+ return URL.createObjectURL(new Blob([b],{type:'audio/wav'}));
+}
+// iOS Safari: ilk dokunuşta Web Audio açılır (sessiz tampon çalınır) ve tek bir <audio> öğesi dokunuş içinde çalınarak "izinli" olur;
+// seslendirme hep bu öğeden çalınır (playVoice → demoSes), böylece sonraki repliklerin dokunuş beklemeden çalması mümkün olur.
+function demoSesAc(){
+ try{ if(navigator.audioSession) navigator.audioSession.type='playback'; }catch(_){}   // iOS 17+: sessiz anahtarı açıkken de duyulsun
+ audio();
+ if(AC){ if(AC.state==='suspended'&&!paused){ const r=AC.resume(); if(r&&r.catch) r.catch(()=>{}); }
+  try{ const b=AC.createBuffer(1,1,22050),s=AC.createBufferSource(); s.buffer=b; s.connect(AC.destination); s.start(0); }catch(_){} }
+ if(!DEMO_SES){ const a=new Audio(); a.setAttribute('playsinline',''); a.preload='auto'; a.src=demoSessiz||(demoSessiz=sessizWav()); const p=a.play(); if(p&&p.catch) p.catch(()=>{}); DEMO_SES=a; }
+ const d=card.querySelector('.ttl.demo .dokun'); if(d) d.remove();
+}
+function demoSes(id){ if(!DEMO_SES) return new Audio('ses/'+id+'.wav'); const a=DEMO_SES; a.onloadedmetadata=a.onended=a.onerror=null; a.pause(); a.src='ses/'+id+'.wav'; return a; }
+function demoBaslik(){
+ const t=card.querySelector('.ttl'); if(!t) return; t.className='ttl demo';
+ t.innerHTML='<span class="giris">Etkileşimli demo · Kararları sen veriyorsun · ~20 dk</span>'+(audioOk?'':'<span class="dokun">Başlamak için dokun</span>')+'<small>🔊 sesi aç'+(matchMedia('(pointer: fine)').matches?' · F tam ekran · M ses':'')+'</small>';
+}
+function demoKarar(){ const s=$('verdict').querySelector('small'); if(s) s.textContent='Devam için dokun'; }
+function demoSecildi(w){
+ const o=$('opt'+w); if(o) o.classList.add('secildi');
+ if(!V.poll){ const s=$('verdict').querySelector('span'); if(s) s.textContent='SEN KARAR VERDİN!'; }
+ SFX.tkey();
+}
+function demoSon(){
+ const st=script[pos]; if(!st||st.type!=='final') return;
+ const e=script.find(x=>x.k==='card'&&x.type==='end');
+ $('demoSonAd').textContent=e?'Bu oyunda SON '+e.n+' / '+NEND+': “'+e.title+'”. Farklı kararlarla başka bir sona ulaşabilirsin.':'';
+ $('demoSon').classList.add('on');
+}
+function demoBilgi(ac){
+ const o=$('demoBilgi'); if(ac===o.classList.contains('on')) return;
+ o.classList.toggle('on',ac); document.body.classList.toggle('demoBilgi',ac);
+ if(ac){ demoDurdu=!paused; if(demoDurdu) setPause(true); $('demoKapat').focus(); }   // okurken oyun durur
+ else if(demoDurdu){ demoDurdu=false; setPause(false); }
+}
+function demoTamEkran(){
+ const d=document,el=d.documentElement;
+ if(d.fullscreenElement||d.webkitFullscreenElement){ (d.exitFullscreen||d.webkitExitFullscreen).call(d); return; }
+ const kilit=()=>{ try{ const r=screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape'); if(r&&r.catch) r.catch(()=>{}); }catch(_){} };
+ try{ const r=(el.requestFullscreen||el.webkitRequestFullscreen).call(el); if(r&&r.then) r.then(kilit,()=>{}); else kilit(); }catch(_){}
+}
+function demoKur(){
+ stage.classList.add('demo'); document.body.classList.add('demo'); fit();
+ $('qrLbl').innerHTML='<b>👆 Seçeneğe tıkla</b>gerçek etkinlikte salon telefonla oy veriyor';
+ const fsOk=!!(document.fullscreenEnabled||document.webkitFullscreenEnabled);   // iPhone Safari'de yok: düğme gizli
+ document.body.insertAdjacentHTML('beforeend',
+  '<div id="demoEt"><b>DEMO</b><button type="button" id="demoNe">Bu ne?</button>'+(fsOk?'<button type="button" id="demoTam" title="Tam ekran" aria-label="Tam ekran">⛶</button>':'')+'</div>'
+  +'<div class="demoOv" id="demoBilgi" role="dialog" aria-modal="true" aria-labelledby="demoBilgiB"><div class="demoKut"><h2 id="demoBilgiB">Mezuniyet.exe nedir?</h2>'
+  +'<p>CENGA\'nın Kasım 2026 sosyal etkinliği için yapılmış etkileşimli bir animasyon oyunu. Projektörde aktı; salondaki herkes kararları telefonundan canlı oyladı.</p>'
+  +'<p><b>6 karar · 5 farklı son</b> · seslendirmeler yapay zekâyla üretildi.</p>'
+  +'<p>Bu demo tek kişilik: karar anında seçeneğe tıkla (ya da 1–4). Ekrana dokunmak yazıyı tamamlar, ikinci dokunuş sahneyi geçer.</p>'
+  +'<div class="dg">'+(DEMO_BAGLANTI?'<a class="bag" href="'+esc(DEMO_BAGLANTI).replace(/"/g,'&quot;')+'" target="_blank" rel="noopener">'+esc(DEMO_BAGLANTI_ADI)+' ↗</a>':'')+'<button type="button" class="ana" id="demoKapat">Kapat</button></div></div></div>'
+  +'<div class="demoOv" id="demoSon"><div class="demoKut"><h2>Başka bir son var mı? 5 son var.</h2><p id="demoSonAd"></p><div class="dg"><button type="button" class="ana" id="demoBastan">Baştan oyna</button><button type="button" id="demoNe2">Bu ne?</button></div></div></div>'
+  +'<div id="demoYatay">📱 Telefonunu yatay çevir: sahne daha büyük görünür.<br><button type="button" id="demoYatayK">Tamam</button></div>');
+ const tik=(id,f)=>{ const e=$(id); if(e) e.addEventListener('click',ev=>{ ev.stopPropagation(); ev.currentTarget.blur(); f(); }); };
+ tik('demoNe',()=>demoBilgi(true)); tik('demoNe2',()=>demoBilgi(true)); tik('demoKapat',()=>demoBilgi(false)); tik('demoTam',demoTamEkran);
+ tik('demoBastan',()=>{ $('demoSon').classList.remove('on'); if(paused) setPause(false); restart(); });
+ $('demoBilgi').addEventListener('click',e=>{ if(e.target.id==='demoBilgi') demoBilgi(false); });
+ addEventListener('keydown',e=>{ if(e.key==='Escape') demoBilgi(false); });
+ // seçenek düğmeleri: oylama sırasında #dec'e gelen tıklama sahneye geçmez (sahne tıklaması oylamayı bitirirdi); sonuçtan sonra dokunuş devam ettirir
+ dec.addEventListener('click',e=>{
+  if(phase!=='vote'&&phase!=='freeze') return;
+  e.stopPropagation(); unlock(); if(paused) return;
+  const o=e.target.closest('.opt'); if(o&&phase==='vote') forceWin(+o.id.slice(3));
+ });
+ ['click','touchend','keydown'].forEach(t=>addEventListener(t,demoSesAc,true));
+ const mq=matchMedia('(orientation: portrait) and (max-width: 900px)'), yatay=()=>$('demoYatay').classList.toggle('on',mq.matches&&!demoYatayKapali);
+ if(mq.addEventListener) mq.addEventListener('change',yatay); else if(mq.addListener) mq.addListener(yatay);
+ tik('demoYatayK',()=>{ demoYatayKapali=true; yatay(); }); yatay();
+ setInterval(()=>{ const o=$('demoSon'); if(o.classList.contains('on')&&!(script[pos]&&script[pos].type==='final')) o.classList.remove('on'); },500);
+}
+if(DEMO) demoKur();
 // ?yol=0,2,1&adim=14 : o yolun 14. adımına doğrudan git (önceki adım anlık kurulur; ekran görüntüsü için). ?vitrin=1&adim=N de çalışır.
 const QS=new URLSearchParams(location.search);
 hudBars(hudVal,false);
@@ -2678,6 +2804,7 @@ else{ if(QS.get('oto')==='0') setAuto(false); show(); }
 const Q=new URLSearchParams(location.search), D=document.getElementById('oyDurum');
 const durum=(m,c)=>{ D.textContent=m; D.className=c||''; if(c==='ok') setTimeout(()=>D.classList.add('gizle'),15000); };
 if(Q.has('sahte')||Q.has('test')){ durum('Sahte oylama (deneme kipi)','off'); setTimeout(()=>D.classList.add('gizle'),8000); }
+else if(Q.has('demo')){ D.style.display='none'; }   // tek kişilik demo: Firebase'e hiç bağlanma
 else{
  window.VOTE_PENDING=true;
  try{

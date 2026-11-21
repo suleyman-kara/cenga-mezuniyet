@@ -2,8 +2,7 @@
 // 1) ilk açılış: SW bütün dosyaları indirir, "hazir" der
 // 2) ikinci açılış: yalnız manifest.json (ve sw.js güncelleme kontrolü) ağdan; wav isteği 0
 // 3) tek wav değişir + manifest yeniden üretilir: yalnız o dosya iner, "guncelleme" gelir, sonraki açılışta yenisi verilir
-// 4) ikinci oyun (/yarisma/): kendi kapsamında önbelleklenir, /oyun/ önbelleğine dokunmaz, /oyun/'un mesajlarını almaz
-// 5) sunucu kapalı + çevrimdışı: oyun açılır (başlık kartı), Range isteği 206 döner, <audio> önbellekten yüklenir; yarışma da açılır
+// 4) sunucu kapalı + çevrimdışı: oyun açılır (başlık kartı), Range isteği 206 döner, <audio> önbellekten yüklenir
 // playwright paketi yoksa: npm i -g playwright && npx playwright install chromium (NODE_PATH=$(npm root -g))
 import fs from 'node:fs';
 import os from 'node:os';
@@ -32,7 +31,7 @@ const durumBekle = (page, t, ms = 180000) => page.waitForFunction(t => window.SW
 
 try {
   const A = path.join(tmp, 'a'), B = path.join(tmp, 'b');
-  const { manifest, manifestler } = buildSite({ kok: KOK, cikis: A });
+  const { manifest } = buildSite({ kok: KOK, cikis: A });
   const wavlar = Object.keys(manifest.dosyalar).filter(f => f.startsWith('ses/'));
   const toplamDosya = Object.keys(manifest.dosyalar).length;
   srv = await sunucuBaslat(A);
@@ -109,30 +108,6 @@ try {
   bekle(await page.evaluate(async s => (await caches.keys()).length >= 2 && (await (await caches.open('mezuniyet-dosya-v1')).keys()).length === s, Object.keys(m2.dosyalar).length),
     'önbellekte eski hash kalmadı (giriş sayısı = manifest)');
 
-  adim('İkinci oyun /yarisma/: ayrı kapsam, /oyun/ önbelleği korunur');
-  const anahtarSay = () => page.evaluate(async () => {
-    const k = (await (await caches.open('mezuniyet-dosya-v1')).keys()).map(q => new URL(q.url).pathname);
-    return { oyun: k.filter(x => x.startsWith('/oyun/__h/')).length, yarisma: k.filter(x => x.startsWith('/yarisma/__h/')).length };
-  });
-  const once = await anahtarSay();
-  srv.kayit.length = 0;
-  await page.goto(srv.url + '/yarisma/?sahte=1&sw=1');
-  await durumBekle(page, 'hazir', 60000);
-  const sonra = await anahtarSay();
-  const yToplam = Object.keys(manifestler.yarisma.dosyalar).length;
-  bekle(sonra.yarisma === new Set(Object.values(manifestler.yarisma.dosyalar).map(d => d.h)).size, `yarışma dosyaları önbellekte (${sonra.yarisma} / ${yToplam})`);
-  bekle(sonra.oyun === once.oyun && once.oyun > 100, `/oyun/ önbelleği dokunulmadı (${once.oyun} → ${sonra.oyun})`);
-  bekle(srv.kayit.every(k => !k.yol.startsWith('/oyun/')), '/yarisma/ açılırken /oyun/ dosyası istenmedi');
-  const yMesaj = await page.evaluate(() => window.__mesajlar.filter(m => m.t === 'ilerleme'));
-  bekle(yMesaj.length > 0 && yMesaj.every(m => m.toplam <= yToplam), `yarışma sayfası yalnız kendi ilerlemesini aldı (${yMesaj.length} mesaj, toplam ${yMesaj.at(-1)?.toplam})`);
-  bekle(await page.evaluate(() => navigator.serviceWorker.controller && new URL(navigator.serviceWorker.controller.scriptURL).pathname) === '/yarisma/sw.js', 'yarışmayı /yarisma/sw.js denetliyor');
-  // oyun yeniden açılınca hâlâ önbellekten (wav isteği yok) ve yarışma önbelleği silinmez
-  srv.kayit.length = 0;
-  await page.goto(URL_);
-  await durumBekle(page, 'hazir');
-  bekle(wavIstekleri().length === 0, 'oyun yine önbellekten (wav isteği 0)');
-  bekle((await anahtarSay()).yarisma === sonra.yarisma, 'oyunun eşitlemesi yarışma önbelleğini silmedi');
-
   adim('?test=1 öz sınamasında rozet yok');
   await page.goto(srv.url + '/oyun/?test=1');
   await page.waitForTimeout(800);
@@ -162,12 +137,6 @@ try {
     a.load();
   }), wavlar[1]);
   bekle(ses.sure > 0, `<audio> çevrimdışı yüklendi: ${JSON.stringify(ses)}`);
-  adim('Çevrimdışı: yarışma da açılır');
-  await page.goto(srv.url + '/yarisma/?sahte=1').catch(() => {});
-  await page.waitForSelector('#lobi.on', { timeout: 20000 });
-  bekle(true, 'yarışma lobisi açıldı');
-  await page.waitForFunction(() => window.YARISMA_DURUM && window.YARISMA_DURUM().oyuncu > 3, null, { timeout: 15000 });
-  bekle(await page.$('#qrBuyuk svg') !== null, 'QR çizildi (qr.js önbellekten)');
   const hatalar = konsol.filter(m => !/oylama|Failed to load resource|ERR_INTERNET_DISCONNECTED|HTTP 503/.test(m));
   bekle(hatalar.length === 0, 'beklenmeyen konsol hatası yok' + (hatalar.length ? ': ' + hatalar.slice(0, 5).join(' | ') : ''));
 } catch (e) {

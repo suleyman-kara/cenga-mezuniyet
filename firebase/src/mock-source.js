@@ -38,8 +38,7 @@ export function createMockSource(opts = {}) {
     onRemoteCommand() { return () => {}; },
     onRemoteStatus() { return () => {}; },
     pushRemoteState() {},
-    // Salon oyunlari: sahte kipte oyuncu listesi ve ek alan yok (zararsiz bos surumler).
-    onPlayers() { return () => {}; },
+    // Salon calisma zamani: sahte kipte ek oturum alani yok (zararsiz bos surum).
     updateSession() { return Promise.resolve({ ok: true, error: null }); },
     async end() {},
     onUpdate(fn) { cb = fn; return () => { if (cb === fn) cb = null; }; },

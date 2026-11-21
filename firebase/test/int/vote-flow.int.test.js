@@ -118,26 +118,17 @@ describe('oturum surdurme + telefon kumandasi (emulator, gercek kurallar)', () =
   }, 15000);
 });
 
-describe('salon yarismasi: takma ad + kisi bazli oylar (emulator, gercek kurallar)', () => {
-  it('oyuncular ad yazar, host listeyi alir; close kisi bazli oylari doner ve sonucEk ayni yazimda gider', async () => {
-    const src = hostSource(); const lists = []; src.onPlayers((l) => lists.push(l));
-    const sid = await src.createSession({ takmaAd: true, oyun: 'yarisma' });
-    expect(await sessionDoc(sid)).toMatchObject({ takmaAd: true, oyun: 'yarisma', phase: 'lobby' });
-    const pl = (uid, ad) => FS.setDoc(FS.doc(voterDb(uid), 'sessions', sid, 'players', uid), { ad, at: FS.serverTimestamp() });
-    await assertSucceeds(pl('p1', 'Ayşe')); await assertSucceeds(pl('p2', 'Mehmet')); await assertSucceeds(pl('p3', ''));
-    await assertFails(pl('p4', 'x'.repeat(21)));
-    for (let i = 0; i < 40 && !(lists.length && lists[lists.length - 1].length === 3); i++) await sleep(50);
-    expect(lists[lists.length - 1].map((x) => x.ad).sort()).toEqual(['', 'Ayşe', 'Mehmet']);
-    await src.open({ decKey: DK, q: 'Soru?', options: ['A', 'B', 'C'], poll: false, durMs: 8000 });
+describe('salon calisma zamani: ek alanlar + kisi bazli oylar (emulator, gercek kurallar)', () => {
+  it('createSession(ek) ek alanlari yazar; close kisi bazli oylari doner ve sonucEk ayni yazimda gider', async () => {
+    const src = hostSource();
+    const sid = await src.createSession({ oyun: 'kod-mahkemesi' });
+    expect(await sessionDoc(sid)).toMatchObject({ oyun: 'kod-mahkemesi', phase: 'lobby' });
+    await src.open({ decKey: DK, q: 'Hukum?', options: ['Suclu', 'Suçsuz', 'Ertele'], poll: false, durMs: 8000 });
     await assertSucceeds(vote('p1', sid, 1)); await sleep(120); await assertSucceeds(vote('p2', sid, 1)); await assertSucceeds(vote('p3', sid, 0));
-    const res = await src.close({ sonucEk: (r) => ({ dogru: 1, sonucIcin: r.decKey, puan: Object.fromEntries(r.votes.filter((v) => v.o === 1).map((v) => [v.uid, 500])) }) });
+    const res = await src.close({ sonucEk: (r) => ({ hukum: r.counts[1] > r.counts[0] ? 'suclu-degil' : 'suclu', sonucKarar: r.decKey }) });
     expect(res.votes.map((v) => [v.uid, v.o]).sort()).toEqual([['p1', 1], ['p2', 1], ['p3', 0]]);
     const p1 = res.votes.find((v) => v.uid === 'p1'), p2 = res.votes.find((v) => v.uid === 'p2');
     expect(p1.atMs).toBeLessThan(p2.atMs); expect(p1.atMs).toBeGreaterThanOrEqual(res.openedAtMs - 2000);
-    expect(await sessionDoc(sid)).toMatchObject({ phase: 'result', dogru: 1, sonucIcin: DK, puan: { p1: 500, p2: 500 } });
+    expect(await sessionDoc(sid)).toMatchObject({ phase: 'result', hukum: 'suclu-degil', sonucKarar: DK });
   }, 15000);
-  it('takmaAd olmayan oturumda (Mezuniyet.exe) oyuncu belgesi yazilamaz', async () => {
-    const src = hostSource(); const sid = await src.createSession();
-    await assertFails(FS.setDoc(FS.doc(voterDb('p1'), 'sessions', sid, 'players', 'p1'), { ad: 'A', at: FS.serverTimestamp() }));
-  });
 });

@@ -1,28 +1,27 @@
 /* ortak/salon.js — Salon çalışma zamanı: projektörde akan, salonun telefonla oy verdiği oyunların hikâyeden
  * bağımsız ortak altyapısı. Klasik <script> (modül değil): global `Salon`.
- * ASIL DOSYA burası; oyun klasörlerindeki kopyalar (ör. yarisma/ortak/salon.js) bayt bayt aynı olmalı (site/build.mjs denetler).
+ * ASIL DOSYA burası; oyun klasörlerindeki kopyalar (ör. kod-mahkemesi/ortak/salon.js) bayt bayt aynı olmalı
+ * (kopya çiftleri site/build.mjs SENKRON_CIFTLERI'ne eklenir, derleme denetler).
  * Mezuniyet.exe (oyun/index.html) bu dosyayı KULLANMAZ: aynı davranışın kendi içindeki ilk sürümü orada kalır (bkz. YENI-OYUN.md).
  *
  * Sayfada önce şunlar yüklenmeli (oyun klasörüne göre):
  *   oylama/vote-core.js · oylama/qr.js · oylama/qr-svg.js · oylama/firebase-config.js · ortak/salon.js (+ ortak/salon.css)
  *
  * const salon = Salon.baslat({
- *   oyunAdi: 'Salon Yarışması',     // durum yazılarında
- *   anahtar: 'yarisma',             // localStorage öneki: salon.<anahtar>.oturum / .ilerleme; oturum belgesinde "oyun"
+ *   oyunAdi: 'Kod Mahkemesi',       // durum yazılarında
+ *   anahtar: 'kod-mahkemesi',       // localStorage öneki: salon.<anahtar>.oturum / .ilerleme; oturum belgesinde "oyun"
  *   oylamaYolu: 'oylama/',          // firebase-source.js'in sayfaya göre yeri
  *   oyAdresi: 'https://cenga-mezuniyet.pages.dev',   // telefonların açacağı /v/ sayfasının kökü
- *   takmaAd: true,                  // oturuma takmaAd:true yazılır → telefon takma ad sorar, oyuncu listesi gelir
- *   sahteOyuncu: 28,                // ?sahte=1'de sanal seyirci sayısı
+ *   sahteSeyirci: 28,               // ?sahte=1'de sanal seyirci sayısı
  *   kumanda: { ileri(), geri(), duraklat(evetMi), ses(), oto(), kazan(i), bitir() },   // telefon kumandası komutları
  *   durum: () => ({ pos, toplam, faz, duraklat, oto, sessiz, kim, metin, karar:{q,o,c,kalan,acik}|null, sonraki }),
  *   sw: true, durumKutusu: true, tuslar: true,
  * });
  * await salon.hazir;                // → { kip, sid, oyUrl }
  * salon.kip      'canli' | 'sahte' | 'demo' | 'cevrimdisi' (bağlanırken 'baglaniyor')
- * salon.oylama   VoteSource: open({decKey,q,options,poll,durMs,ipucu?}), onUpdate(cb), forceWin(i), close({sonucEk}),
- *                pause(), resume(), onPlayers(cb), updateSession(alanlar) — README'deki FirebaseSource ile aynı
+ * salon.oylama   VoteSource: open({decKey,q,options,poll,durMs}), onUpdate(cb), forceWin(i), close({sonucEk}),
+ *                pause(), resume(), updateSession(alanlar) — README'deki FirebaseSource ile aynı
  * salon.oyUrl    telefon oy adresi (çevrimdışı/demo: null) · salon.qrSvg(url?) → SVG metni
- * salon.oyuncular [{uid, ad}] · salon.onOyuncular(cb) → kapat()
  * salon.demoOy(i) demo kipinde tek oyuncunun (uid 'sen') oyu · salon.benimOyum() → i | null
  * salon.durumYaz(metin, sinif, gizleMs) · salon.kayit.oku()/yaz(v)/sil() (12 saatlik ilerleme kaydı)
  * salon.kumandaTus(sifirla) (U / Shift+U ile aynı) · salon.tamEkran() · salon.odak(acik) (rozet/durum yazısını gizler)
@@ -32,10 +31,6 @@
   'use strict';
   var Q = new URLSearchParams(location.search);
   var SAATLIK = 12 * 3600e3;
-  var ADLAR = ['Kod Canavarı', 'Bug Avcısı', 'Null Pointer', 'Sudo Sultan', 'Async Ayşe', 'Stack Taşkın', 'Recursion Rıza', 'Cache Cemile',
-    'Lambda Leyla', 'Merge Mert', 'Pixel Pınar', 'Byte Burak', 'Docker Deniz', 'Kernel Kaan', 'Regex Rana', 'Linux Lale', 'Python Pelin',
-    'Commit Cem', 'Tensor Tuna', 'Array Arda', 'Loop Lara', 'Hash Hande', 'Query Kerem', 'Sprint Selin', 'Debug Doruk', 'Token Tolga',
-    'Git Gizem', 'Shell Şule', 'Vim Volkan', 'Bit Bora'];
 
   function ls(k) {
     return {
@@ -50,22 +45,14 @@
   /* ---------- yerel oylama kaynakları: 'sahte' (sanal seyirci), 'demo' (tek oyuncu tıklar), 'cevrimdisi' (oy yok) ----------
    * FirebaseSource ile aynı arayüz ve aynı close() sonucu biçimi (kişi bazlı oylar dahil); oyun kodu kipe göre dallanmaz. */
   function yerelKaynak(kip, ayar) {
-    var VC = kok.VoteCore, rng = Math.random, sid = rastgeleSid(), upCb = null, plCb = null, timer = null, cur = null, duraklat = false;
-    var oyuncular = [], taban = (ayar.oyAdresi || '').replace(/\/$/, '');
+    var VC = kok.VoteCore, rng = Math.random, sid = rastgeleSid(), upCb = null, timer = null, cur = null, duraklat = false;
+    var seyirci = [], taban = (ayar.oyAdresi || '').replace(/\/$/, '');
     var now = function () { return Date.now(); };
-    function plYay() { if (plCb) try { plCb(oyuncular.map(function (p) { return { uid: p.uid, ad: p.ad }; })); } catch (e) { console.warn('[salon] oyuncu dinleyicisi', e); } }
-    if (kip === 'sahte') {          // lobide yavaş yavaş katılırlar; bazılarının takma adı yok
-      var k = 0, N = Math.max(0, ayar.sahteOyuncu | 0);
-      var katil = function () {
-        if (k >= N) return;
-        var ad = k % 7 === 5 ? '' : ADLAR[k % ADLAR.length] + (k >= ADLAR.length ? ' ' + (Math.floor(k / ADLAR.length) + 1) : '');
-        oyuncular.push({ uid: 'sahte' + String(k).padStart(3, '0'), ad: ad, beceri: 0.3 + rng() * 0.6, hiz: 0.12 + rng() * 0.6 });
-        k++; plYay(); setTimeout(katil, k < 6 ? 350 : 150 + rng() * 650);
-      };
-      setTimeout(katil, 500);
-    } else if (kip === 'demo') {
-      oyuncular.push({ uid: 'sen', ad: 'Sen', insan: true });
-      ['Sanal Ayşe', 'Sanal Mert', 'Sanal Lale'].forEach(function (ad, i) { oyuncular.push({ uid: 'sanal' + i, ad: ad, beceri: 0.4 + 0.15 * i, hiz: 0.25 + 0.25 * rng() }); });
+    // sanal seyirci: her biri her oylamada rastgele bir seçeneğe, kendi hızına göre oy verir
+    if (kip === 'sahte') for (var k = 0, N = Math.max(0, ayar.sahteSeyirci | 0); k < N; k++) seyirci.push({ uid: 'sahte' + String(k).padStart(3, '0'), hiz: 0.12 + rng() * 0.6 });
+    else if (kip === 'demo') {      // tek gerçek oyuncu ('sen', demoOy ile) + birkaç sanal seyirci
+      seyirci.push({ uid: 'sen', insan: true });
+      for (var j = 0; j < 3; j++) seyirci.push({ uid: 'sanal' + j, hiz: 0.25 + 0.25 * rng() });
     }
     function kalan() { return cur.paused ? cur.pausedLeftMs : Math.max(0, cur.closesAtMs - now()); }
     function sayim() { var c = []; for (var i = 0; i < cur.n; i++) c.push(0); cur.votes.forEach(function (v) { c[v.o]++; }); return c; }
@@ -87,17 +74,15 @@
       resumeSession: function (s) { sid = s; return Promise.resolve(s); },
       voteUrl: function (s) { return taban + '/v/?s=' + encodeURIComponent(s || sid); },
       onUpdate: function (fn) { upCb = fn; return function () { if (upCb === fn) upCb = null; }; },
-      onPlayers: function (fn) { plCb = fn; plYay(); return function () { if (plCb === fn) plCb = null; }; },
       updateSession: tamam,
       open: function (o) {
         clearInterval(timer);
-        var n = o.options.length, t0 = now(), d = o.durMs || 30000, ip = o.ipucu;
+        var n = o.options.length, t0 = now(), d = o.durMs || 30000;
         cur = { decKey: o.decKey, n: n, durMs: d, openedAtMs: t0, closesAtMs: t0 + d, votes: new Map(), plan: [], forced: null,
           paused: duraklat, pausedLeftMs: duraklat ? d : null, pauses: [], pauseStart: duraklat ? t0 : null, result: null };
-        if (kip !== 'cevrimdisi') oyuncular.forEach(function (p) {
-          if (p.insan || rng() < 0.07) return;                       // %7 cevapsız
-          var o2 = Number.isInteger(ip) && ip >= 0 && ip < n && rng() < p.beceri ? ip : Math.floor(rng() * n);
-          cur.plan.push({ uid: p.uid, o: o2, t: t0 + d * Math.min(0.93, 0.05 + p.hiz * rng() * 1.2) });
+        if (kip !== 'cevrimdisi') seyirci.forEach(function (p) {
+          if (p.insan || rng() < 0.07) return;                       // %7 oy vermez
+          cur.plan.push({ uid: p.uid, o: Math.floor(rng() * n), t: t0 + d * Math.min(0.93, 0.05 + p.hiz * rng() * 1.2) });
         });
         timer = setInterval(tick, 100); emit();
         return tamam();
@@ -205,12 +190,11 @@
   }
 
   function baslat(ayar) {
-    var o = Object.assign({ oyunAdi: 'Salon oyunu', anahtar: 'salon', oylamaYolu: 'oylama/', oyAdresi: 'https://cenga-mezuniyet.pages.dev', takmaAd: false,
-      sahteOyuncu: 28, sw: true, durumKutusu: true, tuslar: true, kumanda: {}, durum: null }, ayar || {});
+    var o = Object.assign({ oyunAdi: 'Salon oyunu', anahtar: 'salon', oylamaYolu: 'oylama/', oyAdresi: 'https://cenga-mezuniyet.pages.dev',
+      sahteSeyirci: 28, sw: true, durumKutusu: true, tuslar: true, kumanda: {}, durum: null }, ayar || {});
     var istenen = Q.has('sahte') || Q.has('test') ? 'sahte' : Q.has('demo') ? 'demo' : 'canli';
     var oturumK = ls('salon.' + o.anahtar + '.oturum');
-    var S = { kip: istenen === 'canli' ? 'baglaniyor' : istenen, sid: null, oyUrl: null, oylama: null, oyuncular: [], kayit: ls('salon.' + o.anahtar + '.ilerleme') };
-    var plDin = [];
+    var S = { kip: istenen === 'canli' ? 'baglaniyor' : istenen, sid: null, oyUrl: null, oylama: null, kayit: ls('salon.' + o.anahtar + '.ilerleme') };
 
     // durum yazısı (sol alt)
     var D = null, dT = 0;
@@ -224,18 +208,13 @@
       url = url || S.oyUrl; if (!url) return '';
       try { return kok.QrSvg.qrSvg(url); } catch (e) { console.warn('[salon] QR çizilemedi', e); return ''; }
     };
-    S.onOyuncular = function (cb) { plDin.push(cb); try { cb(S.oyuncular.slice()); } catch (_) {} return function () { plDin = plDin.filter(function (x) { return x !== cb; }); }; };
     S.demoOy = function (i) { return !!(S.oylama && S.oylama.demoOy && S.oylama.demoOy(i)); };
     S.benimOyum = function () { return S.oylama && S.oylama.benimOyum ? S.oylama.benimOyum() : null; };
     S.tamEkran = function () {
       var d = document, el = d.documentElement;
       try { if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d); else { var r = (el.requestFullscreen || el.webkitRequestFullscreen).call(el); if (r && r.catch) r.catch(function () {}); } } catch (_) {}
     };
-    function oyuncularGeldi(l) {
-      S.oyuncular = (l || []).map(function (p) { return { uid: p.uid, ad: kisalt(p.ad, 20) }; });
-      plDin.forEach(function (cb) { try { cb(S.oyuncular.slice()); } catch (e) { console.warn('[salon] onOyuncular', e); } });
-    }
-    function yereleGec(kip) { var src = yerelKaynak(kip, o); S.oylama = src; S.kip = kip; src.onPlayers(oyuncularGeldi); return src.createSession(); }
+    function yereleGec(kip) { var src = yerelKaynak(kip, o); S.oylama = src; S.kip = kip; return src.createSession(); }
 
     // ---- telefon kumandası ----
     var K = null, kumOv = false, kumQr = '', kumGizleT = null, OV = null;
@@ -291,7 +270,7 @@
     });
 
     // ---- bağlantı ----
-    var oturumEk = Object.assign({ oyun: o.anahtar }, o.takmaAd ? { takmaAd: true } : {});
+    var oturumEk = { oyun: o.anahtar };
     S.hazir = (async function () {
       if (istenen === 'sahte') { await yereleGec('sahte'); S.durumYaz('Sahte oylama (deneme kipi) · sanal seyirci', 'off', 8000); }
       else if (istenen === 'demo') { await yereleGec('demo'); if (D) D.style.display = 'none'; }
@@ -300,7 +279,6 @@
           if (!kok.FIREBASE_CONFIG) throw new Error('firebase-config.js yüklenmedi');
           var mod = await import(new URL(o.oylamaYolu + 'firebase-source.js', document.baseURI).href);
           var src = await mod.connectFirebaseSource(kok.FIREBASE_CONFIG, { voteBaseUrl: o.oyAdresi });
-          src.onPlayers(oyuncularGeldi);
           var kayit = oturumK.oku(), sid = null, surdu = false;
           if (!Q.has('yeni') && kayit && typeof kayit.sid === 'string') {
             try { sid = await src.resumeSession(kayit.sid); surdu = true; src.updateSession(oturumEk); }

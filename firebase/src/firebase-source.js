@@ -1,6 +1,6 @@
 // FirebaseSource (host tarafi). VoteSource arayuzu: createSession, resumeSession, open, onUpdate, forceWin, close, voteUrl.
 // Telefon kumandasi: createRemote, resumeRemote, resetRemote, onRemoteCommand, onRemoteStatus, pushRemoteState.
-// Salon oyunlari (yarisma vb.): createSession(ek), updateSession, onPlayers, close({sonucEk}) ve close() sonucunda kisi bazli oylar.
+// Salon calisma zamani (ortak/salon.js) icin: createSession(ek), updateSession, close({sonucEk}) ve close() sonucunda kisi bazli oylar.
 // Bagimliliklar enjekte edilir (test: npm "firebase" paketi / sahte; tarayici: connectFirebaseSource ile CDN modulleri).
 const ALPHA = 'abcdefghjkmnpqrstuvwxyz23456789';
 const SECRET_ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -84,23 +84,6 @@ export function createFirebaseSource(deps) {
     } else rec(g.error);
   }
 
-  // ---- Oyuncular (takma ad): sessions/{sid}/players/{uid} = {ad, at}; yalnizca host listeler ----
-  let plCb = null, plUnsub = null;
-  function detachPlayers() { if (plUnsub) { try { plUnsub(); } catch (_) {} plUnsub = null; } }
-  function attachPlayers() {
-    detachPlayers();
-    if (!plCb || !sid) return;
-    const fn = plCb;
-    try {
-      plUnsub = fs.onSnapshot(fs.collection(db, 'sessions', sid, 'players'), (snap) => {
-        if (plCb !== fn) return;
-        const list = [];
-        snap.docs.forEach((d) => { let v = null; try { v = d.data(); } catch (_) {} list.push({ uid: d.id, ad: v && typeof v.ad === 'string' ? v.ad.slice(0, 20) : '' }); });
-        try { fn(list); } catch (e) { rec(errText('oyuncu listesi', e)); }
-      }, (e) => rec(errText('oyuncu dinleme', e)));
-    } catch (e) { rec(errText('oyuncu dinleme', e)); }
-  }
-
   // ---- Telefon kumandasi: sessions/{sid}/remotes/{secret} (+ /cmds) ----
   let rem = null, cmdCb = null, statusCb = null;
   const push = { last: 0, timer: null, pending: undefined, lastJson: null };
@@ -180,7 +163,7 @@ export function createFirebaseSource(deps) {
     get sid() { return sid; },
     get errors() { return errors.slice(); },
 
-    // ek: oyuna ozgu ek alanlar (or. {takmaAd: true, oyun: 'yarisma'}); cekirdek alanlar ezilemez.
+    // ek: oyuna ozgu ek alanlar (or. {oyun: 'kod-mahkemesi'}); cekirdek alanlar ezilemez.
     async createSession(ek) {
       errors = [];
       const a = await guard(fs.signInAnonymously(auth), writeTimeoutMs, 'anonim giris');
@@ -195,7 +178,7 @@ export function createFirebaseSource(deps) {
       }), writeTimeoutMs, 'oturum olusturma');
       if (!w.ok) throw new Error(w.error);
       stop(); detachRemote(); cur = null; isPaused = false;
-      sid = id; attachPlayers();
+      sid = id;
       // Sunucu saati ile yerel saat farki (host closesAt'i sunucu saatine gore yazar).
       await measureOffset(id, t0, now());
       return id;
@@ -223,7 +206,7 @@ export function createFirebaseSource(deps) {
       }), writeTimeoutMs, 'oturum surdurme');
       if (!w.ok) throw new Error(w.error);
       stop(); detachRemote(); cur = null; isPaused = false;
-      uid = me; sid = id; attachPlayers();
+      uid = me; sid = id;
       await measureOffset(id, t0, now());
       return id;
     },
@@ -360,8 +343,6 @@ export function createFirebaseSource(deps) {
       if (!sid || !Object.keys(ek).length) return Promise.resolve({ ok: !!sid, error: sid ? null : 'oturum yok' });
       return guard(fs.updateDoc(sessRef(), ek), writeTimeoutMs, 'oturum alanlari').then((r) => ({ ok: r.ok, error: r.ok ? null : rec(r.error) }));
     },
-    // cb([{uid, ad}]): takma adli oyuncular (sessions/{sid}/players). Oturumdan once de cagrilabilir; oturum acilinca baglanir.
-    onPlayers(fn) { plCb = fn; attachPlayers(); return () => { if (plCb === fn) { plCb = null; detachPlayers(); } }; },
 
     async end() { stop(); if (!sid) return; const r = await guard(fs.updateDoc(sessRef(), { phase: 'ended' }), writeTimeoutMs, 'oturum kapatma'); if (!r.ok) rec(r.error); },
   };

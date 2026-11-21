@@ -46,28 +46,6 @@ service cloud.firestore {
         allow delete: if false;
       }
 
-      // Salon oyunlari (yarisma vb.): istege bagli takma ad. Belge kimligi = seyircinin uid'si.
-      // Yalnizca oturum belgesinde takmaAd == true ise (Mezuniyet.exe oturumlarinda yok -> yazilamaz).
-      // Sahibi yazar (ad <= 20 karakter, at == request.time); host listeler; silme yok.
-      match /players/{pid} {
-        function pSession() { return get(/databases/$(database)/documents/sessions/$(sid)).data; }
-        function pIsHost() { return signedIn() && pSession().hostUid == request.auth.uid; }
-        function validPlayer() {
-          let d = request.resource.data;
-          return d.keys().hasOnly(['ad', 'at']) && d.keys().hasAll(['ad', 'at'])
-            && d.ad is string && d.ad.size() <= 20
-            && d.at == request.time;
-        }
-
-        allow get: if pIsHost() || (signedIn() && pid == request.auth.uid);
-        allow list: if pIsHost();
-        allow create, update: if signedIn() && pid == request.auth.uid
-          && pSession().get('takmaAd', false) == true
-          && pSession().phase != 'ended'
-          && validPlayer();
-        allow delete: if false;
-      }
-
       // Telefon kumandasi (yalnizca sunucu icin). Belge kimligi = host'un urettigi gizli anahtar (20+ karakter);
       // kimligi bilmek "okuma + bir kerelik eslesme" yetkisidir. Eslesen telefon (owner) komut yazabilir.
       match /remotes/{rid} {

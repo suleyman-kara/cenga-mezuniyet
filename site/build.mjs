@@ -7,7 +7,6 @@
 //   index.html, og.jpg, img/, onizleme.*  → site/vitrin/ (açılış sayfası; yoksa /oyun/'a yönlendirme)
 //   _headers              → Cloudflare önbellek başlıkları
 //   oyun/                 → Mezuniyet.exe: oyun + sesler + oylama modülü + sw.js + manifest.json (hash'li dosya listesi)
-//   yarisma/              → Salon Yarışması: oyun + sorular + oylama + ortak/ (Salon çalışma zamanı) + sw.js + manifest.json
 // Her oyun klasörü kendi kapsamında çevrimdışı önbelleklenir (aynı ortak/sw.js); yeni oyun = OYUNLAR'a bir satır.
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -27,23 +26,13 @@ export const SENKRON_CIFTLERI = [
   ['oyun/oylama/firebase-config.js', 'firebase-config.js'],
   ['firebase/public/firebase-config.js', 'firebase-config.js'],
   ['oyun/sw.js', 'ortak/sw.js'],
-  // Salon Yarışması (yarisma/): oylama + Salon çalışma zamanı
-  ['yarisma/sw.js', 'ortak/sw.js'],
-  ['yarisma/oylama/vote-core.js', 'firebase/vote-core.js'],
-  ['yarisma/oylama/qr-svg.js', 'firebase/qr-svg.js'],
-  ['yarisma/oylama/qr.js', 'firebase/vendor/qr.js'],
-  ['yarisma/oylama/firebase-source.js', 'firebase/src/firebase-source.js'],
-  ['yarisma/oylama/firebase-config.js', 'firebase-config.js'],
-  ['yarisma/ortak/salon.js', 'ortak/salon.js'],
-  ['yarisma/ortak/salon.css', 'ortak/salon.css'],
-  ['yarisma/ortak/puan.js', 'ortak/puan.js'],
 ];
 
-// Yayımlanan oyunlar. dahil: 'dosya' | 'klasör/' (bütün ağaç) | 'klasör/*.uzantı' (o klasördeki o uzantılı dosyalar).
+// Yayımlanan oyunlar (yeni oyun = bir satır; ortak/salon.js kullanan oyun 'ortak/' klasörünü de dahil eder ve
+// kopyalarını SENKRON_CIFTLERI'ne ekler, bkz. YENI-OYUN.md). dahil: 'dosya' | 'klasör/' (bütün ağaç) | 'klasör/*.uzantı' (o klasördeki o uzantılı dosyalar).
 // Listede olmayan her şey (goruntuler/, *.md, baslat.bat, araçlar) dist'e girmez. uzunOnbellek: _headers'ta 30 gün.
 export const OYUNLAR = [
   { klasor: 'oyun', dahil: ['index.html', 'sesler.json', 'sw.js', 'oylama/', 'ses/*.wav'], uzunOnbellek: ['ses/*'] },
-  { klasor: 'yarisma', dahil: ['index.html', 'sorular.js', 'sw.js', 'oylama/', 'ortak/'] },
 ];
 
 const sha = buf => crypto.createHash('sha256').update(buf).digest('hex');
@@ -66,7 +55,7 @@ export function senkronMesaji(sorunlar) {
     'HATA: oyunun oylama kopyaları asıl dosyalarla aynı değil. Derleme durduruldu.',
     ...sorunlar.map(s => `  - ${s.kopya}  ↔  ${s.asil}: ${s.neden}`),
     'Çözüm: asıl dosyayı (firebase/ ya da ortak/ altındaki, ya da kökteki firebase-config.js) kopyanın üzerine kopyalayın,',
-    '       ör. cp firebase/vote-core.js oyun/oylama/vote-core.js · cp ortak/salon.js yarisma/ortak/salon.js',
+    '       ör. cp firebase/vote-core.js oyun/oylama/vote-core.js · cp ortak/sw.js oyun/sw.js',
     '       (config için: cd firebase && npm run sync-config)',
   ].join('\n');
 }

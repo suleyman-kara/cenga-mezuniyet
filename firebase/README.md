@@ -26,18 +26,12 @@ sessions/{sid}/remotes/{secret}/cmds/{auto}   { c: 'ileri'|'geri'|'duraklat'|'de
 
 > **Kurallar değişti:** güncel `firestore.rules` yeniden yayımlanmalı — konsolda Firestore > Rules editörüne yapıştırın ya da `npx firebase deploy --only firestore:rules`. Eski kurallarla kumanda "permission-denied" alır (oylama etkilenmez).
 
-### Salon oyunları (yarışma vb.) — takma ad ve puan
-```
-sessions/{sid}                 + takmaAd: true, oyun: 'yarisma'   (createSession(ek)) ; cevapta + dogru, sonucIcin: decKey, puan: {uid: toplam}
-sessions/{sid}/players/{uid}   { ad: string (<= 20), at: serverTimestamp() }
-```
-- Kurallar: `players` yalnız oturumda `takmaAd == true` ve faz `ended` değilken, **yalnız sahibi** (`pid == auth.uid`) yazar, alanlar tam `{ad, at}`,
-  `at == request.time`; sahibi kendi belgesini, host hepsini okur; listeleme yalnız host; silme yok. Mezuniyet.exe oturumlarında alan yok → yazılamaz.
-- Puanı host hesaplar (`ortak/puan.js`): `close()` artık sayılan oyları `votes: [{uid, o, atMs}]` ile döner (oy belgesi kimliği `decKey__uid`, `at` sunucu zamanı);
-  doğruya 500–1000, hızlı olan çok; duraklatılan aralıklar (`pauses`) düşülür. Sonuç `close({sonucEk})` ile sonuç yazımına eklenir.
-- `public/v/` yalnız `takmaAd: true` oturumda takma ad kutusunu ve "✓ Doğru! · Toplam N puan · k. sıra" sonucunu gösterir (`sonucIcin === decKey` ise).
-
-> **Kurallar yine değişti (players):** `firestore.rules` yeniden yayımlanmalı. Eski kurallarla yarışmada takma ad yazılamaz (oylama ve Mezuniyet.exe etkilenmez).
+### Salon çalışma zamanı (ortak/salon.js) için eklemeler
+- Oturum belgesine oyuna özgü ek alanlar: `createSession(ek)` (ör. `{oyun: 'kod-mahkemesi'}`), `updateSession(alanlar)` ve
+  `close({sonucEk})` (sonuçla aynı yazımda). Çekirdek alanlar (`hostUid, phase, decKey, q, options, n, …`) ezilemez. Kurallar değişmedi:
+  oturum belgesini yalnız host yazar, ek alanları herkes okuyabilir (telefon sayfası `/v/` bunları kullanmaz).
+- `close()` sayılan oyları kişi bazlı da döner: `votes: [{uid, o, atMs}]` (oy belgesi kimliği `decKey__uid`, `at` sunucu zamanı), ayrıca
+  `decKey, openedAtMs, closesAtMs, durMs, pauses` (duraklatılan aralıklar). Ör. Kod Mahkemesi'nde aynı uid'nin iki oyunu karşılaştırmak için.
 
 ## VoteSource arayüzü (FirebaseSource ve MockSource aynı)
 | Metot | Açıklama |
@@ -57,12 +51,11 @@ sessions/{sid}/players/{uid}   { ad: string (<= 20), at: serverTimestamp() }
 | `onRemoteStatus(cb({paired,owner}))` | Eşleşme durumu (host'taki "Bekleniyor… / ✓ Kumanda bağlandı"). |
 | `pushRemoteState(st)` | `st` alanına yazar: ~1/sn kısıtlı, en son çağrı kazanır, aynı durum yeniden yazılmaz, asla fırlatmaz. |
 | `end()` | Oturumu `ended` yapar. Oyun artık sayfa kapanırken çağırmaz (yenileme sonrası sürdürme için). |
-| `await createSession(ek)` | Salon oyunları: `ek` (ör. `{takmaAd:true, oyun:'yarisma'}`) oturum belgesine eklenir; çekirdek alanlar ezilemez. `createSession()` eskisi gibi. |
+| `await createSession(ek)` | Salon oyunları: `ek` (ör. `{oyun:'kod-mahkemesi'}`) oturum belgesine eklenir; çekirdek alanlar ezilemez. `createSession()` eskisi gibi. |
 | `close({sonucEk})` | Sonuçta ayrıca `decKey, votes:[{uid,o,atMs}], openedAtMs, closesAtMs, durMs, pauses`. `sonucEk(sonuc)` → ek alanlar sonuçla aynı `updateDoc`'ta. |
-| `onPlayers(cb([{uid,ad}]))` | `players` dinlenir (oturumdan önce çağrılabilir). Mock: boş. |
 | `updateSession(alanlar)` | Oyuna özgü oturum alanları; asla reddetmez. Mock: boş. |
 
-Kaynaklar: `src/firebase-source.js` (`connectFirebaseSource(config)` CDN modüler SDK'yı yükler), `src/mock-source.js` (`createMockSource()` eski sahte akış; otomatik oynatma/video; kumanda metotları zararsız boş sürümler, `url:null`). **`src/*.js` değişince `oyun/oylama/`'ya ve `yarisma/oylama/`'ya kopyalayın** (`cp src/firebase-source.js src/mock-source.js ../oyun/oylama/ && cp src/firebase-source.js ../yarisma/oylama/`; `site/build.mjs` de denetler); `test/unit/oylama-kopya.test.js` bayt eşitliğini denetler. QR: `vendor/qr.js` + `qr-svg.js` → `QrSvg.qrSvg(url)` SVG string.
+Kaynaklar: `src/firebase-source.js` (`connectFirebaseSource(config)` CDN modüler SDK'yı yükler), `src/mock-source.js` (`createMockSource()` eski sahte akış; otomatik oynatma/video; kumanda metotları zararsız boş sürümler, `url:null`). **`src/*.js` değişince `oyun/oylama/`'ya (ve Salon'u kullanan oyunların `oylama/` klasörüne) kopyalayın** (`cp src/firebase-source.js src/mock-source.js ../oyun/oylama/`; `site/build.mjs` de denetler); `test/unit/oylama-kopya.test.js` bayt eşitliğini denetler. QR: `vendor/qr.js` + `qr-svg.js` → `QrSvg.qrSvg(url)` SVG string.
 
 ## Motora bağlama (öneri; motoru bu çalışma değiştirmedi)
 ```html

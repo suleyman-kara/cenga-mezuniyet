@@ -28,10 +28,6 @@ function sahteKok() {
   yaz(k, 'oyun/ses/replikler.json', '[]');
   yaz(k, 'oyun/ses/aaa.wav', 'RIFF-a');
   yaz(k, 'oyun/ses/bbb.wav', 'RIFF-b');
-  yaz(k, 'yarisma/index.html', '<title>yarışma</title>');
-  yaz(k, 'yarisma/sorular.js', 'window.YARISMA={}');
-  yaz(k, 'yarisma/goruntuler/lobi.jpg', 'jpg');
-  yaz(k, 'yarisma/NOTLAR.md', '# not');
   return k;
 }
 
@@ -141,24 +137,13 @@ test('manifest: sürüm içerikle değişir, zamanla değişmez; tek dosya deği
   fs.rmSync(d, { recursive: true, force: true });
 });
 
-test('gerçek repo: /yarisma/ kendi manifesti ve sw.js ile yayımlanır; görüntüler girmez', () => {
+test('gerçek repo: yayımlanan oyunlar yalnız OYUNLAR listesindekiler (yarisma/ yok)', () => {
   const cikis = path.join(gecici('dist'), 'dist');
   const { manifestler } = buildSite({ kok: KOK, cikis });
-  assert.deepEqual(Object.keys(manifestler).sort(), ['oyun', 'yarisma']);
-  for (const f of ['yarisma/index.html', 'yarisma/sorular.js', 'yarisma/sw.js', 'yarisma/manifest.json', 'yarisma/ortak/salon.js', 'yarisma/ortak/salon.css',
-    'yarisma/ortak/puan.js', 'yarisma/oylama/firebase-source.js', 'yarisma/oylama/vote-core.js', 'yarisma/oylama/qr.js', 'yarisma/oylama/qr-svg.js', 'yarisma/oylama/firebase-config.js'])
-    assert.ok(fs.existsSync(path.join(cikis, f)), f + ' yok');
-  assert.ok(!fs.existsSync(path.join(cikis, 'yarisma/goruntuler')), 'goruntuler girmemeli');
-  const m = manifestler.yarisma;
-  assert.ok(m.dosyalar['index.html'] && m.dosyalar['sorular.js'] && !m.dosyalar['sw.js'] && !m.dosyalar['manifest.json']);
-  for (const [rel, d] of Object.entries(m.dosyalar)) assert.equal(d.h, sha16(fs.readFileSync(path.join(cikis, 'yarisma', rel))), rel);
-  assert.ok(!Object.keys(manifestler.oyun.dosyalar).some(f => f.startsWith('ortak/')), 'oyun manifesti değişmedi (ortak/ yok)');
-  // iki oyun aynı sw.js'i kullanır
-  assert.ok(fs.readFileSync(path.join(cikis, 'oyun/sw.js')).equals(fs.readFileSync(path.join(cikis, 'yarisma/sw.js'))));
-  const bas = fs.readFileSync(path.join(cikis, '_headers'), 'utf8');
-  assert.match(bas, /\/yarisma\/sw\.js\n\s+Cache-Control: no-cache/);
-  assert.match(bas, /\/yarisma\/manifest\.json\n\s+Cache-Control: no-cache/);
-  assert.ok(!/\/yarisma\/ses/.test(bas));
+  assert.deepEqual(Object.keys(manifestler).sort(), OYUNLAR.map(o => o.klasor).sort());
+  assert.deepEqual(OYUNLAR.map(o => o.klasor), ['oyun']);
+  assert.ok(!fs.existsSync(path.join(cikis, 'yarisma')), 'yarisma/ derlemeye girmemeli');
+  assert.ok(!Object.keys(manifestler.oyun.dosyalar).some(f => f.startsWith('ortak/')), 'oyun manifestinde ortak/ yok');
   fs.rmSync(path.dirname(cikis), { recursive: true, force: true });
 });
 
@@ -173,21 +158,11 @@ test('_headers: /oyun/ bölümü önceki sürümle birebir aynı', () => {
 `));
 });
 
-test('sahte kök: yarisma yalnız dahil listesindekilerle yayımlanır', () => {
-  const k = sahteKok(), cikis = path.join(k, 'dist');
-  const { manifestler } = buildSite({ kok: k, cikis });
-  assert.deepEqual(Object.keys(manifestler.yarisma.dosyalar).sort(), ['index.html', 'ortak/puan.js', 'ortak/salon.css', 'ortak/salon.js',
-    'oylama/firebase-config.js', 'oylama/firebase-source.js', 'oylama/qr-svg.js', 'oylama/qr.js', 'oylama/vote-core.js', 'sorular.js']);
-  assert.ok(!fs.existsSync(path.join(cikis, 'yarisma/NOTLAR.md')));
-  fs.rmSync(k, { recursive: true, force: true });
-});
-
-test('sahte kök: ortak/ kopyası (salon.js, sw.js) farklıysa derleme durur', () => {
+test('sahte kök: ortak/sw.js kopyası (oyun/sw.js) farklıysa derleme durur', () => {
   const k = sahteKok();
-  fs.appendFileSync(path.join(k, 'yarisma/ortak/salon.js'), '// elle');
   fs.appendFileSync(path.join(k, 'oyun/sw.js'), '// elle');
-  assert.deepEqual(senkronDenetle(k).map(x => x.kopya).sort(), ['oyun/sw.js', 'yarisma/ortak/salon.js']);
-  assert.throws(() => buildSite({ kok: k, cikis: path.join(k, 'dist') }), /yarisma\/ortak\/salon\.js\s+↔\s+ortak\/salon\.js: içerik farklı/);
+  assert.deepEqual(senkronDenetle(k).map(x => x.kopya), ['oyun/sw.js']);
+  assert.throws(() => buildSite({ kok: k, cikis: path.join(k, 'dist') }), /oyun\/sw\.js\s+↔\s+ortak\/sw\.js: içerik farklı/);
   fs.rmSync(k, { recursive: true, force: true });
 });
 

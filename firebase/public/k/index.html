@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0a0e1a">
+<meta name="robots" content="noindex">
+<title>Sunucu Kumandası</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#0a0e1a;color:#f4f6ff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{background:radial-gradient(120% 80% at 50% -10%,#123a4a 0%,#0a0e1a 60%);min-height:100dvh;-webkit-user-select:none;user-select:none}
+#app{min-height:100dvh;display:flex;flex-direction:column;gap:12px;padding:max(12px,env(safe-area-inset-top)) 14px max(16px,env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
+#conn{display:none;background:#ff3d71;color:#fff;font-weight:700;text-align:center;padding:8px 10px;border-radius:12px;font-size:15px}
+#app[data-conn=off] #conn{display:block}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;opacity:.9}
+.tag{background:#ffffff18;padding:5px 10px;border-radius:99px;font-variant-numeric:tabular-nums}
+.tag.ok{color:#5dff9e}
+.view{display:none;flex:1;flex-direction:column;gap:12px}
+#app[data-state=loading] .v-loading,#app[data-state=error] .v-error,#app[data-state=taken] .v-taken,#app[data-state=ready] .v-ready{display:flex}
+.center{text-align:center;justify-content:center}.big{font-size:56px;margin:0}.sub{opacity:.75;font-size:17px;line-height:1.4;margin:0}
+h1{font-size:24px;line-height:1.25;margin:0;font-weight:900}
+#takenmsg .sub{display:block;font-size:18px;font-weight:600;margin-top:10px}
+.now{background:#151b36;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-height:120px}
+.now .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#kim{font-weight:900;font-size:15px;letter-spacing:.1em;color:#8fe3ff;text-transform:uppercase}
+#faz{font-size:12px;font-weight:800;padding:3px 9px;border-radius:99px;background:#ffffff1c;letter-spacing:.06em}
+#faz.dur{background:#ffc93c;color:#2b1c00}#faz.oy{background:#7c4dff}
+#metin{font-size:19px;line-height:1.35;font-weight:600}
+#sonraki{font-size:14px;opacity:.6;line-height:1.3}
+#sonraki:empty{display:none}
+#karar{display:none;background:#1d1446;border:2px solid #7c4dff;border-radius:20px;padding:12px;flex-direction:column;gap:10px}
+#karar.on{display:flex}
+#karar .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#kq{font-weight:800;font-size:17px;line-height:1.25}
+#kalan{flex:none;font:900 26px/1 system-ui,sans-serif;font-variant-numeric:tabular-nums;background:#ffffff1a;border-radius:12px;padding:6px 10px;min-width:56px;text-align:center}
+#kalan.hot{color:#ff5c7a}
+#kopts{display:flex;flex-direction:column;gap:8px}
+button{appearance:none;border:0;font:inherit;color:#fff;cursor:pointer;touch-action:manipulation;transition:transform .08s,opacity .15s}
+button:active:not(:disabled){transform:scale(.97)}
+button:disabled{opacity:.4;cursor:default}
+.kopt{display:flex;align-items:center;gap:10px;text-align:left;background:#2a2160;border-radius:14px;padding:12px 14px;min-height:60px}
+.kopt .n{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#7c4dff;font-weight:900}
+.kopt:nth-child(2) .n{background:#00c2ff;color:#04202b}.kopt:nth-child(3) .n{background:#ffb300;color:#2b1c00}.kopt:nth-child(4) .n{background:#ff4d8d}
+.kopt .t{flex:1;font-weight:800;font-size:17px;line-height:1.2}
+.kopt .t small{display:block;font-weight:600;font-size:13px;opacity:.75;margin-top:2px}
+.kopt .c{flex:none;font-weight:900;font-size:20px;font-variant-numeric:tabular-nums}
+#bitir{background:#ff5c7a;border-radius:14px;min-height:54px;font-weight:900;font-size:18px}
+.ctl{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.ctl button{border-radius:20px;min-height:76px;font-size:21px;font-weight:900;background:#1f2747}
+#ileri{grid-column:1/-1;min-height:120px;font-size:32px;background:linear-gradient(135deg,#17c964,#0fa3a3);color:#03140b}
+#dur{background:#ffc93c;color:#2b1c00}#dur.devam{background:#17c964;color:#03140b}
+.ctl .k{font-size:17px;min-height:60px}
+#ses.kapali,#oto.kapali{opacity:.7;background:#2a1a24}
+#durum{min-height:22px;text-align:center;font-weight:800;font-size:15px}
+#durum.ok{color:#5dff9e}#durum.bad{color:#ff7a93}
+.pulse{animation:p 1.6s ease-in-out infinite}@keyframes p{50%{transform:scale(1.12);opacity:.7}}
+</style>
+</head>
+<body>
+<div id="app" data-state="loading" data-conn="on">
+  <div id="conn" role="status">Bağlantı koptu, yeniden deneniyor…</div>
+  <header><span>🎛 Sunucu kumandası</span><span class="tag" id="adim">–</span></header>
+  <section class="view v-loading center"><p class="big pulse">⏳</p><p class="sub" id="yukmsg">Bağlanıyor…</p></section>
+  <section class="view v-error center"><p class="big">⚠️</p><h1 id="errmsg">Bir sorun oluştu</h1><p class="sub">Sunucu ekranında U tuşuna basıp çıkan QR'ı yeniden okutun.</p></section>
+  <section class="view v-taken center"><p class="big">🔒</p><h1 id="takenmsg">Bu kumanda başka bir telefona bağlı. <span class="sub">Sunucu ekranında Shift+U ile sıfırlayın.</span></h1></section>
+  <section class="view v-ready">
+    <div class="now">
+      <div class="row"><span id="kim"></span><span id="faz"></span></div>
+      <div id="metin"></div>
+      <div id="sonraki"></div>
+    </div>
+    <div id="karar">
+      <div class="row"><span id="kq"></span><span id="kalan">–</span></div>
+      <div id="kopts"></div>
+      <button type="button" id="bitir" data-cmd="bitir">Oylamayı bitir</button>
+    </div>
+    <div class="ctl">
+      <button type="button" id="geri" data-cmd="geri">◀ Geri</button>
+      <button type="button" id="dur" data-cmd="duraklat">⏸ Duraklat</button>
+      <button type="button" id="ileri" data-cmd="ileri">İleri ▶</button>
+      <button type="button" id="ses" class="k" data-cmd="ses">🔊 Ses</button>
+      <button type="button" id="oto" class="k" data-cmd="oto">Oto</button>
+    </div>
+    <div id="durum" aria-live="polite"></div>
+  </section>
+</div>
+<script src="../firebase-config.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SDK = '12.19.0'; // public/v ile ayni CDN surumu
+  var $ = function (id) { return document.getElementById(id); };
+  var app = $('app'), qs = new URLSearchParams(location.search), sid = qs.get('s'), rid = qs.get('r');
+  var S = { fb: null, uid: null, st: null, stAt: 0, claiming: false, drawnKey: null, msgT: null };
+  var FAZ = { vote: ['Oylama açık', 'oy'], closing: ['Oylama kapanıyor', 'oy'], result: ['Sonuç', 'oy'], freeze: ['Karar geliyor', 'oy'] };
+
+  function setState(s) { app.dataset.state = s; }
+  function fail(msg) { $('errmsg').textContent = msg; setState('error'); }
+  function buzz() { try { if (navigator.vibrate) navigator.vibrate(15); } catch (e) { /* sessiz */ } }
+  function note(t, cls) { var d = $('durum'); d.textContent = t; d.className = cls || ''; clearTimeout(S.msgT); S.msgT = setTimeout(function () { d.textContent = ''; d.className = ''; }, 1600); }
+
+  async function wakeLock() {
+    try { if (navigator.wakeLock && navigator.wakeLock.request) { await navigator.wakeLock.request('screen'); } } catch (e) { /* sessiz */ }
+  }
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') { wakeLock(); render(); } });
+  window.addEventListener('offline', function () { app.dataset.conn = 'off'; });
+  window.addEventListener('online', function () { app.dataset.conn = 'on'; });
+
+  async function getFb() {
+    if (window.__FB__) return window.__FB__;
+    var cfg = window.FIREBASE_CONFIG; if (!cfg) throw new Error('config');
+    var u = function (m) { return 'https://www.gstatic.com/firebasejs/' + SDK + '/firebase-' + m + '.js'; };
+    var mods = await Promise.all([import(u('app')), import(u('auth')), import(u('firestore'))]);
+    var app_ = mods[0].initializeApp(cfg), auth = mods[1].getAuth(app_), F = mods[2];
+    await new Promise(function (res) { var off = mods[1].onAuthStateChanged(auth, function () { off(); res(); }); }); // kalici uid: ayni telefon yenileyince yine owner
+    if (!auth.currentUser) await mods[1].signInAnonymously(auth);
+    return { db: F.getFirestore(app_), fs: F, uid: auth.currentUser.uid };
+  }
+
+  // Kalan sure: host ~1/sn yazar; arada yerel olarak geri sayilir.
+  function kalan() {
+    var k = S.st && S.st.karar; if (!k || typeof k.kalan !== 'number') return null;
+    if (!k.acik || S.st.duraklat) return Math.max(0, k.kalan);
+    return Math.max(0, Math.ceil(k.kalan - (Date.now() - S.stAt) / 1000));
+  }
+  function renderKarar() {
+    var k = S.st && S.st.karar, box = $('karar');
+    if (!k || !Array.isArray(k.o)) { box.classList.remove('on'); S.drawnKey = null; return; }
+    box.classList.add('on');
+    $('kq').textContent = k.q || '';
+    var acik = !!k.acik && !S.st.duraklat, list = $('kopts'), key = (k.q || '') + '|' + k.o.join('|');
+    if (S.drawnKey !== key) {
+      S.drawnKey = key; list.textContent = '';
+      k.o.forEach(function (o, i) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'kopt'; b.dataset.win = i;
+        var n = document.createElement('span'); n.className = 'n'; n.textContent = i + 1;
+        var t = document.createElement('span'); t.className = 't'; t.textContent = o;
+        var sm = document.createElement('small'); sm.textContent = 'Bunu kazandır'; t.appendChild(sm);
+        var c = document.createElement('span'); c.className = 'c';
+        b.append(n, t, c);
+        b.addEventListener('click', function () { send('kazan', i); });
+        list.appendChild(b);
+      });
+    }
+    [].forEach.call(list.children, function (b, i) {
+      var c = Array.isArray(k.c) && Number.isInteger(k.c[i]) ? k.c[i] : 0;
+      b.querySelector('.c').textContent = c;
+      b.disabled = !acik;
+    });
+    $('bitir').disabled = !acik;
+    var left = kalan(), el = $('kalan');
+    el.textContent = left === null ? '–' : (k.acik ? left : (S.st.faz === 'result' ? '✓' : '…'));
+    el.classList.toggle('hot', acik && left !== null && left <= 5);
+  }
+  function render() {
+    var st = S.st; if (app.dataset.state !== 'ready') return;
+    if (!st) { $('metin').textContent = 'Sunucu ekranından ilk durum bekleniyor…'; $('kim').textContent = ''; $('faz').textContent = ''; $('adim').textContent = '–'; renderKarar(); return; }
+    $('adim').textContent = (Number(st.pos) + 1) + ' / ' + (st.toplam || '?');
+    $('kim').textContent = st.kim || '';
+    $('metin').textContent = st.metin || '';
+    $('sonraki').textContent = st.sonraki ? 'Sonra: ' + st.sonraki : '';
+    var f = $('faz');
+    if (st.duraklat) { f.textContent = '⏸ Duraklatıldı'; f.className = 'dur'; }
+    else if (FAZ[st.faz]) { f.textContent = FAZ[st.faz][0]; f.className = FAZ[st.faz][1]; }
+    else { f.textContent = st.oto ? 'Otomatik akış' : 'Elle'; f.className = ''; }
+    var d = $('dur');
+    if (st.duraklat) { d.textContent = '▶ Devam'; d.dataset.cmd = 'devam'; d.classList.add('devam'); }
+    else { d.textContent = '⏸ Duraklat'; d.dataset.cmd = 'duraklat'; d.classList.remove('devam'); }
+    // Duraklatilmisken sunucu ileri/geri/oto/kazan tuslarini yok sayar; burada da kapatilir.
+    $('ileri').disabled = !!st.duraklat; $('geri').disabled = !!st.duraklat; $('oto').disabled = !!st.duraklat;
+    var s = $('ses'); s.textContent = st.sessiz ? '🔇 Ses kapalı' : '🔊 Ses açık'; s.classList.toggle('kapali', !!st.sessiz);
+    var o = $('oto'); o.textContent = st.oto ? '⏩ Oto açık' : '⏸ Oto kapalı'; o.classList.toggle('kapali', !st.oto);
+    renderKarar();
+  }
+
+  async function send(c, a) {
+    buzz();
+    if (!S.fb || app.dataset.state !== 'ready') return;
+    var fs = S.fb.fs, data = { c: c, at: fs.serverTimestamp() };
+    if (a !== undefined) data.a = a;
+    try {
+      await fs.addDoc(fs.collection(S.fb.db, 'sessions', sid, 'remotes', rid, 'cmds'), data);
+      note('Gönderildi ✓', 'ok');
+    } catch (e) { note('Gönderilemedi, tekrar dokun', 'bad'); }
+  }
+  [].forEach.call(document.querySelectorAll('.ctl [data-cmd], #bitir'), function (b) {
+    b.addEventListener('click', function () { send(b.dataset.cmd); });
+  });
+
+  function onRemote(snap) {
+    app.dataset.conn = navigator.onLine === false ? 'off' : 'on';
+    if (!snap.exists()) return fail('Bu kumanda artık geçerli değil (sıfırlanmış olabilir).');
+    var d = snap.data() || {};
+    if (d.owner == null) {
+      setState('loading'); $('yukmsg').textContent = 'Eşleştiriliyor…';
+      if (!S.claiming) {
+        S.claiming = true;
+        var fs = S.fb.fs;
+        Promise.resolve().then(function () { return fs.updateDoc(fs.doc(S.fb.db, 'sessions', sid, 'remotes', rid), { owner: S.uid }); })
+          .catch(function () { /* baskasi once davrandiysa anlik goruntu soyler */ })
+          .then(function () { S.claiming = false; });
+      }
+      return;
+    }
+    if (d.owner !== S.uid) { setState('taken'); return; }
+    S.st = d.st || null; S.stAt = Date.now();
+    setState('ready'); render();
+  }
+
+  (async function init() {
+    if (!sid || !rid) return fail('Kumanda bağlantısı eksik. QR kodu yeniden okutun.');
+    wakeLock();
+    try { S.fb = await getFb(); } catch (e) { return fail('Bağlantı kurulamadı'); }
+    S.uid = S.fb.uid;
+    var fs = S.fb.fs;
+    fs.onSnapshot(fs.doc(S.fb.db, 'sessions', sid, 'remotes', rid), onRemote, function () { app.dataset.conn = 'off'; if (app.dataset.state === 'loading') fail('Bağlantı hatası'); });
+    setInterval(function () { if (app.dataset.state === 'ready' && S.st && S.st.karar) renderKarar(); }, 250);
+  })();
+})();
+</script>
+</body>
+</html>

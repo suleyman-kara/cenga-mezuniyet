@@ -9,7 +9,7 @@ export class FakeTimestamp {
 const SERVER_TS = { __serverTimestamp: true };
 
 export class FakeBackend {
-  constructor() { this.docs = new Map(); this.listeners = new Set(); this.offline = false; this.failGetDocs = false; this.failWritesTo = null; this.serverSkewMs = 0; this.uidSeq = 0; }
+  constructor() { this.docs = new Map(); this.listeners = new Set(); this.offline = false; this.failGetDocs = false; this.failWritesTo = null; this.serverSkewMs = 0; this.uidSeq = 0; this.autoSeq = 0; }
   now() { return Date.now() + this.serverSkewMs; }
   resolve(data) { const o = {}; for (const [k, v] of Object.entries(data)) o[k] = v === SERVER_TS ? new FakeTimestamp(this.now()) : v; return o; }
   notify() { for (const l of [...this.listeners]) l(); }
@@ -35,6 +35,8 @@ export class FakeBackend {
       signInAnonymously: async () => { auth.currentUser = { uid }; return { user: auth.currentUser }; },
       setDoc: (ref, data) => write(ref.path, () => be.docs.set(ref.path, be.resolve(data))),
       updateDoc: (ref, data) => write(ref.path, () => { if (!be.docs.has(ref.path)) throw new Error('not-found'); be.docs.set(ref.path, { ...be.docs.get(ref.path), ...be.resolve(data) }); }),
+      deleteDoc: (ref) => write(ref.path, () => { be.docs.delete(ref.path); }),
+      addDoc: (ref, data) => { const id = `auto${++be.autoSeq}`; const path = `${ref.path}/${id}`; return write(path, () => be.docs.set(path, be.resolve(data))).then(() => mkDoc(path, id)); },
       getDoc: async (ref) => { if (be.offline) throw new Error('unavailable (fake offline)'); return snapOf(ref.path); },
       getDocs: async (ref) => { if (be.offline || be.failGetDocs) throw new Error('unavailable (fake)'); return collSnap(ref.path); },
       onSnapshot: (ref, cb) => {

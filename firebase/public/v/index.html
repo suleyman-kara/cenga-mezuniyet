@@ -162,6 +162,7 @@ button.opt:disabled{opacity:.55;cursor:default}button.opt[aria-pressed=true]:dis
     var on = takmaAdli() && S.sess.phase !== 'ended';
     $('adform').hidden = !on; $('adtag').hidden = !(on && S.ad); $('adtag').textContent = '👤 ' + S.ad;
     $('bekleh').textContent = takmaAdli() ? 'Sıradaki soru burada çıkacak' : 'Sıradaki karar anında burada';
+    $('polltag').textContent = takmaAdli() ? 'Anket · puan yok' : 'Anket · sonucu değiştirmez';
     if (on && !S.adGirdi) { S.adGirdi = true; $('adin').value = S.ad; }
   }
   function oyuncuYaz(ad) {

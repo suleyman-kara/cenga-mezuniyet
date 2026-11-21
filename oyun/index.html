@@ -1020,6 +1020,24 @@ body{font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-
 #demoYatay.on{display:block}
 #demoYatay button{margin-top:8px;font:700 14px system-ui,sans-serif;padding:7px 16px;border-radius:9px;border:2px solid #1d2a4a;background:#1d2a4a;color:#fff}
 body.demoBilgi #pauseOv{display:none!important}
+/* telefon kumandası (U) + kaldığın yerden devam */
+#kumandaOv{position:absolute;right:40px;bottom:40px;z-index:46;display:none;align-items:center;gap:28px;background:rgba(10,14,26,.94);border:5px solid #00e5ff;border-radius:28px;padding:24px 34px 24px 24px;color:#fff;font:600 28px/1.3 "Segoe UI",system-ui,sans-serif;box-shadow:0 14px 0 rgba(0,0,0,.3);max-width:980px}
+#kumandaOv.on{display:flex}
+#kumQr{flex:none;width:300px;height:300px;background:#fff;border-radius:16px;padding:12px}
+#kumQr:empty{display:none}
+#kumQr svg{width:100%;height:100%;display:block}
+#kumandaOv .kt{display:flex;flex-direction:column;gap:14px}
+#kumandaOv b{font-size:34px;font-weight:900}
+#kumDurum{font-size:32px;font-weight:800;color:#ffe9b8}#kumDurum.ok{color:#5dff9e}#kumDurum.off{color:#ffb4a2}
+#kumandaOv small{font-size:22px;opacity:.7}
+#devamOv{position:absolute;left:50%;bottom:70px;transform:translateX(-50%);z-index:45;display:none;flex-direction:column;align-items:center;gap:8px;background:rgba(29,42,74,.94);border:5px solid #ffc93c;border-radius:26px;padding:22px 48px;color:#fff;font:700 30px/1.3 "Segoe UI",system-ui,sans-serif;text-align:center;box-shadow:0 10px 0 rgba(0,0,0,.25)}
+#devamOv.on{display:flex}
+#devamOv b{font-size:44px;font-weight:900}
+#devamOv small{font-size:30px;color:#ffe9b8}
+#devamBilgi{font-size:24px;opacity:.75}
+#devamOv .dvDg{display:flex;gap:20px;margin-top:10px}
+#devamOv button{font:800 30px "Segoe UI",system-ui,sans-serif;padding:12px 30px;border-radius:16px;border:4px solid #ffc93c;background:#ffc93c;color:#1d2a4a;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#devamOv button#dvHayir{background:transparent;color:#fff}
 </style>
 </head>
 <body>
@@ -1334,6 +1352,8 @@ body.demoBilgi #pauseOv{display:none!important}
  <div id="flash"></div>
  <div id="pauseOv"><b>⏸ DURAKLATILDI<small>P ile devam</small></b></div>
  <div id="recOn"><i>●</i> KAYIT</div>
+ <div id="kumandaOv"><div id="kumQr"></div><div class="kt"><b>Kumandayı telefonla okut · yalnızca sunucu için</b><span id="kumDurum">Bekleniyor…</span><small>U: kapat · Shift+U: sıfırla (yeni QR, eski telefon düşer)</small></div></div>
+ <div id="devamOv"><b>Kaldığın yerden devam?</b><span id="devamBilgi"></span><small>Enter: devam · N: baştan</small><span class="dvDg"><button type="button" id="dvEvet">▶ Devam et</button><button type="button" id="dvHayir">Baştan başla</button></span></div>
 </div>
 <script>
 "use strict";
@@ -2600,10 +2620,113 @@ function setPause(on){
   if(voteLiveCtl()) try{ window.VOTE.resume(); }catch(_){} }
 }
 function unlock(){ audio(); if(!audioOk){ audioOk=true; const st=script[pos]; if(st&&st.type==='title'){ const k=card.querySelector('.ttl b'); if(k&&k.textContent==='BOŞLUK') k.parentNode.innerHTML='<b>F</b> tam ekran <b>M</b> ses'; } } }
+/* ---------- KALDIĞIN YERDEN DEVAM + TELEFON KUMANDASI ---------- */
+// İlerleme {choices,pos} localStorage'da (yalnızca normal kipte; test/yol/vitrin yazmaz). Açılışta "Kaldığın yerden devam?" sorulur.
+const lsOku=k=>{ try{ return JSON.parse(localStorage.getItem(k)||'null'); }catch(_){ return null; } };
+const lsYaz=(k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(_){} };
+const lsSil=k=>{ try{ localStorage.removeItem(k); }catch(_){} };
+const ILER_K='mezuniyet.ilerleme', ILER_YOK=!!(OYQ.get('test')||OYQ.get('vitrin')||OYQ.get('yol')!==null);
+let ilerJson='',devamAcik=false,devamV=null;
+function ilerlemeKaydet(){
+ if(ILER_YOK||devamAcik) return;
+ const j=JSON.stringify([choices,pos]); if(j===ilerJson) return;
+ ilerJson=j; lsYaz(ILER_K,{choices:choices.slice(),pos,t:Date.now()});
+}
+setInterval(ilerlemeKaydet,500);
+function ilerlemeSil(){ lsSil(ILER_K); ilerJson=''; }
+function ilerlemeOku(){
+ const v=lsOku(ILER_K);
+ if(!v||!Array.isArray(v.choices)||!Number.isInteger(v.pos)||v.pos<=0||!(Date.now()-(+v.t||0)<12*3600e3)) return null;
+ if(!v.choices.every(x=>x===null||Number.isInteger(x)&&x>=0&&x<4)) return null;
+ return v;
+}
+function devamSor(){
+ if(ILER_YOK) return; const v=ilerlemeOku(); if(!v) return;
+ let top=0; try{ top=yap(v.choices.slice()).length; }catch(_){ return; }
+ devamV=v; devamAcik=true; $('devamBilgi').textContent='Adım '+(Math.min(v.pos,top-1)+1)+' / '+top; $('devamOv').classList.add('on');
+}
+function devamKapat(){ devamAcik=false; devamV=null; $('devamOv').classList.remove('on'); }
+function devamEt(){
+ const v=devamV; devamKapat(); if(!v) return;
+ try{
+  choices=v.choices.slice(); script=yap(choices);
+  const n=Math.max(0,Math.min(script.length-1,v.pos)), st=script[n];
+  if(st.k==='dec'&&!st.poll){ choices.length=st.id; script=yap(choices); }   // karara denk gelirse oylama yeniden açılır
+  if(n>0){ pos=n-1; show(true); }
+  pos=n; show(false);
+ }catch(e){ console.warn('[devam] kaldığı yere dönülemedi',e); ilerlemeSil(); restart(); }
+}
+function devamVazgec(){ devamKapat(); ilerlemeSil(); }
+// dokunmatik (klavyesiz telefon, demo): düğmeler; tıklama sahneye geçmesin
+$('devamOv').addEventListener('click',e=>{ e.stopPropagation(); unlock(); if(e.target.id==='dvEvet') devamEt(); else if(e.target.id==='dvHayir') devamVazgec(); });
+
+// Telefon kumandası: alt modül window.KUMANDA'yı kurar ({url, eslesti, hata, hazirla(), sifirla(), itele(st)}).
+let kumOv=false,kumQr='',kumGizleT=null;
+function kumandaCiz(){
+ const el=$('kumandaOv'); el.classList.toggle('on',kumOv); if(!kumOv) return;
+ const K=window.KUMANDA, q=$('kumQr'), s=$('kumDurum');
+ if(!K){ q.innerHTML=''; kumQr=''; s.textContent='Kumanda için canlı bağlantı gerekli (çevrimdışı ya da sahte kip).'; s.className='off'; return; }
+ if(!K.url){ q.innerHTML=''; kumQr=''; }
+ else if(K.url!==kumQr){ try{ q.innerHTML=QrSvg.qrSvg(K.url); kumQr=K.url; }catch(e){ q.innerHTML=''; kumQr=''; } }
+ s.textContent=K.hata?'Kumanda açılamadı: '+K.hata:!K.url?'Hazırlanıyor…':K.eslesti?'✓ Kumanda bağlandı':'Bekleniyor…';
+ s.className=K.hata?'off':K.eslesti&&K.url?'ok':'';
+ if(K.eslesti&&K.url&&!kumGizleT) kumGizleT=setTimeout(()=>{ kumGizleT=null; const K2=window.KUMANDA; if(K2&&K2.eslesti){ kumOv=false; kumandaCiz(); } },1800);   // eşleşince kendiliğinden kapanır
+}
+function kumandaTus(sifirla){
+ const K=window.KUMANDA; clearTimeout(kumGizleT); kumGizleT=null;
+ if(sifirla){ kumOv=true; if(K) K.sifirla(); }
+ else{ kumOv=!kumOv; if(kumOv&&K) K.hazirla(); }
+ kumandaCiz();
+}
+window.kumandaYenile=kumandaCiz;
+const kisaltK=(x,n)=>{ x=String(x==null?'':x).replace(/\s+/g,' ').trim(); return x.length>n?x.slice(0,n-1)+'…':x; };
+const KART_AD={title:'AÇILIŞ',act:'PERDE',end:'SON',final:'FİNAL'};
+function adimOzet(s){
+ if(!s) return '';
+ if(s.k==='beat') return (s.who&&s.who!==A?s.who+': ':'')+kisaltK(s.text,70);
+ if(s.k==='dec') return 'Karar: '+kisaltK(s.d&&s.d.q,70);
+ if(s.k==='montage') return 'Montaj';
+ return kisaltK(s.title||KART_AD[s.type]||'Kart',70);
+}
+// Kumandaya giden durum görüntüsü (ucuz; her 500 ms'de ve her komuttan sonra hesaplanır, kaynak aynıysa yazmaz)
+function kumandaDurum(){
+ const st=script[pos]||{};
+ let kim='',metin='',karar=null;
+ if(st.k==='beat'){ kim=st.who||''; metin=kisaltK(st.text,140); }
+ else if(st.k==='dec'){ kim='KARAR'; metin=kisaltK(st.d&&st.d.q,140); }
+ else if(st.k==='montage'){ kim='MONTAJ'; metin=kisaltK(st.id||'',140); }
+ else if(st.k==='card'){ kim=KART_AD[st.type]||'KART'; metin=kisaltK([st.title,st.sub].filter(Boolean).join(' · ')||'Mezuniyet.exe',140); }
+ if(st.k==='dec'&&V&&V.id===st.id&&V.c&&(phase==='vote'||phase==='closing'||phase==='result'))
+  karar={q:st.d.q,o:st.d.o.map(o=>o[0]),c:V.c.slice(),kalan:Math.max(0,Math.ceil(V.end-V.el)),acik:phase==='vote'};
+ return {pos,toplam:script.length,faz:phase,duraklat:paused,oto:auto,sessiz:muted,kim,metin,karar,sonraki:adimOzet(script[pos+1]),devamSor:devamAcik};
+}
+window.kumandaDurum=kumandaDurum;
+function kumandaItele(){ const K=window.KUMANDA; if(K&&K.url&&K.itele) try{ K.itele(kumandaDurum()); }catch(_){} }
+setInterval(kumandaItele,500);
+// Kumanda komutları klavyedeki karşılıklarıyla aynı yolu izler (duraklatılmışken ileri/geri/oto/kazan yok sayılır).
+window.kumandaKomut=function(c,a){
+ if(c==='duraklat') setPause(true);
+ else if(c==='devam') setPause(false);
+ else if(c==='ses') toggleMute();
+ else if(devamAcik){ if(c==='ileri') devamEt(); }   // açılış sorusunda İleri = kaldığın yerden devam
+ else if(paused){ /* yok say */ }
+ else if(c==='ileri'){ touchAuto(); next(); }
+ else if(c==='geri') back();
+ else if(c==='oto'){ autoOnTouch=false; setAuto(!auto); }
+ else if(c==='kazan'){ if(Number.isInteger(a)) forceWin(a); }
+ else if(c==='bitir'){ const st=script[pos]; if(st&&st.k==='dec'&&phase==='vote') next(); }
+ kumandaItele();
+};
 addEventListener('keydown',e=>{
  if(e.ctrlKey||e.metaKey||e.altKey)return;
  const k=e.key;
  unlock();
+ if(devamAcik){
+  if(k==='Enter'){ e.preventDefault(); devamEt(); return; }
+  if(k==='n'||k==='N'||k==='Escape'){ devamVazgec(); return; }
+  if(!/^[mMfFuU]$/.test(k)) return;   // soru açıkken yalnızca ses, tam ekran ve kumanda
+ }
+ if(k==='u'||k==='U'){ kumandaTus(e.shiftKey); return; }
  if(k==='m'||k==='M'){toggleMute();return;}
  if(k==='p'||k==='P'){ setPause(!paused); return; }
  if(k==='k'||k==='K'){ if(rec) stopRec(); else startRec(); return; }
@@ -2613,9 +2736,9 @@ addEventListener('keydown',e=>{
  else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();back();}
  else if(k>='1'&&k<='4') forceWin(+k-1);
  else if(k==='f'||k==='F'){ if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen().catch(()=>{}); }
- else if(k==='r'||k==='R')restart();
+ else if(k==='r'||k==='R'){ ilerlemeSil(); restart(); }
 });
-stage.addEventListener('click',()=>{unlock(); if(paused) return; touchAuto(); next();});
+stage.addEventListener('click',()=>{unlock(); if(paused||devamAcik) return; touchAuto(); next();});
 
 /* ---------- VİTRİN: index.html?vitrin=1 (bütün mekânlar, pozlar, paneller, montajlar, kartlar) ---------- */
 function vitrinScript(){
@@ -2795,7 +2918,7 @@ else if(QS.get('yol')!==null||QS.get('vitrin')){
  if(n>0){ pos=n-1; show(true); }
  pos=n; show(false);
 }
-else{ if(QS.get('oto')==='0') setAuto(false); show(); }
+else{ if(QS.get('oto')==='0') setAuto(false); show(); devamSor(); }
 </script>
 <div id="oyDurum">Oylama bağlanıyor…</div>
 <script src="oylama/vote-core.js"></script><script src="oylama/qr.js"></script><script src="oylama/qr-svg.js"></script><script src="oylama/firebase-config.js"></script>
@@ -2807,15 +2930,39 @@ if(Q.has('sahte')||Q.has('test')){ durum('Sahte oylama (deneme kipi)','off'); se
 else if(Q.has('demo')){ D.style.display='none'; }   // tek kişilik demo: Firebase'e hiç bağlanma
 else{
  window.VOTE_PENDING=true;
+ // Oturum {sid,t,r} localStorage'da: F5/çökme sonrası 12 saat içinde aynı oturum (aynı QR) sürdürülür. ?yeni=1: yeni oturum.
+ // (Sayfa kapanırken oturum artık "ended" yapılmaz; yoksa yenileme sonrası sürdürülemezdi.)
+ const OT_K='mezuniyet.oturum';
+ const otOku=()=>{ try{ return JSON.parse(localStorage.getItem(OT_K)||'null'); }catch(_){ return null; } };
+ const otYaz=v=>{ try{ localStorage.setItem(OT_K,JSON.stringify(v)); }catch(_){} };
  try{
   const {connectFirebaseSource}=await import('./oylama/firebase-source.js');
   const src=await connectFirebaseSource(window.FIREBASE_CONFIG,{voteBaseUrl:'https://cenga-mezuniyet.pages.dev'});
-  const sid=await src.createSession();
+  let kayit=otOku(), sid=null, surdu=false;
+  if(!Q.has('yeni')&&kayit&&typeof kayit.sid==='string'&&Date.now()-(+kayit.t||0)<12*3600e3){
+   try{ sid=await src.resumeSession(kayit.sid); surdu=true; }catch(e){ console.warn('[oylama] eski oturum sürdürülemedi, yenisi açılıyor:',e&&e.message); }
+  }
+  if(!sid){ sid=await src.createSession(); kayit={sid,t:Date.now(),r:null}; otYaz(kayit); }
   window.VOTE=src; window.VOTE_OK=true; window.VOTE_PENDING=false;
   const url=src.voteUrl(sid); window.qrHazir(QrSvg.qrSvg(url),url);
-  durum('● Canlı oylama hazır · oturum '+sid,'ok'); console.log('[oylama] oturum',sid,url);
-  addEventListener('pagehide',()=>{ try{ src.end(); }catch(_){} });
+  durum((surdu?'● Oturum sürdürüldü (aynı QR)':'● Canlı oylama hazır')+' · oturum '+sid,'ok'); console.log('[oylama] oturum',sid,surdu?'(sürdürüldü)':'(yeni)',url);
+  kumandaKur(src,kayit,surdu,otYaz);
  }catch(e){ console.warn('[oylama] bağlanamadı',e); window.VOTE_PENDING=false; durum('Çevrimdışı: oylama yok, kararlar kurayla (1-4 tuşlarıyla seçebilirsin)','off'); }
+}
+// Telefon kumandası (U tuşu). Gizli kimlik oturumla birlikte saklanır; oturum sürdürülürse eşleşmiş telefon da bağlı kalır.
+function kumandaKur(src,kayit,surdu,otYaz){
+ const K={url:null,eslesti:false,hata:null,_p:null};
+ const yenile=()=>{ try{ if(window.kumandaYenile) window.kumandaYenile(); }catch(_){} };
+ const tamam=r=>{ kayit.r=r.secret; otYaz(kayit); K.url=r.url; K.hata=null; yenile(); };
+ const hata=e=>{ K.hata=String((e&&e.message)||e); console.warn('[kumanda]',K.hata); yenile(); };
+ const sirala=f=>{ const p=(K._p||Promise.resolve()).catch(()=>{}).then(f).then(tamam,hata); K._p=p; p.finally(()=>{ if(K._p===p) K._p=null; }); return p; };
+ K.hazirla=()=>{ if(K.url&&!K.hata) return Promise.resolve(); if(K._p) return K._p; K.hata=null; return sirala(()=>src.createRemote()); };
+ K.sifirla=()=>{ K.url=null; K.eslesti=false; K.hata=null; yenile(); return sirala(()=>src.resetRemote()); };
+ K.itele=st=>src.pushRemoteState(st);
+ src.onRemoteStatus(s=>{ K.eslesti=!!(s&&s.paired); yenile(); });
+ src.onRemoteCommand(m=>{ if(window.kumandaKomut) window.kumandaKomut(m.c,m.a); });
+ window.KUMANDA=K;
+ if(surdu&&kayit.r) src.resumeRemote(kayit.r).then(r=>{ K.url=r.url; K.eslesti=!!r.paired; yenile(); },e=>console.warn('[kumanda] sürdürülemedi',e&&e.message));
 }
 </script>
 <!-- ---------- ÇEVRİMDIŞI ÖNBELLEK (sw.js) · ?sw=0 kapatır · ayrıntı: oyun/sw.js ---------- -->

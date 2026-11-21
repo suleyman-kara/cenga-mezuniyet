@@ -82,3 +82,38 @@ describe('uctan uca oylama (emulator)', () => {
     const res = await src.close(); expect(res.counts).toEqual([1, 1]);
   });
 });
+
+describe('oturum surdurme + telefon kumandasi (emulator, gercek kurallar)', () => {
+  it('yenilenen host ayni oturumu surdurur; baska uid surduremez', async () => {
+    const a = hostSource(); const sid = await a.createSession();
+    await a.open({ decKey: DK, q: 'Q', options: ['A', 'B'], poll: false, durMs: 30000 });
+    const b = hostSource(); await expect(b.resumeSession(sid)).resolves.toBe(sid);
+    expect(await sessionDoc(sid)).toMatchObject({ phase: 'lobby', decKey: null });
+    const db = env.authenticatedContext('baska').firestore();
+    const x = createFirebaseSource({ db, auth: { currentUser: { uid: 'baska' } }, fs: { ...FS, signInAnonymously: async () => ({ user: { uid: 'baska' } }) }, VoteCore });
+    await expect(x.resumeSession(sid)).rejects.toThrow();
+  });
+  it('telefon eslesir, komut gonderir; host isler ve siler; ikinci telefon eslesemez; sifirlama eski telefonu keser', async () => {
+    const src = hostSource({ remoteThrottleMs: 50 }); const sid = await src.createSession();
+    const got = []; src.onRemoteCommand((c) => got.push([c.c, c.a]));
+    const { secret } = await src.createRemote();
+    const tel = voterDb('tel1'), ref = FS.doc(tel, 'sessions', sid, 'remotes', secret);
+    const cmds = (dbx, r = secret) => FS.collection(dbx, 'sessions', sid, 'remotes', r, 'cmds');
+    await assertSucceeds(FS.updateDoc(ref, { owner: 'tel1' }));
+    await assertFails(FS.updateDoc(FS.doc(voterDb('tel2'), 'sessions', sid, 'remotes', secret), { owner: 'tel2' }));
+    await assertSucceeds(FS.addDoc(cmds(tel), { c: 'kazan', a: 1, at: FS.serverTimestamp() }));
+    await assertFails(FS.addDoc(cmds(voterDb('tel2')), { c: 'ileri', at: FS.serverTimestamp() }));
+    for (let i = 0; i < 40 && !got.length; i++) await sleep(50);
+    expect(got).toEqual([['kazan', 1]]);
+    let left = -1;
+    for (let i = 0; i < 40 && left !== 0; i++) { await sleep(50); await env.withSecurityRulesDisabled(async (c) => { left = (await FS.getDocs(cmds(c.firestore()))).size; }); }
+    expect(left).toBe(0); // host isledigi komutu sildi
+    src.pushRemoteState({ pos: 7, metin: 'merhaba' });
+    let st = null; for (let i = 0; i < 40 && !st; i++) { await sleep(50); st = (await FS.getDoc(ref)).data().st; }
+    expect(st).toEqual({ pos: 7, metin: 'merhaba' });
+    const nu = await src.resetRemote();
+    expect((await FS.getDoc(ref)).exists()).toBe(false);
+    await assertFails(FS.addDoc(cmds(tel), { c: 'ileri', at: FS.serverTimestamp() }));
+    await assertSucceeds(FS.updateDoc(FS.doc(voterDb('tel2'), 'sessions', sid, 'remotes', nu.secret), { owner: 'tel2' }));
+  }, 15000);
+});

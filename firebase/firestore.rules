@@ -45,6 +45,42 @@ service cloud.firestore {
           && validVote();
         allow delete: if false;
       }
+
+      // Telefon kumandasi (yalnizca sunucu icin). Belge kimligi = host'un urettigi gizli anahtar (20+ karakter);
+      // kimligi bilmek "okuma + bir kerelik eslesme" yetkisidir. Eslesen telefon (owner) komut yazabilir.
+      match /remotes/{rid} {
+        function rSession() { return get(/databases/$(database)/documents/sessions/$(sid)).data; }
+        function rIsHost() { return signedIn() && rSession().hostUid == request.auth.uid; }
+        // Host olmayan yalnizca owner'i null'dan kendi uid'sine cevirebilir; baska hicbir alan degismez.
+        function claimsOwnership() {
+          return signedIn()
+            && resource.data.owner == null
+            && request.resource.data.owner == request.auth.uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['owner']);
+        }
+
+        allow get: if signedIn();
+        allow list: if rIsHost();
+        allow create, delete: if rIsHost();
+        allow update: if rIsHost() || claimsOwnership();
+
+        match /cmds/{cid} {
+          function remote() { return get(/databases/$(database)/documents/sessions/$(sid)/remotes/$(rid)).data; }
+          function validCmd() {
+            let d = request.resource.data;
+            return ((d.keys().hasOnly(['c', 'at']) && d.keys().hasAll(['c', 'at']))
+                    || (d.keys().hasOnly(['c', 'a', 'at']) && d.keys().hasAll(['c', 'a', 'at'])
+                        && d.a is int && d.a >= 0 && d.a <= 3))
+              && d.c is string
+              && d.c in ['ileri', 'geri', 'duraklat', 'devam', 'kazan', 'bitir', 'ses', 'oto']
+              && d.at == request.time;
+          }
+
+          allow create: if signedIn() && remote().owner == request.auth.uid && validCmd();
+          allow get, list, delete: if rIsHost();
+          allow update: if false;
+        }
+      }
     }
 
     // Diger tum yollar kapali.

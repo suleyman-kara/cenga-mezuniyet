@@ -1,5 +1,5 @@
 // MockSource: eski sahte oylama davranisi (rastgele oy akisi + agirliklar). Otomatik oynatma / video kaydi icin.
-// VoteSource arayuzu: createSession, open, onUpdate, forceWin, close, voteUrl  (bkz. README)
+// VoteSource arayuzu: createSession, resumeSession, open, onUpdate, forceWin, close, voteUrl + bos kumanda metotlari (bkz. README)
 const ALPHA = 'abcdefghjkmnpqrstuvwxyz23456789';
 
 export function createMockSource(opts = {}) {
@@ -28,7 +28,17 @@ export function createMockSource(opts = {}) {
 
   return {
     async createSession() { let s = ''; for (let i = 0; i < 6; i++) s += ALPHA[Math.floor(rng() * ALPHA.length)]; return s; },
+    // Sahte kipte kalicilik yok: verilen sid aynen kabul edilir.
+    async resumeSession(sid) { if (typeof sid !== 'string' || !sid) throw new Error('gecersiz oturum kimligi'); return sid; },
     voteUrl(sid) { return `${base}/v/?s=${sid}`; },
+    // Telefon kumandasi: sahte kipte yok. Zararsiz bos surumler (motor dallanmadan cagirabilsin); url null = kumanda yok.
+    async createRemote() { return { secret: null, url: null }; },
+    async resumeRemote() { return { secret: null, url: null, paired: false }; },
+    async resetRemote() { return { secret: null, url: null }; },
+    onRemoteCommand() { return () => {}; },
+    onRemoteStatus() { return () => {}; },
+    pushRemoteState() {},
+    async end() {},
     onUpdate(fn) { cb = fn; return () => { if (cb === fn) cb = null; }; },
     open({ decKey, q, options, poll, durMs }) {
       clearInterval(timer);

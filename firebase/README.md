@@ -14,6 +14,18 @@ Telefon (public/v/index.html)  --anonim oy-->  Firestore  <--dinler/sayar--  Hos
 - `vote-core.js` (saf mantık): `tally, pickWinner, remainingMs, makeDecKey, percents` — tarayıcıda global `VoteCore`, Node'da `require`.
 - Kurallar `firestore.rules` (tek parça, konsola yapıştırılabilir): oturumu giriş yapmış herkes okur; güncelleme sadece host; oy yalnız doğru kimlik/faz/süre(+1 sn tolerans)/`o` aralığı/alan seti/`at==request.time`; silme yok; oyları sadece host listeler, seyirci yalnız kendi oyunu okur.
 
+### Telefon kumandası (sunucu için) — veri modeli ve kurallar
+```
+sessions/{sid}/remotes/{secret}          { owner: uid|null, st: {...}|null, createdAt }
+sessions/{sid}/remotes/{secret}/cmds/{auto}   { c: 'ileri'|'geri'|'duraklat'|'devam'|'kazan'|'bitir'|'ses'|'oto', a?: 0..3, at: serverTimestamp() }
+```
+- `secret`: host'un ürettiği 24 karakterlik rastgele kimlik (`crypto.getRandomValues`); oturumla birlikte host'un localStorage'ında saklanır. Telefon sayfası: `public/k/?s=<sid>&r=<secret>`.
+- Kurallar: remotes belgesini host oluşturur/günceller/siler/listeler; giriş yapmış herkes **kimliği bilerek** `get` edebilir (kimlik = yetki); host olmayan yalnız `owner`'ı `null`'dan **kendi uid'sine** çevirebilir (bir kerelik eşleşme, başka alan değişemez). `cmds` oluşturma: giriş + remotes belgesinde `owner == auth.uid` + alanlar tam `{c,at}` ya da `{c,a,at}` + `c` izin listesinde + `a` 0..3 tamsayı + `at == request.time`. Komutları yalnız host okur/listeler/siler; güncelleme yok. Belge silinince (Shift+U) eski telefonun komutları reddedilir.
+- `st` (host yazar, ~1/sn, değişince): `{pos, toplam, faz, duraklat, oto, sessiz, kim, metin (≤140), karar: {q, o:[başlıklar], c:[sayılar], kalan, acik} | null, sonraki, devamSor}`.
+- Güvenlik notu: projektördeki kumanda QR'ını salondan biri okutabilir; bu yüzden eşleşme bir keredir ve Shift+U sıfırlar. Sunucu U'ya projektör açılmadan/en başta basmalı.
+
+> **Kurallar değişti:** güncel `firestore.rules` yeniden yayımlanmalı — konsolda Firestore > Rules editörüne yapıştırın ya da `npx firebase deploy --only firestore:rules`. Eski kurallarla kumanda "permission-denied" alır (oylama etkilenmez).
+
 ## VoteSource arayüzü (FirebaseSource ve MockSource aynı)
 | Metot | Açıklama |
 |---|---|
@@ -24,8 +36,16 @@ Telefon (public/v/index.html)  --anonim oy-->  Firestore  <--dinler/sayar--  Hos
 | `await close()` → `{counts,winner,forced,total,error,errors}` | **Her durumda çözülür**, kazanan döner (oysuz/hata: rastgele). `error` doluysa ağ/izin sorunu vardı. |
 | `pause()` / `resume()` | Oyun duraklatılınca (P) çağrılır. Karar açıksa kalan süre saklanır (`paused:true, pausedLeftMs`), sayaç/emit sabit kalır, süre dolmaz; `resume` `closesAt = şimdi + kalan` yazar. Karar yokken yalnız `paused` yazılır. Kurallar duraklatılmışken oyu reddeder. `Promise<{ok,error}>` döner, asla takılmaz. |
 | `voteUrl(sid)` | `https://<proje>.web.app/v/?s=<sid>` (GitHub Pages için `voteBaseUrl` verin). |
+| `await resumeSession(sid)` → `sid` | Sayfa yenilendi/çöktü: anonim giriş (Firebase anonim uid'yi IndexedDB'de saklar → aynı uid), oturumu okur; yalnız `hostUid === uid` ve `phase !== 'ended'` ise kabul eder, saat farkını yeniden ölçer ve oturumu `lobby`'ye sıfırlar (açık oylama varsa telefonlar beklemeye geçer, motor kararı yeniden açar). Aksi halde reddeder → çağıran `createSession()`'a düşer. |
+| `await createRemote()` → `{secret, url}` | Yeni kumanda belgesi (`owner:null`); `url = <base>/k/?s=<sid>&r=<secret>`. |
+| `await resumeRemote(secret)` → `{secret, url, paired}` | Kayıtlı kimlikle devam: belge varsa eşleşme korunur, yoksa aynı kimlikle oluşturulur. |
+| `await resetRemote()` → `{secret, url}` | Eski belge (ve bekleyen komutları) silinir → eski telefon düşer; yeni kimlik. |
+| `onRemoteCommand(cb({c,a,id}))` | `cmds` dinlenir; her komut **en fazla bir kez**, sunucu saatine göre 15 sn'den eskiler atlanır, işlenen belge silinir; bir anlık görüntüdeki komutlar `at` sırasıyla. |
+| `onRemoteStatus(cb({paired,owner}))` | Eşleşme durumu (host'taki "Bekleniyor… / ✓ Kumanda bağlandı"). |
+| `pushRemoteState(st)` | `st` alanına yazar: ~1/sn kısıtlı, en son çağrı kazanır, aynı durum yeniden yazılmaz, asla fırlatmaz. |
+| `end()` | Oturumu `ended` yapar. Oyun artık sayfa kapanırken çağırmaz (yenileme sonrası sürdürme için). |
 
-Kaynaklar: `src/firebase-source.js` (`connectFirebaseSource(config)` CDN modüler SDK'yı yükler), `src/mock-source.js` (`createMockSource()` eski sahte akış; otomatik oynatma/video). QR: `vendor/qr.js` + `qr-svg.js` → `QrSvg.qrSvg(url)` SVG string.
+Kaynaklar: `src/firebase-source.js` (`connectFirebaseSource(config)` CDN modüler SDK'yı yükler), `src/mock-source.js` (`createMockSource()` eski sahte akış; otomatik oynatma/video; kumanda metotları zararsız boş sürümler, `url:null`). **`src/*.js` değişince `oyun/oylama/`'ya kopyalayın** (`cp src/firebase-source.js src/mock-source.js ../oyun/oylama/`); `test/unit/oylama-kopya.test.js` bayt eşitliğini denetler. QR: `vendor/qr.js` + `qr-svg.js` → `QrSvg.qrSvg(url)` SVG string.
 
 ## Motora bağlama (öneri; motoru bu çalışma değiştirmedi)
 ```html
@@ -47,8 +67,13 @@ window.VOTE = src; // classic script'ten erişim
 ## Kurulum (gerçek proje)
 Proje: `cenga-mezuniyet` (`.firebaserc`). 1) Firestore'u etkinleştir. 2) Authentication > Anonymous aç. 3) Web config: `firebase-config.js` (örnek: `firebase-config.example.js`); `npm run sync-config` üst dizindeki dosyayı `public/firebase-config.js`'e kopyalar. 4) `npx firebase deploy --only hosting,firestore:rules` — CLI girişi yoksa `firestore.rules` içeriğini konsol editörüne yapıştırın, `public/` klasörünü (statik, göreli yollar) GitHub Pages'e de koyabilirsiniz (Firebase Auth'ta yetkili alan adlarına Pages alan adını ekleyin). Firestore ve Hosting Spark planında ücretsizdir.
 
+## Oyunda (oyun/index.html) oturum sürdürme ve kumanda
+- localStorage `mezuniyet.oturum = {sid, t, r}`: açılışta `t` 12 saatten gençse `resumeSession(sid)`, olmazsa `createSession()`; `?yeni=1` her zaman yeni oturum. `r` kumanda kimliği (oturum sürdürülürse `resumeRemote(r)`).
+- localStorage `mezuniyet.ilerleme = {choices, pos, t}`: her adımda yazılır; açılışta "Kaldığın yerden devam?" (Enter/N). R siler.
+- U: kumanda QR'ı (gerekirse `createRemote`), Shift+U: `resetRemote`. Komutlar klavyedeki karşılıklarına bağlanır (`window.kumandaKomut`); durum 500 ms'de bir `pushRemoteState(kumandaDurum())` ile gider (kaynak değişmeyeni yazmaz).
+
 ## Testler
-`npm run test:unit` (vote-core, QR/jsQR, config, FirebaseSource/MockSource/telefon sayfası — **sahte bellek içi Firestore**, kural uygulamaz), `npm run test:rules` ve `npm run test:int` (Firestore emülatörü gerekir; emülatör jar'ı `storage.googleapis.com`'dan iner), `npm run lint:rules` (resmi Firebase kural gramerine göre sözdizimi), `npm test` hepsi.
+`npm run test:unit` (vote-core, QR/jsQR, config, FirebaseSource/MockSource/oy ve kumanda sayfaları, resumeSession/kumanda API — **sahte bellek içi Firestore**, kural uygulamaz), `npm run test:rules` ve `npm run test:int` (Firestore emülatörü gerekir; emülatör jar'ı `storage.googleapis.com`'dan iner), `npm run lint:rules` (resmi Firebase kural gramerine göre sözdizimi), `npm test` hepsi.
 
 ## Host'ta internet koparsa
 - Oturum açılmadan (QR'dan önce): `createSession` zaman aşımıyla reddeder → öneri: Mock'a düş, QR gösterme.
